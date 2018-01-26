@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane id="AnchorPane" fx:id="anchorPaneTabela" prefHeight="375.0" prefWidth="700.0" stylesheets="@../resources/css/style.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stec.controller.TabelaSupervisoesController">
+   <children>
+      <BorderPane prefHeight="375.0" prefWidth="700.0">
+         <center>
+            <TableView fx:id="tViewSupervisoes" prefHeight="315.0" prefWidth="700.0" BorderPane.alignment="CENTER">
+              <columns>
+                <TableColumn fx:id="tColumnUR" prefWidth="201.0" text="UR" />
+                <TableColumn fx:id="tColumnMunicipio" prefWidth="200.0" text="Esc. Auditado / Município" />
+                  <TableColumn fx:id="tColumnProgramas" prefWidth="200.0" text="Programas" />
+                  <TableColumn fx:id="tColumnStatus" prefWidth="99.0" text="Status" />
+              </columns>
+            </TableView>
+         </center>
+         <bottom>
+            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <JFXButton fx:id="btnVisualizar" onAction="#handleVisualizar" prefHeight="45.0" prefWidth="75.0" text="Visualizar">
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </JFXButton>
+                  <JFXButton fx:id="btnFinalizar" layoutX="10.0" layoutY="10.0" onAction="#handleFinalizar" prefHeight="45.0" prefWidth="75.0" text="Finalizar">
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </JFXButton>
+                  <JFXButton fx:id="btnExcluir" layoutX="85.0" layoutY="10.0" onAction="#handleExcluir" prefHeight="45.0" prefWidth="75.0" text="Excluir">
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </JFXButton>
+               </children>
+            </HBox>
+         </bottom>
+      </BorderPane>
+   </children>
+</AnchorPane>

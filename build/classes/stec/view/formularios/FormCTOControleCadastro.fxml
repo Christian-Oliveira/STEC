@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="570.0" prefWidth="600.0" stylesheets="@../../resources/css/style.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stec.controller.FormCTOControleCadastroController">
+   <children>
+      <JFXTextField fx:id="nPropriedades" layoutX="14.0" layoutY="68.0" prefHeight="25.0" prefWidth="120.0" />
+      <JFXTextField fx:id="nProdutores" layoutX="155.0" layoutY="68.0" prefHeight="25.0" prefWidth="110.0" />
+      <VBox layoutX="14.0" layoutY="108.0" prefHeight="55.0" prefWidth="579.0">
+         <children>
+            <Label prefHeight="17.0" prefWidth="398.0" text="População Animal Cadastrada" />
+            <HBox prefHeight="40.0" prefWidth="579.0">
+               <children>
+                  <JFXTextField fx:id="bovina" labelFloat="true" promptText="Bovina">
+                     <HBox.margin>
+                        <Insets right="5.0" top="10.0" />
+                     </HBox.margin>
+                  </JFXTextField>
+                  <JFXTextField fx:id="bubalina" labelFloat="true" layoutX="10.0" layoutY="10.0" promptText="Bubalina">
+                     <HBox.margin>
+                        <Insets right="5.0" top="10.0" />
+                     </HBox.margin>
+                  </JFXTextField>
+                  <JFXTextField fx:id="suidea" labelFloat="true" layoutX="145.0" layoutY="10.0" promptText="Suídea">
+                     <HBox.margin>
+                        <Insets right="5.0" top="10.0" />
+                     </HBox.margin>
+                  </JFXTextField>
+                  <JFXTextField fx:id="ovina" labelFloat="true" layoutX="276.0" layoutY="10.0" promptText="Ovina">
+                     <HBox.margin>
+                        <Insets right="5.0" top="10.0" />
+                     </HBox.margin>
+                  </JFXTextField>
+                  <JFXTextField fx:id="caprina" labelFloat="true" layoutX="308.0" layoutY="10.0" promptText="Caprina">
+                     <HBox.margin>
+                        <Insets right="5.0" top="10.0" />
+                     </HBox.margin>
+                  </JFXTextField>
+                  <JFXTextField fx:id="equina" labelFloat="true" layoutX="328.0" layoutY="10.0" promptText="Equina">
+                     <HBox.margin>
+                        <Insets right="5.0" top="10.0" />
+                     </HBox.margin>
+                  </JFXTextField>
+                  <JFXTextField fx:id="muar" labelFloat="true" layoutX="341.0" layoutY="10.0" promptText="Muar">
+                     <HBox.margin>
+                        <Insets right="5.0" top="10.0" />
+                     </HBox.margin>
+                  </JFXTextField>
+                  <JFXTextField fx:id="asinina" labelFloat="true" layoutX="352.0" layoutY="10.0" promptText="Asinina">
+                     <HBox.margin>
+                        <Insets right="5.0" top="10.0" />
+                     </HBox.margin>
+                  </JFXTextField>
+                  <JFXTextField fx:id="avicola" labelFloat="true" layoutX="358.0" layoutY="10.0" promptText="Avícola">
+                     <HBox.margin>
+                        <Insets right="5.0" top="10.0" />
+                     </HBox.margin>
+                  </JFXTextField>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <JFXButton fx:id="btAdicionar" layoutX="400.0" layoutY="512.0" onAction="#handleAdicionar" prefHeight="45.0" prefWidth="80.0" text="Adicionar" />
+      <JFXButton fx:id="btCancelar" layoutX="508.0" layoutY="512.0" onAction="#handleCancelar" prefHeight="45.0" prefWidth="70.0" text="Cancelar" />
+      <JFXComboBox fx:id="cbInfoProdutoresPropriedades" labelFloat="true" layoutX="285.0" layoutY="68.0" prefHeight="25.0" prefWidth="177.0" />
+      <JFXComboBox fx:id="cbDocumentacao" layoutX="11.0" layoutY="217.0" prefHeight="25.0" prefWidth="234.0" />
+      <JFXComboBox fx:id="cbProcedimentos" layoutX="262.0" layoutY="217.0" prefHeight="25.0" prefWidth="158.0" />
+      <JFXComboBox fx:id="cbRegistro" layoutX="437.0" layoutY="217.0" prefHeight="25.0" prefWidth="151.0" />
+      <Label fx:id="lblPropriedades" layoutX="11.0" layoutY="17.0" text="N°  propriedades com &#10;bovinos e bubalinos &#10;cadastradas" textAlignment="CENTER" />
+      <Label fx:id="lblProdutores" layoutX="155.0" layoutY="17.0" text="N°  produtores com &#10;bovinos e bubalinos &#10;cadastradas" textAlignment="CENTER" />
+      <Label fx:id="lblInfoProdutoresPropriedades" layoutX="285.0" layoutY="17.0" text="Informações de produtores, &#10;propriedades e efetivos de &#10;todos os municípios da jurisdição" textAlignment="CENTER">
+         <tooltip>
+            <Tooltip text="Possui estas informações em mural&#10;Possui a lista das demais espécies do município em arquivo" />
+         </tooltip></Label>
+      <Label fx:id="lblDocumentacao" layoutX="11.0" layoutY="166.0" text="Documentação referente ao cadastramento &#10;de propriedade, produtores rurais e &#10;explorações pecuárias" textAlignment="CENTER">
+         <tooltip>
+            <Tooltip text="Os cadastros possuem toda a documentação exigida para abertura e/ou encerramento de cadastros?&#10;Possui o georreferenciamento?&#10;Realiza cadastramento das demais espécies (produtores que não criam bovinos nem bubalinos, mas criam outras espécies)?" />
+         </tooltip></Label>
+      <Label fx:id="lblProcedimentos" layoutX="262.0" layoutY="166.0" text="Procedimentos para abertura &#10;e encerramento de cadastros" textAlignment="CENTER">
+         <tooltip>
+            <Tooltip text="Estão sendo adotados todos os procedimentos para abertura e encerramento de cadastros?&#10;Há critérios adequados para inclusão e inativação de cadastros no SIAPEC?" />
+         </tooltip></Label>
+      <Label fx:id="lblRegistro" layoutX="437.0" layoutY="166.0" text="Registro de entrada, saída e &#10;saldo nas fichas de &#10;movimentação" textAlignment="CENTER">
+         <tooltip>
+            <Tooltip text="Está sendo registrada a movimentação animal corretamente, &#10;utilizando as cores adequadas (entrada: verde, saída: vermelha, saldo: azul)?" />
+         </tooltip></Label>
+      <TabPane layoutX="8.0" layoutY="300.0" prefHeight="200.0" prefWidth="585.0" tabClosingPolicy="UNAVAILABLE">
+         <tabs>
+            <Tab fx:id="comentarios" text="Comentários">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtComentarios" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="recomendacoesULSAVEAC" text="Recomendações ULSAV/EAC">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtRULSAVEAC" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="prazo" text="Prazo para ajuste">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtPrazo" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="recomendacoesUR" text="Recomendações UR">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtRUR" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="recomendacoesUC" text="Recomendações UC">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtRUC" labelFloat="true" prefHeight="171.0" prefWidth="568.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
+      <JFXComboBox fx:id="cbAvaliacao" layoutX="14.0" layoutY="269.0" prefHeight="25.0" prefWidth="80.0" />
+      <Label fx:id="lblAvaliacao" layoutX="14.0" layoutY="252.0" text="Avaliação">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+   </children>
+</AnchorPane>

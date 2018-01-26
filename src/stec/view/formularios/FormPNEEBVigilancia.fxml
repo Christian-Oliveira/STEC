@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../resources/css/style.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stec.controller.FormPNEEBVigilanciaController">
+   <children>
+      <JFXButton fx:id="btAdicionar" layoutX="386.0" layoutY="401.0" onAction="#handleAdicionar" prefHeight="45.0" prefWidth="80.0" text="Adicionar" />
+      <JFXButton fx:id="btCancelar" layoutX="493.0" layoutY="401.0" onAction="#handleCancelar" prefHeight="45.0" prefWidth="70.0" text="Cancelar" />
+      <Label fx:id="lblDirecionamento" layoutX="14.0" layoutY="14.0" text="Direcionamento das &#10;ações de vigilância" textAlignment="CENTER">
+         <tooltip>
+            <Tooltip text="Realiza avaliações de riscos para embasar suas atividades?&#10;Recebe e segue orientações da UC para direcionar as ações de vigilância com base em riscos?&#10;Há evidências que as ações de vigilância são realizadas considerando avaliações de risco?" />
+         </tooltip></Label>
+      <Label fx:id="lblIdentificacao" layoutX="134.0" layoutY="14.0" text="Identificação de áreas &#10;segundo os fatores &#10;de risco" textAlignment="CENTER">
+         <tooltip>
+            <Tooltip text="Há, no escritório, a classificação quanto ao fator de risco para EEB?&#10;No caso de Ulsav, possui a classificação para todos os municípios de sua jurisdição?&#10;Esta classificação foi encaminhada para a Unidade Regional - Unidade Central?&#10;Registrar no campo &quot;Comentários&quot; em qual fator de risco o município está classificado" />
+         </tooltip></Label>
+      <Label fx:id="lblInspecoes" layoutX="261.0" layoutY="14.0" text="Inspeções em &#10;propriedades" textAlignment="CENTER">
+         <tooltip>
+            <Tooltip text="OBS.: Este campo só será considerado se o município trabalhado na supervisão representar um fator de risco para EEB&#10;&#10;Está sendo realizada vigilância ativa em propriedades nas áreas de risco?&#10;Estão sendo adotados os procedimentos adequados nesta fiscalização/investigação (preenchimento dos formulários, &#10;colheita de material: teste rápido &quot;feed check&quot; e/ou colheita de amostras de ração fornecidas no cocho de ruminantes para envio à microscopia)?&#10;Existe material para colheita de amostras de ração e/ou aplicação do teste rápido (feed check)?" />
+         </tooltip></Label>
+      <Label fx:id="lblFiscalizacaoMatadouro" layoutX="346.0" layoutY="14.0" text="Fiscalização em &#10;matadouro" textAlignment="CENTER">
+         <tooltip>
+            <Tooltip text="Está sendo realizada (registro em FAI e controle de km)?&#10;Os procedimentos de fiscalização estão adequados?&#10;&#10;Registrar no campo &quot;Comentários&quot; as seguintes informações:&#10;&#10;Há graxaria anexa ao(s) matadouro(s)? Em caso negativo: qual o destino dos subprodutos e/ou resíduos de abate e limpeza das vísceras, &#10;sangue, ossos, cascos, chifres, gorduras, carcaças ou partes condenadas pela inspeção sanitária e vísceras não comestíveis? &#10;Há registro quanto à existência de serviço de inspeção municipal, estadual ou federal?&#10;&#10;Em caso POSITIVO registrar também as informações relacionadas abaixo:&#10;Caso haja o serviço de inspeção municipal, estadual ou federal, há estabelecido na rotina &#10;a remoção de material de risco específico para EEB (cérebro, olhos, medula espinhal, tonsilas e &#10;terço final do intestino de ruminantes) com posterior incineração?&#10;No caso da necessidade de abate de emergência em animais em decúbito ou que apresentem &#10;sintomatologia nervosa o serviço de inspeção está orientado a comunicar o serviço oficial para que &#10;o mesmo promova vigilância ativa no abate de emergência? Neste caso há colheita do tronco encefálico &#10;com posterior envio, pelo serviço de inspeção, aos laboratórios de referência para diagnóstico? &#10;&#10;Em caso NEGATIVO registrar também as informações relacionadas abaixo:&#10;No caso de animais em decúbito ou que apresentem sintomatologia nervosa o responsável pelo matadouro&#10; está orientado a comunicar o serviço oficial para que o mesmo promova vigilância ativa no abate de emergência? &#10;Neste caso há colheita do tronco encefálico com posterior envio, pelo serviço oficial, aos laboratórios de referência para diagnóstico? " />
+         </tooltip></Label>
+      <Label fx:id="lblFiscalizacaoGraxarias" layoutX="443.0" layoutY="14.0" text="Fiscalização em &#10;graxarias" textAlignment="CENTER">
+         <tooltip>
+            <Tooltip text="Está sendo realizada?&#10;Há registro em FAI e controle de km?&#10;Os procedimentos de fiscalização estão adequados?&#10;&#10;Inserir no campo &quot;Comentários&quot; as informações relacionadas abaixo:&#10;&#10;A(s) graxaria(s) é anexa ou vinculada a algum matadouro ou recebe de vários matadouros? &#10;O processamento de subprodutos e/ou resíduos das operações de abate e de limpeza das vísceras, sangue,&#10; ossos, cascos, chifres, gorduras, carcaças ou partes condenadas pela inspeção sanitária e vísceras não comestíveis está adequado?&#10;Qual o destino do material processado?" />
+         </tooltip></Label>
+      <JFXComboBox fx:id="cbDirecionamento" layoutX="14.0" layoutY="65.0" prefHeight="25.0" prefWidth="110.0" />
+      <JFXComboBox fx:id="cbIdentificacao" layoutX="134.0" layoutY="65.0" prefHeight="25.0" prefWidth="119.0" />
+      <JFXComboBox fx:id="cbInspecoes" layoutX="261.0" layoutY="65.0" prefHeight="25.0" prefWidth="76.0" />
+      <JFXComboBox fx:id="cbFiscalizacaoMatadouro" layoutX="346.0" layoutY="65.0" prefHeight="25.0" prefWidth="85.0" />
+      <JFXComboBox fx:id="cbFiscalizacaoGraxarias" layoutX="443.0" layoutY="65.0" prefHeight="25.0" prefWidth="85.0" />
+      <Label layoutX="14.0" layoutY="104.0" text="Propriedades sob monitoramento para saneamento de foco">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label fx:id="lblPropriedades" layoutX="14.0" layoutY="130.0" text="Nº de propriedades ">
+         <tooltip>
+            <Tooltip text="Indicar o nº de propriedades que estão nesta condição" />
+         </tooltip></Label>
+      <Label fx:id="lblDoencasCurso" layoutX="138.0" layoutY="130.0" text="Doença em curso">
+         <tooltip>
+            <Tooltip text="Inserir a enfermidade ou suspeita clínica para a qual &#10;está ocorrendo o monitoramento. " />
+         </tooltip></Label>
+      <Label fx:id="lblProcedimentosAdotados" layoutX="247.0" layoutY="130.0" text="Procedimentos adotados">
+         <tooltip>
+            <Tooltip text="Estão sendo adotados os procedimentos sanitários e &#10;administrativos adequados?" />
+         </tooltip></Label>
+      <JFXTextField fx:id="nPropriedades" layoutX="14.0" layoutY="147.0" prefHeight="25.0" prefWidth="108.0" />
+      <JFXTextField fx:id="doencasCurso" layoutX="137.0" layoutY="147.0" prefHeight="25.0" prefWidth="94.0" />
+      <JFXComboBox fx:id="cbProcedimentosAdotados" layoutX="247.0" layoutY="147.0" prefHeight="25.0" prefWidth="133.0" />
+      <TabPane layoutX="8.0" layoutY="187.0" prefHeight="200.0" prefWidth="585.0" tabClosingPolicy="UNAVAILABLE">
+         <tabs>
+            <Tab fx:id="comentarios" text="Comentários">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtComentarios" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="recomendacoesULSAVEAC" text="Recomendações ULSAV/EAC">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtRULSAVEAC" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="prazo" text="Prazo para ajuste">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtPrazo" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="recomendacoesUR" text="Recomendações UR">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtRUR" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="recomendacoesUC" text="Recomendações UC">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtRUC" labelFloat="true" prefHeight="171.0" prefWidth="568.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
+      <JFXComboBox fx:id="cbAvaliacao" layoutX="403.0" layoutY="147.0" prefHeight="25.0" prefWidth="80.0" />
+      <Label fx:id="lblAvaliacao" layoutX="406.0" layoutY="104.0" text="Avaliação">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+   </children>
+</AnchorPane>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="300.0" prefWidth="350.0" stylesheets="@../../resources/css/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stec.controller.FormAuditoriaCompiladaController">
+   <children>
+      <JFXComboBox fx:id="cbUR" labelFloat="true" layoutX="55.0" layoutY="44.0" prefHeight="25.0" prefWidth="240.0" promptText="Unidade Regional" />
+      <JFXComboBox fx:id="cbEscritorio" labelFloat="true" layoutX="56.0" layoutY="99.0" prefHeight="25.0" prefWidth="240.0" promptText="Escritório Auditado" />
+      <JFXComboBox fx:id="cbMunicipio" labelFloat="true" layoutX="56.0" layoutY="150.0" prefHeight="25.0" prefWidth="240.0" promptText="Município" />
+      <JFXButton fx:id="btGerarRelatorio" layoutX="113.0" layoutY="225.0" onAction="#handleGerarRelatorio" prefHeight="45.0" prefWidth="125.0" text="Gerar Relatório">
+         <tooltip>
+            <Tooltip text="Opções de Relatório:&#10;&#10;P/ Estado: Apenas clicar em &quot;Gerar Relatório&quot;&#10;P/ Unidade Regional: Preencher apenas o campo &quot;Unidade Regional&quot; com a respectiva UR&#10;P/ ULSAV / EAC: Preencher todos os campos" />
+         </tooltip>
+      </JFXButton>
+   </children>
+</AnchorPane>

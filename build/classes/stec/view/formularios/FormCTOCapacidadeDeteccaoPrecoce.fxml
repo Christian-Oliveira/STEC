@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="700.0" stylesheets="@../../resources/css/style.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stec.controller.FormCTOCapacidadeDeteccaoPrecoceController">
+   <children>
+      <TabPane layoutX="9.0" layoutY="216.0" prefHeight="200.0" prefWidth="684.0" tabClosingPolicy="UNAVAILABLE">
+         <tabs>
+            <Tab fx:id="comentarios" text="Comentários">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtComentarios" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="recomendacoesULSAVEAC" text="Recomendações ULSAV/EAC">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtRULSAVEAC" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="prazo" text="Prazo para ajuste">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtPrazo" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="recomendacoesUR" text="Recomendações UR">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtRUR" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="recomendacoesUC" text="Recomendações UC">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtRUC" labelFloat="true" prefHeight="171.0" prefWidth="568.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
+      <JFXButton fx:id="btAdicionar" layoutX="412.0" layoutY="435.0" onAction="#handleAdicionar" prefHeight="45.0" prefWidth="80.0" text="Adicionar" />
+      <JFXButton fx:id="btCancelar" layoutX="520.0" layoutY="435.0" onAction="#handleCancelar" prefHeight="45.0" prefWidth="70.0" text="Cancelar" />
+      <Label layoutX="9.0" layoutY="10.0" text="Nº de notificações de &#10;enfermidades recebidas /  Tipo de notificação" textAlignment="CENTER">
+         <tooltip>
+            <Tooltip text="Considerar o período de 1 ano&#10;&#10;Quantificar nos campos abaixo as notificações recebidas por tipo. Considerar exames positivos e processos (PNSE) &#10;recebidos também como notificações de enfermidades (Ex.: exames de Brucelose e Tuberculose)" />
+         </tooltip>
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label fx:id="lblEnfermidade" layoutX="290.0" layoutY="23.0" text="Enfermidade envolvida">
+         <tooltip>
+            <Tooltip text="Indicar a enfermidade suspeita para a qual houve notificação. &#10;Considerar todos os programas sanitários." />
+         </tooltip></Label>
+      <Label fx:id="lblFluxo" layoutX="431.0" layoutY="14.0" text="Fluxo de &#10;informações" textAlignment="CENTER">
+         <tooltip>
+            <Tooltip text="O fluxo interno para informações zoossanitárias está sendo cumprido?&#10;Há adequado refluxo de informações sobre resultados dos exames? Inclusive negativos?&#10;Há retorno dos dados compilados da Unidade Central para o escritório?" />
+         </tooltip></Label>
+      <Label fx:id="lblParticipacao" layoutX="518.0" layoutY="14.0" text="Participação da &#10;comunidade" textAlignment="CENTER">
+         <tooltip>
+            <Tooltip text="Há participação da comunidade na notificação de enfermidades?&#10;Há ações de estímulo à notificação de doenças dirigidas pelo SV à comunidade?&#10;Há facilidade para a comunidade ou produtores notificarem suspeitas de enfermidades?&#10;Há participação das revendas veterinárias em orientar produtores a buscarem o serviço &#10;de defesa baseado nas queixas que os mesmos apresentam na loja? Existe orientação para tal junto às revendas?" />
+         </tooltip></Label>
+      <Label fx:id="lblFonte" layoutX="626.0" layoutY="14.0" text="Fontes de &#10;informação" textAlignment="CENTER">
+         <tooltip>
+            <Tooltip text="Há cadastro das fontes de informação (MV privados, laboratórios, universidades, clínicas e revendas veterinárias)&#10;Há evidências de participação destes personagens como fonte de informações e notificações de enfermidades?&#10;Há regularidade na busca ativa de informações zoossanitárias junto às fontes?&#10;A Ulsav repassou o Form Notifica para os profissionais e instituições das áreas afins?&#10;Há participação das revendas veterinárias em orientar produtores a buscarem o serviço de defesa baseado nas &#10;queixas que os mesmos apresentam na loja? Existe orientação para tal junto às revendas?" />
+         </tooltip></Label>
+      <Label fx:id="lblVigilancia" layoutX="10.0" layoutY="48.0" text="Vigilância &#10;(Vg)" textAlignment="CENTER" />
+      <Label fx:id="lblProprietario" layoutX="105.0" layoutY="48.0" text="Proprietário &#10;(Pp)" textAlignment="CENTER" />
+      <Label fx:id="lblTerceiros" layoutX="214.0" layoutY="48.0" text="Terceiros &#10;(Te)" textAlignment="CENTER" />
+      <JFXTextField fx:id="vigilancia" layoutX="10.0" layoutY="82.0" prefHeight="25.0" prefWidth="54.0" />
+      <JFXTextField fx:id="proprietario" layoutX="105.0" layoutY="82.0" prefHeight="25.0" prefWidth="66.0" />
+      <JFXTextField fx:id="terceiros" layoutX="214.0" layoutY="82.0" prefHeight="25.0" prefWidth="52.0" />
+      <JFXTextField fx:id="enfermidade" layoutX="290.0" layoutY="82.0" prefHeight="25.0" prefWidth="121.0" />
+      <JFXComboBox fx:id="cbFluxo" layoutX="431.0" layoutY="82.0" prefHeight="25.0" prefWidth="66.0" />
+      <JFXComboBox fx:id="cbParticipacao" layoutX="518.0" layoutY="82.0" prefHeight="25.0" prefWidth="85.0" />
+      <JFXComboBox fx:id="cbFonte" layoutX="626.0" layoutY="82.0" prefHeight="25.0" prefWidth="60.0" />
+      <Label fx:id="lblRegistro" layoutX="12.0" layoutY="123.0" text="Registro das comunicações e&#10;atendimentos de ocorrência de enfermidades " textAlignment="CENTER">
+         <tooltip>
+            <Tooltip text="Está preenchendo os formulários necessários (Informe semanal, FEPI, livro de notificação, Formulários SIZ), &#10;de acordo com cada caso e para todas as investigações de doenças?&#10;O preenchimento está adequado?&#10;Possui calendário anual do Sivcont?&#10;Possui controle de numeração de form in utilizados por município? &#10;Todas as notificações abertas estão encerradas no próprio form in &#10;(suspeita não fundamentada) ou no form com (ao término do acompanhamento e diagnóstico laboratorial)?" />
+         </tooltip></Label>
+      <JFXComboBox fx:id="cbRegistro" layoutX="261.0" layoutY="128.0" prefHeight="25.0" prefWidth="121.0" />
+      <JFXComboBox fx:id="cbAvaliacao" layoutX="14.0" layoutY="184.0" prefHeight="25.0" prefWidth="80.0" />
+      <Label fx:id="lblAvaliacao" layoutX="14.0" layoutY="167.0" text="Avaliação">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+   </children>
+</AnchorPane>

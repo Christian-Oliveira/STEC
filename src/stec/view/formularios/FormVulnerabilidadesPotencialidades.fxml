@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../resources/css/style.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stec.controller.FormVulnerabilidadesPotencialidadesController">
+   <children>
+      <JFXButton fx:id="btAdicionar" layoutX="408.0" layoutY="344.0" onAction="#handleAdicionar" prefHeight="45.0" prefWidth="80.0" text="Adicionar" />
+      <JFXButton fx:id="btCancelar" layoutX="516.0" layoutY="344.0" onAction="#handleCancelar" prefHeight="45.0" prefWidth="70.0" text="Cancelar" />
+      <JFXTextArea fx:id="txtVulnerabilidades" layoutX="14.0" layoutY="31.0" prefHeight="115.0" prefWidth="547.0" />
+      <JFXTextArea fx:id="txtPotencialidades" layoutX="14.0" layoutY="185.0" prefHeight="115.0" prefWidth="547.0" />
+      <Label fx:id="lblVulnerabilidades" layoutX="14.0" layoutY="14.0" text="Vulnerabilidades que o escritório apresenta na execução das ações de defesa animal" />
+      <Label fx:id="lblPotencialidades" layoutX="14.0" layoutY="168.0" text="Potencialidades que o escritório apresenta na execução das ações de defesa animal" />
+   </children>
+</AnchorPane>

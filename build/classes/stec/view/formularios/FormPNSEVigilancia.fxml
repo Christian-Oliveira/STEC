@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="600.0" stylesheets="@../../resources/css/style.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stec.controller.FormPNSEVigilanciaController">
+   <children>
+      <JFXButton fx:id="btAdicionar" layoutX="377.0" layoutY="414.0" onAction="#handleAdicionar" prefHeight="45.0" prefWidth="80.0" text="Adicionar" />
+      <JFXButton fx:id="btCancelar" layoutX="495.0" layoutY="414.0" onAction="#handleCancelar" prefHeight="45.0" prefWidth="70.0" text="Cancelar" />
+      <Label fx:id="lblDirecionamento" layoutX="14.0" layoutY="14.0" text="Direcionamento das &#10;ações de vigilância" textAlignment="CENTER">
+         <tooltip>
+            <Tooltip text="Realiza avaliações de riscos para embasar suas atividades?&#10;Recebe e segue orientações da UC para direcionar as ações de vigilância com base em riscos?&#10;Há evidências que as ações de vigilância são realizadas considerando avaliações de risco?" />
+         </tooltip></Label>
+      <JFXComboBox fx:id="cbDirecionamento" layoutX="14.0" layoutY="53.0" prefHeight="25.0" prefWidth="110.0" />
+      <Label fx:id="lblVigilancia" layoutX="131.0" layoutY="14.0" text="Vigilância em &#10;propriedades" textAlignment="CENTER">
+         <tooltip>
+            <Tooltip text="Realiza vigilância em propriedades de risco (propriedades com foco; &#10;propriedades com foco não saneado; propriedades que alugam pasto &#10;e instalações; propriedades próximas a recintos de aglomeração)?&#10;Registro em FAI, controle de km?" />
+         </tooltip></Label>
+      <JFXComboBox fx:id="cbVigilancia" layoutX="131.0" layoutY="53.0" prefHeight="25.0" prefWidth="74.0" />
+      <Label fx:id="lblDoencasNotificacao" layoutX="212.0" layoutY="14.0" text="Doenças de &#10;notificação obrigatória" textAlignment="CENTER">
+         <tooltip>
+            <Tooltip text="Tem conhecimento das doenças de notificação obrigatória (Anemia infecciosa equina, &#10;Encefalomielite equina, Mormo, etc)?&#10;&#10;Há ocorrência (notificação) e registro dessas doenças? Em caso afirmativo informar no &#10;campo &quot;Comentários&quot; quais enfermidades." />
+         </tooltip></Label>
+      <Label layoutX="16.0" layoutY="88.0" text="Propriedades sob monitoramento para saneamento de foco">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label fx:id="lblPropriedade" layoutX="14.0" layoutY="112.0" text="Nº de propriedades ">
+         <tooltip>
+            <Tooltip text="Indicar o nº de propriedades que estão nesta condição" />
+         </tooltip></Label>
+      <Label fx:id="lblDoencasCurso" layoutX="138.0" layoutY="112.0" text="Doença em curso">
+         <tooltip>
+            <Tooltip text="Inserir a enfermidade ou suspeita clínica para a qual está ocorrendo o monitoramento. " />
+         </tooltip></Label>
+      <Label fx:id="lblProcedimentosAdotados" layoutX="247.0" layoutY="112.0" text="Procedimentos adotados">
+         <tooltip>
+            <Tooltip text="Estão sendo adotados os procedimentos sanitários e administrativos adequados?" />
+         </tooltip></Label>
+      <JFXTextField fx:id="nPropriedade" layoutX="15.0" layoutY="134.0" prefHeight="25.0" prefWidth="108.0" />
+      <JFXTextField fx:id="doencasCurso" layoutX="137.0" layoutY="134.0" prefHeight="25.0" prefWidth="94.0" />
+      <JFXComboBox fx:id="cbProcedimentosAdotados" layoutX="247.0" layoutY="134.0" prefHeight="25.0" prefWidth="133.0" />
+      <JFXComboBox fx:id="cbDoencasNotificacao" layoutX="212.0" layoutY="53.0" prefHeight="25.0" prefWidth="120.0" />
+      <TabPane layoutX="8.0" layoutY="181.0" prefHeight="200.0" prefWidth="585.0" tabClosingPolicy="UNAVAILABLE">
+         <tabs>
+            <Tab fx:id="comentarios" text="Comentários">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtComentarios" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="recomendacoesULSAVEAC" text="Recomendações ULSAV/EAC">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtRULSAVEAC" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="prazo" text="Prazo para ajuste">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtPrazo" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="recomendacoesUR" text="Recomendações UR">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtRUR" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="recomendacoesUC" text="Recomendações UC">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtRUC" labelFloat="true" prefHeight="171.0" prefWidth="568.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

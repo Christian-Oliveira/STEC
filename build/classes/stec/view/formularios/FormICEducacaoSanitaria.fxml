@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../resources/css/style.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stec.controller.FormICEducacaoSanitariaController">
+   <children>
+      <JFXButton fx:id="btAdicionar" layoutX="430.0" layoutY="351.0" onAction="#handleAdicionar" prefHeight="45.0" prefWidth="80.0" text="Adicionar" />
+      <JFXButton fx:id="btCancelar" layoutX="517.0" layoutY="351.0" onAction="#handleCancelar" prefHeight="45.0" prefWidth="70.0" text="Cancelar" />
+      <Label fx:id="lblMaterial" layoutX="9.0" layoutY="14.0" text="Material de Educação &#10;Sanitária e Comunicação Social" textAlignment="CENTER">
+         <tooltip>
+            <Tooltip text="Recebe material de educação sanitária e comunicação social em saúde animal (apresentações padronizadas, &#10;banners, albuns seriados, cartazes, folders, cartilhas, etc) de forma regular? &#10;Atende a necessidade de informação do seu público considerando aspectos sócio-econômicos e culturais?&#10;A quantidade recebida é suficiente?" />
+         </tooltip></Label>
+      <Label fx:id="lblAcaoEducacao" layoutX="188.0" layoutY="14.0" text="Ações de Educação &#10;Sanitária" textAlignment="CENTER">
+         <tooltip>
+            <Tooltip text="Há ações de Educação Sanitária desenvolvidas no município (palestras, dias de campo, reuniões, participação &#10;de programas de rádio, TV ou outros meios de divulgação)? Registrar no campo &quot;Comentários&quot; os temas abordados&#10;Possui FAI, controle de km, lista de presença, ata de reunião referente aos eventos?&#10;Há inclusão dos médicos veterinários autônomos e/ou da rede privada em treinamentos e/ou ações de &#10;educação sanitária? Registrar no campo &quot;Comentários&quot; os temas abordados&#10;Há ações de estímulo à notificação de doenças dirigida pelo serviço veterinário estadual à comunidade?" />
+         </tooltip></Label>
+      <Label fx:id="lblDiagnostico" layoutX="309.0" layoutY="14.0" text="Diagnóstico Educativo">
+         <tooltip>
+            <Tooltip text="Sabe o que é um diagnóstico educativo e para que serve? &#10;Já aplicou algum diagnóstico educativo no município? &#10;Em caso positivo Registre o Tema no campo &quot;Comentários&quot;&#10;Os resultados são analisados para orientar as ações de educação sanitária e comunicação?" />
+         </tooltip></Label>
+      <Label fx:id="lblComunicacao" layoutX="457.0" layoutY="14.0" text="Comunicação Social">
+         <tooltip>
+            <Tooltip text="Há informação atualizada sobre programas, legislação, &#10;ações, notícias e serviços do SVE, disponibilizada eletronicamente na internet?   &#10;A equipe técnica do escritório conhece e tem acesso a essas informações?" />
+         </tooltip></Label>
+      <JFXComboBox fx:id="cbMaterial" layoutX="9.0" layoutY="48.0" prefHeight="25.0" prefWidth="165.0" />
+      <JFXComboBox fx:id="cbAcaoEducacao" layoutX="188.0" layoutY="48.0" prefHeight="25.0" prefWidth="106.0" />
+      <JFXComboBox fx:id="cbDiagnostico" layoutX="309.0" layoutY="48.0" prefHeight="25.0" prefWidth="118.0" />
+      <JFXComboBox fx:id="cbComunicacao" layoutX="457.0" layoutY="48.0" prefHeight="25.0" prefWidth="106.0" />
+      <TabPane layoutX="9.0" layoutY="140.0" prefHeight="200.0" prefWidth="585.0" tabClosingPolicy="UNAVAILABLE">
+         <tabs>
+            <Tab fx:id="comentarios" text="Comentários">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtComentarios" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="recomendacoesULSAVEAC" text="Recomendações ULSAV/EAC">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtRULSAVEAC" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="prazo" text="Prazo para ajuste">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtPrazo" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="recomendacoesUR" text="Recomendações UR">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtRUR" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="recomendacoesUC" text="Recomendações UC">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtRUC" labelFloat="true" prefHeight="171.0" prefWidth="568.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
+      <JFXComboBox fx:id="cbAvaliacao" layoutX="14.0" layoutY="100.0" prefHeight="25.0" prefWidth="80.0" />
+      <Label fx:id="lblAvaliacao" layoutX="14.0" layoutY="83.0" text="Avaliação">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+   </children>
+</AnchorPane>

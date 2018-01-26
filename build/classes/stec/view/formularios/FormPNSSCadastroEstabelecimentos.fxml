@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../resources/css/style.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stec.controller.FormPNSSCadastroEstabelecimentosController">
+   <children>
+      <JFXButton fx:id="btAdicionar" layoutX="389.0" layoutY="323.0" onAction="#handleAdicionar" prefHeight="45.0" prefWidth="80.0" text="Adicionar" />
+      <JFXButton fx:id="btCancelar" layoutX="494.0" layoutY="323.0" onAction="#handleCancelar" prefHeight="45.0" prefWidth="70.0" text="Cancelar" />
+      <Label fx:id="lblEstabelecimentosCadastrados" layoutX="14.0" layoutY="14.0" text="Estabelecimentos de &#10;criação cadastrados" textAlignment="CENTER">
+         <tooltip>
+            <Tooltip text="Há controle da quantidade de estabelecimentos com suínos cadastrados?" />
+         </tooltip></Label>
+      <Label fx:id="lblGranjas" layoutX="134.0" layoutY="14.0" text="Nº de Granjas ">
+         <tooltip>
+            <Tooltip text="São estabelecimentos com população maior que 15 animais independente do grau de tecnificação, &#10;estrutura física, manejo, alimentação, condição higiênico-sanitária e assistência médico veterinária." />
+         </tooltip></Label>
+      <Label fx:id="lblCriatorios" layoutX="221.0" layoutY="14.0" text="Nº de Criatórios &#10;(subsistência)" textAlignment="CENTER">
+         <tooltip>
+            <Tooltip text="São estabelecimentos com população menor que 15 animais independente do grau &#10;de tecnificação, estrutura física, manejo, alimentação, condição higiênico-sanitária e assistência médico veterinária" />
+         </tooltip></Label>
+      <Label fx:id="lblAtualizacaoCadastral" layoutX="317.0" layoutY="14.0" text="Atualização cadastral">
+         <tooltip>
+            <Tooltip text="Existem atividades planejadas para atualização deste cadastro?&#10;Há atualização de cadastros de suínos, quando os produtores detentores &#10;desses rebanhos não criam bovinos e bubalinos?&#10;Há atualização de cadastros de suínos no período das comprovações de &#10;vacinação contra febre aftosa?" />
+         </tooltip></Label>
+      <Label fx:id="lblSuideos" layoutX="437.0" layoutY="14.0" text="Suídeos asselvajados">
+         <tooltip>
+            <Tooltip text="Existem suídeos asselvajados no município?&#10;Existe cadastro desses animais?&#10;" />
+         </tooltip></Label>
+      <JFXComboBox fx:id="cbEstabelecimentosCadastrados" layoutX="14.0" layoutY="48.0" prefHeight="25.0" prefWidth="111.0" />
+      <JFXComboBox fx:id="cbAtualizacaoCadastral" layoutX="317.0" layoutY="48.0" prefHeight="25.0" prefWidth="112.0" />
+      <JFXComboBox fx:id="cbSuideos" layoutX="437.0" layoutY="48.0" prefHeight="25.0" prefWidth="111.0" />
+      <JFXTextField fx:id="nGranjas" layoutX="134.0" layoutY="48.0" prefHeight="25.0" prefWidth="77.0" />
+      <JFXTextField fx:id="nCriatorios" layoutX="221.0" layoutY="48.0" prefHeight="25.0" prefWidth="89.0" />
+      <TabPane layoutX="8.0" layoutY="100.0" prefHeight="200.0" prefWidth="585.0" tabClosingPolicy="UNAVAILABLE">
+         <tabs>
+            <Tab fx:id="comentarios" text="Comentários">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtComentarios" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="recomendacoesULSAVEAC" text="Recomendações ULSAV/EAC">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtRULSAVEAC" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="prazo" text="Prazo para ajuste">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtPrazo" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="recomendacoesUR" text="Recomendações UR">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtRUR" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="recomendacoesUC" text="Recomendações UC">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtRUC" labelFloat="true" prefHeight="171.0" prefWidth="568.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

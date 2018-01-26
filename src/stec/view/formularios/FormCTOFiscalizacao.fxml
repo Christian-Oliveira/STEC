@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="700.0" stylesheets="@../../resources/css/style.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stec.controller.FormCTOFiscalizacaoController">
+   <children>
+      <JFXButton fx:id="btAdicionar" layoutX="505.0" layoutY="441.0" onAction="#handleAdicionar" prefHeight="45.0" prefWidth="80.0" text="Adicionar" />
+      <JFXButton fx:id="btCancelar" layoutX="613.0" layoutY="441.0" onAction="#handleCancelar" prefHeight="45.0" prefWidth="70.0" text="Cancelar" />
+      <Label layoutX="20.0" layoutY="14.0" text="Nº de Revendas &#10;Cadastradas" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label fx:id="lblRevendasTotal" layoutX="10.0" layoutY="69.0" text="TOTAL">
+         <tooltip>
+            <Tooltip text="Total de revendas veterinárias no município, inclusive &#10;aquelas que não vendem vacinas contra doenças controladas por programas sanitários" />
+         </tooltip></Label>
+      <Label fx:id="lblRevendasVacinas" layoutX="58.0" layoutY="51.0" text="Que &#10;comercializam &#10;vacinas" textAlignment="CENTER">
+         <tooltip>
+            <Tooltip text="Quantidade de revendas veterinárias no municípioque comercializam vacinas &#10;contra doenças controladas por programas sanitários &#10;(aftosa, raiva, brucelose, leptospirose)" />
+         </tooltip></Label>
+      <Label fx:id="lblCadastramento" layoutX="150.0" layoutY="14.0" text="Cadastramento de &#10;Revendas Veterinárias" textAlignment="CENTER">
+         <tooltip>
+            <Tooltip text="Possui toda a documentação referente ao Cadastramento?&#10;Está atualizada?" />
+         </tooltip></Label>
+      <Label fx:id="lblRevendasFiscalizadas" layoutX="286.0" layoutY="15.0" text="Nº de revendas &#10;fiscalizadas durante o &#10;mês" textAlignment="CENTER">
+         <tooltip>
+            <Tooltip text="Registrar o número de revendas fiscalizadas no município" />
+         </tooltip></Label>
+      <Label fx:id="lblFrequenciaFiscalizacao" layoutX="419.0" layoutY="14.0" text="Frequência de &#10;fiscalizações em revendas" textAlignment="CENTER">
+         <tooltip>
+            <Tooltip text="Estão realizando a quantidade de fiscalizações adequadas por mês? &#10;&#10;Considerar que:&#10;&#10;Durante etapas de vacinação contra febre aftosa: Considerar o mínimo de 5 &#10;fiscalizações por semana em cada loja;&#10;&#10;Durante período entre etapas de vacinação contra febre aftosa: Considerar o &#10;mínimo de 1 fiscalização por semana em cada loja que comercializa vacinas e &#10;1 fiscalização ao mês naquelas que NÃO comercializam vacinas" />
+         </tooltip></Label>
+      <Label layoutX="577.0" layoutY="15.0" text="Procedimentos de &#10;Fiscalização" textAlignment="CENTER">
+         <tooltip>
+            <Tooltip text="Possui controle de temperatura? &#10;Controle de venda e estoque de vacinas contra febre aftosa, brucelose, raiva e leptospirose, &#10;e pasta vampiricida?&#10;Termo de recebimento de vacinas?&#10;Levantamento de estoque no início e no final das campanhas de vacinação contra febre aftosa?&#10;&#10;&#10;OBS.: Informar no campo comentários se o controle de venda e estoque das lojas está sendo &#10;realizados no SIAPEC. Em caso negativo informar o motivo" />
+         </tooltip>
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label fx:id="lblDiarias" layoutX="577.0" layoutY="68.0" text="Diárias">
+         <tooltip>
+            <Tooltip text="PNEFA - durante etapas de vacinação" />
+         </tooltip></Label>
+      <Label fx:id="lblSemanais" layoutX="635.0" layoutY="68.0" text="Semanais" textAlignment="CENTER">
+         <tooltip>
+            <Tooltip text="Considerar as fiscalizações que devem ser realizadas permanentemente &#10;nas revendas que vendem vacinas contra doenças que são &#10;contraladas por programas sanitários" />
+         </tooltip></Label>
+      <JFXTextField fx:id="nRevendasTotal" layoutX="10.0" layoutY="100.0" prefHeight="25.0" prefWidth="36.0" />
+      <JFXTextField fx:id="nRevendasVacinas" layoutX="58.0" layoutY="100.0" prefHeight="25.0" prefWidth="79.0" />
+      <JFXComboBox fx:id="cbCadastramento" layoutX="153.0" layoutY="100.0" prefHeight="25.0" prefWidth="117.0" />
+      <JFXTextField fx:id="nRevendasFiscalizadas" layoutX="286.0" layoutY="100.0" prefHeight="25.0" prefWidth="118.0" />
+      <JFXComboBox fx:id="cbFrequenciaFiscalizacao" layoutX="419.0" layoutY="100.0" prefHeight="25.0" prefWidth="136.0" />
+      <JFXComboBox fx:id="cbDiarias" layoutX="570.0" layoutY="100.0" prefHeight="25.0" prefWidth="36.0" />
+      <JFXComboBox fx:id="cbSemanais" layoutX="635.0" layoutY="100.0" prefHeight="25.0" prefWidth="50.0" />
+      <Label fx:id="lblSupervisaoRevenda" layoutX="11.0" layoutY="152.0" text="Supervisão na revenda veterinária">
+         <tooltip>
+            <Tooltip text="Possui uma pasta com toda a documentação arquivada (cópia dos documentos de cadastro, &#10;controle de venda e estoque, controle de temperatura, recebimento de vacinas)?&#10;Possui a relação dos produtores cadastrados na AGED?&#10;Sabe qual procedimento adotar caso um produtor não cadastrado na AGED procure a revenda para comprar vacina?&#10;Possui os telefones do escritório e dos funcionários/servidores da AGED?&#10;Conhece os procedimentos a serem adotados qdo da chegada de vacinas?&#10;Possui o controle de temperatura próximo ao refrigerador?&#10;O funcionário da AGED sabe aferir a temperatura?&#10;O termômetro está posicionado em local adequado?&#10;O refrigerador está organizado adequadamente (há somente vacinas)?&#10;O estoque na loja é igual ao que está registrado no escritório?&#10;&#10;OBS.: Para o PNCEBT cruzar os receituários com a quantidade de doses comercializadas. &#10;Verificar se a revenda tem conhecimento que os receituários devem ser arquivados por um período de 1 ano &#10;segundo normativas estabeleciadas pelo programa sanitário.&#10;&#10;OBS.: Para o PNEFA e, caso a supervisão esteja ocorrendo no período entre etapas, &#10;cruzar as autorizações para compra de vacina contra febre&#10; aftosa com a quantidade de doses comercializadas" />
+         </tooltip></Label>
+      <Label fx:id="lblApreensaoVacinas" layoutX="337.0" layoutY="152.0" text="Apreensão de vacinas">
+         <tooltip>
+            <Tooltip text="Há evidências de apreensão de vacinas?&#10;Há o registro dessas apreensões em formulários específicos?&#10;As vacinas foram encaminhadas para a Unidade Central?&#10;Houve a necessidade de aplicação de autuação? Em caso positivo, a aplicação está correta?" />
+         </tooltip></Label>
+      <JFXComboBox fx:id="cbSupervisaoRevenda" layoutX="199.0" layoutY="146.0" prefHeight="25.0" prefWidth="94.0" />
+      <JFXComboBox fx:id="cbApreensaoVacinas" layoutX="462.0" layoutY="145.0" prefHeight="25.0" prefWidth="63.0" />
+      <TabPane layoutX="12.0" layoutY="241.0" prefHeight="200.0" prefWidth="670.0" tabClosingPolicy="UNAVAILABLE">
+         <tabs>
+            <Tab fx:id="comentarios" text="Comentários">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtComentarios" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="recomendacoesULSAVEAC" text="Recomendações ULSAV/EAC">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtRULSAVEAC" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="prazo" text="Prazo para ajuste">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtPrazo" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="recomendacoesUR" text="Recomendações UR">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtRUR" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="recomendacoesUC" text="Recomendações UC">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtRUC" labelFloat="true" prefHeight="171.0" prefWidth="568.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
+      <JFXComboBox fx:id="cbAvaliacao" layoutX="11.0" layoutY="201.0" prefHeight="25.0" prefWidth="80.0" />
+      <Label fx:id="lblAvaliacao" layoutX="11.0" layoutY="184.0" text="Avaliação">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+   </children>
+</AnchorPane>

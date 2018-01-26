@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="600.0" stylesheets="@../../resources/css/style.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stec.controller.FormRHCapacitacaoController">
+   <children>
+      <TableView fx:id="tabelaCapacitacoes" layoutX="16.0" layoutY="103.0" prefHeight="100.0" prefWidth="568.0">
+        <columns>
+          <TableColumn fx:id="cNome" prefWidth="75.0" text="Nome" />
+          <TableColumn fx:id="cCargo" prefWidth="75.0" text="Cargo / Função" />
+            <TableColumn fx:id="cTreinamento" prefWidth="75.0" text="Treinamento" />
+            <TableColumn fx:id="cAno" prefWidth="75.0" text="Ano" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+      <JFXTextField fx:id="nome" labelFloat="true" layoutX="16.0" layoutY="27.0" prefHeight="25.0" prefWidth="145.0" promptText="Nome">
+         <tooltip>
+            <Tooltip text="Nome do servidor/funcionário que recebeu &#10;o treinamento&#10;" />
+         </tooltip></JFXTextField>
+      <JFXTextField fx:id="cargo" labelFloat="true" layoutX="333.0" layoutY="27.0" prefHeight="25.0" prefWidth="145.0" promptText="Cargo / Função">
+         <tooltip>
+            <Tooltip text="Cargo / função do servidor/funcionário que recebeu &#10;o treinamento" />
+         </tooltip></JFXTextField>
+      <JFXTextField fx:id="treinamento" labelFloat="true" layoutX="174.0" layoutY="27.0" prefHeight="25.0" prefWidth="145.0" promptText="Treinamento">
+         <tooltip>
+            <Tooltip text="Nome do treinamento" />
+         </tooltip></JFXTextField>
+      <JFXTextField fx:id="ano" labelFloat="true" layoutX="491.0" layoutY="27.0" prefHeight="25.0" prefWidth="95.0" promptText="Ano">
+         <tooltip>
+            <Tooltip text="Ano em que houve o treinamento" />
+         </tooltip></JFXTextField>
+      <JFXButton fx:id="btAdicionarCapacitacao" layoutX="14.0" layoutY="61.0" onAction="#handleAdicionarCapacitacao" prefHeight="35.0" prefWidth="145.0" text="Adicionar Capacitação" />
+      <JFXComboBox fx:id="cbAplicacaoPratica" layoutX="321.0" layoutY="220.0" prefHeight="25.0" prefWidth="135.0" />
+      <JFXButton fx:id="btExcluirCapacitacao" layoutX="174.0" layoutY="61.0" onAction="#handleExcluirCapacitacao" prefHeight="35.0" prefWidth="135.0" text="Excluir Capacitação" />
+      <JFXButton fx:id="btAdicionar" layoutX="403.0" layoutY="534.0" onAction="#handleAdicionar" prefHeight="45.0" prefWidth="80.0" text="Adicionar" />
+      <JFXButton fx:id="btCancelar" layoutX="514.0" layoutY="534.0" onAction="#handleCancelar" prefHeight="45.0" prefWidth="70.0" text="Cancelar" />
+      <TabPane layoutX="9.0" layoutY="315.0" prefHeight="200.0" prefWidth="585.0" tabClosingPolicy="UNAVAILABLE">
+         <tabs>
+            <Tab fx:id="comentarios" text="Comentários">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtComentarios" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="recomendacoesULSAVEAC" text="Recomendações ULSAV/EAC">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtRULSAVEAC" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="prazo" text="Prazo para ajuste">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtPrazo" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="recomendacoesUR" text="Recomendações UR">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtRUR" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="recomendacoesUC" text="Recomendações UC">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtRUC" labelFloat="true" prefHeight="171.0" prefWidth="568.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
+      <Label fx:id="lblAplicacaoPratica" layoutX="16.0" layoutY="224.0" text="Aplicação prática das capacitações na rotina de trabalho">
+         <tooltip>
+            <Tooltip text="Os temas abordados nas capacitações estão &#10;relacionados com as demandas da rotina de trabalho?&#10;" />
+         </tooltip></Label>
+      <JFXComboBox fx:id="cbAvaliacao" layoutX="16.0" layoutY="275.0" prefHeight="25.0" prefWidth="80.0" />
+      <Label fx:id="lblAvaliacao" layoutX="16.0" layoutY="258.0" text="Avaliação">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+   </children>
+</AnchorPane>

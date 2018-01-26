@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="700.0" stylesheets="@../../resources/css/style.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stec.controller.FormCTOAtendimentoSuspeitaController">
+   <children>
+      <TabPane layoutX="10.0" layoutY="212.0" prefHeight="200.0" prefWidth="684.0" tabClosingPolicy="UNAVAILABLE">
+         <tabs>
+            <Tab fx:id="comentarios" text="Comentários">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtComentarios" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="recomendacoesULSAVEAC" text="Recomendações ULSAV/EAC">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtRULSAVEAC" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="prazo" text="Prazo para ajuste">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtPrazo" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="recomendacoesUR" text="Recomendações UR">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtRUR" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="recomendacoesUC" text="Recomendações UC">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtRUC" labelFloat="true" prefHeight="171.0" prefWidth="568.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
+      <JFXButton fx:id="btAdicionar" layoutX="413.0" layoutY="431.0" onAction="#handleAdicionar" prefHeight="45.0" prefWidth="80.0" text="Adicionar" />
+      <JFXButton fx:id="btCancelar" layoutX="521.0" layoutY="431.0" onAction="#handleCancelar" prefHeight="45.0" prefWidth="70.0" text="Cancelar" />
+      <Label layoutX="252.0" layoutY="14.0" text="Material para atendimento">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label fx:id="lblEPI" layoutX="72.0" layoutY="45.0" text="Equipamento de &#10;Proteção Individual (EPI)" textAlignment="CENTER">
+         <tooltip>
+            <Tooltip text="Possui o EPI?&#10;Está completo?&#10;Está adequado ao funcionário que necessita utilizar (tamanho, pontuação)?" />
+         </tooltip></Label>
+      <Label fx:id="lblKitVesiculares" layoutX="261.0" layoutY="45.0" text="Kit de atendimento à &#10;enfermidades vesiculares" textAlignment="CENTER">
+         <tooltip>
+            <Tooltip text="Possui o Kit completo? &#10;Faz inspeção periódica e registra em planilha? &#10;Solicita reposição de material?" />
+         </tooltip></Label>
+      <Label fx:id="lblKitMaterialBiologico" layoutX="424.0" layoutY="35.0" text="Kit de atendimento para &#10;colheita de material biológico &#10;(doenças nervosas)" textAlignment="CENTER">
+         <tooltip>
+            <Tooltip text="Possui o Kit completo? &#10;Faz inspeção periódica e registra em planilha? &#10;Solicita reposição de material?" />
+         </tooltip></Label>
+      <Label fx:id="lblAcondicionamento" layoutX="14.0" layoutY="121.0" text="Acondicionamento e remessa de &#10;material para a Unidade Central " textAlignment="CENTER">
+         <tooltip>
+            <Tooltip text="Dispõe de material e meios de conservação para acondicionamento e remessa de amostras à Central (laboratório)?&#10;O veterinário têm conhecimento sobre preparo de amostras para envio?&#10;Dispõe de logistica prevista para envio de amostras (sabe pra onde enviar? Por que meio de transporte? Dispõe de &#10;recurso financeiro para essa finalidade? Tem como viabilizar as condições em tempo hábil?)&#10;" />
+         </tooltip></Label>
+      <Label fx:id="lblProcedimentos" layoutX="327.0" layoutY="138.0" prefHeight="17.0" prefWidth="252.0" text="Procedimentos no atendimentoàs notificações">
+         <tooltip>
+            <Tooltip text="Conhece os procedimentos para o atendimento à notificação? &#10;O médico veterinário está capacitado para atenderà supeita de enfermidade?&#10;Conhece as principais sídromes?&#10;Tempo de ação adequado?&#10;Tempo de reação adequado? &#10;Comunicação ao chefe imediato?&#10;Conhece o material que deve ser colhido para diagnóstico?&#10;Conhece as doenças de diagnóstico diferencial da enfermidade alvo?&#10;Faz solicitação para diagnóstico diferencial?&#10;Têm conhecimento sobre o grupo ECASE (Portaria, componentes / pontos focais)? &#10;Têm acesso aos componentes do grupo?" />
+         </tooltip></Label>
+      <Label fx:id="lblAgroprodutivo" layoutX="14.0" layoutY="185.0" text="Cadastro Agroprodutivo">
+         <tooltip>
+            <Tooltip text="Possui? &#10;Está completo?&#10;Está Atualizado? &#10;Está Padronizado?&#10;Possui o cadastramento do sistema agroprodutivo de todos os municípios da sua jurisdição?&#10;Sabe para que serve?" />
+         </tooltip></Label>
+      <JFXComboBox fx:id="cbEPI" layoutX="72.0" layoutY="83.0" prefHeight="25.0" prefWidth="142.0" />
+      <JFXComboBox fx:id="cbKitVesiculares" layoutX="261.0" layoutY="83.0" prefHeight="25.0" prefWidth="133.0" />
+      <JFXComboBox fx:id="cbKitMaterialBiologico" layoutX="424.0" layoutY="83.0" prefHeight="25.0" prefWidth="161.0" />
+      <JFXComboBox fx:id="cbAcondicionamento" layoutX="191.0" layoutY="129.0" prefHeight="25.0" prefWidth="118.0" />
+      <JFXComboBox fx:id="cbProcedimentos" layoutX="589.0" layoutY="129.0" prefHeight="25.0" prefWidth="95.0" />
+      <JFXComboBox fx:id="cbAgroprodutivo" layoutX="153.0" layoutY="176.0" prefHeight="25.0" prefWidth="95.0" />
+      <JFXComboBox fx:id="cbAvaliacao" layoutX="391.0" layoutY="171.0" prefHeight="25.0" prefWidth="80.0" />
+      <Label fx:id="lblAvaliacao" layoutX="326.0" layoutY="180.0" text="Avaliação">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+   </children>
+</AnchorPane>

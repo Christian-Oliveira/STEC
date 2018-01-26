@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../resources/css/style.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stec.controller.FormPNEFAFiscalizacoesController">
+   <children>
+      <JFXButton fx:id="btAdicionar" layoutX="415.0" layoutY="347.0" onAction="#handleAdicionar" prefHeight="45.0" prefWidth="80.0" text="Adicionar" />
+      <JFXButton fx:id="btCancelar" layoutX="516.0" layoutY="347.0" onAction="#handleCancelar" prefHeight="45.0" prefWidth="70.0" text="Cancelar" />
+      <Label fx:id="lblVacinacao" layoutX="14.0" layoutY="14.0" text="Procedimentos &#10;relacionados à vacinação " textAlignment="CENTER">
+         <tooltip>
+            <Tooltip text="Possui a estratégia de campanha?&#10;Enviou a Carta de comunicação de visitas para vacinação acompanhada (fiscalizada, assistida e/ou oficial)? &#10;As propriedades com vacinação acompanhada pelo SVE seguem critérios de seleção adequados?&#10;Está cumprindo a meta mínima das 20 vacinações acompanhadas pelo SVE?&#10;O índice alcaçado na campanha é compatível com o status sanitário?" />
+         </tooltip></Label>
+      <Label fx:id="lblComprovacao" layoutX="155.0" layoutY="15.0" text="Procedimentos &#10;de comprovação de &#10;vacinação" textAlignment="CENTER">
+         <tooltip>
+            <Tooltip text="Faz evolução do rebanho? &#10;Anexa a nota fiscal de compra da vacina à ficha de comprovação?&#10;A quantidade de doses de vacina é compatível com o rebanho? &#10;Faz o lançamento da comprovação nas fichas de movimentação e de propriedade?&#10;Conhece os procedimentos a serem adotados a produtores que adquirem vacinas em outros estados &#10;da federação? &#10;Está adotando esses procedimentos (possui algum formulário de registro de inspeção de vacinas ou &#10;nota fiscal com carimbo de inspeção)?&#10;Realizou a comprovação imediata da vacinação nos casos das modalidades assistida e/ou oficial? &#10;Possui a documentação relacionada (FAI e controle de quilometragem)? &#10;Faz os lançamentos imediatamente no sistema informatizado? &#10;Registrar no campo &quot;Comentários&quot; se há alguma dificuldade para operar o sistema informatizado." />
+         </tooltip></Label>
+      <Label fx:id="lblRelatorios" layoutX="272.0" layoutY="15.0" text="Relatórios &#10;de campanha" textAlignment="CENTER">
+         <tooltip>
+            <Tooltip text="Possui os relatórios referentes à ultima campanha (Parciais, índices, demais &#10;espécies, vacinações acompanhadas pelo SVE)?&#10;Em caso de baixo índice, relatar a justificativa no campo &quot;Comentários&quot;" />
+         </tooltip></Label>
+      <Label fx:id="lblPosEtapa" layoutX="357.0" layoutY="14.0" text="Procedimentos &#10;pós-etapa" textAlignment="CENTER">
+         <tooltip>
+            <Tooltip text="Possui o manual de Procedimentos Pós-campanha enviado pelo PNEFA/MA?&#10;Possui a lista de inadimplentes? &#10;Realizou ações sobre os inadimplentes – medidas administrativas e sanitárias?&#10;Possui os relatórios de vacinações acompanhadas pelo SVE" />
+         </tooltip></Label>
+      <JFXComboBox fx:id="cbVacinacao" layoutX="14.0" layoutY="65.0" prefHeight="25.0" prefWidth="135.0" />
+      <JFXComboBox fx:id="cbComprovacao" layoutX="155.0" layoutY="65.0" prefHeight="25.0" prefWidth="109.0" />
+      <JFXComboBox fx:id="cbRelatorios" layoutX="272.0" layoutY="65.0" prefHeight="25.0" prefWidth="72.0" />
+      <JFXComboBox fx:id="cbPosEtapa" layoutX="357.0" layoutY="65.0" prefHeight="25.0" prefWidth="83.0" />
+      <TabPane layoutX="8.0" layoutY="109.0" prefHeight="200.0" prefWidth="585.0" tabClosingPolicy="UNAVAILABLE">
+         <tabs>
+            <Tab fx:id="comentarios" text="Comentários">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtComentarios" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="recomendacoesULSAVEAC" text="Recomendações ULSAV/EAC">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtRULSAVEAC" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="prazo" text="Prazo para ajuste">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtPrazo" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="recomendacoesUR" text="Recomendações UR">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtRUR" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="recomendacoesUC" text="Recomendações UC">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtRUC" labelFloat="true" prefHeight="171.0" prefWidth="568.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
+      <JFXComboBox fx:id="cbAvaliacao" layoutX="455.0" layoutY="66.0" prefHeight="25.0" prefWidth="80.0" />
+      <Label fx:id="lblAvaliacao" layoutX="460.0" layoutY="15.0" text="Avaliação">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+   </children>
+</AnchorPane>

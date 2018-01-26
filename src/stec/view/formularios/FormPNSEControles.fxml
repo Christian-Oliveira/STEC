@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="450.0" prefWidth="600.0" stylesheets="@../../resources/css/style.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stec.controller.FormPNSEControlesController">
+   <children>
+      <Label layoutX="14.0" layoutY="14.0" text="Quantidade de &#10;processos  no escritório" textAlignment="CENTER">
+         <tooltip>
+            <Tooltip text="Quantificar nos campos abaixo os processos existentes na Ulsav" />
+         </tooltip></Label>
+      <Label fx:id="lblQtdAntigos" layoutX="14.0" layoutY="48.0" text="Antigos">
+         <tooltip>
+            <Tooltip text="Refere-se a processos antigos, não finalizados. " />
+         </tooltip></Label>
+      <Label fx:id="lblQtdRecentes" layoutX="92.0" layoutY="48.0" text="Recentes">
+         <tooltip>
+            <Tooltip text="Refere-se aos processos recebidos no ano vigente &#10;e ou que estejam em andamento." />
+         </tooltip></Label>
+      <Label fx:id="lblRelacaoMVCadastrados" layoutX="151.0" layoutY="14.0" text="Relação dos Med Vet &#10;cadastrados" textAlignment="CENTER">
+         <tooltip>
+            <Tooltip text="Possui a relação dos médicos veterinários cadastrados junto ao programa?&#10;Está atualizada?" />
+         </tooltip></Label>
+      <Label fx:id="lblRelatorioColheita" layoutX="281.0" layoutY="14.0" text="Relatórios de colheita &#10;Med Vet cadastrados" textAlignment="CENTER">
+         <tooltip>
+            <Tooltip text="Possui os relatórios de colheita referente aos veterinários que atuam em sua jurisdição?" />
+         </tooltip></Label>
+      <JFXTextField fx:id="qtdAntigos" layoutX="14.0" layoutY="65.0" prefHeight="25.0" prefWidth="41.0" />
+      <JFXTextField fx:id="qtdRecentes" layoutX="92.0" layoutY="65.0" prefHeight="25.0" prefWidth="48.0" />
+      <JFXComboBox fx:id="cbRelacaoMVCadastrados" layoutX="151.0" layoutY="65.0" prefHeight="25.0" prefWidth="116.0" />
+      <JFXComboBox fx:id="cbRelatorioColheita" layoutX="281.0" layoutY="65.0" prefHeight="25.0" prefWidth="118.0" />
+      <JFXButton fx:id="btAdicionar" layoutX="400.0" layoutY="375.0" onAction="#handleAdicionar" prefHeight="45.0" prefWidth="80.0" text="Adicionar" />
+      <JFXButton fx:id="btCancelar" layoutX="516.0" layoutY="375.0" onAction="#handleCancelar" prefHeight="45.0" prefWidth="70.0" text="Cancelar" />
+      <TabPane layoutX="8.0" layoutY="107.0" prefHeight="200.0" prefWidth="585.0" tabClosingPolicy="UNAVAILABLE">
+         <tabs>
+            <Tab fx:id="comentarios" text="Comentários">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtComentarios" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="recomendacoesULSAVEAC" text="Recomendações ULSAV/EAC">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtRULSAVEAC" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="prazo" text="Prazo para ajuste">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtPrazo" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="recomendacoesUR" text="Recomendações UR">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtRUR" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="recomendacoesUC" text="Recomendações UC">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtRUC" labelFloat="true" prefHeight="171.0" prefWidth="568.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
+      <Label fx:id="lblAvaliacao" layoutX="410.0" layoutY="14.0" text="Avaliação">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <JFXComboBox fx:id="cbAvaliacao" layoutX="408.0" layoutY="65.0" prefHeight="25.0" prefWidth="80.0" />
+   </children>
+</AnchorPane>

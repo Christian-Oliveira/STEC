@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="555.0" prefWidth="725.0" stylesheets="@../../resources/css/style.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stec.controller.FormCTOControleController">
+   <children>
+      <JFXButton fx:id="btAdicionar" layoutX="504.0" layoutY="479.0" onAction="#handleAdicionar" prefHeight="45.0" prefWidth="80.0" text="Adicionar" />
+      <JFXButton fx:id="btCancelar" layoutX="612.0" layoutY="479.0" onAction="#handleCancelar" prefHeight="45.0" prefWidth="70.0" text="Cancelar" />
+      <JFXTextField fx:id="nBlitzAno" labelFloat="true" layoutX="14.0" layoutY="99.0" prefHeight="25.0" prefWidth="132.0" />
+      <Label alignment="CENTER" layoutX="314.0" layoutY="10.0" prefHeight="17.0" prefWidth="200.0" text="Blitz realizadas durante o mês">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <JFXTextField fx:id="qtdBlitzMes" layoutX="157.0" layoutY="99.0" prefHeight="25.0" prefWidth="63.0" />
+      <JFXTextField fx:id="qtdBlitzMesInspecionados" layoutX="625.0" layoutY="99.0" prefHeight="25.0" prefWidth="78.0" />
+      <JFXComboBox fx:id="cbPontosEstrategicos" layoutX="13.0" layoutY="177.0" prefHeight="25.0" prefWidth="122.0" />
+      <JFXComboBox fx:id="cbRealizacaoMensal" layoutX="153.0" layoutY="177.0" prefHeight="25.0" prefWidth="100.0" />
+      <JFXComboBox fx:id="cbRegistroBlitz" layoutX="271.0" layoutY="177.0" prefHeight="25.0" prefWidth="86.0" />
+      <JFXComboBox fx:id="cbApreensoes" layoutX="375.0" layoutY="177.0" prefHeight="25.0" prefWidth="62.0" />
+      <JFXComboBox fx:id="cbMaterialBlitz" layoutX="454.0" layoutY="177.0" prefHeight="25.0" prefWidth="130.0" />
+      <JFXComboBox fx:id="cbRegistro" layoutX="601.0" layoutY="177.0" prefHeight="25.0" prefWidth="102.0" />
+      <Label fx:id="lblBlitzAno" layoutX="14.0" layoutY="14.0" text="Nº de blitz realizadas &#10;durante o ano (até o &#10;momento da supervisão)" textAlignment="CENTER" />
+      <TabPane layoutX="14.0" layoutY="268.0" prefHeight="200.0" prefWidth="670.0" tabClosingPolicy="UNAVAILABLE">
+         <tabs>
+            <Tab fx:id="comentarios" text="Comentários">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtComentarios" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="recomendacoesULSAVEAC" text="Recomendações ULSAV/EAC">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtRULSAVEAC" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="prazo" text="Prazo para ajuste">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtPrazo" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="recomendacoesUR" text="Recomendações UR">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtRUR" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="recomendacoesUC" text="Recomendações UC">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtRUC" labelFloat="true" prefHeight="171.0" prefWidth="568.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
+      <Label fx:id="lblQtdBlitzMes" layoutX="157.0" layoutY="33.0" text="Quantidade" />
+      <Label alignment="CENTER" layoutX="314.0" layoutY="34.0" prefHeight="17.0" prefWidth="200.0" text="Nº de veículos inspecionados" />
+      <JFXTextField fx:id="qtdBlitzMesAnimais" labelFloat="true" layoutX="230.0" layoutY="99.0" prefHeight="25.0" prefWidth="69.0" />
+      <Label fx:id="lblQtdBlitzMesAnimais" layoutX="230.0" layoutY="69.0" text="Com animais" />
+      <Label fx:id="lblQtdBlitzMesProdutos" layoutX="308.0" layoutY="69.0" prefWidth="157.0" text="Com produtos e subprodutos" />
+      <JFXTextField fx:id="qtdBlitzMesProdutos" labelFloat="true" layoutX="308.0" layoutY="99.0" prefHeight="25.0" prefWidth="157.0" />
+      <Label fx:id="lblQtdBlitzMesVazio" layoutX="473.0" layoutY="52.0" prefHeight="51.0" prefWidth="142.0" text="Vazios ou com carga &#10;que não seja de interesse &#10;da Defesa Animal" textAlignment="CENTER" />
+      <JFXTextField fx:id="qtdBlitzMesVazio" labelFloat="true" layoutX="473.0" layoutY="99.0" prefHeight="25.0" prefWidth="142.0" />
+      <Label fx:id="lblQtdBlitzMesInspecionados" layoutX="625.0" layoutY="27.0" text="Nº de animais &#10;inspecionados" textAlignment="CENTER" />
+      <Label fx:id="lblPontosEstrategicos" layoutX="13.0" layoutY="143.0" text="Pontos Estratégicos &#10;para realização de blitz" textAlignment="CENTER">
+         <tooltip>
+            <Tooltip text="Possui mapeamento dos pontos de ingresso no seu município?&#10;Possui a relação dos pontos estratégicos para realização de blitz?&#10;Há adequada localização dos pontos para realização de blitz [Conhece o fluxo de trânsito de &#10;sua região: dia de maior movimentação no trânsito de animais, matéria prima,produtos e subprodutos; &#10;espécies mais movimentadas; presença de matadouros, frigoríficos, laticínios, indústrias, tanques de coleta &#10;e resfriamento de leite, se o município possui características de mercado consumidor ou fornecedor de &#10;animais ou matéria prima; presença de piscicultura ou estação pesqueira, rotas de fuga, presença de posto &#10;policial (PMMA ou PRF), presença de Posto Fiscal, dias de feriados municipais e dos municípios limítrofes ao seu, etc...]?&#10;Informe nos comentários qual a justificativa para a escolha do local" />
+         </tooltip></Label>
+      <Label fx:id="lblRealizacaoMensal" layoutX="153.0" layoutY="143.0" text="Realização mensal &#10;de blitz" textAlignment="CENTER">
+         <tooltip>
+            <Tooltip text="Blitz programada pela Ulsav&#10;Consta no planejamento técnico mensal? &#10;Contempla todos os EACs? &#10;Está sendo cumprido? Caso o planejamento não esteja sendo cumprido está preenchendo&#10; o formulário de justificativa para não realização da blitz? &#10;Inserir no campo “Comentários” a frequência desse registro e o motivo da não realização.&#10;&#10;Blitz programada pela UC&#10;Possui o planejamento e o orientativo para realização de blitzes encaminhado pela Central? &#10;Tem conhecimento e realiza a leitura desse Instrutivo? &#10;Tem ele arquivado? &#10;Tem atendido às recomendações de realização dessas blitzes? &#10;Caso contrário, tem as justificativas de não realização das atividades arquivadas?&#10;Inserir no campo “Comentários” a frequência desse registro e o motivo da não realização.&#10;Como tem sido o atendimento por parte da Polícia, mobilizada pela Central?  Relate no campo &quot;Comentários&quot;. " />
+         </tooltip></Label>
+      <Label fx:id="lblRegistroBlitz" layoutX="271.0" layoutY="143.0" text="Registro da blitz">
+         <tooltip>
+            <Tooltip text="Possui o ofício à PMMA, FAI de entrega do Ofício à PMMA e de realização da ação, controle de km, mapa de blitz, registro no RTM?&#10;Possui formulário de briefing devidamente preenchido com dados da ação (um para cada ação), registro fotográfico&#10;Caso tenha sido produzida matéria na mídia, tem cópia arquivada?" />
+         </tooltip></Label>
+      <Label fx:id="lblApreensoes" layoutX="375.0" layoutY="143.0" text="Apreensões">
+         <tooltip>
+            <Tooltip text="Há evidências de apreensões e ou destruições resultante da fiscalização de trânsito?&#10;Estão devidamente documentadas (Registro de autos de infração e termos de apreensão, &#10;inutilização e aproveitamento condicional oriundos da ação)?" />
+         </tooltip></Label>
+      <Label fx:id="lblMaterialBlitz" layoutX="454.0" layoutY="143.0" text="Material para realização &#10;de blitz" textAlignment="CENTER">
+         <tooltip>
+            <Tooltip text="Possui o material para realização de blitz: Coletes; Carimbos de identificação do &#10;funcionário, fiscalizado e retorno a origem; Lâmpada negra para verificação de GTA; &#10;Formulários de apreensão, inutilização e aproveitamento condicional de produtos de &#10;origem animal e fiel depositário (RETIRAR); Autos de infração; Mapas de fiscalização de &#10;trânsito; carbono; prancheta; Legislação atualizada;  Desinfetantes necessários para inutilização &#10;de produtos e/ou subprodutos de origem animal apreendidos durante fiscalização?" />
+         </tooltip></Label>
+      <Label fx:id="lblRegistro" layoutX="601.0" layoutY="143.0" text="Registro sobre &#10;operações volantes" textAlignment="CENTER">
+         <tooltip>
+            <Tooltip text="Possui refluxo de informações sobre operações volantes &#10;realizadas no município em arquivo?" />
+         </tooltip></Label>
+      <JFXComboBox fx:id="cbAvaliacao" layoutX="14.0" layoutY="227.0" prefHeight="25.0" prefWidth="80.0" />
+      <Label fx:id="lblAvaliacao" layoutX="14.0" layoutY="210.0" text="Avaliação">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+   </children>
+</AnchorPane>

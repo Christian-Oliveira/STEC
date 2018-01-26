@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="450.0" prefWidth="645.0" stylesheets="@../../resources/css/style.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stec.controller.FormPNCEBTControlesController">
+   <children>
+      <JFXButton fx:id="btAdicionar" layoutX="439.0" layoutY="369.0" onAction="#handleAdicionar" prefHeight="45.0" prefWidth="80.0" text="Adicionar" />
+      <JFXButton fx:id="btCancelar" layoutX="542.0" layoutY="369.0" onAction="#handleCancelar" prefHeight="45.0" prefWidth="70.0" text="Cancelar" />
+      <Label layoutX="14.0" layoutY="14.0" text="Os itens a seguir referem-se aos controle sobre os médicos veterinários autônomos cadastrados &#10;e/ou habilitados junto ao PNCEBT através da Ulsav que está sendo supervisionada" />
+      <Label fx:id="lblPortaria" layoutX="14.0" layoutY="55.0" text="Portarias Med Vet &#10;cadastrados e/ou &#10;habilitados" textAlignment="CENTER">
+         <tooltip>
+            <Tooltip text="Possui portaria, em arquivo, dos veterinários cadastrados &#10;e/ou habilitados junto ao PNCEBT?" />
+         </tooltip></Label>
+      <Label fx:id="lblPontualidade" layoutX="123.0" layoutY="55.0" text="Pontualidade Med Vet &#10;cadastrados e/ou habilitados" textAlignment="CENTER">
+         <tooltip>
+            <Tooltip text="Possui controle de recebimento de relatórios de vacinação (Méd. Vet. Cadastrados), &#10;de acordo com o padrão estabelecido pelo PNCEBT (impresso em planilha)?  &#10;Possui controle de recebimento de relatórios de utilização de antígeno (Méd. Vet. Habilitados), &#10;de acordo com o padrão estabelecido pelo PNCEBT (impresso em planilha)? &#10;Possui exames realizados nos municípios de sua jurisdição (positivos, negativos e inconclusivos)?" />
+         </tooltip></Label>
+      <Label fx:id="lblRelatoriosPNCEBT" layoutX="289.0" layoutY="55.0" text="Relatórios do PNCEBT/MA">
+         <tooltip>
+            <Tooltip text="Possui os relatórios mensais de realização de exames de brucelose e teste de tuberculose realizados &#10;pelos médicos veterinários habilitados?&#10;Possui os relatórios mensais de realização de vacinação dos Médicos Veterinários Cadastrados?&#10;Possui os relatórios de utilização de antígenos e tuberculinas utilizados pelos Médicos Veterinários Habilitados? &#10;Envia-os para a Unidade Regional?" />
+         </tooltip></Label>
+      <Label fx:id="lblComercializacao" layoutX="449.0" layoutY="55.0" text="Comercialização de blocos &#10;de Receituário e atestados &#10;de vacinação contra brucelose (UR)" textAlignment="CENTER">
+         <tooltip>
+            <Tooltip text="Este campo deverá ser analisado apenas pelas auditorias estaduais, pois trata-se de procedimentos que &#10;devem ser adotados pelas Unidades Regionais e avaliados in loco. Desta forma, caso esteja realizando &#10;uma supervisão regional preencha-o utilizando o conceito &quot;NA&quot; (não se aplica)&#10;&#10;Possui arquivo geral de comercialização de blocos de atestados e receituários&#10;Possui arquivo individual (por Médico Veterinário) de comercialização de blocos de atestados e receituários para vacinação contra brucelose?&#10;É realizado o envio mensal para o Setor de Brucelose e Tuberculose, através de formulário padronizado, sobre a comercialização de blocos?" />
+         </tooltip></Label>
+      <JFXComboBox fx:id="cbPortaria" layoutX="14.0" layoutY="106.0" prefHeight="25.0" prefWidth="99.0" />
+      <JFXComboBox fx:id="cbPontualidade" layoutX="123.0" layoutY="106.0" prefHeight="25.0" prefWidth="153.0" />
+      <JFXComboBox fx:id="cbRelatoriosPNCEBT" layoutX="289.0" layoutY="106.0" prefHeight="25.0" prefWidth="139.0" />
+      <JFXComboBox fx:id="cbComercializacao" layoutX="449.0" layoutY="106.0" prefHeight="25.0" prefWidth="186.0" />
+      <TabPane layoutX="13.0" layoutY="153.0" prefHeight="200.0" prefWidth="620.0" tabClosingPolicy="UNAVAILABLE">
+         <tabs>
+            <Tab fx:id="comentarios" text="Comentários">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtComentarios" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="recomendacoesULSAVEAC" text="Recomendações ULSAV/EAC">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtRULSAVEAC" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="prazo" text="Prazo para ajuste">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtPrazo" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="recomendacoesUR" text="Recomendações UR">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtRUR" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="recomendacoesUC" text="Recomendações UC">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtRUC" labelFloat="true" prefHeight="171.0" prefWidth="568.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

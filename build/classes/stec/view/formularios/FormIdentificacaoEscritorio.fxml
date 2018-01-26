@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="600.0" stylesheets="@../../resources/css/style.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stec.controller.FormIdentificacaoEscritorioController">
+   <children>
+      <JFXComboBox fx:id="cbUR" layoutX="15.0" layoutY="38.0" prefHeight="25.0" prefWidth="155.0" />
+      <JFXTextField fx:id="nomeChefe" layoutX="176.0" layoutY="38.0" prefHeight="25.0" prefWidth="195.0" />
+      <JFXTextField fx:id="emailChefe" layoutX="378.0" layoutY="38.0" prefHeight="25.0" prefWidth="180.0" />
+      <JFXComboBox fx:id="cbEscritorio" layoutX="15.0" layoutY="90.0" prefHeight="25.0" prefWidth="155.0" />
+      <JFXTextField fx:id="endereco" labelFloat="true" layoutX="179.0" layoutY="90.0" prefHeight="25.0" prefWidth="379.0" />
+      <JFXTextField fx:id="telefone" layoutX="16.0" layoutY="142.0" prefHeight="25.0" prefWidth="155.0" />
+      <JFXTextField fx:id="veterinario" labelFloat="true" layoutX="176.0" layoutY="142.0" prefHeight="25.0" prefWidth="195.0" />
+      <JFXTextField fx:id="veterinarioEmail" labelFloat="true" layoutX="378.0" layoutY="142.0" prefHeight="25.0" prefWidth="180.0" />
+      <Label layoutX="9.0" layoutY="200.0" prefHeight="34.0" prefWidth="568.0" text="OBS: Na ausência do(a) veterinário(a) responsável pelo escritório, informar campo &quot;Comentários&quot; &#10;o motivo da ausência e o nome e função de quem irá responder à supervisão " />
+      <JFXButton fx:id="btAdicionar" layoutX="406.0" layoutY="441.0" onAction="#handleAdicionar" prefHeight="45.0" prefWidth="80.0" text="Adicionar" />
+      <JFXButton fx:id="btCancelar" layoutX="514.0" layoutY="441.0" onAction="#handleCancelar" prefHeight="45.0" prefWidth="70.0" text="Cancelar" />
+      <Label layoutX="14.0" layoutY="17.0" text="UR" />
+      <Label fx:id="lblChefeUr" layoutX="179.0" layoutY="17.0" text="Chefe da UR" />
+      <Label fx:id="lblEmailChefe" layoutX="378.0" layoutY="17.0" text="Email" />
+      <TabPane layoutX="9.0" layoutY="241.0" prefHeight="200.0" prefWidth="585.0" tabClosingPolicy="UNAVAILABLE">
+         <tabs>
+            <Tab fx:id="comentarios" text="Comentários">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtComentarios" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="recomendacoesULSAVEAC" text="Recomendações ULSAV/EAC">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtRULSAVEAC" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="prazo" text="Prazo para ajuste">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtPrazo" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="recomendacoesUR" text="Recomendações UR">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtRUR" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="recomendacoesUC" text="Recomendações UC">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtRUC" labelFloat="true" prefHeight="171.0" prefWidth="568.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
+      <Label layoutX="16.0" layoutY="73.0" text="EAC" />
+      <Label fx:id="lblEndereco" layoutX="179.0" layoutY="73.0" text="Endereço" />
+      <Label fx:id="lblTelefone" layoutX="13.0" layoutY="125.0" text="Telefone" />
+      <Label fx:id="lblNomeVeterinario" layoutX="178.0" layoutY="125.0" text="Médico(a) veterinário(a) responsável" />
+      <Label fx:id="lblEmailVeterinario" layoutX="376.0" layoutY="125.0" text="Email M. veterinário(a)" />
+   </children>
+</AnchorPane>

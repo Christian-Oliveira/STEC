@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../resources/css/style.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stec.controller.FormAGSupervisaoController">
+   <children>
+      <JFXComboBox fx:id="cbPFFA" layoutX="14.0" layoutY="39.0" prefHeight="25.0" prefWidth="116.0" />
+      <JFXComboBox fx:id="cbEAC" layoutX="147.0" layoutY="39.0" prefHeight="25.0" prefWidth="136.0" />
+      <JFXComboBox fx:id="cbSupervisao" layoutX="302.0" layoutY="39.0" prefHeight="25.0" prefWidth="117.0" />
+      <JFXButton fx:id="btAdicionar" layoutX="409.0" layoutY="341.0" onAction="#handleAdicionar" prefHeight="45.0" prefWidth="80.0" text="Adicionar" />
+      <JFXButton fx:id="btCancelar" layoutX="517.0" layoutY="341.0" onAction="#handleCancelar" prefHeight="45.0" prefWidth="70.0" text="Cancelar" />
+      <Label fx:id="lblPFFA" layoutX="14.0" layoutY="18.0" text="Visita técnica no PFFA">
+         <tooltip>
+            <Tooltip text="Consiste nas visitas periódicas que devem ser realizadas pelo chefe da ULSAV com objetivo de acompanhar o desenvolvimento &#10;das ações no POSTO FIXO DE FISCALIZAÇÃO AGROPECUÁRIA (PFFA), com objetivo de prestar esclarecimentos e atualizações a &#10;respeito de procedimentos e zelar pela padronização&#10;&#10;A frequência mínima aceitável é 1 vez ao mês. &#10;&#10;Esta frequência está sendo atendida? Caso a recomendação de visita técnica quinzenal não esteja sendo atendida, registrar no &#10;campo &quot;Comentários&quot; qual frequência está sendo praticada (não visita o PFFA, semanal, quinzenal, mensal, esporádica) e qual a &#10;dificuldade para atender à recomendada.&#10;Possui os registros das visitas técnicas em Check list, FAI e controle de km?" />
+         </tooltip></Label>
+      <Label fx:id="lblEAC" layoutX="147.0" layoutY="18.0" text="Visita técnica no(s) EAC(s)">
+         <tooltip>
+            <Tooltip text="Consiste nas visitas periódicas que devem ser realizadas pelo chefe da ULSAV com objetivo &#10;de acompanhar o desenvolvimento das ações no(s) EAC(s), prestar esclarecimentos e atualizações a &#10;respeito de procedimentos e zelar pela padronização&#10;&#10;A frequência mínima aceitável é 1 vez ao mês. &#10;&#10;Esta frequência está sendo atendida? Caso a recomendação de visita técnica quinzenal não &#10;esteja sendo atendida, registrar no campo &quot;Comentários&quot; qual frequência está sendo praticada &#10;(não visita o EAC, semanal, quinzenal, mensal, esporádica) e qual a dificuldade para atender à recomendada.&#10;Possui os registros das visitas técnicas em Check list,livro de visitas técnicas, FAI e controle de km?" />
+         </tooltip></Label>
+      <Label fx:id="lblSupervisao" layoutX="302.0" layoutY="18.0" text="Supervisões recebidas">
+         <tooltip>
+            <Tooltip text="Consiste nas supervisões técnicas recebidas pelo escritório com objetivo &#10;de acompanhar o desenvolvimento das ações no(s) EAC(s), prestar esclarecimentos &#10;e atualizações a respeito de procedimentos e zelar pela padronização&#10;&#10;Possui os relatórios das supervisões recebidas?&#10;Está cumprindo às recomendações?" />
+         </tooltip></Label>
+      <TabPane layoutX="10.0" layoutY="136.0" prefHeight="200.0" prefWidth="585.0" tabClosingPolicy="UNAVAILABLE">
+         <tabs>
+            <Tab fx:id="comentarios" text="Comentários">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtComentarios" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="recomendacoesULSAVEAC" text="Recomendações ULSAV/EAC">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtRULSAVEAC" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="prazo" text="Prazo para ajuste">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtPrazo" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="recomendacoesUR" text="Recomendações UR">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtRUR" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="recomendacoesUC" text="Recomendações UC">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtRUC" labelFloat="true" prefHeight="171.0" prefWidth="568.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
+      <JFXComboBox fx:id="cbAvaliacao" layoutX="437.0" layoutY="39.0" prefHeight="25.0" prefWidth="80.0" />
+      <Label fx:id="lblAvaliacao" layoutX="437.0" layoutY="18.0" text="Avaliação">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+   </children>
+</AnchorPane>

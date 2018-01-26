@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="600.0" stylesheets="@../../resources/css/style.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stec.controller.FormCTOControleTransitoAnimaisController">
+   <children>
+      <JFXButton fx:id="btAdicionar" layoutX="411.0" layoutY="441.0" onAction="#handleAdicionar" prefHeight="45.0" prefWidth="80.0" text="Adicionar" />
+      <JFXButton fx:id="btCancelar" layoutX="519.0" layoutY="441.0" onAction="#handleCancelar" prefHeight="45.0" prefWidth="70.0" text="Cancelar" />
+      <JFXTextField fx:id="nGTAEmitente" layoutX="13.0" layoutY="65.0" prefHeight="25.0" prefWidth="90.0" />
+      <JFXComboBox fx:id="cbCredenciamento" layoutX="117.0" layoutY="65.0" prefHeight="25.0" prefWidth="107.0" />
+      <JFXComboBox fx:id="cbManuais" layoutX="240.0" layoutY="65.0" prefHeight="25.0" prefWidth="81.0" />
+      <JFXComboBox fx:id="cbEmissaoGTA" layoutX="337.0" layoutY="65.0" prefHeight="25.0" prefWidth="63.0" />
+      <JFXComboBox fx:id="cbExigencias" layoutX="415.0" layoutY="65.0" prefHeight="25.0" prefWidth="74.0" />
+      <JFXComboBox fx:id="cbRelatorios" layoutX="501.0" layoutY="65.0" prefHeight="25.0" prefWidth="86.0" />
+      <JFXComboBox fx:id="cbGraficos" layoutX="13.0" layoutY="161.0" prefHeight="25.0" prefWidth="79.0" />
+      <JFXComboBox fx:id="cbOrganizacao" layoutX="109.0" layoutY="161.0" prefHeight="25.0" prefWidth="70.0" />
+      <JFXComboBox fx:id="cbGuias" layoutX="195.0" layoutY="161.0" prefHeight="25.0" prefWidth="129.0" />
+      <TabPane layoutX="13.0" layoutY="241.0" prefHeight="200.0" prefWidth="585.0" tabClosingPolicy="UNAVAILABLE">
+         <tabs>
+            <Tab fx:id="comentarios" text="Comentários">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtComentarios" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="recomendacoesULSAVEAC" text="Recomendações ULSAV/EAC">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtRULSAVEAC" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="prazo" text="Prazo para ajuste">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtPrazo" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="recomendacoesUR" text="Recomendações UR">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtRUR" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="recomendacoesUC" text="Recomendações UC">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtRUC" labelFloat="true" prefHeight="171.0" prefWidth="568.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
+      <Label fx:id="lblGTAEmitente" layoutX="13.0" layoutY="14.0" text="Nº de emitentes &#10;de GTA" textAlignment="CENTER">
+         <tooltip>
+            <Tooltip text=" Inserir a quantidade de emitentes de GTA no escritório" />
+         </tooltip></Label>
+      <Label fx:id="lblCredenciamento" layoutX="117.0" layoutY="14.0" text="Credenciamento e &#10;descredenciamento &#10;dos emitentes" textAlignment="CENTER">
+         <tooltip>
+            <Tooltip text="Possui a ficha de catalogação de todos os emitentes atualizada, corretamente preenchida &#10;(preenchimento de todos os campos, assinaturas,...)? &#10;Possui a documentação referente ao credenciamento e descredenciamento de emitentes &#10;(treinamento e memorando)? &#10;Possui fichas de credenciados e descredenciados organizadas no arquivo?&#10;" />
+         </tooltip></Label>
+      <Label fx:id="lblManuais" layoutX="240.0" layoutY="14.0" text="Manuais para &#10;preenchimento" textAlignment="CENTER">
+         <tooltip>
+            <Tooltip text="Possui os manuais para preenchimento atualizados, &#10;organizados e disponíveis?" />
+         </tooltip></Label>
+      <Label fx:id="lblEmissaoGTA" layoutX="337.0" layoutY="14.0" text="Emissão de &#10;GTA" textAlignment="CENTER">
+         <tooltip>
+            <Tooltip text="Informar no campo &quot;Comentários&quot; se a emissão está sendo online ou blocada, se está tendo alguma dificuldade caso seja online e &#10;nos municípios onde a emissão for blocada, como está sendo o lançamento no SIAPEC? Qual a frequência desse lançamento? &#10;O preenchimento está adequado?&#10;Quando as GTAs blocadas não são lançadas no Siapec, o RTM e o Banco diário destas são enviados à UR? &#10;Há correlação entre a emissão de GTA e a ficha de movimentação da propriedade (registra a entrada e saída dos animais, acompanhados &#10;de saldo utilizando cores adequadas de caneta: verde, vermelha e azul, respectivamente)? Observação: Nos escritórios onde a emissão de GTA&#10; é eletrônica, comparar a ficha sanitária registrada no SIAPEC com a do arquivo físico.&#10;Possui os Carimbos padronizados (emitente, unidade, cancelado, substituída, revalidada)? &#10;Conhece o formulário para autorização da emissão eletrônica de GTA interestadual (formulário utilizado só para municípios da mesma jurisdição &#10;da Ulsav em caso não possuir internet disponível)? " />
+         </tooltip></Label>
+      <Label fx:id="lblExigencias" layoutX="415.0" layoutY="14.0" text="Exigências &#10;zoossanitárias" textAlignment="CENTER">
+         <tooltip>
+            <Tooltip text="Está disponível (Fácil acesso)? &#10;Atualizada?" />
+         </tooltip></Label>
+      <Label fx:id="lblRelatorios" layoutX="501.0" layoutY="14.0" text="Relatórios de &#10;emissão de GTA" textAlignment="CENTER">
+         <tooltip>
+            <Tooltip text="Possui o controle diário de emissão de GTA? &#10;Possui o Relatório condensado de emissão de GTA intra e interestadual em formulário &#10;padronizado (Considerar emissão blocada e eletrônica)? " />
+         </tooltip></Label>
+      <Label fx:id="lblGraficos" layoutX="13.0" layoutY="102.0" text="Gráficos da &#10;movimentação" textAlignment="CENTER">
+         <tooltip>
+            <Tooltip text="Possui os Gráficos da movimentação da entrada e da saída, segundo a finalidade, espécie, destino, o tipo de trânsito, &#10;(intramunicipal, intraestadual, interestadual) e o tipo de transporte?&#10;Faz alguma análise do trânsito de animais (sabe informar qual a &#10;espécie, a finalidade, o destino, o tipo de trânsito para os quais há maior emissão de GTA, existe uma constância? &#10;Fatores que influenciam essa movimentação, etc)?" />
+         </tooltip></Label>
+      <Label fx:id="lblOrganizacao" layoutX="109.0" layoutY="102.0" text="Organização &#10;das GTAs" textAlignment="CENTER">
+         <tooltip>
+            <Tooltip text="Organiza as cópias (vias) das GTAs emitidas, em sequência, segundo o mês, espécie e finalidade?&#10;As GTAs canceladas recebem carimbo &quot;CANCELADA&quot; em todas as vias e estão arquivadas por mês?" />
+         </tooltip></Label>
+      <Label fx:id="lblGuias" layoutX="195.0" layoutY="102.0" text="Guias de trânsito para &#10;subprodutos de origem &#10;animal" textAlignment="CENTER">
+         <tooltip>
+            <Tooltip text="Existe Matadouro no município? Registrar no campo &quot;Comentários a quantidade média de&#10; animais (bovino/bubalino) abatidos por mês e a existência ou ausência de salgadeiras e curtumes.&#10;Emite Guia de trânsito de subprodutos de origem animal? Caso não emita registrar no campo &#10;&quot;Comentários&quot; qual o destino do couro do gado abatido.&#10;A planilha com as informações sobre a emissão de Guia de subprodutos e CIS – E, é enviada mensalmente &#10;ao Setor de Trânsito (via e-mail)?" />
+         </tooltip></Label>
+      <JFXComboBox fx:id="cbAvaliacao" layoutX="339.0" layoutY="161.0" prefHeight="25.0" prefWidth="70.0" />
+      <Label fx:id="lblAvaliacao" layoutX="339.0" layoutY="120.0" text="Avaliação">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+   </children>
+</AnchorPane>

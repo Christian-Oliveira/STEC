@@ -1,0 +1,1404 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="600.0" stylesheets="@../../resources/css/style.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stec.controller.FormRHQuantitativoController">
+   <children>
+      <TabPane layoutX="14.0" layoutY="14.0" prefHeight="190.0" prefWidth="575.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="M. Veterinário">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <VBox prefHeight="161.0" prefWidth="575.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <GridPane prefHeight="160.0" prefWidth="575.0">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="242.0" minWidth="10.0" prefWidth="118.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="457.0" minWidth="10.0" prefWidth="457.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <Label text="Quantidade Existente" GridPane.rowIndex="1" />
+                                    <Label text="Com treinamento" GridPane.rowIndex="2" />
+                                    <Label text="Com Pós-graduação" GridPane.rowIndex="3" />
+                                    <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
+                                       <children>
+                                          <Label text="AFA">
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                             <tooltip>
+                                                <Tooltip text="Atividade de Fiscalização Agropecuária" />
+                                             </tooltip>
+                                          </Label>
+                                          <Label layoutX="10.0" layoutY="10.0" text="ANS">
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                             <tooltip>
+                                                <Tooltip text="Atividade de Nível Superior" />
+                                             </tooltip>
+                                          </Label>
+                                          <Label layoutX="32.0" layoutY="10.0" text="ADO">
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                             <tooltip>
+                                                <Tooltip text="Apoio Administrativo Operacional" />
+                                             </tooltip>
+                                          </Label>
+                                          <Label text="EMARPH">
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <Label text="SAGRIMA">
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <Label text="SEDUC">
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <Label text="Saúde">
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <Label text="Prefeitura">
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <Label layoutX="252.0" layoutY="10.0" text="INAGRO">
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                       <children>
+                                          <JFXTextField fx:id="vetQEAFA" alignment="CENTER" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="vetQEANS" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField disable="true" layoutX="40.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="vetQEEMARPH" alignment="CENTER" layoutX="70.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="vetQESAGRIMA" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField disable="true" layoutX="40.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="vetQESaude" alignment="CENTER" layoutX="70.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="vetQEPrefeitura" alignment="CENTER" layoutX="100.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="vetQEINAGRO" alignment="CENTER" layoutX="220.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                       <children>
+                                          <JFXTextField fx:id="vetCTAFA" alignment="CENTER" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="vetCTANS" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField disable="true" layoutX="40.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="vetCTEMARPH" alignment="CENTER" layoutX="70.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="vetCTSAGRIMA" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField disable="true" layoutX="40.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="vetCTSaude" alignment="CENTER" layoutX="70.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="vetCTPrefeitura" alignment="CENTER" layoutX="100.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="vetCTINAGRO" alignment="CENTER" layoutX="220.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                       <children>
+                                          <JFXTextField fx:id="vetCPAFA" alignment="CENTER" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="vetCPANS" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField disable="true" layoutX="40.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="vetCPEMARPH" alignment="CENTER" layoutX="70.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="vetCPSAGRIMA" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField disable="true" layoutX="40.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="vetCPSaude" alignment="CENTER" layoutX="70.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="vetCPPrefeitura" alignment="CENTER" layoutX="100.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="vetCPINAGRO" alignment="CENTER" layoutX="220.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Eng. Agrônomo">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <VBox prefHeight="161.0" prefWidth="575.0">
+                           <children>
+                              <GridPane prefHeight="160.0" prefWidth="575.0">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="242.0" minWidth="10.0" prefWidth="118.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="457.0" minWidth="10.0" prefWidth="457.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <Label text="Quantidade Existente" GridPane.rowIndex="1" />
+                                    <Label text="Com treinamento" GridPane.rowIndex="2" />
+                                    <Label text="Com Pós-graduação" GridPane.rowIndex="3" />
+                                    <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                       <children>
+                                          <JFXTextField fx:id="agroQEAFA" alignment="CENTER" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="agroQEANS" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField disable="true" layoutX="40.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="agroQEEMARPH" alignment="CENTER" layoutX="70.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="agroQESAGRIMA" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField disable="true" layoutX="40.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="agroQESaude" alignment="CENTER" layoutX="70.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="agroQEPrefeitura" alignment="CENTER" layoutX="100.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="agroQEINAGRO" alignment="CENTER" layoutX="220.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                       <children>
+                                          <JFXTextField fx:id="agroCTAFA" alignment="CENTER" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="agroCTANS" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField disable="true" layoutX="40.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="agroCTEMARPH" alignment="CENTER" layoutX="70.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="agroCTSAGRIMA" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField disable="true" layoutX="40.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="agroCTSaude" alignment="CENTER" layoutX="70.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="agroCTPrefeitura" alignment="CENTER" layoutX="100.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="agroCTINAGRO" alignment="CENTER" layoutX="220.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                       <children>
+                                          <JFXTextField fx:id="agroCPAFA" alignment="CENTER" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="agroCPANS" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField disable="true" layoutX="40.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="agroCPEMARPH" alignment="CENTER" layoutX="70.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="agroCPSAGRIMA" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField disable="true" layoutX="40.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="agroCPSaude" alignment="CENTER" layoutX="70.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="agroCPPrefeitura" alignment="CENTER" layoutX="100.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="agroCPINAGRO" alignment="CENTER" layoutX="220.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
+                                       <children>
+                                          <Label text="AFA">
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                             <tooltip>
+                                                <Tooltip text="Atividade de Fiscalização Agropecuária" />
+                                             </tooltip>
+                                          </Label>
+                                          <Label layoutX="10.0" layoutY="10.0" text="ANS">
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                             <tooltip>
+                                                <Tooltip text="Atividade de Nível Superior" />
+                                             </tooltip>
+                                          </Label>
+                                          <Label layoutX="32.0" layoutY="10.0" text="ADO">
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                             <tooltip>
+                                                <Tooltip text="Apoio Administrativo Operacional" />
+                                             </tooltip>
+                                          </Label>
+                                          <Label text="EMARPH">
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <Label text="SAGRIMA">
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <Label text="SEDUC">
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <Label text="Saúde">
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <Label text="Prefeitura">
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <Label layoutX="252.0" layoutY="10.0" text="INAGRO">
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+            <Tab text="Eng. Florestal">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <VBox prefHeight="161.0" prefWidth="575.0">
+                           <children>
+                              <GridPane prefHeight="160.0" prefWidth="575.0">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="242.0" minWidth="10.0" prefWidth="118.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="457.0" minWidth="10.0" prefWidth="457.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <Label text="Quantidade Existente" GridPane.rowIndex="1" />
+                                    <Label text="Com treinamento" GridPane.rowIndex="2" />
+                                    <Label text="Com Pós-graduação" GridPane.rowIndex="3" />
+                                    <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                       <children>
+                                          <JFXTextField fx:id="florQEAFA" alignment="CENTER" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="florQEANS" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField disable="true" layoutX="40.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="florQEEMARPH" alignment="CENTER" layoutX="70.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="florQESAGRIMA" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField disable="true" layoutX="40.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="florQESaude" alignment="CENTER" layoutX="70.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="florQEPrefeitura" alignment="CENTER" layoutX="100.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="florQEINAGRO" alignment="CENTER" layoutX="220.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                       <children>
+                                          <JFXTextField fx:id="florCTAFA" alignment="CENTER" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="florCTANS" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField disable="true" layoutX="40.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="florCTEMARPH" alignment="CENTER" layoutX="70.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="florCTSAGRIMA" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField disable="true" layoutX="40.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="florCTSaude" alignment="CENTER" layoutX="70.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="florCTPrefeitura" alignment="CENTER" layoutX="100.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="florCTINAGRO" alignment="CENTER" layoutX="220.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                       <children>
+                                          <JFXTextField fx:id="florCPAFA" alignment="CENTER" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="florCPANS" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField disable="true" layoutX="40.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="florCPEMARPH" alignment="CENTER" layoutX="70.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="florCPSAGRIMA" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField disable="true" layoutX="40.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="florCPSaude" alignment="CENTER" layoutX="70.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="florCPPrefeitura" alignment="CENTER" layoutX="100.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="florCPINAGRO" alignment="CENTER" layoutX="220.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
+                                       <children>
+                                          <Label text="AFA">
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                             <tooltip>
+                                                <Tooltip text="Atividade de Fiscalização Agropecuária" />
+                                             </tooltip>
+                                          </Label>
+                                          <Label layoutX="10.0" layoutY="10.0" text="ANS">
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                             <tooltip>
+                                                <Tooltip text="Atividade de Nível Superior" />
+                                             </tooltip>
+                                          </Label>
+                                          <Label layoutX="32.0" layoutY="10.0" text="ADO">
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                             <tooltip>
+                                                <Tooltip text="Apoio Administrativo Operacional" />
+                                             </tooltip>
+                                          </Label>
+                                          <Label text="EMARPH">
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <Label text="SAGRIMA">
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <Label text="SEDUC">
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <Label text="Saúde">
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <Label text="Prefeitura">
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <Label layoutX="252.0" layoutY="10.0" text="INAGRO">
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Zootecnista">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <VBox prefHeight="161.0" prefWidth="575.0">
+                           <children>
+                              <GridPane prefHeight="160.0" prefWidth="575.0">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="242.0" minWidth="10.0" prefWidth="118.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="457.0" minWidth="10.0" prefWidth="457.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <Label text="Quantidade Existente" GridPane.rowIndex="1" />
+                                    <Label text="Com treinamento" GridPane.rowIndex="2" />
+                                    <Label text="Com Pós-graduação" GridPane.rowIndex="3" />
+                                    <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                       <children>
+                                          <JFXTextField fx:id="zooQEAFA" alignment="CENTER" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="zooQEANS" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField disable="true" layoutX="40.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="zooQEEMARPH" alignment="CENTER" layoutX="70.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="zooQESAGRIMA" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField disable="true" layoutX="40.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="zooQESaude" alignment="CENTER" layoutX="70.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="zooQEPrefeitura" alignment="CENTER" layoutX="100.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="zooQEINAGRO" alignment="CENTER" layoutX="220.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                       <children>
+                                          <JFXTextField fx:id="zooCTAFA" alignment="CENTER" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="zooCTANS" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField disable="true" layoutX="40.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="zooCTEMARPH" alignment="CENTER" layoutX="70.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="zooCTSAGRIMA" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField disable="true" layoutX="40.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="zooCTSaude" alignment="CENTER" layoutX="70.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="zooCTPrefeitura" alignment="CENTER" layoutX="100.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="zooCTINAGRO" alignment="CENTER" layoutX="220.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                       <children>
+                                          <JFXTextField fx:id="zooCPAFA" alignment="CENTER" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="zooCPANS" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField disable="true" layoutX="40.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="zooCPEMARPH" alignment="CENTER" layoutX="70.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="zooCPSAGRIMA" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField disable="true" layoutX="40.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="zooCPSaude" alignment="CENTER" layoutX="70.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="zooCPPrefeitura" alignment="CENTER" layoutX="100.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="zooCPINAGRO" alignment="CENTER" layoutX="220.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
+                                       <children>
+                                          <Label text="AFA">
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                             <tooltip>
+                                                <Tooltip text="Atividade de Fiscalização Agropecuária" />
+                                             </tooltip>
+                                          </Label>
+                                          <Label layoutX="10.0" layoutY="10.0" text="ANS">
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                             <tooltip>
+                                                <Tooltip text="Atividade de Nível Superior" />
+                                             </tooltip>
+                                          </Label>
+                                          <Label layoutX="32.0" layoutY="10.0" text="ADO">
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                             <tooltip>
+                                                <Tooltip text="Apoio Administrativo Operacional" />
+                                             </tooltip>
+                                          </Label>
+                                          <Label text="EMARPH">
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <Label text="SAGRIMA">
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <Label text="SEDUC">
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <Label text="Saúde">
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <Label text="Prefeitura">
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <Label layoutX="252.0" layoutY="10.0" text="INAGRO">
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Tec. Agropecuário">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <VBox prefHeight="161.0" prefWidth="575.0">
+                           <children>
+                              <GridPane prefHeight="160.0" prefWidth="575.0">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="242.0" minWidth="10.0" prefWidth="118.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="457.0" minWidth="10.0" prefWidth="457.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints maxHeight="73.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="82.0" minHeight="10.0" prefHeight="62.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="76.0" minHeight="10.0" prefHeight="59.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <Label text="Quantidade Existente" GridPane.rowIndex="1" />
+                                    <Label text="Com treinamento" GridPane.rowIndex="2" />
+                                    <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                       <children>
+                                          <JFXTextField fx:id="tecAgroQEAFA" alignment="CENTER" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="tecAgroQEANS" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField disable="true" layoutX="40.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="tecAgroQEEMARPH" alignment="CENTER" layoutX="70.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="tecAgroQESAGRIMA" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="tecAgroQESEDUC" alignment="CENTER" layoutX="40.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="tecAgroQESaude" alignment="CENTER" layoutX="70.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="tecAgroQEPrefeitura" alignment="CENTER" layoutX="100.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="tecAgroQEINAGRO" alignment="CENTER" layoutX="220.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                       <children>
+                                          <JFXTextField fx:id="tecAgroCTAFA" alignment="CENTER" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="tecAgroCTANS" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField disable="true" layoutX="40.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="tecAgroCTEMARPH" alignment="CENTER" layoutX="70.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="tecAgroCTSAGRIMA" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="tecAgroCTSEDUC" alignment="CENTER" layoutX="40.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="tecAgroCTSaude" alignment="CENTER" layoutX="70.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="tecAgroCTPrefeitura" alignment="CENTER" layoutX="100.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="tecAgroCTINAGRO" alignment="CENTER" layoutX="220.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="44.0" prefWidth="457.0" GridPane.columnIndex="1">
+                                       <children>
+                                          <Label text="AFA">
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                             <tooltip>
+                                                <Tooltip text="Atividade de Fiscalização Agropecuária" />
+                                             </tooltip>
+                                          </Label>
+                                          <Label layoutX="10.0" layoutY="10.0" text="ANS">
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                             <tooltip>
+                                                <Tooltip text="Atividade de Nível Superior" />
+                                             </tooltip>
+                                          </Label>
+                                          <Label layoutX="32.0" layoutY="10.0" text="ADO">
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                             <tooltip>
+                                                <Tooltip text="Apoio Administrativo Operacional" />
+                                             </tooltip>
+                                          </Label>
+                                          <Label text="EMARPH">
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <Label text="SAGRIMA">
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <Label text="SEDUC">
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <Label text="Saúde">
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <Label text="Prefeitura">
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <Label layoutX="252.0" layoutY="10.0" text="INAGRO">
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Aux. Administrativo">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <VBox prefHeight="161.0" prefWidth="575.0">
+                           <children>
+                              <GridPane prefHeight="160.0" prefWidth="575.0">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="242.0" minWidth="10.0" prefWidth="118.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="457.0" minWidth="10.0" prefWidth="457.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <Label text="Quantidade Existente" GridPane.rowIndex="1" />
+                                    <Label text="Com treinamento" GridPane.rowIndex="2" />
+                                    <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                       <children>
+                                          <JFXTextField fx:id="auxAdmQEAFA" alignment="CENTER" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="auxAdmQEANS" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="auxAdmQEADO" alignment="CENTER" layoutX="40.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="auxAdmQEEMARPH" alignment="CENTER" layoutX="70.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="auxAdmQESAGRIMA" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="auxAdmQESEDUC" alignment="CENTER" layoutX="40.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="auxAdmQESaude" alignment="CENTER" layoutX="70.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="auxAdmQEPrefeitura" alignment="CENTER" layoutX="100.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="auxAdmQEINAGRO" alignment="CENTER" layoutX="220.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                       <children>
+                                          <JFXTextField fx:id="auxAdmCTAFA" alignment="CENTER" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="auxAdmCTANS" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="auxAdmCTADO" alignment="CENTER" layoutX="40.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="auxAdmCTEMARPH" alignment="CENTER" layoutX="70.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="auxAdmCTSAGRIMA" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="auxAdmCTSEDUC" alignment="CENTER" layoutX="40.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="auxAdmCTSaude" alignment="CENTER" layoutX="70.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="auxAdmCTPrefeitura" alignment="CENTER" layoutX="100.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                          <JFXTextField fx:id="auxAdmCTINAGRO" alignment="CENTER" layoutX="220.0" layoutY="10.0" prefHeight="25.0" prefWidth="30.0" text="0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
+                                       <children>
+                                          <Label text="AFA">
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                             <tooltip>
+                                                <Tooltip text="Atividade de Fiscalização Agropecuária" />
+                                             </tooltip>
+                                          </Label>
+                                          <Label layoutX="10.0" layoutY="10.0" text="ANS">
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                             <tooltip>
+                                                <Tooltip text="Atividade de Nível Superior" />
+                                             </tooltip>
+                                          </Label>
+                                          <Label layoutX="32.0" layoutY="10.0" text="ADO">
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                             <tooltip>
+                                                <Tooltip text="Apoio Administrativo Operacional" />
+                                             </tooltip>
+                                          </Label>
+                                          <Label text="EMARPH">
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <Label text="SAGRIMA">
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <Label text="SEDUC">
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <Label text="Saúde">
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <Label text="Prefeitura">
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <Label layoutX="252.0" layoutY="10.0" text="INAGRO">
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+      <Group layoutX="318.0" layoutY="215.0">
+         <children>
+            <JFXComboBox fx:id="cbAtendeDemanda" layoutX="1.0" layoutY="25.0" prefHeight="25.0" prefWidth="121.0" />
+            <Label fx:id="lblAtendeDemanda" text="Considerando a quantidade atende à demanda?" />
+         </children>
+      </Group>
+      <Group layoutX="14.0" layoutY="215.0">
+         <children>
+            <JFXTextField fx:id="funcionamentoManha" labelFloat="true" layoutY="25.0" prefHeight="25.0" prefWidth="75.0" promptText="manhã" />
+            <JFXTextField fx:id="funcionamentoTarde" labelFloat="true" layoutX="85.0" layoutY="25.0" prefHeight="25.0" prefWidth="75.0" promptText="tarde" />
+            <Label fx:id="lblHorarioFuncionamento" text="Horário de funcionamento do escritório" />
+         </children>
+      </Group>
+      <JFXButton fx:id="btAdicionar" layoutX="406.0" layoutY="541.0" onAction="#handleAdicionar" prefHeight="45.0" prefWidth="80.0" text="Adicionar" />
+      <TabPane layoutX="8.0" layoutY="319.0" prefHeight="200.0" prefWidth="585.0" tabClosingPolicy="UNAVAILABLE">
+         <tabs>
+            <Tab fx:id="comentarios" text="Comentários">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtComentarios" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="recomendacoesULSAVEAC" text="Recomendações ULSAV/EAC">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtRULSAVEAC" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="prazo" text="Prazo para ajuste">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtPrazo" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="recomendacoesUR" text="Recomendações UR">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtRUR" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="recomendacoesUC" text="Recomendações UC">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtRUC" labelFloat="true" prefHeight="171.0" prefWidth="568.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
+      <JFXButton fx:id="btCancelar" layoutX="501.0" layoutY="541.0" onAction="#handleCancelar" prefHeight="45.0" prefWidth="70.0" text="Cancelar" />
+      <Group layoutX="14.0" layoutY="274.0">
+         <children>
+            <JFXComboBox fx:id="cbAvaliacao" layoutX="86.0" prefHeight="25.0" prefWidth="74.0" />
+            <Label fx:id="lblAvaliacao" layoutY="4.0" text="Avaliação">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </Group>
+   </children>
+</AnchorPane>

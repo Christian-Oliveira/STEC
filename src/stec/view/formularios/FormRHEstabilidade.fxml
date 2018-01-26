@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../resources/css/style.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stec.controller.FormRHEstabilidadeController">
+   <children>
+      <Group layoutX="11.0" layoutY="14.0">
+         <children>
+            <JFXTextField fx:id="tempoServicoDefesaSanitaria" layoutY="52.0" prefHeight="25.0" prefWidth="129.0" />
+            <Label fx:id="lblTempoDefesaSanitaria" layoutX="5.0" text="Tempo no serviço de &#10;defesa sanitária animal &#10;(Méd Vet)" textAlignment="CENTER" />
+         </children>
+      </Group>
+      <Group layoutX="181.0" layoutY="14.0">
+         <children>
+            <JFXTextField fx:id="tempoServicoEscritorio" layoutY="52.0" prefHeight="25.0" prefWidth="122.0" />
+            <Label fx:id="lblTempoServicoEscritorio" text="Tempo de serviço &#10;no escritório (Méd Vet)" textAlignment="CENTER" />
+         </children>
+      </Group>
+      <Group layoutX="342.0" layoutY="14.0">
+         <children>
+            <JFXComboBox fx:id="cbEvidenciasEstabilidade" labelFloat="true" layoutY="52.0" prefHeight="25.0" prefWidth="127.0" />
+            <Label fx:id="lblEvidenciasEstabilidade" text="Existe evidências de &#10;estabilidade do quadro &#10;funcional?" textAlignment="CENTER">
+               <tooltip>
+                  <Tooltip text="O vínculo predominante do pessoal da defesa sanitária animal é efetivo? &#10;Caso contrário registrar no campo &quot;Comentários&quot; qual o tipo de vínculo predominante &#10;Ocorre muita rotatividade? " />
+               </tooltip>
+            </Label>
+         </children>
+      </Group>
+      <JFXButton fx:id="btAdicionar" layoutX="404.0" layoutY="348.0" onAction="#handleAdicionar" prefHeight="45.0" prefWidth="80.0" text="Adicionar" />
+      <JFXButton fx:id="btCancelar" layoutX="512.0" layoutY="348.0" onAction="#handleCancelar" prefHeight="45.0" prefWidth="70.0" text="Cancelar" />
+      <TabPane layoutX="9.0" layoutY="161.0" prefHeight="200.0" prefWidth="585.0" tabClosingPolicy="UNAVAILABLE">
+         <tabs>
+            <Tab fx:id="comentarios" text="Comentários">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtComentarios" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="recomendacoesULSAVEAC" text="Recomendações ULSAV/EAC">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtRULSAVEAC" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="prazo" text="Prazo para ajuste">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtPrazo" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="recomendacoesUR" text="Recomendações UR">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtRUR" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="recomendacoesUC" text="Recomendações UC">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtRUC" labelFloat="true" prefHeight="171.0" prefWidth="568.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
+      <Group layoutX="504.0" layoutY="14.0">
+         <children>
+            <JFXComboBox fx:id="cbAvaliacao" layoutY="52.0" prefHeight="25.0" prefWidth="54.0" />
+            <Label fx:id="lblAvaliacao" text="Avaliação">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </Group>
+   </children>
+</AnchorPane>

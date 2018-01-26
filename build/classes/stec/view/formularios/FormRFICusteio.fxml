@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../resources/css/style.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stec.controller.FormRFICusteioController">
+   <children>
+      <JFXComboBox fx:id="cbSolicitacaoDiaria" layoutX="8.0" layoutY="59.0" prefHeight="25.0" prefWidth="111.0" />
+      <JFXComboBox fx:id="cbDisponibilidadeFinanceiro" layoutX="484.0" layoutY="59.0" prefHeight="25.0" prefWidth="103.0" />
+      <JFXButton fx:id="btAdicionar" layoutX="411.0" layoutY="342.0" onAction="#handleAdicionar" prefHeight="45.0" prefWidth="80.0" text="Adicionar" />
+      <JFXButton fx:id="btCancelar" layoutX="520.0" layoutY="342.0" onAction="#handleCancelar" prefHeight="45.0" prefWidth="70.0" text="Cancelar" />
+      <Label fx:id="lblSolicitacaoDiaria" layoutX="8.0" layoutY="14.0" text="Solicitação de diárias">
+         <tooltip>
+            <Tooltip text="Existe o planejamento mensal de diárias?&#10;Faz solicitação de diárias? &#10;Utiliza formulário padrão?" />
+         </tooltip></Label>
+      <Label layoutX="125.0" layoutY="14.0" text=" Planejamento de diárias x Comprovação da execução da ação">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label fx:id="lblFAI" layoutX="141.0" layoutY="41.0" text="FAI">
+         <tooltip>
+            <Tooltip text="Possui as FAIs correspondentes à execução das ações?&#10;Estão preenchidas a contento?" />
+         </tooltip></Label>
+      <Label fx:id="lblRelatorioKM" layoutX="243.0" layoutY="41.0" text="Relatório de KM">
+         <tooltip>
+            <Tooltip text="Possui o relatório de quilometragem referente às ações?&#10;Está em formulário padrão?" />
+         </tooltip></Label>
+      <Label fx:id="lblRelatorioViagem" layoutX="352.0" layoutY="41.0" text="Relatório de viagem">
+         <tooltip>
+            <Tooltip text="Possui os relatórios de viagem referentes às diárias solicitadas?&#10;O período registrado no relatório é compatível com a solicitação e execução das ações?" />
+         </tooltip></Label>
+      <JFXComboBox fx:id="cbFAI" layoutX="141.0" layoutY="59.0" prefHeight="25.0" prefWidth="79.0" />
+      <JFXComboBox fx:id="cbRelatorioKM" layoutX="243.0" layoutY="59.0" prefHeight="25.0" prefWidth="86.0" />
+      <JFXComboBox fx:id="cbRelatorioViagem" layoutX="352.0" layoutY="59.0" prefHeight="25.0" prefWidth="107.0" />
+      <Label fx:id="lblDisponibilidadeFinanceiro" layoutX="485.0" layoutY="14.0" text="Disponibilidade de &#10;recurso financeiro" textAlignment="CENTER">
+         <tooltip>
+            <Tooltip text="Há disponibilidade de recurso financeiro para custear despesas emergenciais?&#10;O valor disponibilizado é suficiente?&#10;Com qual periodicidade? (registrar no campo &quot; Comentários&quot;)&#10;Há controle sobre a utilização desse recurso (requisição de adiantamento e prestação de contas)?&#10;Em caso negativo, registrar no campo &quot;comentários&quot; como é realizada a despesa para manutenção do escritório (material de expediente, limpeza, xerox, etc.)? &#10;Com qual periodicidade? É suficiente?" />
+         </tooltip></Label>
+      <TabPane layoutX="8.0" layoutY="142.0" prefHeight="200.0" prefWidth="585.0" tabClosingPolicy="UNAVAILABLE">
+         <tabs>
+            <Tab fx:id="comentarios" text="Comentários">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtComentarios" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="recomendacoesULSAVEAC" text="Recomendações ULSAV/EAC">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtRULSAVEAC" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="prazo" text="Prazo para ajuste">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtPrazo" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="recomendacoesUR" text="Recomendações UR">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtRUR" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="recomendacoesUC" text="Recomendações UC">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtRUC" labelFloat="true" prefHeight="171.0" prefWidth="568.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
+      <JFXComboBox fx:id="cbAvaliacao" layoutX="14.0" layoutY="110.0" prefHeight="25.0" prefWidth="70.0" />
+      <Label fx:id="lblAvaliacao" layoutX="14.0" layoutY="93.0" text="Avaliação">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+   </children>
+</AnchorPane>

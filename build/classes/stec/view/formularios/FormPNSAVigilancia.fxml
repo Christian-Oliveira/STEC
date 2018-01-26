@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../resources/css/style.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stec.controller.FormPNSAVigilanciaController">
+   <children>
+      <JFXButton fx:id="btAdicionar" layoutX="414.0" layoutY="399.0" onAction="#handleAdicionar" prefHeight="45.0" prefWidth="80.0" text="Adicionar" />
+      <JFXButton fx:id="btCancelar" layoutX="516.0" layoutY="399.0" onAction="#handleCancelar" prefHeight="45.0" prefWidth="70.0" text="Cancelar" />
+      <Label fx:id="lblDirecionamento" layoutX="8.0" layoutY="14.0" text="Direcionamento &#10;das ações de &#10;vigilância" textAlignment="CENTER">
+         <tooltip>
+            <Tooltip text="Realiza avaliações de riscos para embasar suas atividades?&#10;Recebe e segue orientações da UC para direcionar &#10;as ações de vigilância com base em riscos?&#10;Há evidências que as ações de vigilância &#10;são realizadas considerando avaliações de risco?" />
+         </tooltip></Label>
+      <Label fx:id="lblPontoRisco" layoutX="109.0" layoutY="14.0" text="Pontos &#10;de risco" textAlignment="CENTER">
+         <tooltip>
+            <Tooltip text="Os pontos de risco estão identificados?&#10;Está sendo realizada a vigilância aos pontos de risco &#10;(abatedouro, lixão, aglomerações, estabelecimentos de venda de aves vivas)? &#10;Registra informações em FAI e controle de km?" />
+         </tooltip></Label>
+      <Label fx:id="lblSitioMigratorio" layoutX="173.0" layoutY="14.0" text="Sítios &#10;migratórios" textAlignment="CENTER">
+         <tooltip>
+            <Tooltip text="OBS.: Avaliar este item apenas nas Ulsavs de Cururupu e São José de Ribamar. Nas demais preencher com &quot;NA&quot;&#10;&#10;Realiza a vigilância nas propriedades e estabelecimentos próximos &#10;(raio de 10 km) aos sítios migratórios (principalmente no período de set - dez)?&#10;Registra em FAI e controle de km?" />
+         </tooltip></Label>
+      <Label layoutX="14.0" layoutY="123.0" text="Estabelecimentos de avicultura comercial" textAlignment="CENTER" />
+      <Label fx:id="lblVendaAvesVivas" layoutX="243.0" layoutY="14.0" text="Estabelecimentos de venda &#10;de aves vivas (entreposto, &#10;distribuidores, casas &#10;agropecuárias, etc)" textAlignment="CENTER">
+         <tooltip>
+            <Tooltip text="Estão sendo realizadas as fiscalizações?&#10;Possui FAI  e controle de KM?" />
+         </tooltip></Label>
+      <Label fx:id="lblMortandade" layoutX="393.0" layoutY="14.0" text="Mortandade">
+         <tooltip>
+            <Tooltip text="Atende notificações de mortalidade?&#10;&#10;Aves de corte:  relativos as taxas de mortalidade acima de &#10;10% (em lotes com menos de 50 dias de alojamento) ou acima de &#10;20%  (em lotes com mais de 50 dias de alojamento), ou mortalidade acima de 10% dentro do período de 72 horas&#10;Aves de subsistência" />
+         </tooltip></Label>
+      <Label fx:id="lblDoencaNotificacao" layoutX="469.0" layoutY="14.0" text="Doenças de &#10;notificação obrigatória" textAlignment="CENTER">
+         <tooltip>
+            <Tooltip text="Tem conhecimento das doenças de notificação obrigatória (Influenza Aviária, Newcastle, etc)?   &#10;Há ocorrência (notificação) e registro dessas doenças? Em caso afirmativo informar no campo &#10;&quot;Comentários&quot; quais enfermidades." />
+         </tooltip></Label>
+      <Label fx:id="lblCadastrado" layoutX="14.0" layoutY="140.0" text="Somente Cadastrados">
+         <tooltip>
+            <Tooltip text="Estão sendo realizadas as fiscalizações?&#10;As ações de fiscalização estão sendo informadas no RTM?&#10;Possui FAI  e controle de KM?" />
+         </tooltip></Label>
+      <Label fx:id="lblRegistrado" layoutX="172.0" layoutY="140.0" text="Registrados">
+         <tooltip>
+            <Tooltip text="Estão sendo realizadas as fiscalizações rotineiras (mensal)?&#10;Possui os relatórios de supervisão nos estabelecimentos?&#10;Possui FAI e controle de KM?&#10;O livro de fiscalizações da AGED/MA nos estabelecimentos estão sendo preenchidos?&#10;As ações de fiscalização estão sendo informadas no RTM?&#10;Informar no item &quot;Comentários&quot; se há médicos veterinários autônomos responsáveis &#10;técnicos por estes estabelecimentos nos municípios da jurisdição, se os mesmos são &#10;credenciados pelo MAPA para emissão de GTA dos estabelecimentos, em caso positivo, &#10;registrar se eles entregam os relatórios mensais de emissão de GTA no escritório da AGED &#10;e se a Ulsav insere os dados no seu relatório condensado de emissão de GTA.&#10;&#10;&#10;Granjas em processo de registro&#10;Possui os laudos de vistoria (validade de um ano)?&#10;Faz fiscalizações para acompanhamento dos processos e atendimento das pendências contidas &#10;nos laudos de vistorias anteriores? Em caso positivo, informar no item &quot;Comentários&quot; em que fase se encontra. &#10;Faz outro tipo de fiscalização? &#10;Possui FAI e controle de KM?" />
+         </tooltip></Label>
+      <JFXComboBox fx:id="cbDirecionamento" layoutX="8.0" layoutY="82.0" prefHeight="25.0" prefWidth="88.0" />
+      <JFXComboBox fx:id="cbPontoRisco" layoutX="109.0" layoutY="82.0" prefHeight="25.0" prefWidth="42.0" />
+      <JFXComboBox fx:id="cbSitioMigratorio" layoutX="176.0" layoutY="82.0" prefHeight="25.0" prefWidth="61.0" />
+      <JFXComboBox fx:id="cbVendaAvesVivas" layoutX="243.0" layoutY="82.0" prefHeight="25.0" prefWidth="148.0" />
+      <JFXComboBox fx:id="cbMortandade" layoutX="393.0" layoutY="82.0" prefHeight="25.0" prefWidth="66.0" />
+      <JFXComboBox fx:id="cbDoencaNotificacao" layoutX="469.0" layoutY="82.0" prefHeight="25.0" prefWidth="127.0" />
+      <JFXComboBox fx:id="cbCadastrado" layoutX="14.0" layoutY="157.0" prefHeight="25.0" prefWidth="116.0" />
+      <JFXComboBox fx:id="cbRegistrado" layoutX="172.0" layoutY="157.0" prefHeight="25.0" prefWidth="63.0" />
+      <TabPane layoutX="8.0" layoutY="191.0" prefHeight="200.0" prefWidth="585.0" tabClosingPolicy="UNAVAILABLE">
+         <tabs>
+            <Tab fx:id="comentarios" text="Comentários">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtComentarios" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="recomendacoesULSAVEAC" text="Recomendações ULSAV/EAC">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtRULSAVEAC" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="prazo" text="Prazo para ajuste">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtPrazo" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="recomendacoesUR" text="Recomendações UR">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtRUR" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="recomendacoesUC" text="Recomendações UC">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtRUC" labelFloat="true" prefHeight="171.0" prefWidth="568.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
+      <JFXComboBox fx:id="cbAvaliacao" layoutX="260.0" layoutY="157.0" prefHeight="25.0" prefWidth="80.0" />
+      <Label fx:id="lblAvaliacao" layoutX="260.0" layoutY="123.0" text="Avaliação">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+   </children>
+</AnchorPane>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../resources/css/style.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stec.controller.FormAGBaseLegalController">
+   <children>
+      <TabPane layoutX="8.0" layoutY="129.0" prefHeight="200.0" prefWidth="585.0" tabClosingPolicy="UNAVAILABLE">
+         <tabs>
+            <Tab fx:id="comentarios" text="Comentários">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtComentarios" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="recomendacoesULSAVEAC" text="Recomendações ULSAV/EAC">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtRULSAVEAC" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="prazo" text="Prazo para ajuste">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtPrazo" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="recomendacoesUR" text="Recomendações UR">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtRUR" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="recomendacoesUC" text="Recomendações UC">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtRUC" labelFloat="true" prefHeight="171.0" prefWidth="568.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
+      <JFXButton fx:id="btAdicionar" layoutX="411.0" layoutY="348.0" onAction="#handleAdicionar" prefHeight="45.0" prefWidth="80.0" text="Adicionar" />
+      <JFXButton fx:id="btCancelar" layoutX="519.0" layoutY="348.0" onAction="#handleCancelar" prefHeight="45.0" prefWidth="70.0" text="Cancelar" />
+      <JFXComboBox fx:id="cbLegislacao" layoutX="14.0" layoutY="30.0" prefHeight="25.0" prefWidth="80.0" />
+      <JFXComboBox fx:id="cbManuais" layoutX="111.0" layoutY="30.0" prefHeight="25.0" prefWidth="80.0" />
+      <JFXComboBox fx:id="cbPOP" layoutX="197.0" layoutY="30.0" prefHeight="25.0" prefWidth="80.0" />
+      <JFXComboBox fx:id="cbAplicacao" layoutX="286.0" layoutY="30.0" prefHeight="25.0" prefWidth="151.0" />
+      <JFXComboBox fx:id="cbAvaliacao" layoutX="14.0" layoutY="85.0" prefHeight="25.0" prefWidth="80.0" />
+      <Label fx:id="lblLegislacao" layoutX="14.0" layoutY="14.0" text="Legislação">
+         <tooltip>
+            <Tooltip text="A legislação está disponível e organizada (estadual e federal por programas)?&#10;Está atualizada?&#10;O responsável pelo escritório conhece a legislação vigente?" />
+         </tooltip></Label>
+      <Label fx:id="lblManuais" layoutX="113.0" layoutY="11.0" text="Manuais">
+         <tooltip>
+            <Tooltip text="Possui os manuais do MAPA e AGED &#10;impressos e disponíveis para consulta?" />
+         </tooltip></Label>
+      <Label fx:id="lblPOP" layoutX="197.0" layoutY="11.0" text="POPs">
+         <tooltip>
+            <Tooltip text="Possui os Procedimentos Operacionais Padrão &#10;(POPs) atualizados?" />
+         </tooltip></Label>
+      <Label fx:id="lblAplicacao" layoutX="286.0" layoutY="11.0" text="Aplicação de procedimentos">
+         <tooltip>
+            <Tooltip text="Os procedimentos descritos na legislação, Manuais e POPs estão sendo cumpridos?" />
+         </tooltip></Label>
+      <Label fx:id="lblAvaliacao" layoutX="14.0" layoutY="68.0" text="Avaliação">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+   </children>
+</AnchorPane>
