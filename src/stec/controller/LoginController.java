@@ -3,11 +3,12 @@ package stec.controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.animation.PauseTransition;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -17,10 +18,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.util.Duration;
 import stec.model.dao.UsuarioDAO;
 import stec.model.domain.Usuario;
 import stec.resources.Classes.AlertMaker;
@@ -38,6 +39,8 @@ public class LoginController implements Initializable {
     private JFXPasswordField senha;
     @FXML
     private JFXButton btLogin;
+    @FXML
+    private FontAwesomeIconView btnSair;
     @FXML
     private AnchorPane LoginPane;
     @FXML
@@ -66,22 +69,33 @@ public class LoginController implements Initializable {
             
             //Carrega a tela principal
             try {
-                Parent parent = FXMLLoader.load(getClass().getResource("/stec/view/Main.fxml"));
-                
-                Stage stage = new Stage(StageStyle.DECORATED);
-                stage.setTitle("STEC - Sistema de Supervisão Técnica AGED");
+                Stage stage = new Stage();
+                stage.setTitle("");
+                Parent root = FXMLLoader.load(getClass().getResource("/stec/view/TelaPrincipal.fxml"));
+                Scene scene = new Scene(root);
+                stage.initStyle(StageStyle.TRANSPARENT);
+                stage.setScene(scene);
+                stage.show();
+                /**
+                Parent parent = FXMLLoader.load(getClass().getResource("/stec/view/TelaPrincipal.fxml"));
+                Stage stage = new Stage(StageStyle.TRANSPARENT);
                 stage.setScene(new Scene(parent));
-                stage.setMaximized(true);
+                stage.setTitle("");
                 stage.show();         
-                
+                **/
                 //caso a janela principal seja fechada encerra a aplicacao
                 stage.setOnCloseRequest(e -> Platform.exit());
-            } catch (Exception e) {
+            } catch (IOException e) {
                 AlertMaker.showErrorMessage("Error", e.getMessage());
-                Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, e);
+                Logger.getLogger(TelaPrincipalController.class.getName()).log(Level.SEVERE, null, e);
             }
         } else {
             AlertMaker.showSimpleAlert("Falha", "Login ou senha incorretos");
         }
+    }
+    
+    @FXML
+    private void handleSair(MouseEvent event){
+        System.exit(0);
     }
 }

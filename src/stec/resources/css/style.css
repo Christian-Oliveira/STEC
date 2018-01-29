@@ -11,30 +11,30 @@
 }
 
 /*Fim estilo Login*/
-
 .side-bar{
     -fx-background-color: #ffffff;
     -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.3), 7.0, 0.0, 0.0,0.0);
 }
-
-.jfx-button {
-    -fx-background-color: #1976D2;
-    -fx-font-weight: bold;
-}
 /*estilo botões do menu*/
-.side-buttons{
+.menu-buttons{
     -fx-background-color: transparent;
     -fx-background-radius: 0;
     -fx-alignment: CENTER_LEFT;
 }
-.side-buttons:active{
+.menu-buttons:active{
     -fx-background-color: #F3F3F3;
 }
-
-.jfx-button:hover {
+/*fim*/
+/*estilo de outros botões*/
+.buttons-all {
+    -fx-background-color: #1976D2;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+.buttons-all:hover {
     -fx-background-color: #004c8c;
 }
-
+/*fim*/
 .tooltip {
     -fx-background: rgba(30,30,30);
     -fx-text-fill: white;
