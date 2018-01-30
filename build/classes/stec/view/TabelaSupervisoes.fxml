@@ -11,16 +11,6 @@
 <AnchorPane id="AnchorPane" fx:id="anchorPaneTabela" prefHeight="680.0" prefWidth="1100.0" stylesheets="@../resources/css/style.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stec.controller.TabelaSupervisoesController">
    <children>
       <BorderPane prefHeight="680.0" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <center>
-            <TableView fx:id="tViewSupervisoes" accessibleRole="IMAGE_VIEW" prefHeight="620.0" prefWidth="1100.0" scaleShape="false" BorderPane.alignment="CENTER">
-              <columns>
-                <TableColumn fx:id="tColumnUR" prefWidth="250.0" text="UR" />
-                <TableColumn fx:id="tColumnMunicipio" prefWidth="300.0" text="Esc. Auditado / Município" />
-                  <TableColumn fx:id="tColumnProgramas" prefWidth="400.0" text="Programas" />
-                  <TableColumn fx:id="tColumnStatus" prefWidth="148.0" text="Status" />
-              </columns>
-            </TableView>
-         </center>
          <bottom>
             <HBox alignment="CENTER" prefHeight="60.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
@@ -42,6 +32,16 @@
                </children>
             </HBox>
          </bottom>
+         <left>
+            <TableView fx:id="tViewSupervisoes" accessibleRole="IMAGE_VIEW" prefHeight="620.0" prefWidth="1100.0" BorderPane.alignment="CENTER">
+              <columns>
+                <TableColumn fx:id="tColumnUR" prefWidth="250.0" text="UR" />
+                <TableColumn fx:id="tColumnMunicipio" prefWidth="300.0" text="Esc. Auditado / Município" />
+                  <TableColumn fx:id="tColumnProgramas" prefWidth="400.0" text="Programas" />
+                  <TableColumn fx:id="tColumnStatus" prefWidth="148.0" text="Status" />
+              </columns>
+            </TableView>
+         </left>
       </BorderPane>
    </children>
 </AnchorPane>

@@ -8,30 +8,27 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="RelatoriosPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="650.0" stylesheets="@../resources/css/style.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stec.controller.RelatoriosController">
+<AnchorPane fx:id="RelatoriosPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1100.0" stylesheets="@../resources/css/style.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stec.controller.RelatoriosController">
    <children>
       <BorderPane prefHeight="400.0" prefWidth="650.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
-            <TableView fx:id="tabelaSupervisoes" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <TableView fx:id="tabelaSupervisoes" prefHeight="680.0" prefWidth="900.0" BorderPane.alignment="CENTER">
                <columns>
-                  <TableColumn fx:id="colunaUr" prefWidth="75.0" text="UR" />
-                  <TableColumn fx:id="colunaEscritorioMunicipio" prefWidth="143.0" text="Esc. Auditado / Município" />
-                  <TableColumn fx:id="colunaProgramas" prefWidth="143.0" text="Programas" />
+                  <TableColumn fx:id="colunaUr" prefWidth="200.0" text="UR" />
+                  <TableColumn fx:id="colunaEscritorioMunicipio" prefWidth="300.0" text="Esc. Auditado / Município" />
+                  <TableColumn fx:id="colunaProgramas" prefWidth="400.0" text="Programas" />
                </columns>
-               <columnResizePolicy>
-                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-               </columnResizePolicy>
             </TableView>
          </center>
          <right>
-            <VBox alignment="TOP_CENTER" prefHeight="400.0" prefWidth="208.0" BorderPane.alignment="CENTER">
+            <VBox alignment="TOP_CENTER" prefHeight="400.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <JFXButton fx:id="btAuditoriaCompilada" onAction="#handleAuditoriaCompilada" prefHeight="45.0" prefWidth="200.0" text="Comentários e Recomendações &#10;compiladas da auditoria">
+                  <JFXButton fx:id="btAuditoriaCompilada" onAction="#handleAuditoriaCompilada" prefHeight="45.0" prefWidth="200.0" styleClass="buttons-all" text="Comentários e Recomendações &#10;compiladas da auditoria">
                      <VBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </VBox.margin>
                   </JFXButton>
-                  <JFXButton fx:id="btAvaliacaoQualidade" layoutX="15.0" layoutY="15.0" onAction="#handleAvaliacaoQualidade" prefHeight="45.0" prefWidth="200.0" text="Avaliação da qualidade &#10;de serviços veterinários">
+                  <JFXButton fx:id="btAvaliacaoQualidade" layoutX="15.0" layoutY="15.0" onAction="#handleAvaliacaoQualidade" prefHeight="45.0" prefWidth="200.0" styleClass="buttons-all" text="Avaliação da qualidade &#10;de serviços veterinários">
                      <VBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </VBox.margin>
@@ -39,12 +36,6 @@
                </children>
             </VBox>
          </right>
-         <bottom>
-            <JFXButton fx:id="btVoltar" alignment="CENTER" onAction="#handleVoltar" prefHeight="45.0" prefWidth="75.0" text="Voltar" BorderPane.alignment="CENTER">
-               <BorderPane.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </BorderPane.margin></JFXButton>
-         </bottom>
       </BorderPane>
    </children>
 </AnchorPane>

@@ -97,13 +97,13 @@ public class TabelaSupervisoesController implements Initializable {
 
         loader.setLocation(FormSupervisaoController.class.getResource("/stec/view/Supervisao.fxml"));
         AnchorPane pane = (AnchorPane) loader.load();
-
+        
         Stage stage = new Stage();
         stage.setTitle("Supervisão");
         Scene scene = new Scene(pane);
         stage.setMaximized(true);
         stage.setScene(scene);
-
+        
         SupervisaoController controller = loader.getController();
         controller.setDialog(stage);
         controller.setSupervisao(supervisao);

@@ -40,5 +40,4 @@ public final class SQLite {
             Logger.getLogger(SQLite.class.getName()).log(Level.SEVERE, null, e);
         }
     }
-
 }

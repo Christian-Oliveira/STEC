@@ -9,7 +9,6 @@ import java.util.logging.Logger;
 
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -44,7 +43,7 @@ public class MainController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         //carregarTabelaSupervisoes();
     }
-    
+    /** implementado na Nova Interface
     @FXML
     private void handleMINovaSupervisao(ActionEvent event) throws IOException {
         //cria um objeto limpo
@@ -58,7 +57,7 @@ public class MainController implements Initializable {
             //carregarTabelaSupervisoes();
         }
     }
-
+    **/
     @FXML
     private void handleMIRelatorios() throws IOException {
         //Fecha a tela principal
@@ -95,7 +94,7 @@ public class MainController implements Initializable {
             //carregarTabelaSupervisoes();
         }
     }
-
+    /**
     public boolean showFormNovaSupervisao(Supervisao supervisao) throws IOException {
         FXMLLoader loader = new FXMLLoader();
 
@@ -115,7 +114,7 @@ public class MainController implements Initializable {
         stage.showAndWait();
 
         return controller.isBtConfirmarClicked();
-    }
+    }**/
     //falta
     public boolean showFormNovaSupervisaoPFFA(Supervisao supervisao) throws IOException {
         FXMLLoader loader = new FXMLLoader();
@@ -137,7 +136,7 @@ public class MainController implements Initializable {
 
         return controller.isBtConfirmarClicked();
     }
-    /**
+    /** implementado na Nova Interface
     public void carregarTabelaSupervisoes() {
         colunaUr.setCellValueFactory(new PropertyValueFactory<>("ur"));
         colunaEscritorioMunicipio.setCellValueFactory(new PropertyValueFactory<>("escritorio"));//deve ser exatamente o nome do atributo da classe

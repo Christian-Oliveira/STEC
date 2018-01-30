@@ -4,29 +4,37 @@
 <?import com.jfoenix.controls.JFXCheckBox?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="350.0" stylesheets="@../../resources/css/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stec.controller.FormSupervisaoController">
+<AnchorPane prefHeight="450.0" prefWidth="360.0" styleClass="carPane" stylesheets="@../../resources/css/style.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stec.controller.FormSupervisaoController">
    <children>
-      <JFXComboBox fx:id="cbUR" labelFloat="true" layoutX="55.0" layoutY="30.0" prefHeight="25.0" prefWidth="240.0" promptText="Unidade Regional" />
-      <JFXComboBox fx:id="cbEscritorio" labelFloat="true" layoutX="55.0" layoutY="80.0" prefHeight="25.0" prefWidth="240.0" promptText="Escritório Auditado" />
-      <JFXComboBox fx:id="cbMunicipio" labelFloat="true" layoutX="55.0" layoutY="130.0" prefHeight="25.0" prefWidth="240.0" promptText="Município" />
-      <Label layoutX="145.0" layoutY="183.0" text="Programas">
+      <AnchorPane prefHeight="50.0" prefWidth="360.0" styleClass="topPane" />
+      <JFXComboBox fx:id="cbUR" focusColor="#1976d2" labelFloat="true" layoutX="60.0" layoutY="112.0" prefHeight="25.0" prefWidth="240.0" promptText="Unidade Regional" />
+      <JFXComboBox fx:id="cbEscritorio" focusColor="#1976d2" labelFloat="true" layoutX="60.0" layoutY="162.0" prefHeight="25.0" prefWidth="240.0" promptText="Escritório Auditado" />
+      <JFXComboBox fx:id="cbMunicipio" focusColor="#1976d2" labelFloat="true" layoutX="60.0" layoutY="212.0" prefHeight="25.0" prefWidth="240.0" promptText="Município" />
+      <Label layoutX="150.0" layoutY="258.0" text="Programas">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <JFXCheckBox fx:id="chPNEFA" checkedColor="#4059a9" layoutX="14.0" layoutY="210.0" text="PNEFA" />
-      <JFXCheckBox fx:id="chPNCEBT" checkedColor="#4059a9" layoutX="14.0" layoutY="240.0" text="PNCEBT" />
-      <JFXCheckBox fx:id="chPNCRH" checkedColor="#4059a9" layoutX="14.0" layoutY="270.0" text="PNCRH" />
-      <JFXCheckBox fx:id="chPNEEB" checkedColor="#4059a9" layoutX="14.0" layoutY="300.0" text="PNEEB" />
-      <JFXCheckBox fx:id="chPNSE" checkedColor="#4059a9" layoutX="120.0" layoutY="210.0" text="PNSE" />
-      <JFXCheckBox fx:id="chPNSCO" checkedColor="#4059a9" layoutX="120.0" layoutY="240.0" text="PNSCO" />
-      <JFXCheckBox fx:id="chPNSS" checkedColor="#4059a9" layoutX="120.0" layoutY="270.0" text="PNSS" />
-      <JFXCheckBox fx:id="chPNSA" checkedColor="#4059a9" layoutX="120.0" layoutY="300.0" text="PNSA" />
-      <JFXButton fx:id="btAdicionar" layoutX="147.0" layoutY="337.0" onAction="#handleAdicionar" prefHeight="40.0" prefWidth="80.0" text="Adicionar" />
-      <JFXButton fx:id="btCancelar" layoutX="254.0" layoutY="337.0" onAction="#handleCancelar" prefHeight="40.0" prefWidth="70.0" text="Cancelar" />
-      <JFXCheckBox fx:id="chTODOS" checkedColor="#4059a9" layoutX="226.0" layoutY="210.0" text="TODOS" />
+      <JFXCheckBox fx:id="chPNEFA" checkedColor="#1976d2" layoutX="36.0" layoutY="285.0" text="PNEFA" />
+      <JFXCheckBox fx:id="chPNCEBT" checkedColor="#1976d2" layoutX="36.0" layoutY="315.0" text="PNCEBT" />
+      <JFXCheckBox fx:id="chPNCRH" checkedColor="#1976d2" layoutX="36.0" layoutY="345.0" text="PNCRH" />
+      <JFXCheckBox fx:id="chPNEEB" checkedColor="#1976d2" layoutX="36.0" layoutY="375.0" text="PNEEB" />
+      <JFXCheckBox fx:id="chPNSE" checkedColor="#1976d2" layoutX="142.0" layoutY="285.0" text="PNSE" />
+      <JFXCheckBox fx:id="chPNSCO" checkedColor="#1976d2" layoutX="142.0" layoutY="315.0" text="PNSCO" />
+      <JFXCheckBox fx:id="chPNSS" checkedColor="#1976d2" layoutX="142.0" layoutY="345.0" text="PNSS" />
+      <JFXCheckBox fx:id="chPNSA" checkedColor="#1976d2" layoutX="142.0" layoutY="375.0" text="PNSA" />
+      <JFXButton fx:id="btAdicionar" layoutY="410.0" onAction="#handleAdicionar" prefHeight="40.0" prefWidth="180.0" styleClass="buttons-all" text="Adicionar" />
+      <JFXButton fx:id="btCancelar" layoutX="180.0" layoutY="410.0" onAction="#handleCancelar" prefHeight="40.0" prefWidth="180.0" styleClass="buttons-all" text="Cancelar" />
+      <JFXCheckBox fx:id="chTODOS" checkedColor="#1976d2" layoutX="248.0" layoutY="285.0" text="TODOS" />
+      <ImageView fitHeight="90.0" fitWidth="90.0" layoutX="142.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../imagens/clipboard.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

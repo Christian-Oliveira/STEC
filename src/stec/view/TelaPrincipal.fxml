@@ -41,15 +41,16 @@
                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                           </columnConstraints>
                           <rowConstraints>
-                            <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <JFXButton prefHeight="40.0" prefWidth="200.0" styleClass="menu-buttons" text="Nova Supervisão" textFill="#757575">
+                              <JFXButton fx:id="btnNovaSupervisao" onAction="#handleNovaSupervisao" prefHeight="40.0" prefWidth="200.0" styleClass="menu-buttons" text="Nova Supervisão" textFill="#757575">
                                  <graphic>
                                     <FontAwesomeIconView fill="#757575" glyphName="PLUS_SQUARE" size="14" wrappingWidth="30.0" />
                                  </graphic>
@@ -59,24 +60,29 @@
                                     <FontAwesomeIconView fill="#757575" glyphName="EYE" size="14" wrappingWidth="30.0" />
                                  </graphic>
                               </JFXButton>
-                              <JFXButton prefHeight="40.0" prefWidth="200.0" styleClass="menu-buttons" text="Supervisão PFFA" textFill="#757575" GridPane.rowIndex="2">
+                              <JFXButton prefHeight="40.0" prefWidth="200.0" styleClass="menu-buttons" text="Supervisões PFFA" textFill="#757575" GridPane.rowIndex="3">
                                  <graphic>
                                     <FontAwesomeIconView fill="#757575" glyphName="EYE" size="14" wrappingWidth="30.0" />
                                  </graphic>
                               </JFXButton>
-                              <JFXButton prefHeight="40.0" prefWidth="200.0" styleClass="menu-buttons" text="Relatórios" textFill="#757575" GridPane.rowIndex="3">
+                              <JFXButton fx:id="btnRelatorios" onAction="#handleRelatorios" prefHeight="40.0" prefWidth="200.0" styleClass="menu-buttons" text="Relatórios" textFill="#757575" GridPane.rowIndex="4">
                                  <graphic>
                                     <FontAwesomeIconView fill="#757575" glyphName="CLIPBOARD" size="14" wrappingWidth="30.0" />
                                  </graphic>
                               </JFXButton>
-                              <JFXButton fx:id="btnLogout" onAction="#handleLogout" prefHeight="40.0" prefWidth="200.0" styleClass="menu-buttons" text="Log out" textFill="#757575" GridPane.rowIndex="4">
+                              <JFXButton fx:id="btnLogout" onAction="#handleLogout" prefHeight="40.0" prefWidth="200.0" styleClass="menu-buttons" text="Log out" textFill="#757575" GridPane.rowIndex="5">
                                  <graphic>
                                     <FontAwesomeIconView fill="#757575" glyphName="SIGN_OUT" size="14" wrappingWidth="30.0" />
                                  </graphic>
                               </JFXButton>
-                              <JFXButton fx:id="btnSair" onAction="#handleSair" prefHeight="40.0" prefWidth="200.0" styleClass="menu-buttons" text="Sair" textFill="#757575" GridPane.rowIndex="5">
+                              <JFXButton fx:id="btnSair" onAction="#handleSair" prefHeight="40.0" prefWidth="200.0" styleClass="menu-buttons" text="Sair" textFill="#757575" GridPane.rowIndex="6">
                                  <graphic>
                                     <FontAwesomeIconView fill="#757575" glyphName="CLOSE" size="14" wrappingWidth="30.0" />
+                                 </graphic>
+                              </JFXButton>
+                              <JFXButton layoutX="10.0" layoutY="130.0" prefHeight="40.0" prefWidth="200.0" styleClass="menu-buttons" text="Nova Supervisão PFFA" textFill="#757575" GridPane.rowIndex="2">
+                                 <graphic>
+                                    <FontAwesomeIconView fill="#757575" glyphName="PLUS_CIRCLE" size="14" wrappingWidth="30.0" />
                                  </graphic>
                               </JFXButton>
                            </children>
