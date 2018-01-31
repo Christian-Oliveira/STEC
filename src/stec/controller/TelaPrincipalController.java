@@ -47,7 +47,7 @@ public class TelaPrincipalController implements Initializable {
     }
     
     //envia o conteudo do botão selecionado
-    private void setNode(Node node) {
+    public void setNode(Node node) {
         anchorPaneDashboard.getChildren().clear();
         anchorPaneDashboard.getChildren().add((Node) node);
 
@@ -67,12 +67,11 @@ public class TelaPrincipalController implements Initializable {
             supervisao = FXMLLoader.load(getClass().getResource("/stec/view/Supervisao.fxml"));
             relatorios = FXMLLoader.load(getClass().getResource("/stec/view/Relatorios.fxml"));
 
-            //set up default node on page load
+            //envia a pagina padrão para ser carregada
             setNode(listSupervisoes);
         } catch (IOException ex) {
             Logger.getLogger(TelaPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
     
     //Função que instância uma nova supervisão
@@ -86,7 +85,7 @@ public class TelaPrincipalController implements Initializable {
 
         if (btConfirmaClicked) {
             supervisaoDAO.inserir(novaSupervisao);
-            tabela.carregarTabelaSupervisoes();
+            createPages();
         }
     }
     //Função que mostra a tela para criar uma nova supervisão

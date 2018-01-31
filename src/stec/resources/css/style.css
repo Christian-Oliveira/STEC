@@ -24,6 +24,9 @@
 .menu-buttons:active{
     -fx-background-color: #F3F3F3;
 }
+.menu-buttons:hover {
+    -fx-background-color: #F3F3F3;
+}
 /*fim*/
 /*estilo de outros botões*/
 .buttons-all {

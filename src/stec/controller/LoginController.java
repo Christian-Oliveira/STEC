@@ -70,19 +70,12 @@ public class LoginController implements Initializable {
             //Carrega a tela principal
             try {
                 Stage stage = new Stage();
-                stage.setTitle("");
                 Parent root = FXMLLoader.load(getClass().getResource("/stec/view/TelaPrincipal.fxml"));
                 Scene scene = new Scene(root);
                 stage.initStyle(StageStyle.TRANSPARENT);
                 stage.setScene(scene);
                 stage.show();
-                /**
-                Parent parent = FXMLLoader.load(getClass().getResource("/stec/view/TelaPrincipal.fxml"));
-                Stage stage = new Stage(StageStyle.TRANSPARENT);
-                stage.setScene(new Scene(parent));
-                stage.setTitle("");
-                stage.show();         
-                **/
+                
                 //caso a janela principal seja fechada encerra a aplicacao
                 stage.setOnCloseRequest(e -> Platform.exit());
             } catch (IOException e) {

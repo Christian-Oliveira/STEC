@@ -1,382 +1,546 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="anchorPaneSupervisoes" prefHeight="680.0" prefWidth="1100.0" stylesheets="@../resources/css/style.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stec.controller.SupervisaoController">
+<AnchorPane id="AnchorPane" fx:id="anchorPaneSupervisoes" prefHeight="720.0" prefWidth="1300.0" stylesheets="@../resources/css/style.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stec.controller.SupervisaoController">
    <children>
-      <SplitPane dividerPositions="0.44472361809045224" orientation="VERTICAL" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="130.0" prefWidth="639.0">
+      <VBox prefHeight="720.0" prefWidth="1300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane prefHeight="50.0" prefWidth="1300.0" styleClass="topPane">
                <children>
-                  <GridPane layoutX="24.0" layoutY="82.0" prefHeight="173.0" prefWidth="543.0">
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="350.0" minWidth="10.0" prefWidth="148.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="420.0" minWidth="0.0" prefWidth="393.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints maxHeight="25.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
-                      <RowConstraints maxHeight="25.0" minHeight="4.0" prefHeight="25.0" vgrow="SOMETIMES" />
-                      <RowConstraints maxHeight="25.0" minHeight="0.0" prefHeight="25.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="25.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="25.0" minHeight="5.0" prefHeight="25.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="25.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                     <children>
-                        <Label text="Unidade Regional">
-                           <font>
-                              <Font size="14.0" />
-                           </font></Label>
-                        <Label text="Escritório Auditado" GridPane.rowIndex="1">
-                           <font>
-                              <Font size="14.0" />
-                           </font></Label>
-                        <Label text="Município" GridPane.rowIndex="2">
-                           <font>
-                              <Font size="14.0" />
-                           </font></Label>
-                        <Label text="Data da supervisão" GridPane.rowIndex="3">
-                           <font>
-                              <Font size="14.0" />
-                           </font></Label>
-                        <Label text="Programas" GridPane.rowIndex="4">
-                           <font>
-                              <Font size="14.0" />
-                           </font></Label>
-                        <Label text="Auditor" GridPane.rowIndex="5">
-                           <font>
-                              <Font size="14.0" />
-                           </font></Label>
-                        <Label fx:id="lbUr" text="X" GridPane.columnIndex="1">
-                           <font>
-                              <Font size="14.0" />
-                           </font></Label>
-                        <Label fx:id="lbEscritorio" text="X" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                           <font>
-                              <Font size="14.0" />
-                           </font></Label>
-                        <Label fx:id="lbMunicipio" text="X" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                           <font>
-                              <Font size="14.0" />
-                           </font></Label>
-                        <Label fx:id="lbData" text="X" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                           <font>
-                              <Font size="14.0" />
-                           </font></Label>
-                        <Label fx:id="lbProgramas" text="X" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                           <font>
-                              <Font size="14.0" />
-                           </font></Label>
-                        <Label fx:id="lbAuditor" text="X" GridPane.columnIndex="1" GridPane.rowIndex="5">
-                           <font>
-                              <Font size="14.0" />
-                           </font></Label>
-                     </children>
-                  </GridPane>
+                  <Label layoutX="588.0" layoutY="8.0" text="Supervisão" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="215.0" prefWidth="598.0">
+            <HBox prefHeight="680.0" prefWidth="200.0">
                <children>
-                  <TabPane layoutX="49.0" layoutY="26.0" prefHeight="451.0" prefWidth="598.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                    <tabs>
-                      <Tab text="Recursos Humanos, Físicos e Financeiros">
-                           <content>
-                              <Accordion>
-                                <panes>
-                                  <TitledPane animated="false" text="Identificação de Escritório">
-                                       <content>
-                                          <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                                             <children>
-                                                <VBox prefHeight="132.0" prefWidth="596.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                   <children>
-                                                      <JFXButton fx:id="btFormIdentificacaoEscritorio" onAction="#handleIdentificacaoEscritorio" text="Identificação de Escritório" />
-                                                   </children>
-                                                </VBox>
-                                             </children>
-                                          </AnchorPane>
-                                       </content>
-                                  </TitledPane>
-                                  <TitledPane animated="false" text="Recursos Humanos">
-                                    <content>
-                                          <ScrollPane>
-                                             <content>
-                                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                                   <children>
-                                                      <VBox layoutX="44.0" layoutY="-34.0" prefHeight="180.0" prefWidth="598.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-398.0" AnchorPane.topAnchor="0.0">
-                                                         <children>
-                                                            <JFXButton fx:id="btRHQuantitativo" onAction="#handleRHQuantitativo" text="Quantitativo, jornada e distribuição" />
-                                                            <JFXButton fx:id="btRHEstabilidade" onAction="#handleRHEstabilidade" text="Estabilidade das estruturas e sustentabilidade das políticas sanitárias" />
-                                                            <JFXButton fx:id="btRHCapacitacao" onAction="#handleRHCapacitacao" text="Capacitação técnica e formação continuada" />
-                                                            <JFXButton fx:id="btRHCompetencias" layoutX="10.0" layoutY="60.0" onAction="#handleRHCompetencias" text="Competências e independência técnica" />
-                                                         </children>
-                                                      </VBox>
-                                                   </children>
-                                                </AnchorPane>
-                                             </content>
-                                          </ScrollPane>
-                                    </content>
-                                  </TitledPane>
-                                  <TitledPane animated="false" text="Recursos Físicos">
-                                       <content>
-                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                             <children>
-                                                <VBox prefHeight="132.0" prefWidth="596.0">
-                                                   <children>
-                                                      <JFXButton fx:id="btRFInstalacoes" onAction="#handleRFInstalacoes" text="Instalações" />
-                                                      <JFXButton fx:id="btRFTransportes" onAction="#handleRFTransportes" text="Transportes" />
-                                                      <JFXButton fx:id="btRFEquipamentos" onAction="#handleRFEquipamentos" text="Equipamentos e acesso à comunicação" />
-                                                      <JFXButton fx:id="btRFSistemasInformacao" layoutX="10.0" layoutY="60.0" onAction="#handleRFSistemasInformacao" text="Sistemas de informação" />
-                                                   </children>
-                                                </VBox>
-                                             </children>
-                                          </AnchorPane>
-                                       </content>
-                                  </TitledPane>
-                                    <TitledPane animated="false" layoutX="10.0" layoutY="60.0" text="Recursos Financeiros">
-                                       <content>
-                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                             <children>
-                                                <VBox prefHeight="132.0" prefWidth="596.0">
-                                                   <children>
-                                                      <JFXButton fx:id="btRFICusteio" onAction="#handleRFICusteio" text="Recursos pra custeio" />
-                                                      <JFXButton fx:id="btRFIArrecadacao" onAction="#handleRFIArrecadacao" text="Arrecadação" />
-                                                   </children>
-                                                </VBox>
-                                             </children>
-                                          </AnchorPane>
-                                       </content>
-                                    </TitledPane>
-                                </panes>
-                              </Accordion>
-                           </content>
-                        </Tab>
-                      <Tab text="Capacidade Técnica e Operacional">
-                           <content>
-                              <Accordion>
-                                 <panes>
-                                    <TitledPane animated="false" text="Estrutura Organizacional">
-                                       <content>
-                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                             <children>
-                                                <VBox layoutX="13.0" layoutY="13.0" prefHeight="132.0" prefWidth="596.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                   <children>
-                                                      <JFXButton fx:id="btEOEstrutura" onAction="#handleEOEstrutura" text="Estrutura organizacional e capacidade de coordenação interna " />
-                                                   </children>
-                                                </VBox>
-                                             </children>
-                                          </AnchorPane>
-                                       </content>
-                                    </TitledPane>
-                                    <TitledPane animated="false" text="Autoridade e Gestão de Qualidade">
-                                       <content>
-                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                             <children>
-                                                <VBox layoutX="44.0" layoutY="-34.0" prefHeight="157.0" prefWidth="596.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                   <children>
-                                                      <JFXButton fx:id="btAGBaseLegal" onAction="#handleAGBaseLegal" text="Base Legal e aplicação da legislação, manuais e POPs" />
-                                                      <JFXButton fx:id="btAGOrganizacao" onAction="#handleAGOrganizacao" text="Organização dos processos e unidades" />
-                                                      <JFXButton fx:id="btAGSupervisao" onAction="#handleAGSupervisao" text="Supervisão e controle interno" />
-                                                   </children>
-                                                </VBox>
-                                             </children>
-                                          </AnchorPane>
-                                       </content>
-                                    </TitledPane>
-                                    <TitledPane animated="false" text="Capacidade Técnica e Operacional">
-                                       <content>
-                                          <ScrollPane>
-                                             <content>
-                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="210.0" prefWidth="200.0">
-                                                   <children>
-                                                      <VBox prefHeight="132.0" prefWidth="596.0">
-                                                         <children>
-                                                            <JFXButton fx:id="btCTOControleCadastro" onAction="#handleCTOControleCadastro" text="Controle de cadastro de produtores, propriedades e animais" />
-                                                            <JFXButton fx:id="btCTOPlanejamento" onAction="#handleCTOPlanejamento" text="Planejamento, execução de atividades e registro" />
-                                                            <JFXButton fx:id="btCTOControle" onAction="#handleCTOControle" text="Controle de divisas e trânsito interno" />
-                                                            <JFXButton fx:id="btCTOControleTransitoAnimais" layoutX="10.0" layoutY="60.0" onAction="#handleCTOControleTransitoAnimais" text="Controle de trânsito de animais e de produtos de origem animal" />
-                                                            <JFXButton fx:id="btCTOControleEventosAglomeracao" layoutX="10.0" layoutY="85.0" onAction="#handleCTOControleEventosAglomeracao" text="Controle de eventos de aglomeração de animais" />
-                                                            <JFXButton fx:id="btCTOFiscalizacao" layoutX="10.0" layoutY="110.0" onAction="#handleCTOFiscalizacao" text="Fiscalização em revendas veterinárias" />
-                                                            <JFXButton fx:id="btCTODeteccaoPrecoce" layoutX="10.0" layoutY="135.0" onAction="#handleCTODeteccaoPrecoce" text="Capacidade para detecção precoce e notificação imediata de doenças" />
-                                                            <JFXButton fx:id="btCTOAtendimentoSuspeita" layoutX="10.0" layoutY="160.0" onAction="#handleCTOAtendimentoSuspeita" text="Capacidade para atendimento a suspeitas e atuação em emergências" />
-                                                         </children>
-                                                      </VBox>
-                                                   </children>
-                                                </AnchorPane>
-                                             </content>
-                                          </ScrollPane>
-                                       </content>
-                                    </TitledPane>
-                                 </panes>
-                              </Accordion>
-                           </content>
-                        </Tab>
-                        <Tab text="Programas">
-                          <content>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                  <AnchorPane prefHeight="680.0" prefWidth="200.0" styleClass="side-bar">
+                     <children>
+                        <VBox prefHeight="680.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <GridPane>
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
                                  <children>
-                                    <TabPane layoutX="31.0" prefHeight="233.0" prefWidth="598.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <JFXButton fx:id="btnVoltar" onAction="#handleVoltar" prefHeight="40.0" prefWidth="200.0" styleClass="menu-buttons" text="Voltar" textFill="#757575">
+                                       <graphic>
+                                          <FontAwesomeIconView fill="#757575" glyphName="ARROW_LEFT" size="14" wrappingWidth="30.0" />
+                                       </graphic></JFXButton>
+                                    <JFXButton prefHeight="40.0" prefWidth="200.0" styleClass="menu-buttons" text="Log out" textFill="#757575" GridPane.rowIndex="1">
+                                       <graphic>
+                                          <FontAwesomeIconView fill="#757575" glyphName="SIGN_OUT" wrappingWidth="30.0" />
+                                       </graphic>
+                                    </JFXButton>
+                                    <JFXButton fx:id="btnSair" onAction="#handleSair" prefHeight="40.0" prefWidth="200.0" styleClass="menu-buttons" text="Sair" textFill="#757575" GridPane.rowIndex="2">
+                                       <graphic>
+                                          <FontAwesomeIconView fill="#757575" glyphName="CLOSE" size="14" wrappingWidth="30.0" />
+                                       </graphic></JFXButton>
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="680.0" prefWidth="1100.0">
+                     <children>
+                        <VBox prefHeight="680.0" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <AnchorPane prefHeight="250.0" prefWidth="1100.0" style="-fx-background-color: #F3F3F3;">
+                                 <children>
+                                    <AnchorPane layoutX="200.0" layoutY="33.0" prefHeight="180.0" prefWidth="700.0" AnchorPane.rightAnchor="200.0">
+                                       <children>
+                                          <GridPane layoutX="10.0" prefHeight="180.0" prefWidth="700.0" styleClass="carPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <columnConstraints>
+                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="350.0" minWidth="10.0" prefWidth="175.0" />
+                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="578.0" minWidth="0.0" prefWidth="525.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                              <RowConstraints maxHeight="30.0" minHeight="10.0" vgrow="SOMETIMES" />
+                                              <RowConstraints maxHeight="30.0" minHeight="10.0" vgrow="SOMETIMES" />
+                                              <RowConstraints maxHeight="30.0" minHeight="10.0" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="30.0" minHeight="10.0" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="30.0" minHeight="10.0" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="30.0" minHeight="10.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                             <children>
+                                                <Label text="Unidade Regional">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                   <padding>
+                                                      <Insets left="10.0" />
+                                                   </padding>
+                                                </Label>
+                                                <Label text="Escritório Auditado" GridPane.rowIndex="1">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                   <padding>
+                                                      <Insets left="10.0" />
+                                                   </padding>
+                                                </Label>
+                                                <Label text="Município" GridPane.rowIndex="2">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                   <padding>
+                                                      <Insets left="10.0" />
+                                                   </padding>
+                                                </Label>
+                                                <Label text="Data da supervisão" GridPane.rowIndex="3">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                   <padding>
+                                                      <Insets left="10.0" />
+                                                   </padding>
+                                                </Label>
+                                                <Label text="Programas" GridPane.rowIndex="4">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                   <padding>
+                                                      <Insets left="10.0" />
+                                                   </padding>
+                                                </Label>
+                                                <Label text="Auditor" GridPane.rowIndex="5">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                   <padding>
+                                                      <Insets left="10.0" />
+                                                   </padding>
+                                                </Label>
+                                                <Label fx:id="lbUr" text="X" GridPane.columnIndex="1">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="lbEscritorio" text="X" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="lbMunicipio" text="X" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="lbData" text="X" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="lbProgramas" text="X" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="lbAuditor" text="X" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </GridPane>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </AnchorPane>
+                              <Separator prefWidth="200.0" styleClass="topPane" />
+                              <AnchorPane prefHeight="430.0" prefWidth="1100.0" style="-fx-background-color: #F3F3F3;">
+                                 <children>
+                                    <TabPane prefHeight="426.0" prefWidth="1100.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                       <tabs>
-                                        <Tab fx:id="tabPNEFA" disable="true" text="PNEFA">
-                                          <content>
-                                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                        <Tab text="Recursos Humanos, Físicos e Financeiros">
+                                             <content>
+                                                <Accordion>
+                                                  <panes>
+                                                    <TitledPane animated="false" text="Identificação de Escritório">
+                                                         <content>
+                                                            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                                               <children>
+                                                                  <VBox prefHeight="132.0" prefWidth="596.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                     <children>
+                                                                        <JFXButton fx:id="btFormIdentificacaoEscritorio" onAction="#handleIdentificacaoEscritorio" text="Identificação de Escritório" />
+                                                                     </children>
+                                                                  </VBox>
+                                                               </children>
+                                                            </AnchorPane>
+                                                         </content>
+                                                    </TitledPane>
+                                                    <TitledPane animated="false" text="Recursos Humanos">
+                                                      <content>
+                                                            <ScrollPane>
+                                                               <content>
+                                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                                     <children>
+                                                                        <VBox layoutX="44.0" layoutY="-34.0" prefHeight="180.0" prefWidth="598.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-398.0" AnchorPane.topAnchor="0.0">
+                                                                           <children>
+                                                                              <JFXButton fx:id="btRHQuantitativo" onAction="#handleRHQuantitativo" text="Quantitativo, jornada e distribuição" />
+                                                                              <JFXButton fx:id="btRHEstabilidade" onAction="#handleRHEstabilidade" text="Estabilidade das estruturas e sustentabilidade das políticas sanitárias" />
+                                                                              <JFXButton fx:id="btRHCapacitacao" onAction="#handleRHCapacitacao" text="Capacitação técnica e formação continuada" />
+                                                                              <JFXButton fx:id="btRHCompetencias" layoutX="10.0" layoutY="60.0" onAction="#handleRHCompetencias" text="Competências e independência técnica" />
+                                                                           </children>
+                                                                        </VBox>
+                                                                     </children>
+                                                                  </AnchorPane>
+                                                               </content>
+                                                            </ScrollPane>
+                                                      </content>
+                                                    </TitledPane>
+                                                    <TitledPane animated="false" text="Recursos Físicos">
+                                                         <content>
+                                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                               <children>
+                                                                  <VBox prefHeight="132.0" prefWidth="596.0">
+                                                                     <children>
+                                                                        <JFXButton fx:id="btRFInstalacoes" onAction="#handleRFInstalacoes" text="Instalações" />
+                                                                        <JFXButton fx:id="btRFTransportes" onAction="#handleRFTransportes" text="Transportes" />
+                                                                        <JFXButton fx:id="btRFEquipamentos" onAction="#handleRFEquipamentos" text="Equipamentos e acesso à comunicação" />
+                                                                        <JFXButton fx:id="btRFSistemasInformacao" layoutX="10.0" layoutY="60.0" onAction="#handleRFSistemasInformacao" text="Sistemas de informação" />
+                                                                     </children>
+                                                                  </VBox>
+                                                               </children>
+                                                            </AnchorPane>
+                                                         </content>
+                                                    </TitledPane>
+                                                      <TitledPane animated="false" layoutX="10.0" layoutY="60.0" text="Recursos Financeiros">
+                                                         <content>
+                                                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                               <children>
+                                                                  <VBox prefHeight="132.0" prefWidth="596.0">
+                                                                     <children>
+                                                                        <JFXButton fx:id="btRFICusteio" onAction="#handleRFICusteio" text="Recursos pra custeio" />
+                                                                        <JFXButton fx:id="btRFIArrecadacao" onAction="#handleRFIArrecadacao" text="Arrecadação" />
+                                                                     </children>
+                                                                  </VBox>
+                                                               </children>
+                                                            </AnchorPane>
+                                                         </content>
+                                                      </TitledPane>
+                                                  </panes>
+                                                </Accordion>
+                                             </content>
+                                          </Tab>
+                                        <Tab text="Capacidade Técnica e Operacional">
+                                             <content>
+                                                <Accordion>
+                                                   <panes>
+                                                      <TitledPane animated="false" text="Estrutura Organizacional">
+                                                         <content>
+                                                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                               <children>
+                                                                  <VBox layoutX="13.0" layoutY="13.0" prefHeight="132.0" prefWidth="596.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                     <children>
+                                                                        <JFXButton fx:id="btEOEstrutura" onAction="#handleEOEstrutura" text="Estrutura organizacional e capacidade de coordenação interna " />
+                                                                     </children>
+                                                                  </VBox>
+                                                               </children>
+                                                            </AnchorPane>
+                                                         </content>
+                                                      </TitledPane>
+                                                      <TitledPane animated="false" text="Autoridade e Gestão de Qualidade">
+                                                         <content>
+                                                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                               <children>
+                                                                  <VBox layoutX="44.0" layoutY="-34.0" prefHeight="157.0" prefWidth="596.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                     <children>
+                                                                        <JFXButton fx:id="btAGBaseLegal" onAction="#handleAGBaseLegal" text="Base Legal e aplicação da legislação, manuais e POPs" />
+                                                                        <JFXButton fx:id="btAGOrganizacao" onAction="#handleAGOrganizacao" text="Organização dos processos e unidades" />
+                                                                        <JFXButton fx:id="btAGSupervisao" onAction="#handleAGSupervisao" text="Supervisão e controle interno" />
+                                                                     </children>
+                                                                  </VBox>
+                                                               </children>
+                                                            </AnchorPane>
+                                                         </content>
+                                                      </TitledPane>
+                                                      <TitledPane animated="false" text="Capacidade Técnica e Operacional">
+                                                         <content>
+                                                            <ScrollPane>
+                                                               <content>
+                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="210.0" prefWidth="200.0">
+                                                                     <children>
+                                                                        <VBox prefHeight="132.0" prefWidth="596.0">
+                                                                           <children>
+                                                                              <JFXButton fx:id="btCTOControleCadastro" onAction="#handleCTOControleCadastro" text="Controle de cadastro de produtores, propriedades e animais" />
+                                                                              <JFXButton fx:id="btCTOPlanejamento" onAction="#handleCTOPlanejamento" text="Planejamento, execução de atividades e registro" />
+                                                                              <JFXButton fx:id="btCTOControle" onAction="#handleCTOControle" text="Controle de divisas e trânsito interno" />
+                                                                              <JFXButton fx:id="btCTOControleTransitoAnimais" layoutX="10.0" layoutY="60.0" onAction="#handleCTOControleTransitoAnimais" text="Controle de trânsito de animais e de produtos de origem animal" />
+                                                                              <JFXButton fx:id="btCTOControleEventosAglomeracao" layoutX="10.0" layoutY="85.0" onAction="#handleCTOControleEventosAglomeracao" text="Controle de eventos de aglomeração de animais" />
+                                                                              <JFXButton fx:id="btCTOFiscalizacao" layoutX="10.0" layoutY="110.0" onAction="#handleCTOFiscalizacao" text="Fiscalização em revendas veterinárias" />
+                                                                              <JFXButton fx:id="btCTODeteccaoPrecoce" layoutX="10.0" layoutY="135.0" onAction="#handleCTODeteccaoPrecoce" text="Capacidade para detecção precoce e notificação imediata de doenças" />
+                                                                              <JFXButton fx:id="btCTOAtendimentoSuspeita" layoutX="10.0" layoutY="160.0" onAction="#handleCTOAtendimentoSuspeita" text="Capacidade para atendimento a suspeitas e atuação em emergências" />
+                                                                           </children>
+                                                                        </VBox>
+                                                                     </children>
+                                                                  </AnchorPane>
+                                                               </content>
+                                                            </ScrollPane>
+                                                         </content>
+                                                      </TitledPane>
+                                                   </panes>
+                                                </Accordion>
+                                             </content>
+                                          </Tab>
+                                          <Tab text="Programas">
+                                            <content>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                                    <children>
-                                                      <VBox layoutX="24.0" layoutY="-33.0" prefHeight="204.0" prefWidth="598.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                         <children>
-                                                            <Label text="Programa Nacional de Erradicação e Prevenção da Febre Aftosa">
-                                                               <font>
-                                                                  <Font name="System Bold" size="14.0" />
-                                                               </font>
-                                                            </Label>
-                                                            <JFXButton fx:id="btFormPNEFAFiscalizacoes" onAction="#handlePNEFAFiscalizacoes" text="Fiscalizações de Vacinações" />
-                                                            <JFXButton fx:id="btFormPNEFAVigilancia" layoutX="10.0" layoutY="30.0" onAction="#handlePNEFAVigilancia" text="Vigilância Epidemiológica" />
-                                                         </children>
-                                                      </VBox>
+                                                      <TabPane layoutX="31.0" prefHeight="233.0" prefWidth="598.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                        <tabs>
+                                                          <Tab fx:id="tabPNEFA" disable="true" text="PNEFA">
+                                                            <content>
+                                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                                     <children>
+                                                                        <VBox layoutX="24.0" layoutY="-33.0" prefHeight="204.0" prefWidth="598.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                           <children>
+                                                                              <Label text="Programa Nacional de Erradicação e Prevenção da Febre Aftosa">
+                                                                                 <font>
+                                                                                    <Font name="System Bold" size="14.0" />
+                                                                                 </font>
+                                                                              </Label>
+                                                                              <JFXButton fx:id="btFormPNEFAFiscalizacoes" onAction="#handlePNEFAFiscalizacoes" text="Fiscalizações de Vacinações" />
+                                                                              <JFXButton fx:id="btFormPNEFAVigilancia" layoutX="10.0" layoutY="30.0" onAction="#handlePNEFAVigilancia" text="Vigilância Epidemiológica" />
+                                                                           </children>
+                                                                        </VBox>
+                                                                     </children>
+                                                                  </AnchorPane>
+                                                            </content>
+                                                          </Tab>
+                                                          <Tab fx:id="tabPNCEBT" disable="true" text="PNCEBT">
+                                                            <content>
+                                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                                     <children>
+                                                                        <VBox prefHeight="204.0" prefWidth="598.0">
+                                                                           <children>
+                                                                              <Label text="Programa Nacional de Controle e Erradicação da Brucelose e Tuberculose">
+                                                                                 <font>
+                                                                                    <Font name="System Bold" size="14.0" />
+                                                                                 </font>
+                                                                              </Label>
+                                                                              <JFXButton fx:id="btFormPNCEBTFiscalizacoes" onAction="#handlePNCEBTFiscalizacoes" text="Fiscalizações de Vacinações" />
+                                                                              <JFXButton fx:id="btFormPNCEBTVigilancia" layoutX="10.0" layoutY="30.0" onAction="#handlePNCEBTVigilancia" text="Vigilância Epidemiológica" />
+                                                                              <JFXButton fx:id="btFormPNCEBTControles" layoutX="10.0" layoutY="55.0" onAction="#handlePNCEBTControles" text="Controles do Programa" />
+                                                                           </children>
+                                                                        </VBox>
+                                                                     </children>
+                                                                  </AnchorPane>
+                                                            </content>
+                                                          </Tab>
+                                                            <Tab fx:id="tabPNCRH" disable="true" text="PNCRH">
+                                                               <content>
+                                                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                                     <children>
+                                                                        <VBox prefHeight="204.0" prefWidth="598.0">
+                                                                           <children>
+                                                                              <Label text="Programa Nacional de Controle da Raiva dos Herbívoros">
+                                                                                 <font>
+                                                                                    <Font name="System Bold" size="14.0" />
+                                                                                 </font>
+                                                                              </Label>
+                                                                              <JFXButton fx:id="btFormPNCRHFiscalizacoes" onAction="#handlePNCRHFiscalizacoes" text="Fiscalizações de Vacinações" />
+                                                                              <JFXButton fx:id="btFormPNCRHVigilancia" layoutX="10.0" layoutY="30.0" onAction="#handlePNCRHVigilancia" text="Vigilância Epidemiológica" />
+                                                                           </children>
+                                                                        </VBox>
+                                                                     </children>
+                                                                  </AnchorPane>
+                                                               </content>
+                                                            </Tab>
+                                                            <Tab fx:id="tabPNEEB" disable="true" text="PNEEB">
+                                                               <content>
+                                                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                                     <children>
+                                                                        <VBox prefHeight="204.0" prefWidth="598.0">
+                                                                           <children>
+                                                                              <Label text="Programa Nacional de Prevenção e Vigilância da Encefalite Espongiforme Bovina">
+                                                                                 <font>
+                                                                                    <Font name="System Bold" size="14.0" />
+                                                                                 </font>
+                                                                              </Label>
+                                                                              <JFXButton fx:id="btFormPNEEBVigilancia" layoutX="10.0" layoutY="30.0" onAction="#handlePNEEBVigilancia" text="Vigilância Epidemiológica" />
+                                                                           </children>
+                                                                        </VBox>
+                                                                     </children>
+                                                                  </AnchorPane>
+                                                               </content>
+                                                            </Tab>
+                                                            <Tab fx:id="tabPNSE" disable="true" text="PNSE">
+                                                               <content>
+                                                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                                     <children>
+                                                                        <VBox prefHeight="204.0" prefWidth="598.0">
+                                                                           <children>
+                                                                              <Label text="Programa Nacional de Sanidade Equídea">
+                                                                                 <font>
+                                                                                    <Font name="System Bold" size="14.0" />
+                                                                                 </font>
+                                                                              </Label>
+                                                                              <JFXButton fx:id="btFormPNSECadastro" layoutX="10.0" layoutY="30.0" onAction="#handlePNSECadastro" text="Cadastro de Estabelecimentos" />
+                                                                              <JFXButton fx:id="btFormPNSEVigilancia" layoutX="10.0" layoutY="30.0" onAction="#handlePNSEVigilancia" text="Vigilância Epidemiológica" />
+                                                                              <JFXButton fx:id="btFormPNSEControles" layoutX="10.0" layoutY="55.0" onAction="#handlePNSEControles" text="Controles do Programa" />
+                                                                           </children>
+                                                                        </VBox>
+                                                                     </children>
+                                                                  </AnchorPane>
+                                                               </content>
+                                                            </Tab>
+                                                            <Tab fx:id="tabPNSCO" disable="true" text="PNSCO">
+                                                               <content>
+                                                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                                     <children>
+                                                                        <VBox prefHeight="204.0" prefWidth="598.0">
+                                                                           <children>
+                                                                              <Label text="Programa Nacional de Sanidade de Caprinos e Ovinos">
+                                                                                 <font>
+                                                                                    <Font name="System Bold" size="14.0" />
+                                                                                 </font>
+                                                                              </Label>
+                                                                              <JFXButton fx:id="btFormPNSCOCadastro" layoutX="10.0" layoutY="30.0" onAction="#handlePNSCOCadastro" text="Cadastro de Estabelecimentos" />
+                                                                              <JFXButton fx:id="btFormPNSCOVigilancia" layoutX="10.0" layoutY="30.0" onAction="#handlePNSCOVigilancia" text="Vigilância Epidemiológica" />
+                                                                           </children>
+                                                                        </VBox>
+                                                                     </children>
+                                                                  </AnchorPane>
+                                                               </content>
+                                                            </Tab>
+                                                            <Tab fx:id="tabPNSS" disable="true" text="PNSS">
+                                                               <content>
+                                                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                                     <children>
+                                                                        <VBox prefHeight="204.0" prefWidth="598.0">
+                                                                           <children>
+                                                                              <Label text="Programa Nacional de Sanidade de Suídeos">
+                                                                                 <font>
+                                                                                    <Font name="System Bold" size="14.0" />
+                                                                                 </font>
+                                                                              </Label>
+                                                                              <JFXButton fx:id="btFormPNSSCadastro" layoutX="10.0" layoutY="30.0" onAction="#handlePNSSCadastro" text="Cadastro de Estabelecimentos" />
+                                                                              <JFXButton fx:id="btFormPNSSVigilancia" layoutX="10.0" layoutY="30.0" onAction="#handlePNSSVigilancia" text="Vigilância Epidemiológica" />
+                                                                           </children>
+                                                                        </VBox>
+                                                                     </children>
+                                                                  </AnchorPane>
+                                                               </content>
+                                                            </Tab>
+                                                            <Tab fx:id="tabPNSA" disable="true" text="PNSA">
+                                                               <content>
+                                                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                                     <children>
+                                                                        <VBox prefHeight="204.0" prefWidth="598.0">
+                                                                           <children>
+                                                                              <Label text="Programa Nacional de Sanidade Avícola">
+                                                                                 <font>
+                                                                                    <Font name="System Bold" size="14.0" />
+                                                                                 </font>
+                                                                              </Label>
+                                                                              <JFXButton fx:id="btFormPNSACadastro" layoutX="10.0" layoutY="30.0" onAction="#handlePNSACadastro" text="Cadastro de Estabelecimentos" />
+                                                                              <JFXButton fx:id="btFormPNSAVigilancia" layoutX="10.0" layoutY="30.0" onAction="#handlePNSAVigilancia" text="Vigilância Epidemiológica" />
+                                                                           </children>
+                                                                        </VBox>
+                                                                     </children>
+                                                                  </AnchorPane>
+                                                               </content>
+                                                            </Tab>
+                                                        </tabs>
+                                                      </TabPane>
                                                    </children>
                                                 </AnchorPane>
-                                          </content>
-                                        </Tab>
-                                        <Tab fx:id="tabPNCEBT" disable="true" text="PNCEBT">
-                                          <content>
-                                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                                   <children>
-                                                      <VBox prefHeight="204.0" prefWidth="598.0">
-                                                         <children>
-                                                            <Label text="Programa Nacional de Controle e Erradicação da Brucelose e Tuberculose">
-                                                               <font>
-                                                                  <Font name="System Bold" size="14.0" />
-                                                               </font>
-                                                            </Label>
-                                                            <JFXButton fx:id="btFormPNCEBTFiscalizacoes" onAction="#handlePNCEBTFiscalizacoes" text="Fiscalizações de Vacinações" />
-                                                            <JFXButton fx:id="btFormPNCEBTVigilancia" layoutX="10.0" layoutY="30.0" onAction="#handlePNCEBTVigilancia" text="Vigilância Epidemiológica" />
-                                                            <JFXButton fx:id="btFormPNCEBTControles" layoutX="10.0" layoutY="55.0" onAction="#handlePNCEBTControles" text="Controles do Programa" />
-                                                         </children>
-                                                      </VBox>
-                                                   </children>
-                                                </AnchorPane>
-                                          </content>
-                                        </Tab>
-                                          <Tab fx:id="tabPNCRH" disable="true" text="PNCRH">
+                                            </content>
+                                          </Tab>
+                                          <Tab text="Interação com partes interessadas">
                                              <content>
                                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                                    <children>
-                                                      <VBox prefHeight="204.0" prefWidth="598.0">
-                                                         <children>
-                                                            <Label text="Programa Nacional de Controle da Raiva dos Herbívoros">
-                                                               <font>
-                                                                  <Font name="System Bold" size="14.0" />
-                                                               </font>
-                                                            </Label>
-                                                            <JFXButton fx:id="btFormPNCRHFiscalizacoes" onAction="#handlePNCRHFiscalizacoes" text="Fiscalizações de Vacinações" />
-                                                            <JFXButton fx:id="btFormPNCRHVigilancia" layoutX="10.0" layoutY="30.0" onAction="#handlePNCRHVigilancia" text="Vigilância Epidemiológica" />
-                                                         </children>
-                                                      </VBox>
+                                                      <Accordion layoutX="42.0" layoutY="14.0" prefHeight="233.0" prefWidth="598.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                        <panes>
+                                                          <TitledPane animated="false" text="Interação com a comunidade">
+                                                            <content>
+                                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                                     <children>
+                                                                        <JFXButton fx:id="btICEducacaoSanitaria" layoutX="14.0" layoutY="14.0" onAction="#handleICEducacaoSanitaria" text="Educação sanitária e comunicação social (divulgação e publicidade)" />
+                                                                        <JFXButton fx:id="btICParticipacaoComunidade" layoutX="14.0" layoutY="39.0" onAction="#handleICParticipacaoComunidade" text="Participação com a comunidade " />
+                                                                        <JFXButton fx:id="btICParticipacaoInstituicoes" layoutX="14.0" layoutY="66.0" onAction="#handleICParticipacaoInstituicoes" text="Participação com instituições e representações " />
+                                                                     </children>
+                                                                  </AnchorPane>
+                                                            </content>
+                                                          </TitledPane>
+                                                          <TitledPane animated="false" text="Interação com os médicos veterinários">
+                                                            <content>
+                                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                                     <children>
+                                                                        <JFXButton fx:id="btIMVHabilitacao" layoutX="14.0" layoutY="14.0" onAction="#handleIMVHabilitacao" text="Habilitação e cadastramento dos médicos veterinários" />
+                                                                     </children>
+                                                                  </AnchorPane>
+                                                            </content>
+                                                          </TitledPane>
+                                                          <TitledPane animated="false" text="Interação com as instituições">
+                                                            <content>
+                                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                                     <children>
+                                                                        <JFXButton fx:id="btIISistemaInspecao" layoutX="14.0" layoutY="14.0" onAction="#handleIISistemaInspecao" text="Sistema de inspeção (seguridade alimentar) " />
+                                                                        <JFXButton fx:id="btIISUS" layoutX="14.0" layoutY="39.0" onAction="#handleIISUS" text="Sistema Único de Saúde (zoonoses, vigilância sanitária, etc.)" />
+                                                                     </children>
+                                                                  </AnchorPane>
+                                                            </content>
+                                                          </TitledPane>
+                                                        </panes>
+                                                      </Accordion>
                                                    </children>
                                                 </AnchorPane>
                                              </content>
                                           </Tab>
-                                          <Tab fx:id="tabPNEEB" disable="true" text="PNEEB">
+                                          <Tab text="Acesso aos mercados">
                                              <content>
                                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                                    <children>
-                                                      <VBox prefHeight="204.0" prefWidth="598.0">
-                                                         <children>
-                                                            <Label text="Programa Nacional de Prevenção e Vigilância da Encefalite Espongiforme Bovina">
-                                                               <font>
-                                                                  <Font name="System Bold" size="14.0" />
-                                                               </font>
-                                                            </Label>
-                                                            <JFXButton fx:id="btFormPNEEBVigilancia" layoutX="10.0" layoutY="30.0" onAction="#handlePNEEBVigilancia" text="Vigilância Epidemiológica" />
-                                                         </children>
-                                                      </VBox>
-                                                   </children>
-                                                </AnchorPane>
-                                             </content>
-                                          </Tab>
-                                          <Tab fx:id="tabPNSE" disable="true" text="PNSE">
-                                             <content>
-                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                                   <children>
-                                                      <VBox prefHeight="204.0" prefWidth="598.0">
-                                                         <children>
-                                                            <Label text="Programa Nacional de Sanidade Equídea">
-                                                               <font>
-                                                                  <Font name="System Bold" size="14.0" />
-                                                               </font>
-                                                            </Label>
-                                                            <JFXButton fx:id="btFormPNSECadastro" layoutX="10.0" layoutY="30.0" onAction="#handlePNSECadastro" text="Cadastro de Estabelecimentos" />
-                                                            <JFXButton fx:id="btFormPNSEVigilancia" layoutX="10.0" layoutY="30.0" onAction="#handlePNSEVigilancia" text="Vigilância Epidemiológica" />
-                                                            <JFXButton fx:id="btFormPNSEControles" layoutX="10.0" layoutY="55.0" onAction="#handlePNSEControles" text="Controles do Programa" />
-                                                         </children>
-                                                      </VBox>
-                                                   </children>
-                                                </AnchorPane>
-                                             </content>
-                                          </Tab>
-                                          <Tab fx:id="tabPNSCO" disable="true" text="PNSCO">
-                                             <content>
-                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                                   <children>
-                                                      <VBox prefHeight="204.0" prefWidth="598.0">
-                                                         <children>
-                                                            <Label text="Programa Nacional de Sanidade de Caprinos e Ovinos">
-                                                               <font>
-                                                                  <Font name="System Bold" size="14.0" />
-                                                               </font>
-                                                            </Label>
-                                                            <JFXButton fx:id="btFormPNSCOCadastro" layoutX="10.0" layoutY="30.0" onAction="#handlePNSCOCadastro" text="Cadastro de Estabelecimentos" />
-                                                            <JFXButton fx:id="btFormPNSCOVigilancia" layoutX="10.0" layoutY="30.0" onAction="#handlePNSCOVigilancia" text="Vigilância Epidemiológica" />
-                                                         </children>
-                                                      </VBox>
-                                                   </children>
-                                                </AnchorPane>
-                                             </content>
-                                          </Tab>
-                                          <Tab fx:id="tabPNSS" disable="true" text="PNSS">
-                                             <content>
-                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                                   <children>
-                                                      <VBox prefHeight="204.0" prefWidth="598.0">
-                                                         <children>
-                                                            <Label text="Programa Nacional de Sanidade de Suídeos">
-                                                               <font>
-                                                                  <Font name="System Bold" size="14.0" />
-                                                               </font>
-                                                            </Label>
-                                                            <JFXButton fx:id="btFormPNSSCadastro" layoutX="10.0" layoutY="30.0" onAction="#handlePNSSCadastro" text="Cadastro de Estabelecimentos" />
-                                                            <JFXButton fx:id="btFormPNSSVigilancia" layoutX="10.0" layoutY="30.0" onAction="#handlePNSSVigilancia" text="Vigilância Epidemiológica" />
-                                                         </children>
-                                                      </VBox>
-                                                   </children>
-                                                </AnchorPane>
-                                             </content>
-                                          </Tab>
-                                          <Tab fx:id="tabPNSA" disable="true" text="PNSA">
-                                             <content>
-                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                                   <children>
-                                                      <VBox prefHeight="204.0" prefWidth="598.0">
-                                                         <children>
-                                                            <Label text="Programa Nacional de Sanidade Avícola">
-                                                               <font>
-                                                                  <Font name="System Bold" size="14.0" />
-                                                               </font>
-                                                            </Label>
-                                                            <JFXButton fx:id="btFormPNSACadastro" layoutX="10.0" layoutY="30.0" onAction="#handlePNSACadastro" text="Cadastro de Estabelecimentos" />
-                                                            <JFXButton fx:id="btFormPNSAVigilancia" layoutX="10.0" layoutY="30.0" onAction="#handlePNSAVigilancia" text="Vigilância Epidemiológica" />
-                                                         </children>
-                                                      </VBox>
+                                                      <Accordion layoutX="42.0" layoutY="14.0" prefHeight="233.0" prefWidth="598.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                         <panes>
+                                                            <TitledPane animated="false" text="Acesso aos mercados">
+                                                               <content>
+                                                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                                     <children>
+                                                                        <JFXButton fx:id="btAMAcesso" layoutX="14.0" layoutY="14.0" onAction="#handleAMAcesso" text="Acesso aos mercados" />
+                                                                     </children>
+                                                                  </AnchorPane>
+                                                               </content>
+                                                            </TitledPane>
+                                                            <TitledPane animated="false" layoutX="10.0" layoutY="85.0" text="Vulnerabilidades e Potencialidades">
+                                                               <content>
+                                                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                                     <children>
+                                                                        <JFXButton fx:id="btVulnerabilidadesPotencialidades" layoutX="14.0" layoutY="14.0" onAction="#handleVulnerabilidadesPotencialidades" text="Vulnerabilidades e Potencialidades" />
+                                                                     </children>
+                                                                  </AnchorPane>
+                                                               </content>
+                                                            </TitledPane>
+                                                         </panes>
+                                                      </Accordion>
                                                    </children>
                                                 </AnchorPane>
                                              </content>
@@ -385,94 +549,13 @@
                                     </TabPane>
                                  </children>
                               </AnchorPane>
-                          </content>
-                        </Tab>
-                        <Tab text="Interação com partes interessadas">
-                           <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                 <children>
-                                    <Accordion layoutX="42.0" layoutY="14.0" prefHeight="233.0" prefWidth="598.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                      <panes>
-                                        <TitledPane animated="false" text="Interação com a comunidade">
-                                          <content>
-                                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                                   <children>
-                                                      <JFXButton fx:id="btICEducacaoSanitaria" layoutX="14.0" layoutY="14.0" onAction="#handleICEducacaoSanitaria" text="Educação sanitária e comunicação social (divulgação e publicidade)" />
-                                                      <JFXButton fx:id="btICParticipacaoComunidade" layoutX="14.0" layoutY="39.0" onAction="#handleICParticipacaoComunidade" text="Participação com a comunidade " />
-                                                      <JFXButton fx:id="btICParticipacaoInstituicoes" layoutX="14.0" layoutY="66.0" onAction="#handleICParticipacaoInstituicoes" text="Participação com instituições e representações " />
-                                                   </children>
-                                                </AnchorPane>
-                                          </content>
-                                        </TitledPane>
-                                        <TitledPane animated="false" text="Interação com os médicos veterinários">
-                                          <content>
-                                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                                   <children>
-                                                      <JFXButton fx:id="btIMVHabilitacao" layoutX="14.0" layoutY="14.0" onAction="#handleIMVHabilitacao" text="Habilitação e cadastramento dos médicos veterinários" />
-                                                   </children>
-                                                </AnchorPane>
-                                          </content>
-                                        </TitledPane>
-                                        <TitledPane animated="false" text="Interação com as instituições">
-                                          <content>
-                                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                                   <children>
-                                                      <JFXButton fx:id="btIISistemaInspecao" layoutX="14.0" layoutY="14.0" onAction="#handleIISistemaInspecao" text="Sistema de inspeção (seguridade alimentar) " />
-                                                      <JFXButton fx:id="btIISUS" layoutX="14.0" layoutY="39.0" onAction="#handleIISUS" text="Sistema Único de Saúde (zoonoses, vigilância sanitária, etc.)" />
-                                                   </children>
-                                                </AnchorPane>
-                                          </content>
-                                        </TitledPane>
-                                      </panes>
-                                    </Accordion>
-                                 </children>
-                              </AnchorPane>
-                           </content>
-                        </Tab>
-                        <Tab text="Acesso aos mercados">
-                           <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                 <children>
-                                    <Accordion layoutX="42.0" layoutY="14.0" prefHeight="233.0" prefWidth="598.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                       <panes>
-                                          <TitledPane animated="false" text="Acesso aos mercados">
-                                             <content>
-                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                                   <children>
-                                                      <JFXButton fx:id="btAMAcesso" layoutX="14.0" layoutY="14.0" onAction="#handleAMAcesso" text="Acesso aos mercados" />
-                                                   </children>
-                                                </AnchorPane>
-                                             </content>
-                                          </TitledPane>
-                                          <TitledPane animated="false" layoutX="10.0" layoutY="85.0" text="Vulnerabilidades e Potencialidades">
-                                             <content>
-                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                                   <children>
-                                                      <JFXButton fx:id="btVulnerabilidadesPotencialidades" layoutX="14.0" layoutY="14.0" onAction="#handleVulnerabilidadesPotencialidades" text="Vulnerabilidades e Potencialidades" />
-                                                   </children>
-                                                </AnchorPane>
-                                             </content>
-                                          </TitledPane>
-                                       </panes>
-                                    </Accordion>
-                                 </children>
-                              </AnchorPane>
-                           </content>
-                        </Tab>
-                    </tabs>
-                  </TabPane>
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
                </children>
-            </AnchorPane>
-         </items>
-      </SplitPane>
-      <AnchorPane prefHeight="50.0" prefWidth="1100.0" styleClass="topPane">
-         <children>
-            <Label layoutX="496.0" layoutY="8.0" text="Supervisão" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="24.0" />
-               </font>
-            </Label>
+            </HBox>
          </children>
-      </AnchorPane>
+      </VBox>
    </children>
 </AnchorPane>

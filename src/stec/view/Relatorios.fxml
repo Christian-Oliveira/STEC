@@ -2,11 +2,13 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="RelatoriosPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1100.0" stylesheets="@../resources/css/style.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stec.controller.RelatoriosController">
    <children>
@@ -16,12 +18,12 @@
                <columns>
                   <TableColumn fx:id="colunaUr" prefWidth="200.0" text="UR" />
                   <TableColumn fx:id="colunaEscritorioMunicipio" prefWidth="300.0" text="Esc. Auditado / Município" />
-                  <TableColumn fx:id="colunaProgramas" prefWidth="400.0" text="Programas" />
+                  <TableColumn fx:id="colunaProgramas" prefWidth="398.0" text="Programas" />
                </columns>
             </TableView>
          </center>
          <right>
-            <VBox alignment="TOP_CENTER" prefHeight="400.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <VBox alignment="TOP_CENTER" prefHeight="680.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
                   <JFXButton fx:id="btAuditoriaCompilada" onAction="#handleAuditoriaCompilada" prefHeight="45.0" prefWidth="200.0" styleClass="buttons-all" text="Comentários e Recomendações &#10;compiladas da auditoria">
                      <VBox.margin>
@@ -36,6 +38,17 @@
                </children>
             </VBox>
          </right>
+         <top>
+            <AnchorPane prefHeight="40.0" prefWidth="1100.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label layoutX="493.0" layoutY="4.0" text="Relatórios">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </top>
       </BorderPane>
    </children>
 </AnchorPane>

@@ -20,6 +20,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import stec.model.dao.RespostaDAO;
 import stec.model.dao.SupervisaoDAO;
 import stec.model.domain.RelatorioSupervisao;
@@ -31,6 +32,7 @@ public class TabelaSupervisoesController implements Initializable {
     List<Supervisao> listSupervisoes;//Lista das supervisoes
     ObservableList<Supervisao> observableListSupervisoes;//Observable list das supervisoes
     private final SupervisaoDAO supervisaoDAO = new SupervisaoDAO();//objeto DAO responsavel pela interacao com o bd
+    public Stage dialog;
     
     @FXML
     private AnchorPane anchorPaneTabela;
@@ -54,7 +56,6 @@ public class TabelaSupervisoesController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         carregarTabelaSupervisoes();
-
     }
     
     //Função do botão visualizar para preencher uma supervisão
@@ -99,15 +100,14 @@ public class TabelaSupervisoesController implements Initializable {
         AnchorPane pane = (AnchorPane) loader.load();
         
         Stage stage = new Stage();
-        stage.setTitle("Supervisão");
+        stage.initStyle(StageStyle.TRANSPARENT);
         Scene scene = new Scene(pane);
-        stage.setMaximized(true);
         stage.setScene(scene);
         
         SupervisaoController controller = loader.getController();
         controller.setDialog(stage);
         controller.setSupervisao(supervisao);
-
+        
         stage.show();
     }
     

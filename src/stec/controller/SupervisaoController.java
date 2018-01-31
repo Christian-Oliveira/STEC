@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -151,6 +152,10 @@ public class SupervisaoController implements Initializable {
     private JFXButton btCTODeteccaoPrecoce;
     @FXML
     private JFXButton btCTOAtendimentoSuspeita;
+    @FXML
+    private JFXButton btnVoltar;
+    @FXML
+    private JFXButton btnSair;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -1404,5 +1409,16 @@ public class SupervisaoController implements Initializable {
                 respostaDAO.inserir(resposta);
             }
         }
+    }
+    
+    //Função do botão voltar
+    @FXML
+    public void handleVoltar(ActionEvent event){
+        dialog.close();
+    }
+    
+    //Função do botão sair
+    public void handleSair(ActionEvent event){
+        Platform.exit();
     }
 }
