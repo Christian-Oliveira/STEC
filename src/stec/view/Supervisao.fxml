@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
@@ -9,6 +10,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -30,7 +32,7 @@
          <left>
             <VBox prefHeight="680.0" prefWidth="200.0" styleClass="side-bar" BorderPane.alignment="CENTER">
                <children>
-                  <JFXButton prefHeight="50.0" prefWidth="200.0" text="Recursos Humanos,&#10;Físicos e Financeiros" textAlignment="CENTER" wrapText="true">
+                  <JFXButton fx:id="btnRHFF" onAction="#handleRHFF" prefHeight="50.0" prefWidth="200.0" text="Recursos Humanos,&#10;Físicos e Financeiros" textAlignment="CENTER" wrapText="true">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -38,7 +40,7 @@
                         <Insets bottom="10.0" />
                      </VBox.margin>
                   </JFXButton>
-                  <JFXButton prefHeight="50.0" prefWidth="200.0" text="Capacidade Técnica e&#10;Operacional" textAlignment="CENTER">
+                  <JFXButton fx:id="btnCTO" onAction="#handleCTO" prefHeight="50.0" prefWidth="200.0" text="Capacidade Técnica e&#10;Operacional" textAlignment="CENTER">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -46,7 +48,7 @@
                         <Insets />
                      </VBox.margin>
                   </JFXButton>
-                  <JFXButton prefHeight="50.0" prefWidth="200.0" text="Programas" textAlignment="CENTER">
+                  <JFXButton fx:id="btnProgramas" onAction="#handleProgramas" prefHeight="50.0" prefWidth="200.0" text="Programas" textAlignment="CENTER">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -54,7 +56,7 @@
                         <Insets />
                      </VBox.margin>
                   </JFXButton>
-                  <JFXButton prefHeight="50.0" prefWidth="200.0" text="Interação com partes&#10;interessadas" textAlignment="CENTER">
+                  <JFXButton fx:id="btnIPI" onAction="#handleIPI" prefHeight="50.0" prefWidth="200.0" text="Interação com partes&#10;interessadas" textAlignment="CENTER">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -62,7 +64,7 @@
                         <Insets />
                      </VBox.margin>
                   </JFXButton>
-                  <JFXButton prefHeight="50.0" prefWidth="200.0" text="Acesso aos mercados" textAlignment="CENTER">
+                  <JFXButton fx:id="btnMercados" onAction="#handleMercados" prefHeight="50.0" prefWidth="200.0" text="Acesso aos mercados" textAlignment="CENTER">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -94,7 +96,7 @@
          <center>
             <VBox prefHeight="680.0" prefWidth="1100.0" BorderPane.alignment="CENTER">
                <children>
-                  <AnchorPane prefHeight="250.0" prefWidth="1100.0">
+                  <AnchorPane prefHeight="215.0" prefWidth="1080.0">
                      <children>
                         <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="180.0" prefWidth="600.0" AnchorPane.rightAnchor="466.0">
                            <children>
@@ -197,7 +199,312 @@
                      </children>
                   </AnchorPane>
                   <Separator prefHeight="0.0" prefWidth="1080.0" styleClass="topPane" />
-                  <AnchorPane prefHeight="430.0" prefWidth="1100.0" />
+                  <AnchorPane prefWidth="1080.0">
+                     <children>
+                        <VBox fx:id="vBoxRHFF" prefHeight="483.0" prefWidth="1080.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <Label text="Identificação de Escritório">
+                                 <VBox.margin>
+                                    <Insets left="10.0" top="5.0" />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <HBox prefHeight="90.0" prefWidth="1100.0">
+                                 <children>
+                                    <JFXButton prefHeight="80.0" prefWidth="110.0" text="Identificação&#10;de&#10;Escritório" textAlignment="CENTER">
+                                       <HBox.margin>
+                                          <Insets left="20.0" top="4.0" />
+                                       </HBox.margin>
+                                       <styleClass>
+                                          <String fx:value="buttons-all" />
+                                          <String fx:value="carPane" />
+                                       </styleClass>
+                                    </JFXButton>
+                                 </children>
+                              </HBox>
+                              <Label text="Recursos Humanos">
+                                 <VBox.margin>
+                                    <Insets left="10.0" top="5.0" />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <HBox prefHeight="90.0" prefWidth="1100.0">
+                                 <children>
+                                    <JFXButton prefHeight="80.0" prefWidth="110.0" text="Quantitativo,&#10;jornada e&#10;distribuição" textAlignment="CENTER">
+                                       <HBox.margin>
+                                          <Insets left="20.0" top="4.0" />
+                                       </HBox.margin>
+                                       <styleClass>
+                                          <String fx:value="buttons-all" />
+                                          <String fx:value="carPane" />
+                                       </styleClass>
+                                    </JFXButton>
+                                    <JFXButton prefHeight="80.0" prefWidth="110.0" text="Estruturas,&#10;sustentabilidade e&#10;políticas&#10;sanitárias" textAlignment="CENTER">
+                                       <HBox.margin>
+                                          <Insets left="30.0" top="4.0" />
+                                       </HBox.margin>
+                                       <styleClass>
+                                          <String fx:value="buttons-all" />
+                                          <String fx:value="carPane" />
+                                       </styleClass>
+                                    </JFXButton>
+                                    <JFXButton prefHeight="80.0" prefWidth="110.0" text="Capacitação&#10;técnica e&#10;formação&#10;continuada" textAlignment="CENTER">
+                                       <HBox.margin>
+                                          <Insets left="30.0" top="4.0" />
+                                       </HBox.margin>
+                                       <styleClass>
+                                          <String fx:value="buttons-all" />
+                                          <String fx:value="carPane" />
+                                       </styleClass>
+                                    </JFXButton>
+                                    <JFXButton prefHeight="80.0" prefWidth="110.0" text="Competências e&#10;independência&#10;técnica" textAlignment="CENTER">
+                                       <HBox.margin>
+                                          <Insets left="30.0" top="4.0" />
+                                       </HBox.margin>
+                                       <styleClass>
+                                          <String fx:value="buttons-all" />
+                                          <String fx:value="carPane" />
+                                       </styleClass>
+                                    </JFXButton>
+                                 </children>
+                              </HBox>
+                              <Label text="Recursos Físicos">
+                                 <VBox.margin>
+                                    <Insets left="10.0" top="5.0" />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <HBox prefHeight="90.0" prefWidth="1100.0">
+                                 <children>
+                                    <JFXButton prefHeight="80.0" prefWidth="110.0" text="Instalações">
+                                       <HBox.margin>
+                                          <Insets left="20.0" top="4.0" />
+                                       </HBox.margin>
+                                       <styleClass>
+                                          <String fx:value="buttons-all" />
+                                          <String fx:value="carPane" />
+                                       </styleClass>
+                                    </JFXButton>
+                                    <JFXButton prefHeight="80.0" prefWidth="110.0" text="Transportes">
+                                       <HBox.margin>
+                                          <Insets left="30.0" top="4.0" />
+                                       </HBox.margin>
+                                       <styleClass>
+                                          <String fx:value="buttons-all" />
+                                          <String fx:value="carPane" />
+                                       </styleClass>
+                                    </JFXButton>
+                                    <JFXButton prefHeight="80.0" prefWidth="110.0" text="Equipamentos e&#10;acesso à&#10;comunicação" textAlignment="CENTER">
+                                       <HBox.margin>
+                                          <Insets left="30.0" top="4.0" />
+                                       </HBox.margin>
+                                       <styleClass>
+                                          <String fx:value="buttons-all" />
+                                          <String fx:value="carPane" />
+                                       </styleClass>
+                                    </JFXButton>
+                                    <JFXButton prefHeight="80.0" prefWidth="110.0" text="Sistemas&#10;de&#10;informação" textAlignment="CENTER">
+                                       <HBox.margin>
+                                          <Insets left="30.0" top="4.0" />
+                                       </HBox.margin>
+                                       <styleClass>
+                                          <String fx:value="buttons-all" />
+                                          <String fx:value="carPane" />
+                                       </styleClass>
+                                    </JFXButton>
+                                 </children>
+                              </HBox>
+                              <Label text="Recursos Financeiros">
+                                 <VBox.margin>
+                                    <Insets left="10.0" top="5.0" />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <HBox prefHeight="90.0" prefWidth="200.0">
+                                 <children>
+                                    <JFXButton prefHeight="80.0" prefWidth="110.0" text="Recursos&#10;para&#10;Custeio" textAlignment="CENTER">
+                                       <HBox.margin>
+                                          <Insets left="20.0" top="4.0" />
+                                       </HBox.margin>
+                                       <styleClass>
+                                          <String fx:value="buttons-all" />
+                                          <String fx:value="carPane" />
+                                       </styleClass>
+                                    </JFXButton>
+                                    <JFXButton prefHeight="80.0" prefWidth="110.0" text="Arrecadação">
+                                       <HBox.margin>
+                                          <Insets left="30.0" top="4.0" />
+                                       </HBox.margin>
+                                       <styleClass>
+                                          <String fx:value="buttons-all" />
+                                          <String fx:value="carPane" />
+                                       </styleClass>
+                                    </JFXButton>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <VBox fx:id="vBoxCTO" prefHeight="483.0" prefWidth="1080.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <Label text="Estrutura Organizacional">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets left="10.0" top="5.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <HBox prefHeight="90.0" prefWidth="1100.0">
+                                 <children>
+                                    <JFXButton prefHeight="80.0" prefWidth="130.0" text="Capacidade de&#10;coordenação&#10;interna" textAlignment="CENTER">
+                                       <HBox.margin>
+                                          <Insets left="20.0" top="4.0" />
+                                       </HBox.margin>
+                                       <styleClass>
+                                          <String fx:value="buttons-all" />
+                                          <String fx:value="carPane" />
+                                       </styleClass>
+                                    </JFXButton>
+                                 </children>
+                              </HBox>
+                              <Label text="Autoridade e Gestão de Qualidade">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets left="10.0" top="5.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <HBox prefHeight="90.0" prefWidth="1100.0">
+                                 <children>
+                                    <JFXButton prefHeight="80.0" prefWidth="130.0" text="Base Legal e&#10;aplicação da&#10;legislação,&#10;manuais e POPs" textAlignment="CENTER">
+                                       <HBox.margin>
+                                          <Insets left="20.0" top="4.0" />
+                                       </HBox.margin>
+                                       <styleClass>
+                                          <String fx:value="buttons-all" />
+                                          <String fx:value="carPane" />
+                                       </styleClass>
+                                    </JFXButton>
+                                    <JFXButton prefHeight="80.0" prefWidth="130.0" text="Organização dos&#10;processos e&#10;unidades" textAlignment="CENTER">
+                                       <HBox.margin>
+                                          <Insets left="30.0" top="4.0" />
+                                       </HBox.margin>
+                                       <styleClass>
+                                          <String fx:value="buttons-all" />
+                                          <String fx:value="carPane" />
+                                       </styleClass>
+                                    </JFXButton>
+                                    <JFXButton prefHeight="80.0" prefWidth="130.0" text="Supervisão e&#10;controle interno" textAlignment="CENTER">
+                                       <HBox.margin>
+                                          <Insets left="30.0" top="4.0" />
+                                       </HBox.margin>
+                                       <styleClass>
+                                          <String fx:value="buttons-all" />
+                                          <String fx:value="carPane" />
+                                       </styleClass>
+                                    </JFXButton>
+                                 </children>
+                              </HBox>
+                              <Label text="Capacidade Técnica e Operacional">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets left="10.0" top="5.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <HBox prefHeight="90.0" prefWidth="1100.0">
+                                 <children>
+                                    <JFXButton prefHeight="80.0" prefWidth="130.0" text="Cadastro de&#10;produtores,&#10;propriedades e&#10;animais" textAlignment="CENTER">
+                                       <HBox.margin>
+                                          <Insets left="20.0" top="4.0" />
+                                       </HBox.margin>
+                                       <styleClass>
+                                          <String fx:value="buttons-all" />
+                                          <String fx:value="carPane" />
+                                       </styleClass>
+                                    </JFXButton>
+                                    <JFXButton prefHeight="80.0" prefWidth="130.0" text="Planejamento,&#10;execução de&#10;atividades e&#10;registro" textAlignment="CENTER">
+                                       <HBox.margin>
+                                          <Insets left="30.0" top="4.0" />
+                                       </HBox.margin>
+                                       <styleClass>
+                                          <String fx:value="buttons-all" />
+                                          <String fx:value="carPane" />
+                                       </styleClass>
+                                    </JFXButton>
+                                    <JFXButton prefHeight="80.0" prefWidth="130.0" text="Controle de&#10;divisas e&#10;trânsito interno" textAlignment="CENTER">
+                                       <HBox.margin>
+                                          <Insets left="30.0" top="4.0" />
+                                       </HBox.margin>
+                                       <styleClass>
+                                          <String fx:value="buttons-all" />
+                                          <String fx:value="carPane" />
+                                       </styleClass>
+                                    </JFXButton>
+                                    <JFXButton prefHeight="80.0" prefWidth="130.0" text="Trânsito de&#10;animais e de&#10;produtos de&#10;origem animal" textAlignment="CENTER">
+                                       <HBox.margin>
+                                          <Insets left="30.0" top="4.0" />
+                                       </HBox.margin>
+                                       <styleClass>
+                                          <String fx:value="buttons-all" />
+                                          <String fx:value="carPane" />
+                                       </styleClass>
+                                    </JFXButton>
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <JFXButton prefHeight="80.0" prefWidth="130.0" text="Controle de&#10;eventos de&#10;aglomeração&#10;de animais" textAlignment="CENTER">
+                                       <styleClass>
+                                          <String fx:value="buttons-all" />
+                                          <String fx:value="carPane" />
+                                       </styleClass>
+                                       <HBox.margin>
+                                          <Insets left="20.0" top="10.0" />
+                                       </HBox.margin>
+                                    </JFXButton>
+                                    <JFXButton prefHeight="80.0" prefWidth="130.0" text="Fiscalização&#10;em revendas&#10;veterinárias" textAlignment="CENTER">
+                                       <styleClass>
+                                          <String fx:value="buttons-all" />
+                                          <String fx:value="carPane" />
+                                       </styleClass>
+                                       <HBox.margin>
+                                          <Insets left="30.0" top="10.0" />
+                                       </HBox.margin>
+                                    </JFXButton>
+                                    <JFXButton prefHeight="80.0" prefWidth="130.0" text="Detecção precoce&#10;e&#10;notificação de&#10;doenças" textAlignment="CENTER">
+                                       <styleClass>
+                                          <String fx:value="buttons-all" />
+                                          <String fx:value="carPane" />
+                                       </styleClass>
+                                       <HBox.margin>
+                                          <Insets left="30.0" top="10.0" />
+                                       </HBox.margin>
+                                    </JFXButton>
+                                    <JFXButton prefHeight="80.0" prefWidth="130.0" text="Atendimento&#10;a suspeitas e&#10;atuação em&#10;emergências" textAlignment="CENTER">
+                                       <styleClass>
+                                          <String fx:value="buttons-all" />
+                                          <String fx:value="carPane" />
+                                       </styleClass>
+                                       <HBox.margin>
+                                          <Insets left="30.0" top="10.0" />
+                                       </HBox.margin>
+                                    </JFXButton>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children></AnchorPane>
                </children>
             </VBox>
          </center>

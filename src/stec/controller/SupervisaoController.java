@@ -42,7 +42,17 @@ public class SupervisaoController implements Initializable {
     private Label lbAuditor;
     @FXML
     private JFXButton btFormIdentificacaoEscritorio;
+    /**@FXML
+    private TabPane tabPaneRHFF;
     @FXML
+    private TabPane tabPaneCTO;
+    @FXML
+    private TabPane tabPaneProgramas;
+    @FXML
+    private TabPane tabPaneIPI;
+    @FXML
+    private TabPane tabPaneMercados;
+    @FXML**/
     private Tab tabPNEFA;
     @FXML
     private Tab tabPNCEBT;
@@ -156,10 +166,20 @@ public class SupervisaoController implements Initializable {
     private JFXButton btnVoltar;
     @FXML
     private JFXButton btnSair;
+    @FXML
+    private JFXButton btnRHFF;
+    @FXML
+    private JFXButton btnCTO;
+    @FXML
+    private JFXButton btnProgramas;
+    @FXML
+    private JFXButton btnIPI;
+    @FXML
+    private JFXButton btnMercados;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        //tabPaneRHFF.isVisible();
     }
 
     public Supervisao getSupervisao() {
@@ -235,7 +255,28 @@ public class SupervisaoController implements Initializable {
         return controller.isBtConfirmarClicked();
         
     }
-
+    /**
+    @FXML
+    private void handleRHFF(ActionEvent event){
+        tabPaneRHFF.isVisible();
+    }
+    @FXML
+    private void handleCTO(ActionEvent vent){
+        tabPaneCTO.isVisible();
+    }
+    @FXML
+    private void handleProgramas(ActionEvent event){
+        tabPaneProgramas.isVisible();
+    }
+    @FXML
+    private void handleIPI(ActionEvent event){
+        tabPaneIPI.isVisible();
+    }
+    @FXML
+    private void handleMercado(ActionEvent event){
+        tabPaneMercados.isVisible();
+    }**/
+    /**
     //-----------------Identificacao de Escritorio------------------------------
     @FXML
     private void handleIdentificacaoEscritorio(ActionEvent event) throws IOException {
@@ -1410,7 +1451,7 @@ public class SupervisaoController implements Initializable {
             }
         }
     }
-    
+    **/
     //Função do botão voltar
     @FXML
     public void handleVoltar(ActionEvent event){
