@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="450.0" prefWidth="360.0" styleClass="carPane" stylesheets="@../../resources/css/style.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stec.controller.FormSupervisaoController">
+<AnchorPane prefHeight="450.0" prefWidth="360.0" styleClass="carPane" stylesheets="@../../../resources/css/style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stec.view.formularios.FormSupervisao.FormSupervisaoController">
    <children>
       <AnchorPane prefHeight="50.0" prefWidth="360.0" styleClass="topPane" />
       <JFXComboBox fx:id="cbUR" focusColor="#1976d2" labelFloat="true" layoutX="60.0" layoutY="112.0" prefHeight="25.0" prefWidth="240.0" promptText="Unidade Regional" />
@@ -33,7 +33,7 @@
       <JFXCheckBox fx:id="chTODOS" checkedColor="#1976d2" layoutX="248.0" layoutY="285.0" text="TODOS" />
       <ImageView fitHeight="90.0" fitWidth="90.0" layoutX="142.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../imagens/clipboard.png" />
+            <Image url="@../../imagens/supervisao.png" />
          </image>
       </ImageView>
    </children>

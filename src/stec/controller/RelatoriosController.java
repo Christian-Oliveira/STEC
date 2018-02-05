@@ -1,5 +1,6 @@
 package stec.controller;
 
+import stec.view.formularios.FormSupervisao.FormSupervisaoController;
 import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
 import java.net.URL;

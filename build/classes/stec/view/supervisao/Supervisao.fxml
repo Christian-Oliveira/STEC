@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="anchorPaneSupervisoes" prefHeight="600.0" prefWidth="800.0" stylesheets="@../../resources/css/style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stec.view.supervisao.SupervisaoController">
+   <children>
+      <BorderPane prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <center>
+            <VBox prefHeight="365.0" prefWidth="580.0" BorderPane.alignment="CENTER">
+               <children>
+                  <GridPane prefHeight="120.0" prefWidth="600.0" styleClass="carPane">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="350.0" minWidth="10.0" prefWidth="186.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="578.0" minWidth="0.0" prefWidth="394.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints maxHeight="30.0" minHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="30.0" minHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="30.0" minHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="30.0" minHeight="10.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label text="Unidade Regional">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </Label>
+                        <Label text="Data da supervisão" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </Label>
+                        <Label text="Programas" GridPane.rowIndex="3">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </Label>
+                        <Label text="Auditor" GridPane.rowIndex="4">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </Label>
+                        <Label fx:id="lbUr" text="X" GridPane.columnIndex="1">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lbData" text="X" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lbProgramas" text="X" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lbAuditor" text="X" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label text="Escritorio / Municipio" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </Label>
+                        <Label fx:id="lbEscritorio" prefWidth="300.0" text="X" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </VBox.margin>
+                  </GridPane>
+                  <Separator prefWidth="200.0" />
+                  <AnchorPane fx:id="formulariosPane" prefHeight="434.0" prefWidth="580.0" style="-fx-background-color: white; -fx-background-radius: 8;">
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </VBox.margin>
+                  </AnchorPane>
+               </children>
+               <BorderPane.margin>
+                  <Insets />
+               </BorderPane.margin>
+            </VBox>
+         </center>
+         <right>
+            <VBox prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="200.0" text="Formulários">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font></Label>
+                  <Separator prefWidth="200.0" />
+                  <JFXButton fx:id="btnRHFF" onAction="#handleRFF" prefHeight="50.0" prefWidth="200.0" text="Recursos Humanos,&#10;Físicos e Financeiros" textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </JFXButton>
+                  <JFXButton fx:id="btnCTO" onAction="#handleCTO" prefHeight="50.0" prefWidth="200.0" text="Capacidade Técnica e&#10;Operacional" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </JFXButton>
+                  <JFXButton fx:id="btnProgramas" onAction="#handleProgramas" prefHeight="50.0" prefWidth="200.0" text="Programas" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </JFXButton>
+                  <JFXButton fx:id="btnIPI" onAction="#handleIPI" prefHeight="50.0" prefWidth="200.0" text="Interação com partes&#10;interessadas" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </JFXButton>
+                  <JFXButton fx:id="btnAcesso" onAction="#handleAcesso" prefHeight="50.0" prefWidth="200.0" text="Acesso aos mercados" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </JFXButton>
+               </children>
+            </VBox>
+         </right>
+      </BorderPane>
+   </children>
+</AnchorPane>

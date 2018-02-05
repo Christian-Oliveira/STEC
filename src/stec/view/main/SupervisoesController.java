@@ -1,18 +1,21 @@
-package stec.controller;
+package stec.view.main;
 
+import stec.view.login.LoginController;
 import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import javafx.animation.FadeTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
+import javafx.fxml.JavaFXBuilderFactory;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
@@ -20,7 +23,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
+import javafx.util.Duration;
+import stec.view.supervisao.SupervisaoController;
 import stec.model.dao.RespostaDAO;
 import stec.model.dao.SupervisaoDAO;
 import stec.model.domain.RelatorioSupervisao;
@@ -28,14 +32,13 @@ import stec.model.domain.Supervisao;
 import stec.model.domain.Ur;
 import stec.resources.Classes.AlertMaker;
 
-public class TabelaSupervisoesController implements Initializable {
+public class SupervisoesController implements Initializable {
+
     List<Supervisao> listSupervisoes;//Lista das supervisoes
     ObservableList<Supervisao> observableListSupervisoes;//Observable list das supervisoes
     private final SupervisaoDAO supervisaoDAO = new SupervisaoDAO();//objeto DAO responsavel pela interacao com o bd
     public Stage dialog;
-    
-    @FXML
-    private AnchorPane anchorPaneTabela;
+
     @FXML
     private JFXButton btnVisualizar;
     @FXML
@@ -52,66 +55,87 @@ public class TabelaSupervisoesController implements Initializable {
     private TableColumn<Supervisao, String> tColumnProgramas;
     @FXML
     private TableColumn<Supervisao, Boolean> tColumnStatus;
-        
+    @FXML
+    private AnchorPane content;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         carregarTabelaSupervisoes();
     }
-    
-    //Função do botão visualizar para preencher uma supervisão
+
+    /**
+     * Carrega em uma nova janela os dados da supervisao selecionada
+     */
     @FXML
     private void handleVisualizar(ActionEvent event) throws IOException {
 
-        Supervisao supervisao = tViewSupervisoes.getSelectionModel().getSelectedItem();//Instancia um objeto com os dados da supervisao selecionada
-
+        Supervisao supervisao = tViewSupervisoes.getSelectionModel().getSelectedItem();
+        
+        //Caso nao tenha selecionado uma supervisao
         if (supervisao == null) {
             AlertMaker.showErrorMessage("Aviso", "Por favor, selecione uma supervisão.");
         } else {
-            if (supervisao.isStatus()) {//se a supervisao tiver finalizada
+            //Verifica se a supervisao esta finalizada
+            if (supervisao.isStatus()) {
                 AlertMaker.showSimpleAlert("Aviso", "Será gerado um PDF da supervisão");
-                RelatorioSupervisao relatorio = new RelatorioSupervisao();
-                relatorio.setSupervisao(supervisao);
-
+                
                 RespostaDAO respostaDAO = new RespostaDAO();
+                
+                //passa para classe de relatorio o objeto da supervisao e suas respostas
+                RelatorioSupervisao relatorio = new RelatorioSupervisao(supervisao, respostaDAO.listarRespostasDaSupervisao(supervisao));
 
-                relatorio.setHashRespostas(respostaDAO.listarRespostasDaSupervisao(supervisao));
-
-                //Nome do pdf da supervisao
+                //Monta o nome do pdf da supervisao
                 String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                         : supervisao.getUlsav().getNome());
                 String data[] = supervisao.getCreated().split(" ");//pega apenas a data
-
                 String file = "Supervisão " + municipio + " " + data[0];
-
+                                
                 relatorio.show(file);
+            
+            //passa o objeto para a janela que vai apresentar os dados
             } else {
-                showSupervisao(supervisao);//passa o objeto para a janela que vai apresentar os dados
+                
+                //Muda a tela passando dados
+                URL url = getClass().getResource("/stec/view/supervisao/Supervisao.fxml");
+
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(url);
+                loader.setBuilderFactory(new JavaFXBuilderFactory());
+                               
+                showSupervisao(supervisao, loader.load(url.openStream()));
+                
+                ((SupervisaoController)loader.getController()).setSupervisao(supervisao);
             }
 
         }
     }
-    
-    //Função que carrega a tela de Supervisão e apresenta os dados
-    public void showSupervisao(Supervisao supervisao) throws IOException {
+       
+    /**
+     * Carrega a tela de Supervisão e apresenta os dados
+     */
+    public void showSupervisao(Supervisao supervisao, Node node) throws IOException {
         
-        FXMLLoader loader = new FXMLLoader();
+        content.getChildren().clear();
+        content.getChildren().add((Node) node);
+                
+        //Faz com que a janela filha preencha completamente as dimensoes do pai
+        AnchorPane.setTopAnchor(node, 0.0);
+        AnchorPane.setBottomAnchor(node, 0.0);
+        AnchorPane.setLeftAnchor(node, 0.0);
+        AnchorPane.setRightAnchor(node, 0.0);
 
-        loader.setLocation(FormSupervisaoController.class.getResource("/stec/view/Supervisao.fxml"));
-        AnchorPane pane = (AnchorPane) loader.load();
-        
-        Stage stage = new Stage();
-        stage.initStyle(StageStyle.TRANSPARENT);
-        Scene scene = new Scene(pane);
-        stage.setScene(scene);
-        
-        SupervisaoController controller = loader.getController();
-        controller.setDialog(stage);
-        controller.setSupervisao(supervisao);
-        
-        stage.show();
-    }
-    
-    //Função que finaliza uma supervisão
+        FadeTransition ft = new FadeTransition(Duration.millis(1500));
+        ft.setNode(node);
+        ft.setFromValue(0.1);
+        ft.setToValue(1);
+        ft.setCycleCount(1);
+        ft.setAutoReverse(false);
+        ft.play();
+    }  
+   
+    /**
+     * Função que finaliza uma supervisão
+     */
     @FXML
     private void handleFinalizar(ActionEvent event) throws IOException {
         Supervisao supervisao = tViewSupervisoes.getSelectionModel().getSelectedItem();//Instancia um objeto com os dados da supervisao selecionada
@@ -127,8 +151,10 @@ public class TabelaSupervisoesController implements Initializable {
             }
         }
     }
-    
-    //Função que exclui uma supervisão
+
+    /**
+     * Função que exclui uma supervisão
+     */
     @FXML
     private void handleExcluir(ActionEvent event) {
         Supervisao supervisao = tViewSupervisoes.getSelectionModel().getSelectedItem();//Instancia um objeto com os dados da supervisao selecionada
@@ -151,18 +177,24 @@ public class TabelaSupervisoesController implements Initializable {
                 if (action.get() == ButtonType.OK) {
                     supervisaoDAO.excluir(supervisao);
                 }
+
                 carregarTabelaSupervisoes();
             }
         }
     }
     
+    /**
+     * Carrega as supervisoes do usuario
+     */
     public void carregarTabelaSupervisoes() {
+        //deve ser exatamente o nome do atributo da classe
         tColumnUR.setCellValueFactory(new PropertyValueFactory<>("ur"));
-        tColumnMunicipio.setCellValueFactory(new PropertyValueFactory<>("escritorio"));//deve ser exatamente o nome do atributo da classe
+        tColumnMunicipio.setCellValueFactory(new PropertyValueFactory<>("escritorio"));
         tColumnProgramas.setCellValueFactory(new PropertyValueFactory<>("programas"));
         tColumnStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
 
-        listSupervisoes = supervisaoDAO.listar(LoginController.USUARIO);//lista as supervisoes do usuario
+        //Lista as supervisoes do usuario
+        listSupervisoes = supervisaoDAO.listar(LoginController.USUARIO);
 
         observableListSupervisoes = FXCollections.observableArrayList(listSupervisoes);
         tViewSupervisoes.setItems(observableListSupervisoes);

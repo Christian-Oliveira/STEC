@@ -30,7 +30,7 @@ public class SupervisaoDAO {
     public List<String> opcoesAvaliacao = new ArrayList<>();
     public List<Formulario> listFormularios = new ArrayList<>();
     public List<Formulario> listProgramas = new ArrayList<>();
-
+    
     public SupervisaoDAO() {
         handler = SQLite.getInstance();
 

@@ -1,5 +1,7 @@
 package stec.controller;
 
+import stec.view.formularios.FormSupervisao.FormSupervisaoController;
+import stec.view.main.SupervisoesController;
 import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
 import java.net.URL;
@@ -22,12 +24,13 @@ import stec.model.dao.SupervisaoDAO;
 import stec.model.domain.Supervisao;
 
 public class TelaPrincipalController implements Initializable {
-    
-    private final TabelaSupervisoesController tabela = new TabelaSupervisoesController(); //instancia a classe da tabela de supervisoes
-    private final SupervisaoDAO supervisaoDAO = new SupervisaoDAO();//objeto DAO responsavel pela interacao com o bd
 
-    @FXML
-    private AnchorPane anchorPaneDashboard;
+    //instancia a classe da tabela de supervisoes
+    private final SupervisoesController tabela = new SupervisoesController();
+
+    //objeto DAO responsavel pela interacao com o bd
+    private final SupervisaoDAO supervisaoDAO = new SupervisaoDAO();
+
     @FXML
     private JFXButton btnNovaSupervisao;
     @FXML
@@ -37,19 +40,36 @@ public class TelaPrincipalController implements Initializable {
     @FXML
     private JFXButton btnLogout;
     @FXML
-    private JFXButton btnSair;
+    private JFXButton btnSair;   
+    @FXML
+    private AnchorPane content;
     
-    private AnchorPane listSupervisoes, supervisao, relatorios;
+    private AnchorPane contentPane;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        createPages();
+        
+        
+        try {
+            loadContent(FXMLLoader.load(getClass().getResource("/stec/view/TabelaSupervisoes.fxml")));
+        } catch (IOException ex) {
+            Logger.getLogger(TelaPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-    
-    //envia o conteudo do botão selecionado
-    public void setNode(Node node) {
-        anchorPaneDashboard.getChildren().clear();
-        anchorPaneDashboard.getChildren().add((Node) node);
+
+    /*
+    * Limpa a o AnchorPane e carrega o conteudo do botao selecionado.
+    * Aplica uma transicao entre um conteudo e outro
+    */
+    public void loadContent(Node node) {
+        content.getChildren().clear();
+        content.getChildren().add((Node) node);
+        
+        //Faz com que a janela filha preencha completamente as dimensoes do pai
+        AnchorPane.setTopAnchor(node, 0.0);
+        AnchorPane.setBottomAnchor(node, 0.0);
+        AnchorPane.setLeftAnchor(node, 0.0);
+        AnchorPane.setRightAnchor(node, 0.0);
 
         FadeTransition ft = new FadeTransition(Duration.millis(1500));
         ft.setNode(node);
@@ -60,34 +80,27 @@ public class TelaPrincipalController implements Initializable {
         ft.play();
     }
 
-    //carrega todos os arquivos fxml
-    private void createPages() {
-        try {
-            listSupervisoes = FXMLLoader.load(getClass().getResource("/stec/view/TabelaSupervisoes.fxml"));
-            supervisao = FXMLLoader.load(getClass().getResource("/stec/view/Supervisao.fxml"));
-            relatorios = FXMLLoader.load(getClass().getResource("/stec/view/Relatorios.fxml"));
+    /*
+    * Função que abre o formulario de nova supervisao e
+    * ao confirmar insere no BD
+    */
+    @FXML
+    private void handleNovaSupervisao(ActionEvent event) throws IOException {
+        //Instancia um novo objeto 
+        Supervisao supervisao = new Supervisao();
 
-            //envia a pagina padrão para ser carregada
-            setNode(listSupervisoes);
-        } catch (IOException ex) {
-            Logger.getLogger(TelaPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+        //Abre o formulario de nova supervisao
+        boolean btConfirmaClicked = showFormNovaSupervisao(supervisao);
+        
+        //Ao confirmar inseri no BD o objeto com as informacoes preenchidas
+        if (btConfirmaClicked) {
+            supervisaoDAO.inserir(supervisao);
+            
+            //Recarrega a tabela de supervisoes
+            loadContent(FXMLLoader.load(getClass().getResource("/stec/view/TabelaSupervisoes.fxml")));
         }
     }
     
-    //Função que instância uma nova supervisão
-    @FXML
-    private void handleNovaSupervisao(ActionEvent event) throws IOException {
-        //cria um objeto limpo
-        Supervisao novaSupervisao = new Supervisao();
-
-        //passa o objeto para o formulario
-        boolean btConfirmaClicked = showFormNovaSupervisao(novaSupervisao);
-
-        if (btConfirmaClicked) {
-            supervisaoDAO.inserir(novaSupervisao);
-            createPages();
-        }
-    }
     //Função que mostra a tela para criar uma nova supervisão
     public boolean showFormNovaSupervisao(Supervisao novaSupervisao) throws IOException {
         FXMLLoader loader = new FXMLLoader();
@@ -110,21 +123,21 @@ public class TelaPrincipalController implements Initializable {
 
         return controller.isBtConfirmarClicked();
     }
-    
+
     //Função que retona a tabela com as supervisões
     @FXML
-    private void handleSupervisoes(ActionEvent event) throws IOException{
-        setNode(listSupervisoes);
+    private void handleSupervisoes(ActionEvent event) throws IOException {
+        loadContent(FXMLLoader.load(getClass().getResource("/stec/view/TabelaSupervisoes.fxml")));
     }
-    
+
     @FXML
-    private void handleRelatorios(ActionEvent event){
-        setNode(relatorios);
+    private void handleRelatorios(ActionEvent event) throws IOException {
+        loadContent(FXMLLoader.load(getClass().getResource("/stec/view/Relatorios.fxml")));
     }
-    
+
     @FXML
     private void handleLogout(ActionEvent event) {
-        
+
     }
 
     @FXML

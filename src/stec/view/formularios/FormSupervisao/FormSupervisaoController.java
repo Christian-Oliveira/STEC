@@ -1,5 +1,6 @@
-package stec.controller;
+package stec.view.formularios.FormSupervisao;
 
+import stec.view.login.LoginController;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXComboBox;
@@ -24,22 +25,23 @@ import stec.model.domain.Ur;
 import stec.resources.Classes.AlertMaker;
 
 public class FormSupervisaoController implements Initializable {
-    
-    private Supervisao supervisao = new Supervisao();
-    private final SupervisaoDAO supervisaoDAO = new SupervisaoDAO();
+
     private Stage dialog;
     private boolean btConfirmarClicked = false;
-    
+
+    private Supervisao supervisao = new Supervisao();
+    private final SupervisaoDAO supervisaoDAO = new SupervisaoDAO();
+
     private final UrDAO urDAO = new UrDAO();
-    private List<Ur> listUrs = new ArrayList<>();   
+    private List<Ur> listUrs = new ArrayList<>();
     ObservableList<Ur> observableListUrs;
-    
+
     private final EacDAO eacDAO = new EacDAO();
     private final UlsavDAO ulsavDAO = new UlsavDAO();
-    
+
     ObservableList<String> observableListEscritorios;
     ObservableList<Object> observableListMunicipios;
-    
+
     @FXML
     private JFXComboBox<Ur> cbUR;
     @FXML
@@ -71,55 +73,64 @@ public class FormSupervisaoController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+
         carregarComboboxUr();
         carregarComboboxEscritorioAuditado();
-        
+
         cbEscritorio.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> carregarComboBoxMunicipios(newValue));
         chTODOS.selectedProperty().addListener((observable, oldValue, newValue) -> checkAll(newValue));
-    }    
+    }
 
     @FXML
     private void handleAdicionar(ActionEvent event) {
         List<String> programas = new ArrayList<>();
-        
+
         if (validarInput()) {
             supervisao.setUsuario(LoginController.USUARIO);
-            
+
             supervisao.setUr(cbUR.getSelectionModel().getSelectedItem());
             supervisao.setTipoEscritorio(cbEscritorio.getSelectionModel().getSelectedItem());
-            
-            if (cbEscritorio.getSelectionModel().getSelectedItem().equals("EAC"))
+
+            if (cbEscritorio.getSelectionModel().getSelectedItem().equals("EAC")) {
                 supervisao.setEac((Eac) cbMunicipio.getSelectionModel().getSelectedItem());
-            else 
+            } else {
                 supervisao.setUlsav((Ulsav) cbMunicipio.getSelectionModel().getSelectedItem());
-            
-            if (chPNCEBT.isSelected())
+            }
+
+            if (chPNCEBT.isSelected()) {
                 programas.add("PNCEBT");
-            
-            if (chPNSS.isSelected())
+            }
+
+            if (chPNSS.isSelected()) {
                 programas.add("PNSS");
-            
-            if (chPNCRH.isSelected())
+            }
+
+            if (chPNCRH.isSelected()) {
                 programas.add("PNCRH");
-            
-            if (chPNEEB.isSelected())
+            }
+
+            if (chPNEEB.isSelected()) {
                 programas.add("PNEEB");
-            
-            if (chPNEFA.isSelected())
+            }
+
+            if (chPNEFA.isSelected()) {
                 programas.add("PNEFA");
-            
-            if (chPNSA.isSelected())
+            }
+
+            if (chPNSA.isSelected()) {
                 programas.add("PNSA");
-            
-            if (chPNSE.isSelected())
+            }
+
+            if (chPNSE.isSelected()) {
                 programas.add("PNSE");
-            
-            if (chPNSCO.isSelected())
+            }
+
+            if (chPNSCO.isSelected()) {
                 programas.add("PNSCO");
-            
+            }
+
             supervisao.setProgramas(programas);
-            
+
             btConfirmarClicked = true;
             dialog.close();
         }
@@ -128,27 +139,30 @@ public class FormSupervisaoController implements Initializable {
     @FXML
     private void handleCancelar(ActionEvent event) {
         dialog.close();
-    }   
-    
+    }
+
     private boolean validarInput() {
         String message = "";
-        
-        if (cbUR.getSelectionModel().getSelectedItem() == null)
+
+        if (cbUR.getSelectionModel().getSelectedItem() == null) {
             message += "Regional inválida\n";
-        
-        if (cbEscritorio.getSelectionModel().getSelectedItem() == null)
+        }
+
+        if (cbEscritorio.getSelectionModel().getSelectedItem() == null) {
             message += "Escritório inválido\n";
-        
-        if (cbMunicipio.getSelectionModel().getSelectedItem() == null)
+        }
+
+        if (cbMunicipio.getSelectionModel().getSelectedItem() == null) {
             message += "Município inválido\n";
-        
-        if (chPNCEBT.isSelected() == false && chPNCRH.isSelected() == false &&
-                chPNEEB.isSelected() == false && chPNEFA.isSelected() == false &&
-                chPNSA.isSelected() == false && chPNSE.isSelected() == false &&
-                chPNSCO.isSelected() == false && chPNSS.isSelected() == false) {
+        }
+
+        if (chPNCEBT.isSelected() == false && chPNCRH.isSelected() == false
+                && chPNEEB.isSelected() == false && chPNEFA.isSelected() == false
+                && chPNSA.isSelected() == false && chPNSE.isSelected() == false
+                && chPNSCO.isSelected() == false && chPNSS.isSelected() == false) {
             message += "Selecione pelo menos um programa\n";
         }
-                
+
         if (message.length() == 0) {
             return true;
         } else {
@@ -156,7 +170,7 @@ public class FormSupervisaoController implements Initializable {
             return false;
         }
     }
-    
+
     public void checkAll(Boolean status) {
         if (status) {
             chPNEFA.setSelected(true);
@@ -179,40 +193,45 @@ public class FormSupervisaoController implements Initializable {
         }
     }
     
+    /**
+     * Busca todas as URs e lista elas em um select
+     */
     public void carregarComboboxUr() {
         listUrs = urDAO.listar();
         observableListUrs = FXCollections.observableArrayList(listUrs);
         cbUR.setItems(observableListUrs);
     }
-    
+
     public void carregarComboboxEscritorioAuditado() {
         observableListEscritorios = FXCollections.observableArrayList(supervisaoDAO.listEscritorios);
         cbEscritorio.setItems(observableListEscritorios);
     }
-    
+
     public boolean carregarComboBoxMunicipios(String escritorio) {
         String message = "";
-        
-        if (cbUR.getSelectionModel().getSelectedItem() == null)
+
+        if (cbUR.getSelectionModel().getSelectedItem() == null) {
             message += "Regional inválida\n";
-        
-        if (cbEscritorio.getSelectionModel().getSelectedItem() == null)
+        }
+
+        if (cbEscritorio.getSelectionModel().getSelectedItem() == null) {
             message += "Escritório inválido\n";
-        
+        }
+
         if (message.length() > 0) {
             AlertMaker.showErrorMessage("Campos inválidos, por favor, corrija...", message);
-            return false;            
+            return false;
         }
-        
+
         //Se a opcao escolhida do escritorio for EAC
         if (escritorio.equals("EAC")) {
 
             List<Eac> listEac = new ArrayList<>();//Cria um list para receber as EACS
-            
+
             listEac = eacDAO.listarPor("UR", cbUR.getSelectionModel().getSelectedItem().getId());//Busca todas as EAC que pertencem aquela UR
-            
+
             observableListMunicipios = FXCollections.observableArrayList(listEac);//Transforma a list em uma observable list
-            
+
             cbMunicipio.setItems(observableListMunicipios);//Preenche o combobox com a observable list criada
         } else if (escritorio.equals("ULSAV")) {
             List<Ulsav> listUlsav = new ArrayList<>();
@@ -222,7 +241,7 @@ public class FormSupervisaoController implements Initializable {
         } else {
             return false;
         }
-        
+
         return true;
     }
 
@@ -249,5 +268,5 @@ public class FormSupervisaoController implements Initializable {
     public void setBtConfirmarClicked(boolean btConfirmarClicked) {
         this.btConfirmarClicked = btConfirmarClicked;
     }
-    
+
 }
