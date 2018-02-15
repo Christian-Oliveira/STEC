@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="LoginPane" prefHeight="500.0" prefWidth="580.0" stylesheets="@../../resources/css/style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stec.view.login.LoginController">
+<AnchorPane id="AnchorPane" fx:id="LoginPane" prefHeight="500.0" prefWidth="580.0" stylesheets="@../../resources/css/style.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stec.view.login.LoginController">
    <children>
       <AnchorPane layoutX="-7.0" prefHeight="150.0" prefWidth="600.0" styleClass="topPane">
          <children>
@@ -23,7 +23,7 @@
       </AnchorPane>
       <AnchorPane layoutX="117.0" layoutY="75.0" prefHeight="400.0" prefWidth="360.0" styleClass="carPane">
          <children>
-            <ImageView fitHeight="90.0" fitWidth="90.0" layoutX="135.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="135.0" AnchorPane.rightAnchor="135.0">
+            <ImageView fitHeight="90.0" fitWidth="90.0" layoutX="135.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="135.0" AnchorPane.rightAnchor="135.0">
                <viewport>
                   <Rectangle2D />
                </viewport>
@@ -31,22 +31,17 @@
                   <Image url="@../imagens/login_user.png" />
                </image>
             </ImageView>
-            <JFXTextField fx:id="login" focusColor="#61aff8" labelFloat="true" layoutX="54.0" layoutY="136.0" prefHeight="30.0" prefWidth="251.0" promptText="Login" text="teste">
+            <JFXTextField fx:id="login" focusColor="#61aff8" labelFloat="true" layoutX="54.0" layoutY="153.0" prefHeight="30.0" prefWidth="251.0" promptText="Login" text="teste">
                <font>
                   <Font size="15.0" />
                </font>
             </JFXTextField>
-            <JFXPasswordField fx:id="senha" focusColor="#61aff8" labelFloat="true" layoutX="54.0" layoutY="198.0" prefHeight="30.0" prefWidth="251.0" promptText="Senha" text="123456">
+            <JFXPasswordField fx:id="senha" focusColor="#61aff8" labelFloat="true" layoutX="54.0" layoutY="215.0" prefHeight="30.0" prefWidth="251.0" promptText="Senha" text="123456">
                <font>
                   <Font size="15.0" />
                </font>
             </JFXPasswordField>
-            <JFXButton fx:id="btLogin" buttonType="RAISED" layoutX="125.0" layoutY="259.0" onAction="#handleLogin" prefHeight="50.0" prefWidth="110.0" styleClass="buttons-all" text="Login" />
-            <ImageView fx:id="imgProgress" fitHeight="50.0" fitWidth="50.0" layoutX="155.0" layoutY="340.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../imagens/Preloader_9.gif" />
-               </image>
-            </ImageView>
+            <JFXButton fx:id="btLogin" buttonType="RAISED" layoutX="125.0" layoutY="296.0" onAction="#handleLogin" prefHeight="50.0" prefWidth="110.0" styleClass="buttons-all" text="Login" />
          </children>
       </AnchorPane>
    </children>

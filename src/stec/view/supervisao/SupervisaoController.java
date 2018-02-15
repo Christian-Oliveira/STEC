@@ -16,6 +16,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import stec.controller.FormAGBaseLegalController;
@@ -103,88 +104,34 @@ public class SupervisaoController implements Initializable {
     private JFXButton btnAcesso;
 //parei aqui
 
-    @FXML
     private JFXButton btnEOEstrutura = new JFXButton("Estrutura Organizacional");
-    @FXML
     private JFXButton btnAGBaseLegal = new JFXButton("Autoridade e Gestão da Qualidade - Base Legal e aplicação da legislação, manuais e POPs");
-    @FXML
     private JFXButton btnAGOrganizacao = new JFXButton("Autoridade e Gestão da Qualidade - Organização dos processos e unidades");
-    @FXML
     private JFXButton btnAGSupervisao = new JFXButton("Autoridade e Gestão da Qualidade - Supervisão e controle interno");
 
-    @FXML
     private JFXButton btnCTOControleCadastro = new JFXButton("Capacidade Técnica e Operacional - Controle de cadastro de produtores, propriedades e animais");
-    @FXML
     private JFXButton btnCTOPlanejamento = new JFXButton("Capacidade Técnica e Operacional - Planejamento, execução de atividades e registro");
-    @FXML
     private JFXButton btnCTOControle = new JFXButton("Capacidade Técnica e Operacional - Controle de divisas e trânsito interno");
-    @FXML
     private JFXButton btnCTOControleTransitoAnimais = new JFXButton("Capacidade Técnica e Operacional - Controle de trânsito de animais e produtos de origem animal");
-    @FXML
     private JFXButton btnCTOControleEventosAglomeracao = new JFXButton("Capacidade Técnica e Operacional - Controle de eventos de aglomeração de animais");
-    @FXML
     private JFXButton btnCTOFiscalizacao = new JFXButton("Capacidade Técnica e Operacional - Fiscalização em revendas veterinárias");
-    @FXML
     private JFXButton btnCTODeteccaoPrecoce = new JFXButton("Capacidade Técnica e Operacional - Detecção precoce e notificação imediata de doenças");
-    @FXML
     private JFXButton btnCTOAtendimentoSuspeita = new JFXButton("Capacidade Técnica e Operacional - Atendimento a suspeitas e atuação em emergências");
     
-    @FXML
     private JFXButton btnICEducacaoSanitaria = new JFXButton("Interação com a Comunidade - Educação sanitária e comunicação social (divulgação e publicidade)");
-    @FXML
     private JFXButton btnICParticipacaoComunidade = new JFXButton("Interação com a Comunidade - Participação com a comunidade");
-    @FXML
     private JFXButton btnICParticipacaoInstituicoes = new JFXButton("Interação com a Comunidade - Participação com instituições e representações");
-    @FXML
     private JFXButton btnIMVHabilitacao = new JFXButton("Interação com Médico Veterinário - Habilitação e cadastramento dos médicos veterinários");
-    @FXML
     private JFXButton btnIISistemaInspecao = new JFXButton("Interação com Instituições - Sistema de inspeção");
-    @FXML
     private JFXButton btnIISUS = new JFXButton("Interação com Instituições - Sistema Único de Saúde (zoonoses, vigilância sanitária, etc.)");
     
-    @FXML
-    private JFXButton btnPNEFAFiscalizacoes = new JFXButton("Fiscalizações de vacinações");
-    @FXML
-    private JFXButton btnPNEFAVigilancia = new JFXButton("Vigilância Epidemiológica");
-    @FXML
-    private JFXButton btnPNCEBTFiscalizacoes = new JFXButton("Fiscalizações de vacinações");
-    @FXML
-    private JFXButton btnPNCEBTVigilancia = new JFXButton("Vigilância Epidemiológica");
-    @FXML
-    private JFXButton btnPNCEBTControles = new JFXButton("Controles do Programa");
-    @FXML
-    private JFXButton btnPNCRHFiscalizacoes = new JFXButton("Fiscalizações de vacinações");
-    @FXML
-    private JFXButton btnPNCRHVigilancia = new JFXButton("Vigilância Epidemiológica");
-    @FXML
-    private JFXButton btnPNEEBVigilancia = new JFXButton("Vigilância Epidemiológica");
-    @FXML
-    private JFXButton btnPNSECadastro = new JFXButton("Cadastro de Estabelecimentos");
-    @FXML
-    private JFXButton btnPNSEVigilancia = new JFXButton("Vigilância Epidemiológica");
-    @FXML
-    private JFXButton btnPNSEControles = new JFXButton("Controles do Programa");
-    @FXML
-    private JFXButton btnPNSCOCadastro = new JFXButton("Cadastro de Estabelecimentos");
-    @FXML
-    private JFXButton btnPNSCOVigilancia = new JFXButton("Vigilância Epidemiológica");
-    @FXML
-    private JFXButton btnPNSSCadastro = new JFXButton("Cadastro de Estabelecimentos");
-    @FXML
-    private JFXButton btnPNSSVigilancia = new JFXButton("Vigilância Epidemiológica");
-    @FXML
-    private JFXButton btnPNSACadastro = new JFXButton("Interação com Médico Veterinário - Habilitação e cadastramento dos médicos veterinários");
-    @FXML
-    private JFXButton btnPNSAVigilancia = new JFXButton("Vigilância Epidemiológica");
 
-    @FXML
     private JFXButton btnAMAcesso = new JFXButton("Acesso aos mercados");
-    @FXML
     private JFXButton btnVulnerabilidadesPotencialidades = new JFXButton("Vulnerabilidades e Potencialidades");
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        
     }
 
     @FXML
@@ -654,7 +601,7 @@ public class SupervisaoController implements Initializable {
         Stage stage = new Stage();
         stage.setTitle(resposta.getFormulario().getNome());
         //stage.setMaximized(true);
-        stage.setResizable(false);
+        //stage.setResizable(false);
 
         Scene scene = new Scene(pane);
 

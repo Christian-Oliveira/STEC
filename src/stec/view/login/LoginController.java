@@ -43,12 +43,10 @@ public class LoginController implements Initializable {
     private FontAwesomeIconView btnSair;
     @FXML
     private AnchorPane LoginPane;
-    @FXML
-    private ImageView imgProgress;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        imgProgress.setVisible(false);
+        
     }
 
     /*
@@ -56,8 +54,6 @@ public class LoginController implements Initializable {
      */
     @FXML
     private void handleLogin(ActionEvent event) {
-        imgProgress.setVisible(true);
-
         //instanciando novo usuario
         Usuario usuario = new Usuario();
 
@@ -84,7 +80,7 @@ public class LoginController implements Initializable {
                 stage.show();
 
                 //caso a janela principal seja fechada encerra a aplicacao
-                stage.setOnCloseRequest(e -> Platform.exit());
+                //stage.setOnCloseRequest(e -> Platform.exit());
             } catch (IOException e) {
                 AlertMaker.showErrorMessage("Error", e.getMessage());
                 Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, e);

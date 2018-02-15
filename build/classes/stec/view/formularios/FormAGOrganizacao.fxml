@@ -3,85 +3,146 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextArea?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../resources/css/style.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stec.controller.FormAGOrganizacaoController">
+<AnchorPane id="AnchorPane" prefHeight="330.0" prefWidth="633.0" styleClass="card" stylesheets="@../../resources/css/style.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stec.controller.FormAGOrganizacaoController">
    <children>
-      <JFXButton fx:id="btAdicionar" layoutX="417.0" layoutY="350.0" onAction="#handleAdicionar" prefHeight="45.0" prefWidth="75.0" text="Adicionar" />
-      <JFXButton fx:id="btCancelar" layoutX="520.0" layoutY="350.0" onAction="#handleCancelar" prefHeight="45.0" prefWidth="70.0" text="Cancelar" />
-      <JFXComboBox fx:id="cbArquivo" layoutX="14.0" layoutY="31.0" prefHeight="25.0" prefWidth="70.0" />
-      <JFXComboBox fx:id="cbMural" layoutX="102.0" layoutY="31.0" prefHeight="25.0" prefWidth="75.0" />
-      <JFXComboBox fx:id="cbFluxo" layoutX="195.0" layoutY="31.0" prefHeight="25.0" prefWidth="114.0" />
-      <Label fx:id="lblArquivo" layoutX="14.0" layoutY="14.0" text="Arquivo">
-         <tooltip>
-            <Tooltip text="O arquivo está organizado?&#10;Segue a padronização? &#10;Possui pastas com formulários dos programas?&#10;Está atualizado?&#10;A organização permite o manuseio com agilidade?&#10;Requisição de formulários impressos (padronizado/Setor)?&#10;Possui livro de visitas técnicas? Está sendo preenchido?" />
-         </tooltip></Label>
-      <Label fx:id="lblMural" layoutX="102.0" layoutY="14.0" text="Mural Técnico">
-         <tooltip>
-            <Tooltip text="Segue a padronização?&#10;Mapas atualizados (setores e linhas, sistema agroprodutivo, mapas do MAPA, Campanhas)?&#10;Tabela de preços dos serviços estabelecidos pela AGED, exigências zoossanitárias para emissão de GTA?&#10;Possui Fotos de ações?&#10;Informativos ao público sobre enfermidades (febre aftosa, brucelose, raiva, AIE, Mormo, etc.)?&#10;Informações sobre peculiaridades do município (área, população humana, áreas indígenas, quilombolas, etc)?&#10;Gráficos da emissão de GTA&#10;Informações dos rebanhos, propriedades e produtores (todos os municípios da jurisdição)" />
-         </tooltip></Label>
-      <Label fx:id="lblFluxo" layoutX="195.0" layoutY="14.0" text="Fluxo de informações">
-         <tooltip>
-            <Tooltip text="Está obedecendo o fluxo de envio de informações?" />
-         </tooltip></Label>
-      <TabPane layoutX="9.0" layoutY="139.0" prefHeight="200.0" prefWidth="585.0" tabClosingPolicy="UNAVAILABLE">
-         <tabs>
-            <Tab fx:id="comentarios" text="Comentários">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <JFXTextArea fx:id="txtComentarios" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-            <Tab fx:id="recomendacoesULSAVEAC" text="Recomendações ULSAV/EAC">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <JFXTextArea fx:id="txtRULSAVEAC" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-            <Tab fx:id="prazo" text="Prazo para ajuste">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <JFXTextArea fx:id="txtPrazo" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-            <Tab fx:id="recomendacoesUR" text="Recomendações UR">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <JFXTextArea fx:id="txtRUR" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-            <Tab fx:id="recomendacoesUC" text="Recomendações UC">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <JFXTextArea fx:id="txtRUC" labelFloat="true" prefHeight="171.0" prefWidth="568.0" />
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-         </tabs>
-      </TabPane>
-      <JFXComboBox fx:id="cbAvaliacao" layoutX="325.0" layoutY="31.0" prefHeight="25.0" prefWidth="80.0" />
-      <Label fx:id="lblAvaliacao" layoutX="325.0" layoutY="14.0" text="Avaliação">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font></Label>
+      <VBox prefHeight="400.0" prefWidth="642.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
+               <children>
+                  <Label fx:id="lblArquivo" text="Arquivo">
+                     <tooltip>
+                        <Tooltip text="O arquivo está organizado?&#10;Segue a padronização? &#10;Possui pastas com formulários dos programas?&#10;Está atualizado?&#10;A organização permite o manuseio com agilidade?&#10;Requisição de formulários impressos (padronizado/Setor)?&#10;Possui livro de visitas técnicas? Está sendo preenchido?" />
+                     </tooltip>
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </Label>
+                  <JFXComboBox fx:id="cbArquivo" prefHeight="25.0" prefWidth="75.0">
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </JFXComboBox>
+                  <Label fx:id="lblMural" text="Mural Técnico">
+                     <tooltip>
+                        <Tooltip text="Segue a padronização?&#10;Mapas atualizados (setores e linhas, sistema agroprodutivo, mapas do MAPA, Campanhas)?&#10;Tabela de preços dos serviços estabelecidos pela AGED, exigências zoossanitárias para emissão de GTA?&#10;Possui Fotos de ações?&#10;Informativos ao público sobre enfermidades (febre aftosa, brucelose, raiva, AIE, Mormo, etc.)?&#10;Informações sobre peculiaridades do município (área, população humana, áreas indígenas, quilombolas, etc)?&#10;Gráficos da emissão de GTA&#10;Informações dos rebanhos, propriedades e produtores (todos os municípios da jurisdição)" />
+                     </tooltip>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <JFXComboBox fx:id="cbMural" prefHeight="25.0" prefWidth="75.0">
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </JFXComboBox>
+                  <Label fx:id="lblFluxo" text="Fluxo de&#10;informações" textAlignment="CENTER">
+                     <tooltip>
+                        <Tooltip text="Está obedecendo o fluxo de envio de informações?" />
+                     </tooltip>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <JFXComboBox fx:id="cbFluxo" prefHeight="25.0" prefWidth="75.0">
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </JFXComboBox>
+                  <Label fx:id="lblAvaliacao" text="Avaliação">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <JFXComboBox fx:id="cbAvaliacao" prefHeight="25.0" prefWidth="75.0">
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </JFXComboBox>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <TabPane prefHeight="200.0" prefWidth="633.0" tabClosingPolicy="UNAVAILABLE">
+               <tabs>
+                  <Tab fx:id="comentarios" text="Comentários">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <JFXTextArea fx:id="txtComentarios" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab fx:id="recomendacoesULSAVEAC" text="Recomendações ULSAV/EAC">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <JFXTextArea fx:id="txtRULSAVEAC" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab fx:id="prazo" text="Prazo p/ ajuste">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <JFXTextArea fx:id="txtPrazo" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab fx:id="recomendacoesUR" text="Recomendações UR">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <JFXTextArea fx:id="txtRUR" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab fx:id="recomendacoesUC" text="Recomendações UC">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <JFXTextArea fx:id="txtRUC" labelFloat="true" prefHeight="171.0" prefWidth="568.0" />
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+               </tabs>
+            </TabPane>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
+               <children>
+                  <JFXButton fx:id="btAdicionar" onAction="#handleAdicionar" prefHeight="40.0" prefWidth="80.0" styleClass="buttons-all" text="Adicionar">
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin>
+                  </JFXButton>
+                  <JFXButton fx:id="btCancelar" onAction="#handleCancelar" prefHeight="40.0" prefWidth="80.0" styleClass="buttons-all" text="Cancelar">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </JFXButton>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

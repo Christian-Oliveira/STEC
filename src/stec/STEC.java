@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import stec.model.database.SQLite;
 
 public class STEC extends Application {
@@ -13,10 +14,10 @@ public class STEC extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/stec/view/login/Login.fxml"));
+        stage.initStyle(StageStyle.UTILITY);
         Scene scene = new Scene(root);
         stage.setScene(scene);
-        stage.setResizable(false);
-        stage.show();        
+        stage.show();    
         
         //Cria uma thread que gera a conexao com o bd, apos isso sera utilizado apenas a mesma instancia
         new Thread(new Runnable() {
