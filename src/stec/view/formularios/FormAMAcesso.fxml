@@ -13,11 +13,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="320.0" prefWidth="633.0" styleClass="card" stylesheets="@../../resources/css/style.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stec.controller.FormAMAcessoController">
+<AnchorPane id="AnchorPane" prefHeight="350.0" prefWidth="650.0" styleClass="card" stylesheets="@../../resources/css/style.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stec.controller.FormAMAcessoController">
    <children>
-      <VBox alignment="CENTER" prefHeight="400.0" prefWidth="642.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox alignment="CENTER" prefHeight="400.0" prefWidth="650.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <HBox alignment="CENTER" prefHeight="50.0">
+            <HBox alignment="CENTER" prefHeight="100.0">
                <children>
                   <Label fx:id="lblAcesso" text="Acesso aos mercados">
                      <tooltip>
@@ -97,7 +97,7 @@
                   </TabPane>
                </children>
                <VBox.margin>
-                  <Insets />
+                  <Insets left="10.0" />
                </VBox.margin>
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0">

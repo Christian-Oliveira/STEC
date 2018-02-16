@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="480.0" prefWidth="633.0" styleClass="card" stylesheets="@../../resources/css/style.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stec.controller.FormCTOCapacidadeDeteccaoPrecoceController">
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="750.0" styleClass="card" stylesheets="@../../resources/css/style.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stec.controller.FormCTOCapacidadeDeteccaoPrecoceController">
    <children>
       <VBox alignment="CENTER" prefHeight="500.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -40,7 +40,7 @@
                   </JFXTextField>
                   <Label fx:id="lblProprietario" text="Proprietário &#10;(Pp)" textAlignment="CENTER">
                      <HBox.margin>
-                        <Insets left="10.0" right="5.0" />
+                        <Insets left="50.0" right="5.0" />
                      </HBox.margin>
                   </Label>
                   <JFXTextField fx:id="proprietario" prefHeight="25.0" prefWidth="100.0">
@@ -50,11 +50,14 @@
                   </JFXTextField>
                   <Label fx:id="lblTerceiros" text="Terceiros &#10;(Te)" textAlignment="CENTER">
                      <HBox.margin>
-                        <Insets left="10.0" right="5.0" />
+                        <Insets left="50.0" right="5.0" />
                      </HBox.margin>
                   </Label>
                   <JFXTextField fx:id="terceiros" prefHeight="25.0" prefWidth="100.0" />
                </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
             </HBox>
             <Separator prefWidth="200.0" />
             <HBox alignment="CENTER" prefHeight="60.0" prefWidth="200.0">
@@ -64,25 +67,46 @@
                         <Tooltip text="Indicar a enfermidade suspeita para a qual houve notificação. &#10;Considerar todos os programas sanitários." />
                      </tooltip>
                   </Label>
-                  <JFXTextField fx:id="enfermidade" prefHeight="25.0" prefWidth="121.0" />
+                  <JFXTextField fx:id="enfermidade" prefHeight="25.0" prefWidth="100.0">
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin></JFXTextField>
                   <Label fx:id="lblFluxo" text="Fluxo de &#10;informações" textAlignment="CENTER">
                      <tooltip>
                         <Tooltip text="O fluxo interno para informações zoossanitárias está sendo cumprido?&#10;Há adequado refluxo de informações sobre resultados dos exames? Inclusive negativos?&#10;Há retorno dos dados compilados da Unidade Central para o escritório?" />
                      </tooltip>
+                     <HBox.margin>
+                        <Insets left="25.0" />
+                     </HBox.margin>
                   </Label>
-                  <JFXComboBox fx:id="cbFluxo" prefHeight="25.0" prefWidth="66.0" />
+                  <JFXComboBox fx:id="cbFluxo" prefHeight="25.0" prefWidth="75.0">
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin></JFXComboBox>
                   <Label fx:id="lblParticipacao" text="Participação da &#10;comunidade" textAlignment="CENTER">
                      <tooltip>
                         <Tooltip text="Há participação da comunidade na notificação de enfermidades?&#10;Há ações de estímulo à notificação de doenças dirigidas pelo SV à comunidade?&#10;Há facilidade para a comunidade ou produtores notificarem suspeitas de enfermidades?&#10;Há participação das revendas veterinárias em orientar produtores a buscarem o serviço &#10;de defesa baseado nas queixas que os mesmos apresentam na loja? Existe orientação para tal junto às revendas?" />
                      </tooltip>
+                     <HBox.margin>
+                        <Insets left="25.0" />
+                     </HBox.margin>
                   </Label>
-                  <JFXComboBox fx:id="cbParticipacao" prefHeight="25.0" prefWidth="85.0" />
+                  <JFXComboBox fx:id="cbParticipacao" prefHeight="25.0" prefWidth="75.0">
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin></JFXComboBox>
                   <Label fx:id="lblFonte" text="Fontes de &#10;informação" textAlignment="CENTER">
                      <tooltip>
                         <Tooltip text="Há cadastro das fontes de informação (MV privados, laboratórios, universidades, clínicas e revendas veterinárias)&#10;Há evidências de participação destes personagens como fonte de informações e notificações de enfermidades?&#10;Há regularidade na busca ativa de informações zoossanitárias junto às fontes?&#10;A Ulsav repassou o Form Notifica para os profissionais e instituições das áreas afins?&#10;Há participação das revendas veterinárias em orientar produtores a buscarem o serviço de defesa baseado nas &#10;queixas que os mesmos apresentam na loja? Existe orientação para tal junto às revendas?" />
                      </tooltip>
+                     <HBox.margin>
+                        <Insets left="25.0" />
+                     </HBox.margin>
                   </Label>
-                  <JFXComboBox fx:id="cbFonte" prefHeight="25.0" prefWidth="60.0" />
+                  <JFXComboBox fx:id="cbFonte" prefHeight="25.0" prefWidth="75.0">
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin></JFXComboBox>
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="60.0" prefWidth="200.0">
@@ -92,17 +116,20 @@
                         <Tooltip text="Está preenchendo os formulários necessários (Informe semanal, FEPI, livro de notificação, Formulários SIZ), &#10;de acordo com cada caso e para todas as investigações de doenças?&#10;O preenchimento está adequado?&#10;Possui calendário anual do Sivcont?&#10;Possui controle de numeração de form in utilizados por município? &#10;Todas as notificações abertas estão encerradas no próprio form in &#10;(suspeita não fundamentada) ou no form com (ao término do acompanhamento e diagnóstico laboratorial)?" />
                      </tooltip>
                   </Label>
-                  <JFXComboBox fx:id="cbRegistro" prefHeight="25.0" prefWidth="121.0">
+                  <JFXComboBox fx:id="cbRegistro" prefHeight="25.0" prefWidth="75.0">
                      <HBox.margin>
-                        <Insets left="5.0" right="10.0" />
+                        <Insets left="5.0" />
                      </HBox.margin>
                   </JFXComboBox>
                   <Label fx:id="lblAvaliacao" text="Avaliação">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
+                     <HBox.margin>
+                        <Insets left="50.0" />
+                     </HBox.margin>
                   </Label>
-                  <JFXComboBox fx:id="cbAvaliacao" prefHeight="25.0" prefWidth="80.0">
+                  <JFXComboBox fx:id="cbAvaliacao" prefHeight="25.0" prefWidth="75.0">
                      <HBox.margin>
                         <Insets left="5.0" />
                      </HBox.margin>
@@ -161,6 +188,12 @@
                      </tabs>
                   </TabPane>
                </children>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
                <children>
