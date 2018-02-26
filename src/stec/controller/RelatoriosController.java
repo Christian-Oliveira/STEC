@@ -45,6 +45,8 @@ public class RelatoriosController implements Initializable {
     private JFXButton btAuditoriaCompilada;
     @FXML
     private JFXButton btAvaliacaoQualidade;
+    @FXML
+    private JFXButton btComentarios;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -103,5 +105,10 @@ public class RelatoriosController implements Initializable {
 
         observableListSupervisoes = FXCollections.observableArrayList(listSupervisoes);
         tabelaSupervisoes.setItems(observableListSupervisoes);
+    }
+    
+    //Função para gerar PDF dos comentarios de cada UR
+    private void handleComentarios (ActionEvent event) {
+        
     }
 }

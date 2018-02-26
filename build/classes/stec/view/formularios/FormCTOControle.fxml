@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="555.0" prefWidth="725.0" styleClass="card" stylesheets="@../../resources/css/style.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stec.controller.FormCTOControleController">
+<AnchorPane id="AnchorPane" prefHeight="550.0" prefWidth="850.0" styleClass="card" stylesheets="@../../resources/css/style.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stec.controller.FormCTOControleController">
    <children>
       <VBox alignment="CENTER" prefHeight="555.0" prefWidth="725.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -24,12 +24,12 @@
                   <Label fx:id="lblBlitzAno" text="Nº de blitz realizadas durante o ano&#10;(até o momento da supervisão)" textAlignment="CENTER" />
                   <JFXTextField fx:id="nBlitzAno" labelFloat="true" prefHeight="25.0" prefWidth="100.0">
                      <HBox.margin>
-                        <Insets left="5.0" />
+                        <Insets left="10.0" />
                      </HBox.margin>
                   </JFXTextField>
                </children>
                <VBox.margin>
-                  <Insets bottom="10.0" top="10.0" />
+                  <Insets />
                </VBox.margin>
             </HBox>
             <Separator prefWidth="200.0" />
@@ -38,15 +38,15 @@
                   <Font name="System Bold" size="12.0" />
                </font>
                <VBox.margin>
-                  <Insets bottom="10.0" top="10.0" />
+                  <Insets top="5.0" />
                </VBox.margin>
             </Label>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
                <children>
                   <Label fx:id="lblQtdBlitzMes" text="Quantidade" />
-                  <JFXTextField fx:id="qtdBlitzMes" prefHeight="25.0" prefWidth="63.0">
+                  <JFXTextField fx:id="qtdBlitzMes" prefHeight="25.0" prefWidth="75.0">
                      <HBox.margin>
-                        <Insets left="5.0" right="20.0" />
+                        <Insets left="5.0" right="100.0" />
                      </HBox.margin>
                   </JFXTextField>
                   <Label fx:id="lblQtdBlitzMesInspecionados" text="Nº de animais &#10;inspecionados" textAlignment="CENTER">
@@ -54,14 +54,14 @@
                         <Insets />
                      </HBox.margin>
                   </Label>
-                  <JFXTextField fx:id="qtdBlitzMesInspecionados" prefHeight="25.0" prefWidth="78.0">
+                  <JFXTextField fx:id="qtdBlitzMesInspecionados" prefHeight="25.0" prefWidth="75.0">
                      <HBox.margin>
                         <Insets left="5.0" />
                      </HBox.margin>
                   </JFXTextField>
                </children>
                <VBox.margin>
-                  <Insets bottom="10.0" />
+                  <Insets />
                </VBox.margin>
             </HBox>
             <Separator prefWidth="200.0" />
@@ -70,38 +70,36 @@
                   <Font name="System Bold" size="12.0" />
                </font>
                <VBox.margin>
-                  <Insets top="10.0" />
+                  <Insets top="5.0" />
                </VBox.margin>
             </Label>
-            <HBox alignment="CENTER" prefHeight="100.0">
+            <HBox alignment="CENTER" prefHeight="50.0">
                <children>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="150.0">
-                     <children>
-                        <Label fx:id="lblQtdBlitzMesAnimais" prefHeight="34.0" prefWidth="69.0" text="Com animais" />
-                        <JFXTextField fx:id="qtdBlitzMesAnimais" labelFloat="true" prefHeight="25.0" prefWidth="100.0" />
-                     </children>
+                  <Label fx:id="lblQtdBlitzMesAnimais" prefHeight="34.0" prefWidth="69.0" text="Com animais" />
+                  <JFXTextField fx:id="qtdBlitzMesAnimais" labelFloat="true" prefHeight="25.0" prefWidth="75.0">
                      <HBox.margin>
-                        <Insets right="50.0" />
+                        <Insets left="5.0" right="100.0" />
                      </HBox.margin>
-                  </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="150.0">
-                     <children>
-                        <Label fx:id="lblQtdBlitzMesProdutos" alignment="CENTER" prefWidth="157.0" text="Com produtos&#10;e subprodutos" textAlignment="CENTER" />
-                        <JFXTextField fx:id="qtdBlitzMesProdutos" labelFloat="true" prefHeight="25.0" prefWidth="157.0" />
-                     </children>
+                  </JFXTextField>
+                  <Label fx:id="lblQtdBlitzMesProdutos" alignment="CENTER" prefHeight="30.0" prefWidth="78.0" text="Com produtos&#10;e subprodutos" textAlignment="CENTER" />
+                  <JFXTextField fx:id="qtdBlitzMesProdutos" labelFloat="true" prefHeight="25.0" prefWidth="75.0">
                      <HBox.margin>
-                        <Insets right="50.0" />
+                        <Insets left="5.0" right="100.0" />
                      </HBox.margin>
-                  </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="180.0">
-                     <children>
-                        <Label fx:id="lblQtdBlitzMesVazio" prefHeight="31.0" prefWidth="180.0" text="Vazios ou com carga que não seja&#10;de interesse da Defesa Animal" textAlignment="CENTER" />
-                        <JFXTextField fx:id="qtdBlitzMesVazio" labelFloat="true" prefHeight="25.0" prefWidth="100.0" />
-                     </children>
-                  </VBox>
+                  </JFXTextField>
+                  <Label fx:id="lblQtdBlitzMesVazio" prefHeight="31.0" prefWidth="180.0" text="Vazios ou com carga que não seja&#10;de interesse da Defesa Animal" textAlignment="CENTER" />
+                  <JFXTextField fx:id="qtdBlitzMesVazio" labelFloat="true" prefHeight="25.0" prefWidth="75.0">
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </JFXTextField>
                </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <Separator prefWidth="200.0" />
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
                <children>
                   <Label fx:id="lblPontosEstrategicos" text="Pontos Estratégicos &#10;para realização de blitz" textAlignment="CENTER">
                      <tooltip>
@@ -110,7 +108,7 @@
                   </Label>
                   <JFXComboBox fx:id="cbPontosEstrategicos" prefHeight="25.0" prefWidth="75.0">
                      <HBox.margin>
-                        <Insets left="5.0" right="10.0" />
+                        <Insets left="5.0" right="30.0" />
                      </HBox.margin>
                   </JFXComboBox>
                   <Label fx:id="lblRealizacaoMensal" text="Realização mensal &#10;de blitz" textAlignment="CENTER">
@@ -120,7 +118,7 @@
                   </Label>
                   <JFXComboBox fx:id="cbRealizacaoMensal" prefHeight="25.0" prefWidth="75.0">
                      <HBox.margin>
-                        <Insets left="5.0" right="10.0" />
+                        <Insets left="5.0" right="30.0" />
                      </HBox.margin>
                   </JFXComboBox>
                   <Label fx:id="lblRegistroBlitz" text="Registro da blitz">
@@ -130,13 +128,9 @@
                   </Label>
                   <JFXComboBox fx:id="cbRegistroBlitz" prefHeight="25.0" prefWidth="75.0">
                      <HBox.margin>
-                        <Insets left="5.0" />
+                        <Insets left="5.0" right="30.0" />
                      </HBox.margin>
                   </JFXComboBox>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-               <children>
                   <Label fx:id="lblApreensoes" text="Apreensões">
                      <tooltip>
                         <Tooltip text="Há evidências de apreensões e ou destruições resultante da fiscalização de trânsito?&#10;Estão devidamente documentadas (Registro de autos de infração e termos de apreensão, &#10;inutilização e aproveitamento condicional oriundos da ação)?" />
@@ -144,9 +138,13 @@
                   </Label>
                   <JFXComboBox fx:id="cbApreensoes" prefHeight="25.0" prefWidth="75.0">
                      <HBox.margin>
-                        <Insets left="5.0" right="10.0" />
+                        <Insets left="5.0" />
                      </HBox.margin>
                   </JFXComboBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
+               <children>
                   <Label fx:id="lblMaterialBlitz" text="Material para realização &#10;de blitz" textAlignment="CENTER">
                      <tooltip>
                         <Tooltip text="Possui o material para realização de blitz: Coletes; Carimbos de identificação do &#10;funcionário, fiscalizado e retorno a origem; Lâmpada negra para verificação de GTA; &#10;Formulários de apreensão, inutilização e aproveitamento condicional de produtos de &#10;origem animal e fiel depositário (RETIRAR); Autos de infração; Mapas de fiscalização de &#10;trânsito; carbono; prancheta; Legislação atualizada;  Desinfetantes necessários para inutilização &#10;de produtos e/ou subprodutos de origem animal apreendidos durante fiscalização?" />
@@ -154,7 +152,7 @@
                   </Label>
                   <JFXComboBox fx:id="cbMaterialBlitz" prefHeight="25.0" prefWidth="75.0">
                      <HBox.margin>
-                        <Insets left="5.0" right="10.0" />
+                        <Insets left="5.0" right="100.0" />
                      </HBox.margin>
                   </JFXComboBox>
                   <Label fx:id="lblRegistro" text="Registro sobre &#10;operações volantes" textAlignment="CENTER">
@@ -164,7 +162,7 @@
                   </Label>
                   <JFXComboBox fx:id="cbRegistro" prefHeight="25.0" prefWidth="75.0">
                      <HBox.margin>
-                        <Insets left="5.0" right="10.0" />
+                        <Insets left="5.0" right="100.0" />
                      </HBox.margin>
                   </JFXComboBox>
                   <Label fx:id="lblAvaliacao" text="Avaliação">
