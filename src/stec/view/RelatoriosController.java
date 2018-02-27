@@ -1,4 +1,4 @@
-package stec.controller;
+package stec.view;
 
 import stec.view.formularios.FormSupervisao.FormSupervisaoController;
 import com.jfoenix.controls.JFXButton;
@@ -18,12 +18,14 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import stec.model.dao.RespostaDAO;
 import stec.model.dao.SupervisaoDAO;
 import stec.model.domain.RelatorioAvaliacaoSupervisao;
 import stec.model.domain.Supervisao;
 import stec.model.domain.Ur;
 import stec.resources.Classes.AlertMaker;
+import stec.view.relatorios.FormAuditoriaCompiladaController;
 
 public class RelatoriosController implements Initializable {
     
@@ -45,8 +47,6 @@ public class RelatoriosController implements Initializable {
     private JFXButton btAuditoriaCompilada;
     @FXML
     private JFXButton btAvaliacaoQualidade;
-    @FXML
-    private JFXButton btComentarios;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -57,13 +57,13 @@ public class RelatoriosController implements Initializable {
     private void handleAuditoriaCompilada(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader();
 
-        loader.setLocation(FormSupervisaoController.class.getResource("/stec/view/relatorios/FormAuditoriaCompilada.fxml"));
+        loader.setLocation(FormAuditoriaCompiladaController.class.getResource("/stec/view/relatorios/FormAuditoriaCompilada.fxml"));
         AnchorPane pane = (AnchorPane) loader.load();
 
         Stage stage = new Stage();
         stage.setTitle("Relatórios Compilados");
+        stage.initStyle(StageStyle.UTILITY);
         Scene scene = new Scene(pane);
-        stage.setResizable(false);
         stage.setScene(scene);
 
         stage.show();
@@ -105,10 +105,5 @@ public class RelatoriosController implements Initializable {
 
         observableListSupervisoes = FXCollections.observableArrayList(listSupervisoes);
         tabelaSupervisoes.setItems(observableListSupervisoes);
-    }
-    
-    //Função para gerar PDF dos comentarios de cada UR
-    private void handleComentarios (ActionEvent event) {
-        
     }
 }
