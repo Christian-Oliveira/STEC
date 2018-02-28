@@ -18,8 +18,6 @@ import stec.model.dao.UlsavDAO;
 import stec.model.dao.UrDAO;
 import stec.model.domain.Eac;
 import stec.model.domain.RelatorioAuditoriaCompilada;
-import stec.model.domain.RelatorioAvaliacaoSupervisao;
-import stec.model.domain.RelatorioCompiladoSupervisao;
 import stec.model.domain.Supervisao;
 import stec.model.domain.Ulsav;
 import stec.model.domain.Ur;
@@ -67,19 +65,18 @@ public class FormAuditoriaCompiladaController implements Initializable {
                 && cbEscritorio.getSelectionModel().getSelectedItem() == null
                 && cbMunicipio.getSelectionModel().getSelectedItem() == null) {
             AlertMaker.showSimpleAlert("Relatório compilado", "Será gerado o relatório compilado do ESTADO, conténdo todas as Superviões");
-            
+
             //para cada supervisao que foi importada
             for (Supervisao supervisao : supervisaoDAO.listarImportadas()) {
-                   
                 //armazena as respostas da supervisao
                 /*supervisao.setHashRespostas(respostaDAO.listarRespostasDaSupervisaoImportada(supervisao));*/
                 
                 //adiciona a supervisao e suas respostas no list de supervisoes
                 /*relatorio.getListSupervisao().add(supervisao);*/
-                
+            
                 relatorio.setSupervisao(supervisao);
 
-                RespostaDAO respostaDAO = new RespostaDAO();
+                RespostaDAO respostaDAO = new RespostaDAO(); 
                 relatorio.setHashRespostas(respostaDAO.listarRespostasDaSupervisaoImportada(supervisao));
 
                 //Nome do pdf da supervisao

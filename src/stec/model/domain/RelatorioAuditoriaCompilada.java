@@ -9,7 +9,6 @@ import java.util.HashMap;
 import com.google.gson.Gson;
 import com.itextpdf.text.Anchor;
 import com.itextpdf.text.Chapter;
-import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
@@ -18,12 +17,7 @@ import com.itextpdf.text.Font.FontFamily;
 import com.itextpdf.text.List;
 import com.itextpdf.text.ListItem;
 import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.Phrase;
-import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.Section;
-import com.itextpdf.text.TabSettings;
-import com.itextpdf.text.pdf.PdfPCell;
-import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.pdf.draw.DottedLineSeparator;
 
@@ -75,10 +69,8 @@ import stec.controller.FormPNSCOVigilanciaController;
 import stec.controller.FormPNSEControlesController;
 import stec.controller.FormPNSEVigilanciaController;
 import stec.controller.FormPNSSCadastroEstabelecimentosController;
-import stec.controller.FormRFEquipamentosController;
-import stec.controller.FormRFTransportesController;
-import stec.controller.FormRHCapacitacaoController;
 import stec.controller.FormVulnerabilidadesPotencialidadesController;
+import stec.model.dao.SupervisaoDAO;
 
 public class RelatorioAuditoriaCompilada {
 
@@ -88,6 +80,7 @@ public class RelatorioAuditoriaCompilada {
     private static Font smallBold = new Font(Font.FontFamily.HELVETICA, 10, Font.BOLD);// negrito texto normal
     private static Font subFont = new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD);// sub capitulos capitulo
     private Supervisao supervisao = new Supervisao();
+    private SupervisaoDAO supervisaoDAO = new SupervisaoDAO();
     private HashMap<String, Resposta> hashRespostas = new HashMap<>();
 
     public void setSupervisao(Supervisao supervisao) {
@@ -114,7 +107,7 @@ public class RelatorioAuditoriaCompilada {
 
             this.Capa(document, supervisao);
             this.IdentificacaoEscritorio(document, supervisao, hashRespostas);
-            this.RecursosHumanos(document, hashRespostas);
+            /*this.RecursosHumanos(document, hashRespostas);
             this.RecursosFisicos(document, supervisao, hashRespostas);
             this.RecursosFinanceiros(document, hashRespostas);
             this.EstruturaOrganizacional(document, hashRespostas);
@@ -157,7 +150,7 @@ public class RelatorioAuditoriaCompilada {
             this.AcessoMercados(document, hashRespostas);
             this.VulnerabilidadesPotencialidades(document, hashRespostas);
             this.Assinaturas(document, supervisao, hashRespostas);
-            
+            */
             document.close();
         } catch (Exception e) {
             // TODO Auto-generated catch block
@@ -181,7 +174,7 @@ public class RelatorioAuditoriaCompilada {
 
         addEmptyLine(capa, 15);
 
-        Paragraph titulo = new Paragraph("Relatório dos Comentarios, Recomendações ULSAV/EAC\n" 
+        Paragraph titulo = new Paragraph("Relatório dos Comentarios, Recomendações ULSAV/EAC\n"
                 + "Prazo para Ajuste e Recomendações UR e UC", catFont);
         titulo.setAlignment(Element.ALIGN_CENTER);
         capa.add(titulo);
@@ -199,34 +192,43 @@ public class RelatorioAuditoriaCompilada {
         // Start a new page
         document.newPage();
     }
-
+//Identificação Escritorio-----------------------------------------------------------------------------------------
     public void IdentificacaoEscritorio(Document document, Supervisao supervisao, HashMap<String, Resposta> resposta) throws DocumentException {
         Paragraph identificacaoEscritorio = new Paragraph();
 
-        Anchor titulo = new Anchor("Identificação de Escritório", chaFont);
+        Anchor titulo = new Anchor("Formulário - Identificação de Escritório", chaFont);
         titulo.setName("Identificação de Escritório");
         identificacaoEscritorio.add(titulo);
-
         addEmptyLine(identificacaoEscritorio, 1);
 
         Gson gson = new Gson();
-
         FormIdentificacaoEscritorioController.FormIdentificacaoEscritorio formulario = gson.fromJson(resposta.get("identificacao_escritorio").getResposta(),
                 FormIdentificacaoEscritorioController.FormIdentificacaoEscritorio.class);
-
-        Paragraph comentariosRecomendacoes = new Paragraph("Comentários: \n" + formulario.getComentario()
-                + "\nRecomendações ULSAV / EAC: \n" + formulario.getRecomendacaoUlsavEac() + "\nPrazos para ajuste: \n"
-                + formulario.getPrazo() + "\nRecomendações UR: \n" + formulario.getRecomendacaoUr()
-                + "\nRecomendações UC: \n" + formulario.getRecomendacaoUC(), f);
-        comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
-        identificacaoEscritorio.add(comentariosRecomendacoes);
-
+        
+        Paragraph comentarios = new Paragraph("Comentários", subFont);
+        identificacaoEscritorio.add(comentarios);
+        addEmptyLine(identificacaoEscritorio, 1);
         document.add(identificacaoEscritorio);
-
-        document.newPage();
+        
+        Paragraph resp = new Paragraph();
+        for (int i=0; i<2; i++){
+            //Adiciona o nome do municipio auditado
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nComentários: \n" + formulario.getComentario()
+                    + "\n------------------------------------------------------------------------------\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
     }
+//Fim
 
-    public void RecursosHumanos(Document document, HashMap<String, Resposta> resposta) throws DocumentException {
+    /*public void RecursosHumanos(Document document, HashMap<String, Resposta> resposta) throws DocumentException {
         Anchor anchor = new Anchor("Recursos Humanos", chaFont);
         anchor.setName("Recursos Humanos");
 
@@ -234,7 +236,7 @@ public class RelatorioAuditoriaCompilada {
         Chapter catPart = new Chapter(new Paragraph(anchor), 1);
 
         Gson gson = new Gson();
-        
+
 //RH Quantitativo----------------------------------------------------------------------------------------
         FormRHQuantitativo formulario = gson.fromJson(resposta.get("rh_quantitativo").getResposta(),
                 FormRHQuantitativo.class);
@@ -248,16 +250,22 @@ public class RelatorioAuditoriaCompilada {
         Paragraph paragraph = new Paragraph();
         addEmptyLine(paragraph, 1);
 
-        Paragraph comentariosRecomendacoes = new Paragraph("Comentários: \n" + formulario.getComentario()
-                + "\nRecomendações ULSAV / EAC: \n" + formulario.getRecomendacaoUlsavEac() + "\nPrazos para ajuste: \n"
-                + formulario.getPrazo() + "\nRecomendações UR: \n" + formulario.getRecomendacaoUr()
+        Paragraph comentariosRecomendacoes = new Paragraph(
+                "Comentários: \n" + formulario.getComentario()
+                + "------------------------------------------------------------------------------\n"
+                + "\nRecomendações ULSAV / EAC: \n" + formulario.getRecomendacaoUlsavEac()
+                + "------------------------------------------------------------------------------\n"
+                + "\nPrazos para ajuste: \n" + formulario.getPrazo()
+                + "------------------------------------------------------------------------------\n"
+                + "\nRecomendações UR: \n" + formulario.getRecomendacaoUr()
+                + "------------------------------------------------------------------------------\n"
                 + "\nRecomendações UC: \n" + formulario.getRecomendacaoUC(), f);
         comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
         subCatPart.add(comentariosRecomendacoes);
 //fim
         // ------------------------
         subCatPart.add(paragraph);// adiciona linha vazia ao paragrafo da secao
-        
+
         //RH Estabilidade----------------------------------------------------------------------------
         FormRHEstabilidade formulario2 = gson.fromJson(resposta.get("rh_estabilidade").getResposta(),
                 FormRHEstabilidade.class);
@@ -267,39 +275,51 @@ public class RelatorioAuditoriaCompilada {
 
         subCatPart.add(paragraph);// adiciona linha vazia ao paragrafo da secao
 
-        comentariosRecomendacoes = new Paragraph("Comentários: \n" + formulario2.getComentario()
-                + "\nRecomendações ULSAV / EAC: \n" + formulario2.getRecomendacaoUlsavEac() + "\nPrazos para ajuste: \n"
-                + formulario2.getPrazo() + "\nRecomendações UR: \n" + formulario2.getRecomendacaoUr()
+        comentariosRecomendacoes = new Paragraph(
+                "Comentários: \n" + formulario2.getComentario()
+                + "------------------------------------------------------------------------------\n"
+                + "\nRecomendações ULSAV / EAC: \n" + formulario2.getRecomendacaoUlsavEac()
+                + "------------------------------------------------------------------------------\n"
+                + "\nPrazos para ajuste: \n" + formulario2.getPrazo()
+                + "------------------------------------------------------------------------------\n"
+                + "\nRecomendações UR: \n" + formulario2.getRecomendacaoUr()
+                + "------------------------------------------------------------------------------\n"
                 + "\nRecomendações UC: \n" + formulario2.getRecomendacaoUC(), f);
         comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
         subCatPart.add(comentariosRecomendacoes);
 //fim
         // -------------------
         subCatPart.add(paragraph);// adiciona linha vazia ao paragrafo da secao
-        
+
 //RH Capacitação--------------------------------------------------------------------------------------
         FormRHCapacitacao formulario3 = gson.fromJson(resposta.get("rh_capacitacao").getResposta(),
                 FormRHCapacitacao.class);
-        
+
         subCatPart = catPart
                 .addSection(new Paragraph("Capacitação técnica e formação continuada", subFont));
 
         subCatPart.add(paragraph);// adiciona linha vazia ao paragrafo da secao
 
-        comentariosRecomendacoes = new Paragraph("Comentários: \n" + formulario3.getComentario()
-                + "\nRecomendações ULSAV / EAC: \n" + formulario3.getRecomendacaoUlsavEac() + "\nPrazos para ajuste: \n"
-                + formulario3.getPrazo() + "\nRecomendações UR: \n" + formulario3.getRecomendacaoUr()
+        comentariosRecomendacoes = new Paragraph(
+                "Comentários: \n" + formulario3.getComentario()
+                + "------------------------------------------------------------------------------\n"
+                + "\nRecomendações ULSAV / EAC: \n" + formulario3.getRecomendacaoUlsavEac()
+                + "------------------------------------------------------------------------------\n"
+                + "\nPrazos para ajuste: \n" + formulario3.getPrazo()
+                + "------------------------------------------------------------------------------\n"
+                + "\nRecomendações UR: \n" + formulario3.getRecomendacaoUr()
+                + "------------------------------------------------------------------------------\n"
                 + "\nRecomendações UC: \n" + formulario3.getRecomendacaoUC(), f);
         comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
         subCatPart.add(comentariosRecomendacoes);
 //fim
         // -------------------------------------
         subCatPart.add(paragraph);// adiciona linha vazia ao paragrafo da secao
-        
+
 //RH Competências-------------------------------------------------------------------------------------
         FormRHCompetencias formulario4 = gson.fromJson(resposta.get("rh_competencias").getResposta(),
                 FormRHCompetencias.class);
-        
+
         subCatPart = catPart
                 .addSection(new Paragraph("Competências e independência técnica", subFont));
 
@@ -317,6 +337,7 @@ public class RelatorioAuditoriaCompilada {
         document.newPage();// adiciona uma nova página
     }
 //fim
+
     public void RecursosFisicos(Document document, Supervisao supervisao, HashMap<String, Resposta> resposta) throws DocumentException {
         Anchor anchor = new Anchor("Recursos Físicos", chaFont);
         anchor.setName("Recursos Físicos");
@@ -327,7 +348,7 @@ public class RelatorioAuditoriaCompilada {
 //RF Instalações------------------------------------------------------------------------------------
         FormRFInstalacoes formulario = gson.fromJson(resposta.get("rf_instalacoes").getResposta(),
                 FormRFInstalacoes.class);
-        Paragraph subPara = new Paragraph("Instalações",subFont);
+        Paragraph subPara = new Paragraph("Instalações", subFont);
 
         Section subCatPart = catPart.addSection(subPara);// adiciona o sub titulo da secao do capitulo
 
@@ -351,7 +372,7 @@ public class RelatorioAuditoriaCompilada {
         subPara = new Paragraph("Transportes", subFont);
 
         subCatPart = catPart.addSection(subPara);// adiciona o sub titulo da secao do capitulo
-        
+
         subCatPart.add(paragraph);// adiciona linha vazia ao paragrafo da secao
 
         comentariosRecomendacoes = new Paragraph("Comentários: \n" + formulario2.getComentario()
@@ -404,6 +425,7 @@ public class RelatorioAuditoriaCompilada {
         document.newPage();
     }
 //Fim
+
     public void RecursosFinanceiros(Document document, HashMap<String, Resposta> resposta) throws DocumentException {
         Anchor anchor = new Anchor("Recursos Financeiros", chaFont);
         anchor.setName("Recursos Financeiros");
@@ -452,6 +474,8 @@ public class RelatorioAuditoriaCompilada {
         document.newPage();
     }
 //Fim
+//EO Estrutura--------------------------------------------------------------------------------------------
+
     public void EstruturaOrganizacional(Document document, HashMap<String, Resposta> resposta)
             throws DocumentException {
         Anchor anchor = new Anchor("Estrutura Organizacional", chaFont);
@@ -460,7 +484,6 @@ public class RelatorioAuditoriaCompilada {
         Chapter catPart = new Chapter(new Paragraph(anchor), 4);// onde e descrito qual o numero do capitulo
 
         Gson gson = new Gson();
-//EO Estrutura--------------------------------------------------------------------------------------
         FormEOEstrutura formulario = gson.fromJson(resposta.get("eo_estrutura").getResposta(), FormEOEstrutura.class);
         Paragraph subPara = new Paragraph("Estrutura organizacional e capacidade de coordenação interna", subFont);
 
@@ -482,6 +505,7 @@ public class RelatorioAuditoriaCompilada {
         document.newPage();
     }
 //Fim
+
     public void AutoridadeGestao(Document document, HashMap<String, Resposta> resposta) throws DocumentException {
         Anchor anchor = new Anchor("Autoridade e Gestão de Qualidade", chaFont);
         anchor.setName("Autoridade e Gestão de Qualidade");
@@ -510,7 +534,7 @@ public class RelatorioAuditoriaCompilada {
         subCatPart.add(paragraph);// adiciona linha vazia ao paragrafo da secao
 //Fim
 //AG Organização-------------------------------------------------------------------------------------
-        FormAGOrganizacao formulario2 = gson.fromJson(resposta.get("ag_organizacao").getResposta(),FormAGOrganizacao.class);
+        FormAGOrganizacao formulario2 = gson.fromJson(resposta.get("ag_organizacao").getResposta(), FormAGOrganizacao.class);
         subPara = new Paragraph("Organização dos processos e unidades", subFont);
 
         subCatPart = catPart.addSection(subPara);// adiciona o sub titulo da secao do capitulo
@@ -548,6 +572,7 @@ public class RelatorioAuditoriaCompilada {
         document.newPage();
     }
 //Fim
+
     public void CapacidadeTecnicaOperacional(Document document, HashMap<String, Resposta> resposta)
             throws DocumentException {
         Anchor anchor = new Anchor("Capacidade Técnica e Operacional", chaFont);
@@ -715,6 +740,7 @@ public class RelatorioAuditoriaCompilada {
         document.newPage();
     }
 //Fim
+
     public void PNEFA(Document document, HashMap<String, Resposta> resposta) throws DocumentException {
         Anchor anchor = new Anchor("Programa Nacional de Erradicação e Prevenção da Febre Aftosa - Maranhão (PNEFA/MA)",
                 chaFont);
@@ -764,6 +790,7 @@ public class RelatorioAuditoriaCompilada {
         document.newPage();
     }
 //Fim
+
     public void PNCEBT(Document document, HashMap<String, Resposta> resposta) throws DocumentException {
         Anchor anchor = new Anchor(
                 "Programa Nacional de Controle e Erradicação da Brucelose e Tuberculose - Maranhão (PNCEBT/MA)",
@@ -832,6 +859,7 @@ public class RelatorioAuditoriaCompilada {
         document.newPage();
     }
 //Fim
+
     public void PNCRH(Document document, HashMap<String, Resposta> resposta) throws DocumentException {
         Anchor anchor = new Anchor("Programa Nacional de Controle da Raiva dos Herbívoros - Maranhão (PNCRH/MA)",
                 chaFont);
@@ -881,6 +909,7 @@ public class RelatorioAuditoriaCompilada {
         document.newPage();
     }
 //Fim
+
     public void PNEEB(Document document, HashMap<String, Resposta> resposta) throws DocumentException {
         Anchor anchor = new Anchor(
                 "Programa Nacional de Prevenção e Vigilância da Encefalite Espongiforme Bovina - Maranhão (PNEEB/MA)",
@@ -914,6 +943,7 @@ public class RelatorioAuditoriaCompilada {
         document.newPage();
     }
 //Fim
+
     public void PNSE(Document document, HashMap<String, Resposta> resposta) throws DocumentException {
         Anchor anchor = new Anchor("Programa Nacional de Sanidade Equídea - Maranhão (PNSE/MA)", chaFont);
         anchor.setName("Programa Nacional de Sanidade Equídea - Maranhão (PNSE/MA)");
@@ -980,6 +1010,7 @@ public class RelatorioAuditoriaCompilada {
         document.newPage();
     }
 //Fim
+
     public void PNSCO(Document document, HashMap<String, Resposta> resposta) throws DocumentException {
         Anchor anchor = new Anchor("Programa Nacional de Sanidade de Caprinos e Ovinos - Maranhão (PNSCO/MA)", chaFont);
         anchor.setName("Programa Nacional de Sanidade de Caprinos e Ovinos - Maranhão (PNSCO/MA)");
@@ -1028,6 +1059,7 @@ public class RelatorioAuditoriaCompilada {
         document.newPage();
     }
 //Fim
+
     public void PNSS(Document document, HashMap<String, Resposta> resposta) throws DocumentException {
         Anchor anchor = new Anchor("Programa Nacional de Sanidade de Suídeos - Maranhão (PNSS/MA)", chaFont);
         anchor.setName("Programa Nacional de Sanidade de Suídeos - Maranhão (PNSS/MA)");
@@ -1063,7 +1095,7 @@ public class RelatorioAuditoriaCompilada {
 
         subCatPart = catPart.addSection(subPara);// adiciona o sub titulo da secao do capitulo
         subCatPart.add(paragraph);// adiciona linha vazia ao paragrafo da secao
-        
+
         subCatPart.add(new Paragraph("Registro da vigilância em propriedades e pontos de risco: "
                 + formulario2.getRegistroVigilancia() + "\nMortandade: " + formulario2.getMortandade(), f));
 
@@ -1081,6 +1113,7 @@ public class RelatorioAuditoriaCompilada {
         document.newPage();
     }
 //Fim
+
     public void PNSA(Document document, HashMap<String, Resposta> resposta) throws DocumentException {
         Anchor anchor = new Anchor("Programa Nacional de Sanidade Avícola - Maranhão (PNSA/MA)", chaFont);
         anchor.setName("Programa Nacional de Sanidade Avícola - Maranhão (PNSA/MA)");
@@ -1116,7 +1149,7 @@ public class RelatorioAuditoriaCompilada {
 
         subCatPart = catPart.addSection(subPara);// adiciona o sub titulo da secao do capitulo
         subCatPart.add(paragraph);// adiciona linha vazia ao paragrafo da secao
-        
+
         subCatPart.add(new Paragraph("Mortandade: " + formulario2.getMortandade()
                 + "\nDoenças de notificação obrigatória: " + formulario2.getDoencaNotificacao(), f));
         comentariosRecomendacoes = new Paragraph("Comentários: \n" + formulario2.getComentario()
@@ -1131,6 +1164,7 @@ public class RelatorioAuditoriaCompilada {
         document.newPage();
     }
 //Fim
+
     public void InteracaoPartes(Document document, HashMap<String, Resposta> resposta) throws DocumentException {
         Anchor anchor = new Anchor("Interação com as partes interessadas", chaFont);
         anchor.setName("Interação com as partes interessadas");
@@ -1216,16 +1250,9 @@ public class RelatorioAuditoriaCompilada {
 //IP Instituição Inspeção-----------------------------------------------------------------------------------------
         FormIISistemaInspecao formulario5 = gson.fromJson(resposta.get("interacao_instituicao_inspecao").getResposta(),
                 FormIISistemaInspecao.class);
-        subPara = new Paragraph(
-                "Sistema de inspeção (seguridade alimentar)    " + "Avaliação: " + formulario5.getAvaliacao(),
-                subFont);
+        subPara = new Paragraph("Sistema de inspeção (seguridade alimentar)", subFont);
 
         subCatPart = catPart.addSection(subPara);// adiciona o sub titulo da secao do capitulo
-
-        subCatPart.add(paragraph);// adiciona linha vazia ao paragrafo da secao
-
-        subCatPart.add(new Paragraph("Interação com sistema de inspeção: " + formulario5.getInteracaoInspecao(), f));
-
         subCatPart.add(paragraph);// adiciona linha vazia ao paragrafo da secao
 
         comentariosRecomendacoes = new Paragraph("Comentários: \n" + formulario5.getComentario()
@@ -1237,17 +1264,12 @@ public class RelatorioAuditoriaCompilada {
 
         // ------------------------------------------------------
         subCatPart.add(paragraph);// adiciona linha vazia ao paragrafo da secao
-
+//Fim
+//IP Instituição SUS----------------------------------------------------------------------------------------------
         FormIISUS formulario6 = gson.fromJson(resposta.get("interacao_instituicao_sus").getResposta(), FormIISUS.class);
-        subPara = new Paragraph("Sistema Único de Saúde (zoonoses, vigilância sanitária, etc.)    " + "Avaliação: "
-                + formulario6.getAvaliacao(), subFont);
+        subPara = new Paragraph("Sistema Único de Saúde (zoonoses, vigilância sanitária, etc.)", subFont);
 
         subCatPart = catPart.addSection(subPara);// adiciona o sub titulo da secao do capitulo
-
-        subCatPart.add(paragraph);// adiciona linha vazia ao paragrafo da secao
-
-        subCatPart.add(new Paragraph("Interação com sistema único de saúde: " + formulario6.getInteracaoSUS(), f));
-
         subCatPart.add(paragraph);// adiciona linha vazia ao paragrafo da secao
 
         comentariosRecomendacoes = new Paragraph("Comentários: \n" + formulario6.getComentario()
@@ -1261,6 +1283,7 @@ public class RelatorioAuditoriaCompilada {
 
         document.newPage();
     }
+//Fim
 
     public void AcessoMercados(Document document, HashMap<String, Resposta> resposta) throws DocumentException {
         Anchor anchor = new Anchor("Acesso aos mercados", chaFont);
@@ -1269,18 +1292,14 @@ public class RelatorioAuditoriaCompilada {
         Chapter catPart = new Chapter(new Paragraph(anchor), 13);// onde e descrito qual o numero do capitulo
 
         Gson gson = new Gson();
+//Acesso aos Mercados----------------------------------------------------------------------------------------
         FormAMAcesso formulario = gson.fromJson(resposta.get("acesso_mercado").getResposta(), FormAMAcesso.class);
-        Paragraph subPara = new Paragraph("Acesso aos mercados    " + "Avaliação: " + formulario.getAvaliacao(),
-                subFont);
+        Paragraph subPara = new Paragraph("Acesso aos mercados", subFont);
 
         Section subCatPart = catPart.addSection(subPara);// adiciona o sub titulo da secao do capitulo
 
         Paragraph paragraph = new Paragraph();
         addEmptyLine(paragraph, 1);
-        subCatPart.add(paragraph);// adiciona linha vazia ao paragrafo da secao
-
-        subCatPart.add(new Paragraph("Acesso aos mercados: " + formulario.getAcesso(), f));
-
         subCatPart.add(paragraph);// adiciona linha vazia ao paragrafo da secao
 
         Paragraph comentariosRecomendacoes = new Paragraph("Comentários: \n" + formulario.getComentario()
@@ -1294,6 +1313,7 @@ public class RelatorioAuditoriaCompilada {
 
         document.newPage();
     }
+//Fim
 
     public void VulnerabilidadesPotencialidades(Document document, HashMap<String, Resposta> resposta)
             throws DocumentException {
@@ -1306,7 +1326,7 @@ public class RelatorioAuditoriaCompilada {
         addEmptyLine(identificacaoEscritorio, 1);
 
         Gson gson = new Gson();
-
+//VP Vulnerabilidade----------------------------------------------------------------------------------------
         FormVulnerabilidadesPotencialidadesController.FormVulnerabilidadesPotencialidades formulario = gson.fromJson(
                 resposta.get("vulnerabilidade_potencialidade").getResposta(),
                 FormVulnerabilidadesPotencialidadesController.FormVulnerabilidadesPotencialidades.class);
@@ -1319,7 +1339,8 @@ public class RelatorioAuditoriaCompilada {
         identificacaoEscritorio.add(vulnerabilidades);
 
         addEmptyLine(identificacaoEscritorio, 1);
-
+//Fim
+//VP Potencialidade-----------------------------------------------------------------------------------------
         Paragraph potencialidades = new Paragraph(
                 "Potencialidades que o escritório apresenta na execução das ações de defesa animal: \n"
                 + formulario.getPotencialidades(),
@@ -1331,7 +1352,8 @@ public class RelatorioAuditoriaCompilada {
 
         document.newPage();
     }
-
+//Fim
+    */
     public void Assinaturas(Document document, Supervisao supervisao, HashMap<String, Resposta> resposta)
             throws DocumentException {
         Paragraph paragraph = new Paragraph();
