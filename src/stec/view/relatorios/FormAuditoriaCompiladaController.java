@@ -17,7 +17,7 @@ import stec.model.dao.SupervisaoDAO;
 import stec.model.dao.UlsavDAO;
 import stec.model.dao.UrDAO;
 import stec.model.domain.Eac;
-import stec.model.domain.RelatorioAuditoriaCompilada;
+import stec.model.domain.RelatorioCompiladoSupervisao;
 import stec.model.domain.Supervisao;
 import stec.model.domain.Ulsav;
 import stec.model.domain.Ur;
@@ -58,38 +58,25 @@ public class FormAuditoriaCompiladaController implements Initializable {
     @FXML
     private void handleGerarRelatorio(ActionEvent event) {
         
-        RelatorioAuditoriaCompilada relatorio = new RelatorioAuditoriaCompilada();
+        RelatorioCompiladoSupervisao relatorio = new RelatorioCompiladoSupervisao();
         
         //Estado
         if (cbUR.getSelectionModel().getSelectedItem() == null 
                 && cbEscritorio.getSelectionModel().getSelectedItem() == null
                 && cbMunicipio.getSelectionModel().getSelectedItem() == null) {
-            AlertMaker.showSimpleAlert("Relatório compilado", "Será gerado o relatório compilado do ESTADO, conténdo todas as Superviões");
-
+            //AlertMaker.showSimpleAlert("Relatório compilado", "Será gerado o relatório compilado do ESTADO, conténdo todas as Superviões");
+            
             //para cada supervisao que foi importada
             for (Supervisao supervisao : supervisaoDAO.listarImportadas()) {
                 //armazena as respostas da supervisao
-                /*supervisao.setHashRespostas(respostaDAO.listarRespostasDaSupervisaoImportada(supervisao));*/
+                supervisao.setHashRespostas(respostaDAO.listarRespostasDaSupervisaoImportada(supervisao));
                 
                 //adiciona a supervisao e suas respostas no list de supervisoes
-                /*relatorio.getListSupervisao().add(supervisao);*/
+                relatorio.getListSupervisao().add(supervisao);
             
-                relatorio.setSupervisao(supervisao);
-
-                RespostaDAO respostaDAO = new RespostaDAO(); 
-                relatorio.setHashRespostas(respostaDAO.listarRespostasDaSupervisaoImportada(supervisao));
-
-                //Nome do pdf da supervisao
-                String nome = ("Comentarios e Recomendações");
-                String data[] = supervisao.getCreated().split(" ");//pega apenas a data
-
-                String file = nome +"-"+ data[0];
-
-                relatorio.show(file);
             }
-            
             //funcao para criar o relatorio compilado. passando o nome do relatorio
-            /*relatorio.showRelatorioEstado("Relatório compilado das supervisões do ESTADO");*/       
+            relatorio.showRelatorioEstado("Relatório compilado das supervisões do ESTADO");       
         } else if (cbUR.getSelectionModel().getSelectedItem() != null //Unidade Regional
                 && cbEscritorio.getSelectionModel().getSelectedItem() == null
                 && cbMunicipio.getSelectionModel().getSelectedItem() == null) {

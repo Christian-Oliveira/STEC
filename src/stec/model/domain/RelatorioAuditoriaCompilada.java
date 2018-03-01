@@ -5,6 +5,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.google.gson.Gson;
 import com.itextpdf.text.Anchor;
@@ -14,7 +16,7 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.Font.FontFamily;
-import com.itextpdf.text.List;
+//import com.itextpdf.text.List;
 import com.itextpdf.text.ListItem;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Section;
@@ -70,6 +72,7 @@ import stec.controller.FormPNSEControlesController;
 import stec.controller.FormPNSEVigilanciaController;
 import stec.controller.FormPNSSCadastroEstabelecimentosController;
 import stec.controller.FormVulnerabilidadesPotencialidadesController;
+import stec.model.dao.RespostaDAO;
 import stec.model.dao.SupervisaoDAO;
 
 public class RelatorioAuditoriaCompilada {
@@ -82,6 +85,7 @@ public class RelatorioAuditoriaCompilada {
     private Supervisao supervisao = new Supervisao();
     private SupervisaoDAO supervisaoDAO = new SupervisaoDAO();
     private HashMap<String, Resposta> hashRespostas = new HashMap<>();
+    private List<Supervisao> listSupervisao = new ArrayList<>();
 
     public void setSupervisao(Supervisao supervisao) {
         this.supervisao = supervisao;
@@ -98,15 +102,21 @@ public class RelatorioAuditoriaCompilada {
     public HashMap<String, Resposta> getHashRespostas() {
         return this.hashRespostas;
     }
+    public List<Supervisao> getListSupervisao() {
+        return listSupervisao;
+    }
+    public void setListSupervisao(List<Supervisao> listSupervisao) {
+        this.listSupervisao = listSupervisao;
+    }
 
     public void show(String file) {
         try {
             Document document = new Document();
-            PdfWriter.getInstance(document, new FileOutputStream("c:/Projetos/STECv2.0/Relatórios PDF/" + file + ".pdf"));
+            PdfWriter.getInstance(document, new FileOutputStream("Relatórios PDF/" + file + ".pdf"));
             document.open();
 
-            this.Capa(document, supervisao);
-            this.IdentificacaoEscritorio(document, supervisao, hashRespostas);
+            this.Capa(document);
+            this.IdentificacaoEscritorio(document, listSupervisao, hashRespostas);
             /*this.RecursosHumanos(document, hashRespostas);
             this.RecursosFisicos(document, supervisao, hashRespostas);
             this.RecursosFinanceiros(document, hashRespostas);
@@ -161,7 +171,7 @@ public class RelatorioAuditoriaCompilada {
     /*
     * Adiciona a capa com o titulo ao documento OK
      */
-    public void Capa(Document document, Supervisao supervisao) throws DocumentException {
+    public void Capa(Document document) throws DocumentException {
         Paragraph capa = new Paragraph();
 
         Paragraph cabecalho = new Paragraph(
@@ -193,25 +203,27 @@ public class RelatorioAuditoriaCompilada {
         document.newPage();
     }
 //Identificação Escritorio-----------------------------------------------------------------------------------------
-    public void IdentificacaoEscritorio(Document document, Supervisao supervisao, HashMap<String, Resposta> resposta) throws DocumentException {
+    public void IdentificacaoEscritorio(Document document, List<Supervisao> list, HashMap<String, Resposta> resposta) throws DocumentException {
+        //colocar titulo principal
         Paragraph identificacaoEscritorio = new Paragraph();
-
         Anchor titulo = new Anchor("Formulário - Identificação de Escritório", chaFont);
         titulo.setName("Identificação de Escritório");
         identificacaoEscritorio.add(titulo);
         addEmptyLine(identificacaoEscritorio, 1);
-
+        document.add(identificacaoEscritorio);
         Gson gson = new Gson();
         FormIdentificacaoEscritorioController.FormIdentificacaoEscritorio formulario = gson.fromJson(resposta.get("identificacao_escritorio").getResposta(),
                 FormIdentificacaoEscritorioController.FormIdentificacaoEscritorio.class);
         
-        Paragraph comentarios = new Paragraph("Comentários", subFont);
-        identificacaoEscritorio.add(comentarios);
-        addEmptyLine(identificacaoEscritorio, 1);
-        document.add(identificacaoEscritorio);
+        //Colocar o subtitulo
+        Paragraph comentarios = new Paragraph("", subFont);
+        comentarios.add("Comentarios");
+        document.add(comentarios);
+        comentarios.clear();
         
+        //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
         Paragraph resp = new Paragraph();
-        for (int i=0; i<2; i++){
+        for (Supervisao supervisao : list){
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -220,11 +232,101 @@ public class RelatorioAuditoriaCompilada {
             //adiciona a resposta dos comentarios do municipio auditado
             Paragraph comentariosRecomendacoes = new Paragraph(
                     "\nComentários: \n" + formulario.getComentario()
-                    + "\n------------------------------------------------------------------------------\n\n", f);
+                    + "\n___________________________________________________________________________________\n\n", f);
             comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
             resp.add(comentariosRecomendacoes);
         }
         document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subtitulo
+        comentarios.add("Recomendações ULSAV / EAC");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            //Adiciona o nome do municipio auditado
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações ULSAV / EAC: \n" + formulario.getRecomendacaoUlsavEac()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subtitulo
+        comentarios.add("Prazos para ajuste");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nPrazos para ajuste: \n" + formulario.getPrazo()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subTitulo
+        comentarios.add("Recomendações UR");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações UR: \n" + formulario.getRecomendacaoUr()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subtitulo
+        comentarios.add("Recomendações UC");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações UC: \n" + formulario.getRecomendacaoUC()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
     }
 //Fim
 
@@ -1354,7 +1456,7 @@ public class RelatorioAuditoriaCompilada {
     }
 //Fim
     */
-    public void Assinaturas(Document document, Supervisao supervisao, HashMap<String, Resposta> resposta)
+    /*public void Assinaturas(Document document, Supervisao supervisao, HashMap<String, Resposta> resposta)
             throws DocumentException {
         Paragraph paragraph = new Paragraph();
 
@@ -1454,7 +1556,7 @@ public class RelatorioAuditoriaCompilada {
 
         document.add(paragraph);
 
-    }
+    }*/
 
     public void addEmptyLine(Paragraph paragraph, int number) {
         for (int i = 0; i < number; i++) {

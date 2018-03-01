@@ -1,6 +1,5 @@
 package stec.view;
 
-import stec.view.formularios.FormSupervisao.FormSupervisaoController;
 import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
 import java.net.URL;
@@ -21,6 +20,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import stec.model.dao.RespostaDAO;
 import stec.model.dao.SupervisaoDAO;
+import stec.model.domain.RelatorioAuditoriaCompilada;
 import stec.model.domain.RelatorioAvaliacaoSupervisao;
 import stec.model.domain.Supervisao;
 import stec.model.domain.Ur;
@@ -32,6 +32,7 @@ public class RelatoriosController implements Initializable {
     List<Supervisao> listSupervisoes;//Lista das supervisoes
     ObservableList<Supervisao> observableListSupervisoes;//Observable list das supervisoes
     private final SupervisaoDAO supervisaoDAO = new SupervisaoDAO();//objeto DAO responsavel pela interacao com o bd
+    private final RespostaDAO respostaDAO = new RespostaDAO();
     
     @FXML
     private AnchorPane RelatoriosPane;
@@ -47,6 +48,8 @@ public class RelatoriosController implements Initializable {
     private JFXButton btAuditoriaCompilada;
     @FXML
     private JFXButton btAvaliacaoQualidade;
+    @FXML
+    private JFXButton btComentarios;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -94,6 +97,31 @@ public class RelatoriosController implements Initializable {
             relatorio.show(file);
 
         }
+    }
+    
+    @FXML
+    private void handleComentarios(ActionEvent event) {
+        AlertMaker.showSimpleAlert("Comentários e Recomendações", "Será gerado o relatório dos comentários e recomendações");
+        RelatorioAuditoriaCompilada relatorio = new RelatorioAuditoriaCompilada();
+        for (Supervisao supervisao : supervisaoDAO.listarImportadas()) {
+            //armazena as respostas da supervisao
+            supervisao.setHashRespostas(respostaDAO.listarRespostasDaSupervisaoImportada(supervisao));
+
+            //adiciona a supervisao e suas respostas no list de supervisoes
+            relatorio.getListSupervisao().add(supervisao);
+            //relatorio.setSupervisao(supervisao);
+
+            //RespostaDAO respostaDAO = new RespostaDAO();
+            //relatorio.setHashRespostas(respostaDAO.listarRespostasDaSupervisaoImportada(supervisao));
+
+        }
+        //Nome do pdf da supervisao
+        String nome = ("Comentarios e Recomendações");
+        //String data[] = supervisao.getCreated().split(" ");//pega apenas a data
+
+        String file = nome;// +"-"+ data[0];
+
+        relatorio.show(file);
     }
         
     public void carregarTabelaSupervisoesImportadas() {
