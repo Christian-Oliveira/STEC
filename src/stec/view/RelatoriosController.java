@@ -105,7 +105,7 @@ public class RelatoriosController implements Initializable {
         RelatorioAuditoriaCompilada relatorio = new RelatorioAuditoriaCompilada();
         for (Supervisao supervisao : supervisaoDAO.listarImportadas()) {
             //armazena as respostas da supervisao
-            supervisao.setHashRespostas(respostaDAO.listarRespostasDaSupervisaoImportada(supervisao));
+            relatorio.setHashRespostas(respostaDAO.listarRespostasDaSupervisaoImportada(supervisao));
 
             //adiciona a supervisao e suas respostas no list de supervisoes
             relatorio.getListSupervisao().add(supervisao);
