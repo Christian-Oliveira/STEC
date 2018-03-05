@@ -75,6 +75,7 @@ import stec.controller.FormVulnerabilidadesPotencialidadesController;
 import stec.model.dao.RespostaDAO;
 import stec.model.dao.SupervisaoDAO;
 import stec.model.domain.Supervisao;
+import stec.resources.Classes.IFormulario;
 
 public class RelatorioAuditoriaCompilada {
 
@@ -83,20 +84,20 @@ public class RelatorioAuditoriaCompilada {
     private static Font chaFont = new Font(Font.FontFamily.HELVETICA, 13, Font.BOLD);// capitulos do documento
     private static Font smallBold = new Font(Font.FontFamily.HELVETICA, 10, Font.BOLD);// negrito texto normal
     private static Font subFont = new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD);// sub capitulos capitulo
-    private Supervisao supervisao = new Supervisao();
+    //private Supervisao supervisao = new Supervisao();
     private SupervisaoDAO supervisaoDAO = new SupervisaoDAO();
     private HashMap<String, Resposta> hashRespostas = new HashMap<>();
     private List<Supervisao> listSupervisao = new ArrayList<>();
     
 
-    public void setSupervisao(Supervisao supervisao) {
+/*    public void setSupervisao(Supervisao supervisao) {
         this.supervisao = supervisao;
     }
 
     public Supervisao getSupervisao() {
         return this.supervisao;
     }
-
+*/
     public void setHashRespostas(HashMap<String, Resposta> respostas) {
         this.hashRespostas = respostas;
     }
@@ -118,50 +119,57 @@ public class RelatorioAuditoriaCompilada {
             document.open();
 
             this.Capa(document);
-            this.IdentificacaoEscritorio(document, listSupervisao, hashRespostas);
+            //this.IdentificacaoEscritorio(document, listSupervisao, hashRespostas);
             this.RecursosHumanos(document, listSupervisao, hashRespostas);
-            this.RecursosFisicos(document, listSupervisao, hashRespostas);
+            /*this.RecursosFisicos(document, listSupervisao, hashRespostas);
             this.RecursosFinanceiros(document, listSupervisao, hashRespostas);
-            /*this.EstruturaOrganizacional(document, hashRespostas);
-            this.AutoridadeGestao(document, hashRespostas);
-            this.CapacidadeTecnicaOperacional(document, hashRespostas);
-
-            if (supervisao.getProgramas().toString().contains("PNEFA")) {
-                this.PNEFA(document, hashRespostas);
+            this.EstruturaOrganizacional(document, listSupervisao, hashRespostas);
+            this.AutoridadeGestao(document, listSupervisao, hashRespostas);
+            this.CapacidadeTecnicaOperacional(document, listSupervisao, hashRespostas);
+            
+            for (Supervisao supervisao : listSupervisao){
+                if (supervisao.getProgramas().toString().contains("PNEFA"))
+                    this.PNEFA(document, listSupervisao, hashRespostas);
+            }
+            
+            for (Supervisao supervisao : listSupervisao){
+                if (supervisao.getProgramas().toString().contains("PNCEBT"))
+                    this.PNCEBT(document, listSupervisao, hashRespostas);
+            }
+            
+            for (Supervisao supervisao : listSupervisao){
+                if (supervisao.getProgramas().toString().contains("PNCRH"))
+                    this.PNCRH(document, listSupervisao, hashRespostas);
             }
 
-            if (supervisao.getProgramas().toString().contains("PNCEBT")) {
-                this.PNCEBT(document, hashRespostas);
+            for (Supervisao supervisao : listSupervisao){
+                if (supervisao.getProgramas().toString().contains("PNEEB"))
+                    this.PNEEB(document, listSupervisao, hashRespostas);
             }
 
-            if (supervisao.getProgramas().toString().contains("PNCRH")) {
-                this.PNCRH(document, hashRespostas);
+            for (Supervisao supervisao : listSupervisao){
+                if (supervisao.getProgramas().toString().contains("PNSE"))
+                    this.PNSE(document, listSupervisao, hashRespostas);
             }
 
-            if (supervisao.getProgramas().toString().contains("PNEEB")) {
-                this.PNEEB(document, hashRespostas);
+            for (Supervisao supervisao : listSupervisao){
+                if (supervisao.getProgramas().toString().contains("PNSCO"))
+                    this.PNSCO(document, listSupervisao, hashRespostas);
             }
 
-            if (supervisao.getProgramas().toString().contains("PNSE")) {
-                this.PNSE(document, hashRespostas);
+            for (Supervisao supervisao : listSupervisao){
+                if (supervisao.getProgramas().toString().contains("PNSS"))
+                    this.PNSS(document, listSupervisao, hashRespostas);
             }
 
-            if (supervisao.getProgramas().toString().contains("PNSCO")) {
-                this.PNSCO(document, hashRespostas);
+            for (Supervisao supervisao : listSupervisao){
+                if (supervisao.getProgramas().toString().contains("PNSA"))
+                    this.PNSA(document, listSupervisao, hashRespostas);
             }
 
-            if (supervisao.getProgramas().toString().contains("PNSS")) {
-                this.PNSS(document, hashRespostas);
-            }
-
-            if (supervisao.getProgramas().toString().contains("PNSA")) {
-                this.PNSA(document, hashRespostas);
-            }
-
-            this.InteracaoPartes(document, hashRespostas);
-            this.AcessoMercados(document, hashRespostas);
-            this.VulnerabilidadesPotencialidades(document, hashRespostas);
-            this.Assinaturas(document, supervisao, hashRespostas);
+            this.InteracaoPartes(document, listSupervisao, hashRespostas);
+            this.AcessoMercados(document, listSupervisao, hashRespostas);
+            this.VulnerabilidadesPotencialidades(document, listSupervisao, hashRespostas);
             */
             document.close();
         } catch (Exception e) {
@@ -169,7 +177,7 @@ public class RelatorioAuditoriaCompilada {
             e.printStackTrace();
         }
     }
-
+    
     /*
     * Adiciona a capa com o titulo ao documento OK
      */
@@ -214,9 +222,7 @@ public class RelatorioAuditoriaCompilada {
         addEmptyLine(identificacaoEscritorio, 1);
         document.add(identificacaoEscritorio);
         Gson gson = new Gson();
-        FormIdentificacaoEscritorioController.FormIdentificacaoEscritorio formulario = gson.fromJson(resposta.get("identificacao_escritorio").getResposta(),
-                FormIdentificacaoEscritorioController.FormIdentificacaoEscritorio.class);
-        
+                
         //Colocar o subtitulo
         Paragraph comentarios = new Paragraph("", subFont);
         comentarios.add("Comentarios");
@@ -226,6 +232,9 @@ public class RelatorioAuditoriaCompilada {
         //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
         Paragraph resp = new Paragraph();
         for (Supervisao supervisao : list){
+            FormIdentificacaoEscritorioController.FormIdentificacaoEscritorio formulario = gson.fromJson(supervisao.getHashRespostas().get("identificacao_escritorio").getResposta(),
+                FormIdentificacaoEscritorioController.FormIdentificacaoEscritorio.class);
+            
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -249,6 +258,8 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
         for (Supervisao supervisao : list){
+            FormIdentificacaoEscritorioController.FormIdentificacaoEscritorio formulario = gson.fromJson(supervisao.getHashRespostas().get("identificacao_escritorio").getResposta(),
+                FormIdentificacaoEscritorioController.FormIdentificacaoEscritorio.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -272,6 +283,9 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
         for (Supervisao supervisao : list){
+            FormIdentificacaoEscritorioController.FormIdentificacaoEscritorio formulario = gson.fromJson(supervisao.getHashRespostas().get("identificacao_escritorio").getResposta(),
+                FormIdentificacaoEscritorioController.FormIdentificacaoEscritorio.class);
+            //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
             Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
@@ -294,6 +308,9 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
         for (Supervisao supervisao : list){
+            FormIdentificacaoEscritorioController.FormIdentificacaoEscritorio formulario = gson.fromJson(supervisao.getHashRespostas().get("identificacao_escritorio").getResposta(),
+                FormIdentificacaoEscritorioController.FormIdentificacaoEscritorio.class);
+            //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
             Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
@@ -316,6 +333,9 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
         for (Supervisao supervisao : list){
+            FormIdentificacaoEscritorioController.FormIdentificacaoEscritorio formulario = gson.fromJson(supervisao.getHashRespostas().get("identificacao_escritorio").getResposta(),
+                FormIdentificacaoEscritorioController.FormIdentificacaoEscritorio.class);
+            //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
             Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
@@ -352,7 +372,7 @@ public class RelatorioAuditoriaCompilada {
         //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
         Paragraph resp = new Paragraph();
         for (Supervisao supervisao : list){
-            FormRHQuantitativo formulario = gson.fromJson(resposta.get("rh_quantitativo").getResposta(),
+            FormRHQuantitativo formulario = gson.fromJson(supervisao.getHashRespostas().get("rh_quantitativo").getResposta(),
                     FormRHQuantitativo.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -377,7 +397,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormRHQuantitativo formulario = gson.fromJson(resposta.get("rh_quantitativo").getResposta(),
+            FormRHQuantitativo formulario = gson.fromJson(supervisao.getHashRespostas().get("rh_quantitativo").getResposta(),
                     FormRHQuantitativo.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -402,7 +422,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormRHQuantitativo formulario = gson.fromJson(resposta.get("rh_quantitativo").getResposta(),
+            FormRHQuantitativo formulario = gson.fromJson(supervisao.getHashRespostas().get("rh_quantitativo").getResposta(),
                     FormRHQuantitativo.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -426,7 +446,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormRHQuantitativo formulario = gson.fromJson(resposta.get("rh_quantitativo").getResposta(),
+            FormRHQuantitativo formulario = gson.fromJson(supervisao.getHashRespostas().get("rh_quantitativo").getResposta(),
                     FormRHQuantitativo.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -450,7 +470,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormRHQuantitativo formulario = gson.fromJson(resposta.get("rh_quantitativo").getResposta(),
+            FormRHQuantitativo formulario = gson.fromJson(supervisao.getHashRespostas().get("rh_quantitativo").getResposta(),
                     FormRHQuantitativo.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -476,7 +496,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormRHEstabilidade formulario2 = gson.fromJson(resposta.get("rh_estabilidade").getResposta(),
+            FormRHEstabilidade formulario2 = gson.fromJson(supervisao.getHashRespostas().get("rh_estabilidade").getResposta(),
                     FormRHEstabilidade.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -501,7 +521,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormRHEstabilidade formulario2 = gson.fromJson(resposta.get("rh_estabilidade").getResposta(),
+            FormRHEstabilidade formulario2 = gson.fromJson(supervisao.getHashRespostas().get("rh_estabilidade").getResposta(),
                     FormRHEstabilidade.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -526,7 +546,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormRHEstabilidade formulario2 = gson.fromJson(resposta.get("rh_estabilidade").getResposta(),
+            FormRHEstabilidade formulario2 = gson.fromJson(supervisao.getHashRespostas().get("rh_estabilidade").getResposta(),
                     FormRHEstabilidade.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -550,7 +570,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormRHEstabilidade formulario2 = gson.fromJson(resposta.get("rh_estabilidade").getResposta(),
+            FormRHEstabilidade formulario2 = gson.fromJson(supervisao.getHashRespostas().get("rh_estabilidade").getResposta(),
                     FormRHEstabilidade.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -574,7 +594,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormRHEstabilidade formulario2 = gson.fromJson(resposta.get("rh_estabilidade").getResposta(),
+            FormRHEstabilidade formulario2 = gson.fromJson(supervisao.getHashRespostas().get("rh_estabilidade").getResposta(),
                     FormRHEstabilidade.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -599,7 +619,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormRHCapacitacao formulario3 = gson.fromJson(resposta.get("rh_capacitacao").getResposta(),
+            FormRHCapacitacao formulario3 = gson.fromJson(supervisao.getHashRespostas().get("rh_capacitacao").getResposta(),
                     FormRHCapacitacao.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -624,7 +644,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormRHCapacitacao formulario3 = gson.fromJson(resposta.get("rh_capacitacao").getResposta(),
+            FormRHCapacitacao formulario3 = gson.fromJson(supervisao.getHashRespostas().get("rh_capacitacao").getResposta(),
                     FormRHCapacitacao.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -649,7 +669,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormRHCapacitacao formulario3 = gson.fromJson(resposta.get("rh_capacitacao").getResposta(),
+            FormRHCapacitacao formulario3 = gson.fromJson(supervisao.getHashRespostas().get("rh_capacitacao").getResposta(),
                     FormRHCapacitacao.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -673,7 +693,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormRHCapacitacao formulario3 = gson.fromJson(resposta.get("rh_capacitacao").getResposta(),
+            FormRHCapacitacao formulario3 = gson.fromJson(supervisao.getHashRespostas().get("rh_capacitacao").getResposta(),
                     FormRHCapacitacao.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -697,7 +717,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormRHCapacitacao formulario3 = gson.fromJson(resposta.get("rh_capacitacao").getResposta(),
+            FormRHCapacitacao formulario3 = gson.fromJson(supervisao.getHashRespostas().get("rh_capacitacao").getResposta(),
                     FormRHCapacitacao.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -722,7 +742,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormRHCompetencias formulario4 = gson.fromJson(resposta.get("rh_competencias").getResposta(),
+            FormRHCompetencias formulario4 = gson.fromJson(supervisao.getHashRespostas().get("rh_competencias").getResposta(),
                     FormRHCompetencias.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -747,7 +767,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormRHCompetencias formulario4 = gson.fromJson(resposta.get("rh_competencias").getResposta(),
+            FormRHCompetencias formulario4 = gson.fromJson(supervisao.getHashRespostas().get("rh_competencias").getResposta(),
                     FormRHCompetencias.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -772,7 +792,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormRHCompetencias formulario4 = gson.fromJson(resposta.get("rh_competencias").getResposta(),
+            FormRHCompetencias formulario4 = gson.fromJson(supervisao.getHashRespostas().get("rh_competencias").getResposta(),
                     FormRHCompetencias.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -796,7 +816,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormRHCompetencias formulario4 = gson.fromJson(resposta.get("rh_competencias").getResposta(),
+            FormRHCompetencias formulario4 = gson.fromJson(supervisao.getHashRespostas().get("rh_competencias").getResposta(),
                     FormRHCompetencias.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -820,7 +840,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormRHCompetencias formulario4 = gson.fromJson(resposta.get("rh_competencias").getResposta(),
+            FormRHCompetencias formulario4 = gson.fromJson(supervisao.getHashRespostas().get("rh_competencias").getResposta(),
                     FormRHCompetencias.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -847,8 +867,7 @@ public class RelatorioAuditoriaCompilada {
         document.add(catPart);
         Gson gson = new Gson();
 //RF Instalações------------------------------------------------------------------------------------------
-        Paragraph comentarios = new Paragraph("", subFont);
-        comentarios.add("RF Instalações\n");
+        Paragraph comentarios = new Paragraph("RF Instalações\n", subFont);
         comentarios.add("Comentarios");
         document.add(comentarios);
         comentarios.clear();
@@ -856,7 +875,7 @@ public class RelatorioAuditoriaCompilada {
         //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
         Paragraph resp = new Paragraph();
         for (Supervisao supervisao : list){
-            FormRFInstalacoes formulario = gson.fromJson(resposta.get("rf_instalacoes").getResposta(),
+            FormRFInstalacoes formulario = gson.fromJson(supervisao.getHashRespostas().get("rf_instalacoes").getResposta(),
                     FormRFInstalacoes.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -881,7 +900,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormRFInstalacoes formulario = gson.fromJson(resposta.get("rf_instalacoes").getResposta(),
+            FormRFInstalacoes formulario = gson.fromJson(supervisao.getHashRespostas().get("rf_instalacoes").getResposta(),
                     FormRFInstalacoes.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -906,7 +925,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormRFInstalacoes formulario = gson.fromJson(resposta.get("rf_instalacoes").getResposta(),
+            FormRFInstalacoes formulario = gson.fromJson(supervisao.getHashRespostas().get("rf_instalacoes").getResposta(),
                     FormRFInstalacoes.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -930,7 +949,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormRFInstalacoes formulario = gson.fromJson(resposta.get("rf_instalacoes").getResposta(),
+            FormRFInstalacoes formulario = gson.fromJson(supervisao.getHashRespostas().get("rf_instalacoes").getResposta(),
                     FormRFInstalacoes.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -954,7 +973,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormRFInstalacoes formulario = gson.fromJson(resposta.get("rf_instalacoes").getResposta(),
+            FormRFInstalacoes formulario = gson.fromJson(supervisao.getHashRespostas().get("rf_instalacoes").getResposta(),
                     FormRFInstalacoes.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -979,7 +998,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormRFTransportes formulario2 = gson.fromJson(resposta.get("rf_transportes").getResposta(),
+            FormRFTransportes formulario2 = gson.fromJson(supervisao.getHashRespostas().get("rf_transportes").getResposta(),
                     FormRFTransportes.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -1004,7 +1023,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormRFTransportes formulario2 = gson.fromJson(resposta.get("rf_transportes").getResposta(),
+            FormRFTransportes formulario2 = gson.fromJson(supervisao.getHashRespostas().get("rf_transportes").getResposta(),
                     FormRFTransportes.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -1029,7 +1048,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormRFTransportes formulario2 = gson.fromJson(resposta.get("rf_transportes").getResposta(),
+            FormRFTransportes formulario2 = gson.fromJson(supervisao.getHashRespostas().get("rf_transportes").getResposta(),
                     FormRFTransportes.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -1053,7 +1072,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormRFTransportes formulario2 = gson.fromJson(resposta.get("rf_transportes").getResposta(),
+            FormRFTransportes formulario2 = gson.fromJson(supervisao.getHashRespostas().get("rf_transportes").getResposta(),
                     FormRFTransportes.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -1077,7 +1096,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormRFTransportes formulario2 = gson.fromJson(resposta.get("rf_transportes").getResposta(),
+            FormRFTransportes formulario2 = gson.fromJson(supervisao.getHashRespostas().get("rf_transportes").getResposta(),
                     FormRFTransportes.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -1102,7 +1121,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormRFEquipamentos formulario3 = gson.fromJson(resposta.get("rf_equipamentos").getResposta(),
+            FormRFEquipamentos formulario3 = gson.fromJson(supervisao.getHashRespostas().get("rf_equipamentos").getResposta(),
                     FormRFEquipamentos.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -1127,7 +1146,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormRFEquipamentos formulario3 = gson.fromJson(resposta.get("rf_equipamentos").getResposta(),
+            FormRFEquipamentos formulario3 = gson.fromJson(supervisao.getHashRespostas().get("rf_equipamentos").getResposta(),
                     FormRFEquipamentos.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -1152,7 +1171,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormRFEquipamentos formulario3 = gson.fromJson(resposta.get("rf_equipamentos").getResposta(),
+            FormRFEquipamentos formulario3 = gson.fromJson(supervisao.getHashRespostas().get("rf_equipamentos").getResposta(),
                     FormRFEquipamentos.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -1176,7 +1195,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormRFEquipamentos formulario3 = gson.fromJson(resposta.get("rf_equipamentos").getResposta(),
+            FormRFEquipamentos formulario3 = gson.fromJson(supervisao.getHashRespostas().get("rf_equipamentos").getResposta(),
                     FormRFEquipamentos.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -1200,7 +1219,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormRFEquipamentos formulario3 = gson.fromJson(resposta.get("rf_equipamentos").getResposta(),
+            FormRFEquipamentos formulario3 = gson.fromJson(supervisao.getHashRespostas().get("rf_equipamentos").getResposta(),
                     FormRFEquipamentos.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -1357,7 +1376,7 @@ public class RelatorioAuditoriaCompilada {
         //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
         Paragraph resp = new Paragraph();
         for (Supervisao supervisao : list){
-            FormRFICusteio formulario = gson.fromJson(resposta.get("rf_custeio").getResposta(),
+            FormRFICusteio formulario = gson.fromJson(resposta.get("rfi_custeio").getResposta(),
                     FormRFICusteio.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -1382,7 +1401,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormRFICusteio formulario = gson.fromJson(resposta.get("rf_custeio").getResposta(),
+            FormRFICusteio formulario = gson.fromJson(resposta.get("rfi_custeio").getResposta(),
                     FormRFICusteio.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -1407,7 +1426,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormRFICusteio formulario = gson.fromJson(resposta.get("rf_custeio").getResposta(),
+            FormRFICusteio formulario = gson.fromJson(resposta.get("rfi_custeio").getResposta(),
                     FormRFICusteio.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -1431,7 +1450,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormRFICusteio formulario = gson.fromJson(resposta.get("rf_custeio").getResposta(),
+            FormRFICusteio formulario = gson.fromJson(resposta.get("rfi_custeio").getResposta(),
                     FormRFICusteio.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -1455,7 +1474,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormRFICusteio formulario = gson.fromJson(resposta.get("rf_custeio").getResposta(),
+            FormRFICusteio formulario = gson.fromJson(resposta.get("rfi_custeio").getResposta(),
                     FormRFICusteio.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -1480,7 +1499,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormRFIArrecadacao formulario2 = gson.fromJson(resposta.get("rf_arrecadacao").getResposta(),
+            FormRFIArrecadacao formulario2 = gson.fromJson(resposta.get("rfi_arrecadacao").getResposta(),
                     FormRFIArrecadacao.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -1505,7 +1524,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormRFIArrecadacao formulario2 = gson.fromJson(resposta.get("rf_arrecadacao").getResposta(),
+            FormRFIArrecadacao formulario2 = gson.fromJson(resposta.get("rfi_arrecadacao").getResposta(),
                     FormRFIArrecadacao.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -1530,7 +1549,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormRFIArrecadacao formulario2 = gson.fromJson(resposta.get("rf_arrecadacao").getResposta(),
+            FormRFIArrecadacao formulario2 = gson.fromJson(resposta.get("rfi_arrecadacao").getResposta(),
                     FormRFIArrecadacao.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -1554,7 +1573,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormRFIArrecadacao formulario2 = gson.fromJson(resposta.get("rf_arrecadacao").getResposta(),
+            FormRFIArrecadacao formulario2 = gson.fromJson(resposta.get("rfi_arrecadacao").getResposta(),
                     FormRFIArrecadacao.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -1578,7 +1597,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormRFIArrecadacao formulario2 = gson.fromJson(resposta.get("rf_arrecadacao").getResposta(),
+            FormRFIArrecadacao formulario2 = gson.fromJson(resposta.get("rfi_arrecadacao").getResposta(),
                     FormRFIArrecadacao.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -1988,7 +2007,7 @@ public class RelatorioAuditoriaCompilada {
         Anchor anchor = new Anchor("Capacidade Técnica e Operacional", chaFont);
         anchor.setName("Capacidade Técnica e Operacional");
 
-        Chapter catPart = new Chapter(new Paragraph(anchor), 5);// onde e descrito qual o numero do capitulo
+        Chapter catPart = new Chapter(new Paragraph(anchor), 6);// onde e descrito qual o numero do capitulo
 
         Gson gson = new Gson();
 //CTO Controle Cadastro-----------------------------------------------------------------------------------------
@@ -2485,698 +2504,3598 @@ public class RelatorioAuditoriaCompilada {
         document.newPage();
 //Fim
 //CTO Controle Eventos------------------------------------------------------------------------------------
-/*        FormCTOControleEventosAglomeracao formulario5 = gson
-                .fromJson(resposta.get("cto_controle_eventos").getResposta(), FormCTOControleEventosAglomeracao.class);
-        subPara = new Paragraph("Controle de eventos de aglomeração de animais", subFont);
-
-        subCatPart = catPart.addSection(subPara);// adiciona o sub titulo da secao do capitulo
-
-        Paragraph p2 = new Paragraph();
-        addEmptyLine(p2, 2);
-
-        subCatPart.add(paragraph);// adiciona linha vazia ao paragrafo da secao
-
-        comentariosRecomendacoes = new Paragraph("Comentários: \n" + formulario5.getComentario()
-                + "\nRecomendações ULSAV / EAC: \n" + formulario5.getRecomendacaoUlsavEac() + "\nPrazos para ajuste: \n"
-                + formulario5.getPrazo() + "\nRecomendações UR: \n" + formulario5.getRecomendacaoUr()
-                + "\nRecomendações UC: \n" + formulario5.getRecomendacaoUC(), f);
-        comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
-        subCatPart.add(comentariosRecomendacoes);
-
-        // ------------------------------------------------------
-        subCatPart.add(paragraph);// adiciona linha vazia ao paragrafo da secao
+        comentarios.add("CTO Controle de eventos de aglomeração de animais\n");
+        comentarios.add("Comentarios");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormCTOControleEventosAglomeracao formulario5 = gson.fromJson(resposta.get("cto_controle_eventos").getResposta(),
+                    FormCTOControleEventosAglomeracao.class);
+            //Adiciona o nome do municipio auditado
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nComentários: \n" + formulario5.getComentario()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+    
+        //Colocar o subtitulo
+        comentarios.add("Recomendações ULSAV / EAC");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormCTOControleEventosAglomeracao formulario5 = gson.fromJson(resposta.get("cto_controle_eventos").getResposta(),
+                    FormCTOControleEventosAglomeracao.class);
+            //Adiciona o nome do municipio auditado
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações ULSAV / EAC: \n" + formulario5.getRecomendacaoUlsavEac()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subtitulo
+        comentarios.add("Prazos para ajuste");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormCTOControleEventosAglomeracao formulario5 = gson.fromJson(resposta.get("cto_controle_eventos").getResposta(),
+                    FormCTOControleEventosAglomeracao.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nPrazos para ajuste: \n" + formulario5.getPrazo()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subTitulo
+        comentarios.add("Recomendações UR");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormCTOControleEventosAglomeracao formulario5 = gson.fromJson(resposta.get("cto_controle_eventos").getResposta(),
+                    FormCTOControleEventosAglomeracao.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações UR: \n" + formulario5.getRecomendacaoUr()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subtitulo
+        comentarios.add("Recomendações UC");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormCTOControleEventosAglomeracao formulario5 = gson.fromJson(resposta.get("cto_controle_eventos").getResposta(),
+                    FormCTOControleEventosAglomeracao.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações UC: \n" + formulario5.getRecomendacaoUC()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
 //Fim
 //CTO Fiscalização-------------------------------------------------------------------------------------
-        FormCTOFiscalizacao formulario6 = gson.fromJson(resposta.get("cto_fiscalizacao").getResposta(),
-                FormCTOFiscalizacao.class);
-        subPara = new Paragraph(
-                "Fiscalização em revendas veterinárias", subFont);
-
-        subCatPart = catPart.addSection(subPara);// adiciona o sub titulo da secao do capitulo
-
-        subCatPart.add(paragraph);// adiciona linha vazia ao paragrafo da secao
-
-        comentariosRecomendacoes = new Paragraph("Comentários: \n" + formulario6.getComentario()
-                + "\nRecomendações ULSAV / EAC: \n" + formulario6.getRecomendacaoUlsavEac() + "\nPrazos para ajuste: \n"
-                + formulario6.getPrazo() + "\nRecomendações UR: \n" + formulario6.getRecomendacaoUr()
-                + "\nRecomendações UC: \n" + formulario6.getRecomendacaoUC(), f);
-        comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
-        subCatPart.add(comentariosRecomendacoes);
-
-        // ------------------------------------------------------
-        subCatPart.add(paragraph);// adiciona linha vazia ao paragrafo da secao
+        comentarios.add("Fiscalização em revendas veterinárias\n");
+        comentarios.add("Comentarios");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormCTOFiscalizacao formulario6 = gson.fromJson(resposta.get("cto_fiscalizacao").getResposta(),
+                    FormCTOFiscalizacao.class);
+            //Adiciona o nome do municipio auditado
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nComentários: \n" + formulario6.getComentario()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+    
+        //Colocar o subtitulo
+        comentarios.add("Recomendações ULSAV / EAC");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormCTOFiscalizacao formulario6 = gson.fromJson(resposta.get("cto_fiscalizacao").getResposta(),
+                    FormCTOFiscalizacao.class);
+            //Adiciona o nome do municipio auditado
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações ULSAV / EAC: \n" + formulario6.getRecomendacaoUlsavEac()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subtitulo
+        comentarios.add("Prazos para ajuste");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormCTOFiscalizacao formulario6 = gson.fromJson(resposta.get("cto_fiscalizacao").getResposta(),
+                    FormCTOFiscalizacao.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nPrazos para ajuste: \n" + formulario6.getPrazo()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subTitulo
+        comentarios.add("Recomendações UR");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormCTOFiscalizacao formulario6 = gson.fromJson(resposta.get("cto_fiscalizacao").getResposta(),
+                    FormCTOFiscalizacao.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações UR: \n" + formulario6.getRecomendacaoUr()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subtitulo
+        comentarios.add("Recomendações UC");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormCTOFiscalizacao formulario6 = gson.fromJson(resposta.get("cto_fiscalizacao").getResposta(),
+                    FormCTOFiscalizacao.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações UC: \n" + formulario6.getRecomendacaoUC()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
 //Fim
 //CTO Detecção Precoce------------------------------------------------------------------------------------
-        FormCTOCapacidadeDeteccaoPrecoce formulario7 = gson.fromJson(resposta.get("cto_deteccao_precoce").getResposta(),
+        comentarios.add("Capacidade para detecção precoce e notificação imediata de doenças\n");
+        comentarios.add("Comentarios");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormCTOCapacidadeDeteccaoPrecoce formulario7 = gson.fromJson(resposta.get("cto_deteccao_precoce").getResposta(),
                 FormCTOCapacidadeDeteccaoPrecoce.class);
-        subPara = new Paragraph("Capacidade para detecção precoce e notificação imediata de doenças", subFont);
-
-        subCatPart = catPart.addSection(subPara);// adiciona o sub titulo da secao do capitulo
-
-        subCatPart.add(paragraph);// adiciona linha vazia ao paragrafo da secao
-
-        comentariosRecomendacoes = new Paragraph("Comentários: \n" + formulario7.getComentario()
-                + "\nRecomendações ULSAV / EAC: \n" + formulario7.getRecomendacaoUlsavEac() + "\nPrazos para ajuste: \n"
-                + formulario7.getPrazo() + "\nRecomendações UR: \n" + formulario7.getRecomendacaoUr()
-                + "\nRecomendações UC: \n" + formulario7.getRecomendacaoUC(), f);
-        comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
-        subCatPart.add(comentariosRecomendacoes);
-
-        // ------------------------------------------------------
-        subCatPart.add(paragraph);// adiciona linha vazia ao paragrafo da secao
+            //Adiciona o nome do municipio auditado
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nComentários: \n" + formulario7.getComentario()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+    
+        //Colocar o subtitulo
+        comentarios.add("Recomendações ULSAV / EAC");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormCTOCapacidadeDeteccaoPrecoce formulario7 = gson.fromJson(resposta.get("cto_deteccao_precoce").getResposta(),
+                FormCTOCapacidadeDeteccaoPrecoce.class);
+            //Adiciona o nome do municipio auditado
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações ULSAV / EAC: \n" + formulario7.getRecomendacaoUlsavEac()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subtitulo
+        comentarios.add("Prazos para ajuste");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormCTOCapacidadeDeteccaoPrecoce formulario7 = gson.fromJson(resposta.get("cto_deteccao_precoce").getResposta(),
+                FormCTOCapacidadeDeteccaoPrecoce.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nPrazos para ajuste: \n" + formulario7.getPrazo()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subTitulo
+        comentarios.add("Recomendações UR");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormCTOCapacidadeDeteccaoPrecoce formulario7 = gson.fromJson(resposta.get("cto_deteccao_precoce").getResposta(),
+                FormCTOCapacidadeDeteccaoPrecoce.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações UR: \n" + formulario7.getRecomendacaoUr()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subtitulo
+        comentarios.add("Recomendações UC");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormCTOCapacidadeDeteccaoPrecoce formulario7 = gson.fromJson(resposta.get("cto_deteccao_precoce").getResposta(),
+                FormCTOCapacidadeDeteccaoPrecoce.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações UC: \n" + formulario7.getRecomendacaoUC()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
 //Fim
 //CTO Atendimento Suspeita----------------------------------------------------------------------------------
-        FormCTOAtendimentoSuspeita formulario8 = gson.fromJson(resposta.get("cto_atendimento_suspeita").getResposta(),
+        comentarios.add("Capacidade para atendimento a suspeitas e atuação em emergências\n");
+        comentarios.add("Comentarios");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormCTOAtendimentoSuspeita formulario8 = gson.fromJson(resposta.get("cto_atendimento_suspeita").getResposta(),
                 FormCTOAtendimentoSuspeita.class);
-        subPara = new Paragraph("Capacidade para atendimento a suspeitas e atuação em emergências", subFont);
-
-        subCatPart = catPart.addSection(subPara);// adiciona o sub titulo da secao do capitulo
-
-        subCatPart.add(paragraph);// adiciona linha vazia ao paragrafo da secao
-
-        comentariosRecomendacoes = new Paragraph("Comentários: \n" + formulario8.getComentario()
-                + "\nRecomendações ULSAV / EAC: \n" + formulario8.getRecomendacaoUlsavEac() + "\nPrazos para ajuste: \n"
-                + formulario8.getPrazo() + "\nRecomendações UR: \n" + formulario8.getRecomendacaoUr()
-                + "\nRecomendações UC: \n" + formulario8.getRecomendacaoUC(), f);
-        comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
-        subCatPart.add(comentariosRecomendacoes);
-
-        document.add(catPart);
-
+            //Adiciona o nome do municipio auditado
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nComentários: \n" + formulario8.getComentario()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+    
+        //Colocar o subtitulo
+        comentarios.add("Recomendações ULSAV / EAC");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormCTOAtendimentoSuspeita formulario8 = gson.fromJson(resposta.get("cto_atendimento_suspeita").getResposta(),
+                FormCTOAtendimentoSuspeita.class);
+            //Adiciona o nome do municipio auditado
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações ULSAV / EAC: \n" + formulario8.getRecomendacaoUlsavEac()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subtitulo
+        comentarios.add("Prazos para ajuste");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormCTOAtendimentoSuspeita formulario8 = gson.fromJson(resposta.get("cto_atendimento_suspeita").getResposta(),
+                FormCTOAtendimentoSuspeita.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nPrazos para ajuste: \n" + formulario8.getPrazo()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subTitulo
+        comentarios.add("Recomendações UR");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormCTOAtendimentoSuspeita formulario8 = gson.fromJson(resposta.get("cto_atendimento_suspeita").getResposta(),
+                FormCTOAtendimentoSuspeita.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações UR: \n" + formulario8.getRecomendacaoUr()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subtitulo
+        comentarios.add("Recomendações UC");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormCTOAtendimentoSuspeita formulario8 = gson.fromJson(resposta.get("cto_atendimento_suspeita").getResposta(),
+                FormCTOAtendimentoSuspeita.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações UC: \n" + formulario8.getRecomendacaoUC()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
         document.newPage();
     }
 //Fim
 
-    public void PNEFA(Document document, HashMap<String, Resposta> resposta) throws DocumentException {
+    public void PNEFA(Document document, List<Supervisao> list,HashMap<String, Resposta> resposta) throws DocumentException {
         Anchor anchor = new Anchor("Programa Nacional de Erradicação e Prevenção da Febre Aftosa - Maranhão (PNEFA/MA)",
                 chaFont);
         anchor.setName("Programa Nacional de Erradicação e Prevenção da Febre Aftosa - Maranhão (PNEFA/MA)");
 
-        Chapter catPart = new Chapter(new Paragraph(anchor), 6);// onde e descrito qual o numero do capitulo
-
+        Chapter catPart = new Chapter(new Paragraph(anchor), 7);// onde e descrito qual o numero do capitulo
+        document.add(catPart);
         Gson gson = new Gson();
 //PNEFA Fiscalizações----------------------------------------------------------------------------------------------
-        FormPNEFAFiscalizacoes formulario = gson.fromJson(resposta.get("pnefa_fiscalizacoes").getResposta(),
+        Paragraph comentarios = new Paragraph("Fiscalização de Vacinações\n", subFont);
+        comentarios.add("Comentarios");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
+        Paragraph resp = new Paragraph();
+        for (Supervisao supervisao : list){
+            FormPNEFAFiscalizacoes formulario = gson.fromJson(resposta.get("pnefa_fiscalizacoes").getResposta(),
                 FormPNEFAFiscalizacoes.class);
-        Paragraph subPara = new Paragraph("Fiscalização de Vacinações", subFont);
-
-        Section subCatPart = catPart.addSection(subPara);// adiciona o sub titulo da secao do capitulo
-
-        Paragraph paragraph = new Paragraph();
-        addEmptyLine(paragraph, 1);
-        subCatPart.add(paragraph);// adiciona linha vazia ao paragrafo da secao
-
-        Paragraph comentariosRecomendacoes = new Paragraph("Comentários: \n" + formulario.getComentario()
-                + "\nRecomendações ULSAV / EAC: \n" + formulario.getRecomendacaoUlsavEac() + "\nPrazos para ajuste: \n"
-                + formulario.getPrazo() + "\nRecomendações UR: \n" + formulario.getRecomendacaoUr()
-                + "\nRecomendações UC: \n" + formulario.getRecomendacaoUC(), f);
-        comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
-        subCatPart.add(comentariosRecomendacoes);
-
-        // ---------------------------------------
-        subCatPart.add(paragraph);// adiciona linha vazia ao paragrafo da secao
+            //Adiciona o nome do municipio auditado
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nComentários: \n" + formulario.getComentario()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+    
+        //Colocar o subtitulo
+        comentarios.add("Recomendações ULSAV / EAC");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNEFAFiscalizacoes formulario = gson.fromJson(resposta.get("pnefa_fiscalizacoes").getResposta(),
+                FormPNEFAFiscalizacoes.class);
+            //Adiciona o nome do municipio auditado
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações ULSAV / EAC: \n" + formulario.getRecomendacaoUlsavEac()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subtitulo
+        comentarios.add("Prazos para ajuste");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNEFAFiscalizacoes formulario = gson.fromJson(resposta.get("pnefa_fiscalizacoes").getResposta(),
+                FormPNEFAFiscalizacoes.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nPrazos para ajuste: \n" + formulario.getPrazo()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subTitulo
+        comentarios.add("Recomendações UR");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNEFAFiscalizacoes formulario = gson.fromJson(resposta.get("pnefa_fiscalizacoes").getResposta(),
+                FormPNEFAFiscalizacoes.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações UR: \n" + formulario.getRecomendacaoUr()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subtitulo
+        comentarios.add("Recomendações UC");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNEFAFiscalizacoes formulario = gson.fromJson(resposta.get("pnefa_fiscalizacoes").getResposta(),
+                FormPNEFAFiscalizacoes.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações UC: \n" + formulario.getRecomendacaoUC()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
 //Fim
 //PNEFA Vigilância------------------------------------------------------------------------------------------------
-        FormPNEFAVigilanciaController.FormPNEFAVigilancia formulario2 = gson.fromJson(resposta.get("pnefa_vigilancia").getResposta(),
+        comentarios.add("Vigilância Epidemiológica");
+        comentarios.add("Comentarios");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNEFAVigilanciaController.FormPNEFAVigilancia formulario2 = gson.fromJson(resposta.get("pnefa_vigilancia").getResposta(),
                 FormPNEFAVigilanciaController.FormPNEFAVigilancia.class);
-        subPara = new Paragraph("Vigilância Epidemiológica", subFont);
-
-        subCatPart = catPart.addSection(subPara);// adiciona o sub titulo da secao do capitulo
-        subCatPart.add(paragraph);// adiciona linha vazia ao paragrafo da secao
-
-        comentariosRecomendacoes = new Paragraph("Comentários: \n" + formulario2.getComentario()
-                + "\nRecomendações ULSAV / EAC: \n" + formulario2.getRecomendacaoUlsavEac() + "\nPrazos para ajuste: \n"
-                + formulario2.getPrazo() + "\nRecomendações UR: \n" + formulario2.getRecomendacaoUr()
-                + "\nRecomendações UC: \n" + formulario2.getRecomendacaoUC(), f);
-        comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
-        subCatPart.add(comentariosRecomendacoes);
-
-        document.add(catPart);
-
+            //Adiciona o nome do municipio auditado
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nComentários: \n" + formulario2.getComentario()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+    
+        //Colocar o subtitulo
+        comentarios.add("Recomendações ULSAV / EAC");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNEFAVigilanciaController.FormPNEFAVigilancia formulario2 = gson.fromJson(resposta.get("pnefa_vigilancia").getResposta(),
+                FormPNEFAVigilanciaController.FormPNEFAVigilancia.class);
+            //Adiciona o nome do municipio auditado
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações ULSAV / EAC: \n" + formulario2.getRecomendacaoUlsavEac()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subtitulo
+        comentarios.add("Prazos para ajuste");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNEFAVigilanciaController.FormPNEFAVigilancia formulario2 = gson.fromJson(resposta.get("pnefa_vigilancia").getResposta(),
+                FormPNEFAVigilanciaController.FormPNEFAVigilancia.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nPrazos para ajuste: \n" + formulario2.getPrazo()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subTitulo
+        comentarios.add("Recomendações UR");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNEFAVigilanciaController.FormPNEFAVigilancia formulario2 = gson.fromJson(resposta.get("pnefa_vigilancia").getResposta(),
+                FormPNEFAVigilanciaController.FormPNEFAVigilancia.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações UR: \n" + formulario2.getRecomendacaoUr()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subtitulo
+        comentarios.add("Recomendações UC");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNEFAVigilanciaController.FormPNEFAVigilancia formulario2 = gson.fromJson(resposta.get("pnefa_vigilancia").getResposta(),
+                FormPNEFAVigilanciaController.FormPNEFAVigilancia.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações UC: \n" + formulario2.getRecomendacaoUC()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
         document.newPage();
     }
 //Fim
-
-    public void PNCEBT(Document document, HashMap<String, Resposta> resposta) throws DocumentException {
-        Anchor anchor = new Anchor(
-                "Programa Nacional de Controle e Erradicação da Brucelose e Tuberculose - Maranhão (PNCEBT/MA)",
+//PNCEBT------------------------------------------------------------------------------------------------------
+    public void PNCEBT(Document document, List<Supervisao> list, HashMap<String, Resposta> resposta) throws DocumentException {
+        Anchor anchor = new Anchor("Programa Nacional de Controle e Erradicação da Brucelose e Tuberculose - Maranhão (PNCEBT/MA)",
                 chaFont);
         anchor.setName("Programa Nacional de Controle e Erradicação da Brucelose e Tuberculose - Maranhão (PNCEBT/MA)");
 
-        Chapter catPart = new Chapter(new Paragraph(anchor), 7);// onde e descrito qual o numero do capitulo
-
+        Chapter catPart = new Chapter(new Paragraph(anchor), 8);// onde e descrito qual o numero do capitulo
+        document.add(catPart);
         Gson gson = new Gson();
 //PNCEBT Fiscalizações----------------------------------------------------------------------------------------
-        FormPNCEBTFiscalizacoes formulario = gson.fromJson(resposta.get("pncebt_fiscalizacoes").getResposta(),
+        Paragraph comentarios = new Paragraph("Fiscalização de Vacinações\n", subFont);
+        comentarios.add("Comentarios");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
+        Paragraph resp = new Paragraph();
+        for (Supervisao supervisao : list){
+            FormPNCEBTFiscalizacoes formulario = gson.fromJson(resposta.get("pncebt_fiscalizacoes").getResposta(),
                 FormPNCEBTFiscalizacoes.class);
-        Paragraph subPara = new Paragraph("Fiscalização de Vacinações", subFont);
-
-        Section subCatPart = catPart.addSection(subPara);// adiciona o sub titulo da secao do capitulo
-
-        Paragraph paragraph = new Paragraph();
-        addEmptyLine(paragraph, 1);
-        subCatPart.add(paragraph);// adiciona linha vazia ao paragrafo da secao
-
-        Paragraph comentariosRecomendacoes = new Paragraph("Comentários: \n" + formulario.getComentario()
-                + "\nRecomendações ULSAV / EAC: \n" + formulario.getRecomendacaoUlsavEac() + "\nPrazos para ajuste: \n"
-                + formulario.getPrazo() + "\nRecomendações UR: \n" + formulario.getRecomendacaoUr()
-                + "\nRecomendações UC: \n" + formulario.getRecomendacaoUC(), f);
-        comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
-        subCatPart.add(comentariosRecomendacoes);
-
-        // ---------------------------------------
-        subCatPart.add(paragraph);// adiciona linha vazia ao paragrafo da secao
+            //Adiciona o nome do municipio auditado
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nComentários: \n" + formulario.getComentario()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+    
+        //Colocar o subtitulo
+        comentarios.add("Recomendações ULSAV / EAC");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNCEBTFiscalizacoes formulario = gson.fromJson(resposta.get("pncebt_fiscalizacoes").getResposta(),
+                FormPNCEBTFiscalizacoes.class);
+            //Adiciona o nome do municipio auditado
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações ULSAV / EAC: \n" + formulario.getRecomendacaoUlsavEac()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subtitulo
+        comentarios.add("Prazos para ajuste");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNCEBTFiscalizacoes formulario = gson.fromJson(resposta.get("pncebt_fiscalizacoes").getResposta(),
+                FormPNCEBTFiscalizacoes.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nPrazos para ajuste: \n" + formulario.getPrazo()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subTitulo
+        comentarios.add("Recomendações UR");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNCEBTFiscalizacoes formulario = gson.fromJson(resposta.get("pncebt_fiscalizacoes").getResposta(),
+                FormPNCEBTFiscalizacoes.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações UR: \n" + formulario.getRecomendacaoUr()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subtitulo
+        comentarios.add("Recomendações UC");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNCEBTFiscalizacoes formulario = gson.fromJson(resposta.get("pncebt_fiscalizacoes").getResposta(),
+                FormPNCEBTFiscalizacoes.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações UC: \n" + formulario.getRecomendacaoUC()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
 //Fim
 //PNCEBT Vigilância------------------------------------------------------------------------------------------
-        FormPNCEBTVigilianciaController.FormPNCEBTVigilancia formulario2 = gson.fromJson(resposta.get("pncebt_vigilancia").getResposta(),
+        comentarios.add("Vigilância Epidemiológica");
+        comentarios.add("Comentarios");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNCEBTVigilianciaController.FormPNCEBTVigilancia formulario2 = gson.fromJson(resposta.get("pncebt_vigilancia").getResposta(),
                 FormPNCEBTVigilianciaController.FormPNCEBTVigilancia.class);
-        subPara = new Paragraph("Vigilância Epidemiológica", subFont);
-
-        subCatPart = catPart.addSection(subPara);// adiciona o sub titulo da secao do capitulo
-        subCatPart.add(paragraph);// adiciona linha vazia ao paragrafo da secao
-
-        comentariosRecomendacoes = new Paragraph("Comentários: \n" + formulario2.getComentario()
-                + "\nRecomendações ULSAV / EAC: \n" + formulario2.getRecomendacaoUlsavEac() + "\nPrazos para ajuste: \n"
-                + formulario2.getPrazo() + "\nRecomendações UR: \n" + formulario2.getRecomendacaoUr()
-                + "\nRecomendações UC: \n" + formulario2.getRecomendacaoUC(), f);
-        comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
-        subCatPart.add(comentariosRecomendacoes);
-
-        // ---------------------------------------
-        subCatPart.add(paragraph);// adiciona linha vazia ao paragrafo da secao
+            //Adiciona o nome do municipio auditado
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nComentários: \n" + formulario2.getComentario()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+    
+        //Colocar o subtitulo
+        comentarios.add("Recomendações ULSAV / EAC");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNCEBTVigilianciaController.FormPNCEBTVigilancia formulario2 = gson.fromJson(resposta.get("pncebt_vigilancia").getResposta(),
+                FormPNCEBTVigilianciaController.FormPNCEBTVigilancia.class);
+            //Adiciona o nome do municipio auditado
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações ULSAV / EAC: \n" + formulario2.getRecomendacaoUlsavEac()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subtitulo
+        comentarios.add("Prazos para ajuste");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNCEBTVigilianciaController.FormPNCEBTVigilancia formulario2 = gson.fromJson(resposta.get("pncebt_vigilancia").getResposta(),
+                FormPNCEBTVigilianciaController.FormPNCEBTVigilancia.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nPrazos para ajuste: \n" + formulario2.getPrazo()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subTitulo
+        comentarios.add("Recomendações UR");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNCEBTVigilianciaController.FormPNCEBTVigilancia formulario2 = gson.fromJson(resposta.get("pncebt_vigilancia").getResposta(),
+                FormPNCEBTVigilianciaController.FormPNCEBTVigilancia.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações UR: \n" + formulario2.getRecomendacaoUr()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subtitulo
+        comentarios.add("Recomendações UC");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNCEBTVigilianciaController.FormPNCEBTVigilancia formulario2 = gson.fromJson(resposta.get("pncebt_vigilancia").getResposta(),
+                FormPNCEBTVigilianciaController.FormPNCEBTVigilancia.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações UC: \n" + formulario2.getRecomendacaoUC()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
 //Fim
 //PNCEBT Controles-----------------------------------------------------------------------------------------------
-        FormPNCEBTControlesController.FormPNCEBTControles formulario3 = gson.fromJson(resposta.get("pncebt_controles").getResposta(),
+        comentarios.add("Controles do Programa");
+        comentarios.add("Comentarios");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNCEBTControlesController.FormPNCEBTControles formulario3 = gson.fromJson(resposta.get("pncebt_controles").getResposta(),
                 FormPNCEBTControlesController.FormPNCEBTControles.class);
-        subPara = new Paragraph("Controles do Programa", subFont);
-
-        subCatPart = catPart.addSection(subPara);// adiciona o sub titulo da secao do capitulo
-        subCatPart.add(paragraph);// adiciona linha vazia ao paragrafo da secao
-
-        comentariosRecomendacoes = new Paragraph("Comentários: \n" + formulario3.getComentario()
-                + "\nRecomendações ULSAV / EAC: \n" + formulario3.getRecomendacaoUlsavEac() + "\nPrazos para ajuste: \n"
-                + formulario3.getPrazo() + "\nRecomendações UR: \n" + formulario3.getRecomendacaoUr()
-                + "\nRecomendações UC: \n" + formulario3.getRecomendacaoUC(), f);
-        comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
-        subCatPart.add(comentariosRecomendacoes);
-
-        document.add(catPart);
-
+            //Adiciona o nome do municipio auditado
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nComentários: \n" + formulario3.getComentario()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+    
+        //Colocar o subtitulo
+        comentarios.add("Recomendações ULSAV / EAC");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNCEBTControlesController.FormPNCEBTControles formulario3 = gson.fromJson(resposta.get("pncebt_controles").getResposta(),
+                FormPNCEBTControlesController.FormPNCEBTControles.class);
+            //Adiciona o nome do municipio auditado
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações ULSAV / EAC: \n" + formulario3.getRecomendacaoUlsavEac()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subtitulo
+        comentarios.add("Prazos para ajuste");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNCEBTControlesController.FormPNCEBTControles formulario3 = gson.fromJson(resposta.get("pncebt_controles").getResposta(),
+                FormPNCEBTControlesController.FormPNCEBTControles.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nPrazos para ajuste: \n" + formulario3.getPrazo()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subTitulo
+        comentarios.add("Recomendações UR");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNCEBTControlesController.FormPNCEBTControles formulario3 = gson.fromJson(resposta.get("pncebt_controles").getResposta(),
+                FormPNCEBTControlesController.FormPNCEBTControles.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações UR: \n" + formulario3.getRecomendacaoUr()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subtitulo
+        comentarios.add("Recomendações UC");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNCEBTControlesController.FormPNCEBTControles formulario3 = gson.fromJson(resposta.get("pncebt_controles").getResposta(),
+                FormPNCEBTControlesController.FormPNCEBTControles.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações UC: \n" + formulario3.getRecomendacaoUC()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
         document.newPage();
     }
 //Fim
-
-    public void PNCRH(Document document, HashMap<String, Resposta> resposta) throws DocumentException {
+//PNCRH----------------------------------------------------------------------------------------------------
+    public void PNCRH(Document document, List<Supervisao> list, HashMap<String, Resposta> resposta) throws DocumentException {
         Anchor anchor = new Anchor("Programa Nacional de Controle da Raiva dos Herbívoros - Maranhão (PNCRH/MA)",
                 chaFont);
         anchor.setName("Programa Nacional de Controle da Raiva dos Herbívoros - Maranhão (PNCRH/MA)");
 
-        Chapter catPart = new Chapter(new Paragraph(anchor), 8);// onde e descrito qual o numero do capitulo
-
+        Chapter catPart = new Chapter(new Paragraph(anchor), 9);// onde e descrito qual o numero do capitulo
+        document.add(catPart);
         Gson gson = new Gson();
 //PNCRH Fiscalizações--------------------------------------------------------------------------------------
-        FormPNCRHFiscalizacoes formulario = gson.fromJson(resposta.get("pncrh_fiscalizacoes").getResposta(),
+        Paragraph comentarios = new Paragraph("Fiscalização de Vacinações\n", subFont);
+        comentarios.add("Comentarios");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
+        Paragraph resp = new Paragraph();
+        for (Supervisao supervisao : list){
+            FormPNCRHFiscalizacoes formulario = gson.fromJson(resposta.get("pncrh_fiscalizacoes").getResposta(),
                 FormPNCRHFiscalizacoes.class);
-        Paragraph subPara = new Paragraph("Fiscalização de Vacinações", subFont);
-
-        Section subCatPart = catPart.addSection(subPara);// adiciona o sub titulo da secao do capitulo
-
-        Paragraph paragraph = new Paragraph();
-        addEmptyLine(paragraph, 1);
-        subCatPart.add(paragraph);// adiciona linha vazia ao paragrafo da secao
-
-        Paragraph comentariosRecomendacoes = new Paragraph("Comentários: \n" + formulario.getComentario()
-                + "\nRecomendações ULSAV / EAC: \n" + formulario.getRecomendacaoUlsavEac() + "\nPrazos para ajuste: \n"
-                + formulario.getPrazo() + "\nRecomendações UR: \n" + formulario.getRecomendacaoUr()
-                + "\nRecomendações UC: \n" + formulario.getRecomendacaoUC(), f);
-        comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
-        subCatPart.add(comentariosRecomendacoes);
-
-        // ---------------------------------------
-        subCatPart.add(paragraph);// adiciona linha vazia ao paragrafo da secao
+            //Adiciona o nome do municipio auditado
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nComentários: \n" + formulario.getComentario()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+    
+        //Colocar o subtitulo
+        comentarios.add("Recomendações ULSAV / EAC");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNCRHFiscalizacoes formulario = gson.fromJson(resposta.get("pncrh_fiscalizacoes").getResposta(),
+                FormPNCRHFiscalizacoes.class);
+            //Adiciona o nome do municipio auditado
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações ULSAV / EAC: \n" + formulario.getRecomendacaoUlsavEac()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subtitulo
+        comentarios.add("Prazos para ajuste");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNCRHFiscalizacoes formulario = gson.fromJson(resposta.get("pncrh_fiscalizacoes").getResposta(),
+                FormPNCRHFiscalizacoes.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nPrazos para ajuste: \n" + formulario.getPrazo()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subTitulo
+        comentarios.add("Recomendações UR");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNCRHFiscalizacoes formulario = gson.fromJson(resposta.get("pncrh_fiscalizacoes").getResposta(),
+                FormPNCRHFiscalizacoes.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações UR: \n" + formulario.getRecomendacaoUr()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subtitulo
+        comentarios.add("Recomendações UC");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNCRHFiscalizacoes formulario = gson.fromJson(resposta.get("pncrh_fiscalizacoes").getResposta(),
+                FormPNCRHFiscalizacoes.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações UC: \n" + formulario.getRecomendacaoUC()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
 //Fim
 //PNCRH Vigilância------------------------------------------------------------------------------------------
-        FormPNCRHVigilanciaController.FormPNCRHVigilancia formulario2 = gson.fromJson(resposta.get("pncrh_vigilancia").getResposta(),
+        comentarios.add("Vigilância Epidemiológica");
+        comentarios.add("Comentarios");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNCRHVigilanciaController.FormPNCRHVigilancia formulario2 = gson.fromJson(resposta.get("pncrh_vigilancia").getResposta(),
                 FormPNCRHVigilanciaController.FormPNCRHVigilancia.class);
-        subPara = new Paragraph("Vigilância Epidemiológica", subFont);
-
-        subCatPart = catPart.addSection(subPara);// adiciona o sub titulo da secao do capitulo
-        subCatPart.add(paragraph);// adiciona linha vazia ao paragrafo da secao
-
-        comentariosRecomendacoes = new Paragraph("Comentários: \n" + formulario2.getComentario()
-                + "\nRecomendações ULSAV / EAC: \n" + formulario2.getRecomendacaoUlsavEac() + "\nPrazos para ajuste: \n"
-                + formulario2.getPrazo() + "\nRecomendações UR: \n" + formulario2.getRecomendacaoUr()
-                + "\nRecomendações UC: \n" + formulario2.getRecomendacaoUC(), f);
-        comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
-        subCatPart.add(comentariosRecomendacoes);
-
-        document.add(catPart);
-
+            //Adiciona o nome do municipio auditado
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nComentários: \n" + formulario2.getComentario()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+    
+        //Colocar o subtitulo
+        comentarios.add("Recomendações ULSAV / EAC");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNCRHVigilanciaController.FormPNCRHVigilancia formulario2 = gson.fromJson(resposta.get("pncrh_vigilancia").getResposta(),
+                FormPNCRHVigilanciaController.FormPNCRHVigilancia.class);
+            //Adiciona o nome do municipio auditado
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações ULSAV / EAC: \n" + formulario2.getRecomendacaoUlsavEac()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subtitulo
+        comentarios.add("Prazos para ajuste");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNCRHVigilanciaController.FormPNCRHVigilancia formulario2 = gson.fromJson(resposta.get("pncrh_vigilancia").getResposta(),
+                FormPNCRHVigilanciaController.FormPNCRHVigilancia.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nPrazos para ajuste: \n" + formulario2.getPrazo()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subTitulo
+        comentarios.add("Recomendações UR");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNCRHVigilanciaController.FormPNCRHVigilancia formulario2 = gson.fromJson(resposta.get("pncrh_vigilancia").getResposta(),
+                FormPNCRHVigilanciaController.FormPNCRHVigilancia.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações UR: \n" + formulario2.getRecomendacaoUr()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subtitulo
+        comentarios.add("Recomendações UC");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNCRHVigilanciaController.FormPNCRHVigilancia formulario2 = gson.fromJson(resposta.get("pncrh_vigilancia").getResposta(),
+                FormPNCRHVigilanciaController.FormPNCRHVigilancia.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações UC: \n" + formulario2.getRecomendacaoUC()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
         document.newPage();
     }
 //Fim
-
-    public void PNEEB(Document document, HashMap<String, Resposta> resposta) throws DocumentException {
+//PNEEB--------------------------------------------------------------------------------------------------
+    public void PNEEB(Document document, List<Supervisao> list, HashMap<String, Resposta> resposta) throws DocumentException {
         Anchor anchor = new Anchor(
                 "Programa Nacional de Prevenção e Vigilância da Encefalite Espongiforme Bovina - Maranhão (PNEEB/MA)",
                 chaFont);
         anchor.setName(
                 "Programa Nacional de Prevenção e Vigilância da Encefalite Espongiforme Bovina - Maranhão (PNEEB/MA)");
 
-        Chapter catPart = new Chapter(new Paragraph(anchor), 8);// onde e descrito qual o numero do capitulo
-
+        Chapter catPart = new Chapter(new Paragraph(anchor), 10);// onde e descrito qual o numero do capitulo
+        document.add(catPart);
         Gson gson = new Gson();
 //PNEEB Vigilância--------------------------------------------------------------------------------------
-        FormPNEEBVigilancia formulario = gson.fromJson(resposta.get("pneeb_vigilancia").getResposta(),
+        Paragraph comentarios = new Paragraph("Vigilância Epidemiológica", subFont);
+        comentarios.add("Comentarios");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
+        Paragraph resp = new Paragraph();
+        for (Supervisao supervisao : list){
+            FormPNEEBVigilancia formulario = gson.fromJson(resposta.get("pneeb_vigilancia").getResposta(),
                 FormPNEEBVigilancia.class);
-        Paragraph subPara = new Paragraph("Vigilância Epidemiológica", subFont);
-
-        Section subCatPart = catPart.addSection(subPara);// adiciona o sub titulo da secao do capitulo
-
-        Paragraph paragraph = new Paragraph();
-        addEmptyLine(paragraph, 1);
-        subCatPart.add(paragraph);// adiciona linha vazia ao paragrafo da secao
-
-        Paragraph comentariosRecomendacoes = new Paragraph("Comentários: \n" + formulario.getComentario()
-                + "\nRecomendações ULSAV / EAC: \n" + formulario.getRecomendacaoUlsavEac() + "\nPrazos para ajuste: \n"
-                + formulario.getPrazo() + "\nRecomendações UR: \n" + formulario.getRecomendacaoUr()
-                + "\nRecomendações UC: \n" + formulario.getRecomendacaoUC(), f);
-        comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
-        subCatPart.add(comentariosRecomendacoes);
-
-        document.add(catPart);
-
+            //Adiciona o nome do municipio auditado
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nComentários: \n" + formulario.getComentario()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+    
+        //Colocar o subtitulo
+        comentarios.add("Recomendações ULSAV / EAC");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNEEBVigilancia formulario = gson.fromJson(resposta.get("pneeb_vigilancia").getResposta(),
+                FormPNEEBVigilancia.class);
+            //Adiciona o nome do municipio auditado
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações ULSAV / EAC: \n" + formulario.getRecomendacaoUlsavEac()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subtitulo
+        comentarios.add("Prazos para ajuste");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNEEBVigilancia formulario = gson.fromJson(resposta.get("pneeb_vigilancia").getResposta(),
+                FormPNEEBVigilancia.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nPrazos para ajuste: \n" + formulario.getPrazo()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subTitulo
+        comentarios.add("Recomendações UR");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNEEBVigilancia formulario = gson.fromJson(resposta.get("pneeb_vigilancia").getResposta(),
+                FormPNEEBVigilancia.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações UR: \n" + formulario.getRecomendacaoUr()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subtitulo
+        comentarios.add("Recomendações UC");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNEEBVigilancia formulario = gson.fromJson(resposta.get("pneeb_vigilancia").getResposta(),
+                FormPNEEBVigilancia.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações UC: \n" + formulario.getRecomendacaoUC()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
         document.newPage();
     }
 //Fim
-
-    public void PNSE(Document document, HashMap<String, Resposta> resposta) throws DocumentException {
+//PNSE----------------------------------------------------------------------------------------------------
+    public void PNSE(Document document, List<Supervisao> list, HashMap<String, Resposta> resposta) throws DocumentException {
         Anchor anchor = new Anchor("Programa Nacional de Sanidade Equídea - Maranhão (PNSE/MA)", chaFont);
         anchor.setName("Programa Nacional de Sanidade Equídea - Maranhão (PNSE/MA)");
 
-        Chapter catPart = new Chapter(new Paragraph(anchor), 9);// onde e descrito qual o numero do capitulo
-
+        Chapter catPart = new Chapter(new Paragraph(anchor), 11);// onde e descrito qual o numero do capitulo
+        document.add(catPart);
         Gson gson = new Gson();
 //PNSE Cadastro Estabelecimentos--------------------------------------------------------------------------
-        FormPNSECadastroEstabelecimento formulario = gson.fromJson(
-                resposta.get("pnse_cadastro_estabelecimentos").getResposta(), FormPNSECadastroEstabelecimento.class);
-        Paragraph subPara = new Paragraph("Cadastro de Estabelecimentos", subFont);
-
-        Section subCatPart = catPart.addSection(subPara);// adiciona o sub titulo da secao do capitulo
-
-        Paragraph paragraph = new Paragraph();
-        addEmptyLine(paragraph, 1);
-        subCatPart.add(paragraph);// adiciona linha vazia ao paragrafo da secao
-
-        Paragraph comentariosRecomendacoes = new Paragraph("Comentários: \n" + formulario.getComentario()
-                + "\nRecomendações ULSAV / EAC: \n" + formulario.getRecomendacaoUlsavEac() + "\nPrazos para ajuste: \n"
-                + formulario.getPrazo() + "\nRecomendações UR: \n" + formulario.getRecomendacaoUr()
-                + "\nRecomendações UC: \n" + formulario.getRecomendacaoUC(), f);
-        comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
-        subCatPart.add(comentariosRecomendacoes);
-
-        // ---------------------------------------
-        subCatPart.add(paragraph);// adiciona linha vazia ao paragrafo da secao
+        Paragraph comentarios = new Paragraph("Cadastro de Estabelecimentos", subFont);
+        comentarios.add("Comentarios");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
+        Paragraph resp = new Paragraph();
+        for (Supervisao supervisao : list){
+            FormPNSECadastroEstabelecimento formulario = gson.fromJson(resposta.get("pnse_cadastro_estabelecimentos").getResposta(), 
+                    FormPNSECadastroEstabelecimento.class);
+            //Adiciona o nome do municipio auditado
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nComentários: \n" + formulario.getComentario()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+    
+        //Colocar o subtitulo
+        comentarios.add("Recomendações ULSAV / EAC");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNSECadastroEstabelecimento formulario = gson.fromJson(resposta.get("pnse_cadastro_estabelecimentos").getResposta(), 
+                    FormPNSECadastroEstabelecimento.class);
+            //Adiciona o nome do municipio auditado
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações ULSAV / EAC: \n" + formulario.getRecomendacaoUlsavEac()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subtitulo
+        comentarios.add("Prazos para ajuste");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNSECadastroEstabelecimento formulario = gson.fromJson(resposta.get("pnse_cadastro_estabelecimentos").getResposta(), 
+                    FormPNSECadastroEstabelecimento.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nPrazos para ajuste: \n" + formulario.getPrazo()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subTitulo
+        comentarios.add("Recomendações UR");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNSECadastroEstabelecimento formulario = gson.fromJson(resposta.get("pnse_cadastro_estabelecimentos").getResposta(), 
+                    FormPNSECadastroEstabelecimento.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações UR: \n" + formulario.getRecomendacaoUr()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subtitulo
+        comentarios.add("Recomendações UC");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNSECadastroEstabelecimento formulario = gson.fromJson(resposta.get("pnse_cadastro_estabelecimentos").getResposta(), 
+                    FormPNSECadastroEstabelecimento.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações UC: \n" + formulario.getRecomendacaoUC()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
 //Fim
 //PNSE Vigilância-----------------------------------------------------------------------------------------------
-        FormPNSEVigilanciaController.FormPNSEVigilancia formulario2 = gson.fromJson(resposta.get("pnse_vigilancia").getResposta(),
+        comentarios.add("Vigilância Epidemiológica");
+        comentarios.add("Comentarios");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNSEVigilanciaController.FormPNSEVigilancia formulario2 = gson.fromJson(resposta.get("pnse_vigilancia").getResposta(),
                 FormPNSEVigilanciaController.FormPNSEVigilancia.class);
-        subPara = new Paragraph("Vigilância Epidemiológica", subFont);
-
-        subCatPart = catPart.addSection(subPara);// adiciona o sub titulo da secao do capitulo
-        subCatPart.add(paragraph);// adiciona linha vazia ao paragrafo da secao
-
-        comentariosRecomendacoes = new Paragraph("Comentários: \n" + formulario2.getComentario()
-                + "\nRecomendações ULSAV / EAC: \n" + formulario2.getRecomendacaoUlsavEac() + "\nPrazos para ajuste: \n"
-                + formulario2.getPrazo() + "\nRecomendações UR: \n" + formulario2.getRecomendacaoUr()
-                + "\nRecomendações UC: \n" + formulario2.getRecomendacaoUC(), f);
-        comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
-        subCatPart.add(comentariosRecomendacoes);
-
-        // ---------------------------------------
-        subCatPart.add(paragraph);// adiciona linha vazia ao paragrafo da secao
+            //Adiciona o nome do municipio auditado
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nComentários: \n" + formulario2.getComentario()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+    
+        //Colocar o subtitulo
+        comentarios.add("Recomendações ULSAV / EAC");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNSEVigilanciaController.FormPNSEVigilancia formulario2 = gson.fromJson(resposta.get("pnse_vigilancia").getResposta(),
+                FormPNSEVigilanciaController.FormPNSEVigilancia.class);
+            //Adiciona o nome do municipio auditado
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações ULSAV / EAC: \n" + formulario2.getRecomendacaoUlsavEac()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subtitulo
+        comentarios.add("Prazos para ajuste");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNSEVigilanciaController.FormPNSEVigilancia formulario2 = gson.fromJson(resposta.get("pnse_vigilancia").getResposta(),
+                FormPNSEVigilanciaController.FormPNSEVigilancia.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nPrazos para ajuste: \n" + formulario2.getPrazo()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subTitulo
+        comentarios.add("Recomendações UR");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNSEVigilanciaController.FormPNSEVigilancia formulario2 = gson.fromJson(resposta.get("pnse_vigilancia").getResposta(),
+                FormPNSEVigilanciaController.FormPNSEVigilancia.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações UR: \n" + formulario2.getRecomendacaoUr()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subtitulo
+        comentarios.add("Recomendações UC");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNSEVigilanciaController.FormPNSEVigilancia formulario2 = gson.fromJson(resposta.get("pnse_vigilancia").getResposta(),
+                FormPNSEVigilanciaController.FormPNSEVigilancia.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações UC: \n" + formulario2.getRecomendacaoUC()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
 //Fim
 //PNSE Controles-------------------------------------------------------------------------------------------------
-        FormPNSEControlesController.FormPNSEControles formulario3 = gson.fromJson(resposta.get("pnse_controles").getResposta(),
+        comentarios.add("Controles do Programa");
+        comentarios.add("Comentarios");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNSEControlesController.FormPNSEControles formulario3 = gson.fromJson(resposta.get("pnse_controles").getResposta(),
                 FormPNSEControlesController.FormPNSEControles.class);
-        subPara = new Paragraph("Controles do Programa", subFont);
-
-        subCatPart = catPart.addSection(subPara);// adiciona o sub titulo da secao do capitulo
-        subCatPart.add(paragraph);// adiciona linha vazia ao paragrafo da secao
-
-        comentariosRecomendacoes = new Paragraph("Comentários: \n" + formulario3.getComentario()
-                + "\nRecomendações ULSAV / EAC: \n" + formulario3.getRecomendacaoUlsavEac() + "\nPrazos para ajuste: \n"
-                + formulario3.getPrazo() + "\nRecomendações UR: \n" + formulario3.getRecomendacaoUr()
-                + "\nRecomendações UC: \n" + formulario3.getRecomendacaoUC(), f);
-        comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
-        subCatPart.add(comentariosRecomendacoes);
-
-        document.add(catPart);
-
+            //Adiciona o nome do municipio auditado
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nComentários: \n" + formulario3.getComentario()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+    
+        //Colocar o subtitulo
+        comentarios.add("Recomendações ULSAV / EAC");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNSEControlesController.FormPNSEControles formulario3 = gson.fromJson(resposta.get("pnse_controles").getResposta(),
+                FormPNSEControlesController.FormPNSEControles.class);
+            //Adiciona o nome do municipio auditado
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações ULSAV / EAC: \n" + formulario3.getRecomendacaoUlsavEac()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subtitulo
+        comentarios.add("Prazos para ajuste");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNSEControlesController.FormPNSEControles formulario3 = gson.fromJson(resposta.get("pnse_controles").getResposta(),
+                FormPNSEControlesController.FormPNSEControles.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nPrazos para ajuste: \n" + formulario3.getPrazo()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subTitulo
+        comentarios.add("Recomendações UR");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNSEControlesController.FormPNSEControles formulario3 = gson.fromJson(resposta.get("pnse_controles").getResposta(),
+                FormPNSEControlesController.FormPNSEControles.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações UR: \n" + formulario3.getRecomendacaoUr()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subtitulo
+        comentarios.add("Recomendações UC");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNSEControlesController.FormPNSEControles formulario3 = gson.fromJson(resposta.get("pnse_controles").getResposta(),
+                FormPNSEControlesController.FormPNSEControles.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações UC: \n" + formulario3.getRecomendacaoUC()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
         document.newPage();
     }
 //Fim
-
-    public void PNSCO(Document document, HashMap<String, Resposta> resposta) throws DocumentException {
+//PNSCO-----------------------------------------------------------------------------------------------------
+    public void PNSCO(Document document, List<Supervisao> list, HashMap<String, Resposta> resposta) throws DocumentException {
         Anchor anchor = new Anchor("Programa Nacional de Sanidade de Caprinos e Ovinos - Maranhão (PNSCO/MA)", chaFont);
         anchor.setName("Programa Nacional de Sanidade de Caprinos e Ovinos - Maranhão (PNSCO/MA)");
 
-        Chapter catPart = new Chapter(new Paragraph(anchor), 8);// onde e descrito qual o numero do capitulo
-
+        Chapter catPart = new Chapter(new Paragraph(anchor), 12);// onde e descrito qual o numero do capitulo
+        document.add(catPart);
         Gson gson = new Gson();
 //PNSCO Cadastro Estabelecimentos----------------------------------------------------------------------------
-        FormPNSCOCadastros formulario = gson.fromJson(resposta.get("pnsco_cadastro_estabelecimentos").getResposta(),
+        Paragraph comentarios = new Paragraph("Cadastro de Estabelecimentos", subFont);
+        comentarios.add("Comentarios");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
+        Paragraph resp = new Paragraph();
+        for (Supervisao supervisao : list){
+            FormPNSCOCadastros formulario = gson.fromJson(resposta.get("pnsco_cadastro_estabelecimentos").getResposta(),
                 FormPNSCOCadastros.class);
-        Paragraph subPara = new Paragraph("Cadastro de Estabelecimentos", subFont);
-
-        Section subCatPart = catPart.addSection(subPara);// adiciona o sub titulo da secao do capitulo
-
-        Paragraph paragraph = new Paragraph();
-        addEmptyLine(paragraph, 1);
-        subCatPart.add(paragraph);// adiciona linha vazia ao paragrafo da secao
-
-        Paragraph comentariosRecomendacoes = new Paragraph("Comentários: \n" + formulario.getComentario()
-                + "\nRecomendações ULSAV / EAC: \n" + formulario.getRecomendacaoUlsavEac() + "\nPrazos para ajuste: \n"
-                + formulario.getPrazo() + "\nRecomendações UR: \n" + formulario.getRecomendacaoUr()
-                + "\nRecomendações UC: \n" + formulario.getRecomendacaoUC(), f);
-        comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
-        subCatPart.add(comentariosRecomendacoes);
-
-        // ---------------------------------------
-        subCatPart.add(paragraph);// adiciona linha vazia ao paragrafo da secao
+            //Adiciona o nome do municipio auditado
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nComentários: \n" + formulario.getComentario()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+    
+        //Colocar o subtitulo
+        comentarios.add("Recomendações ULSAV / EAC");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNSCOCadastros formulario = gson.fromJson(resposta.get("pnsco_cadastro_estabelecimentos").getResposta(),
+                FormPNSCOCadastros.class);
+            //Adiciona o nome do municipio auditado
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações ULSAV / EAC: \n" + formulario.getRecomendacaoUlsavEac()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subtitulo
+        comentarios.add("Prazos para ajuste");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNSCOCadastros formulario = gson.fromJson(resposta.get("pnsco_cadastro_estabelecimentos").getResposta(),
+                FormPNSCOCadastros.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nPrazos para ajuste: \n" + formulario.getPrazo()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subTitulo
+        comentarios.add("Recomendações UR");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNSCOCadastros formulario = gson.fromJson(resposta.get("pnsco_cadastro_estabelecimentos").getResposta(),
+                FormPNSCOCadastros.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações UR: \n" + formulario.getRecomendacaoUr()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subtitulo
+        comentarios.add("Recomendações UC");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNSCOCadastros formulario = gson.fromJson(resposta.get("pnsco_cadastro_estabelecimentos").getResposta(),
+                FormPNSCOCadastros.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações UC: \n" + formulario.getRecomendacaoUC()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
 //Fim
 //PNSCO Vigilância------------------------------------------------------------------------------------------
-        FormPNSCOVigilanciaController.FormPNSCOVigilancia formulario2 = gson.fromJson(resposta.get("pnsco_vigilancia").getResposta(),
+        comentarios.add("Vigilância Epidemiológica");
+        comentarios.add("Comentarios");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNSCOVigilanciaController.FormPNSCOVigilancia formulario2 = gson.fromJson(resposta.get("pnsco_vigilancia").getResposta(),
                 FormPNSCOVigilanciaController.FormPNSCOVigilancia.class);
-        subPara = new Paragraph("Vigilância Epidemiológica", subFont);
-
-        subCatPart = catPart.addSection(subPara);// adiciona o sub titulo da secao do capitulo
-        subCatPart.add(paragraph);// adiciona linha vazia ao paragrafo da secao
-
-        comentariosRecomendacoes = new Paragraph("Comentários: \n" + formulario2.getComentario()
-                + "\nRecomendações ULSAV / EAC: \n" + formulario2.getRecomendacaoUlsavEac() + "\nPrazos para ajuste: \n"
-                + formulario2.getPrazo() + "\nRecomendações UR: \n" + formulario2.getRecomendacaoUr()
-                + "\nRecomendações UC: \n" + formulario2.getRecomendacaoUC(), f);
-        comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
-        subCatPart.add(comentariosRecomendacoes);
-
-        document.add(catPart);
-
+            //Adiciona o nome do municipio auditado
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nComentários: \n" + formulario2.getComentario()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+    
+        //Colocar o subtitulo
+        comentarios.add("Recomendações ULSAV / EAC");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNSCOVigilanciaController.FormPNSCOVigilancia formulario2 = gson.fromJson(resposta.get("pnsco_vigilancia").getResposta(),
+                FormPNSCOVigilanciaController.FormPNSCOVigilancia.class);
+            //Adiciona o nome do municipio auditado
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações ULSAV / EAC: \n" + formulario2.getRecomendacaoUlsavEac()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subtitulo
+        comentarios.add("Prazos para ajuste");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNSCOVigilanciaController.FormPNSCOVigilancia formulario2 = gson.fromJson(resposta.get("pnsco_vigilancia").getResposta(),
+                FormPNSCOVigilanciaController.FormPNSCOVigilancia.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nPrazos para ajuste: \n" + formulario2.getPrazo()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subTitulo
+        comentarios.add("Recomendações UR");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNSCOVigilanciaController.FormPNSCOVigilancia formulario2 = gson.fromJson(resposta.get("pnsco_vigilancia").getResposta(),
+                FormPNSCOVigilanciaController.FormPNSCOVigilancia.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações UR: \n" + formulario2.getRecomendacaoUr()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subtitulo
+        comentarios.add("Recomendações UC");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNSCOVigilanciaController.FormPNSCOVigilancia formulario2 = gson.fromJson(resposta.get("pnsco_vigilancia").getResposta(),
+                FormPNSCOVigilanciaController.FormPNSCOVigilancia.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações UC: \n" + formulario2.getRecomendacaoUC()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
         document.newPage();
     }
 //Fim
-
-    public void PNSS(Document document, HashMap<String, Resposta> resposta) throws DocumentException {
+//PNSS------------------------------------------------------------------------------------------------------
+    public void PNSS(Document document, List<Supervisao> list, HashMap<String, Resposta> resposta) throws DocumentException {
         Anchor anchor = new Anchor("Programa Nacional de Sanidade de Suídeos - Maranhão (PNSS/MA)", chaFont);
         anchor.setName("Programa Nacional de Sanidade de Suídeos - Maranhão (PNSS/MA)");
 
-        Chapter catPart = new Chapter(new Paragraph(anchor), 10);// onde e descrito qual o numero do capitulo
-
+        Chapter catPart = new Chapter(new Paragraph(anchor), 13);// onde e descrito qual o numero do capitulo
+        document.add(catPart);
         Gson gson = new Gson();
 //PNSS Cadastro Estabelecimentos-----------------------------------------------------------------------------
-        FormPNSSCadastroEstabelecimentosController.FormPNSSCadastroEstabelecimento formulario = gson.fromJson(
+        Paragraph comentarios = new Paragraph("Cadastro de Estabelecimentos", subFont);
+        comentarios.add("Comentarios");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
+        Paragraph resp = new Paragraph();
+        for (Supervisao supervisao : list){
+            FormPNSSCadastroEstabelecimentosController.FormPNSSCadastroEstabelecimento formulario = gson.fromJson(
                 resposta.get("pnss_cadastro_estabelecimentos").getResposta(), FormPNSSCadastroEstabelecimentosController.FormPNSSCadastroEstabelecimento.class);
-        Paragraph subPara = new Paragraph("Cadastro de Estabelecimentos", subFont);
-
-        Section subCatPart = catPart.addSection(subPara);// adiciona o sub titulo da secao do capitulo
-
-        Paragraph paragraph = new Paragraph();
-        addEmptyLine(paragraph, 1);
-        subCatPart.add(paragraph);// adiciona linha vazia ao paragrafo da secao
-
-        Paragraph comentariosRecomendacoes = new Paragraph("Comentários: \n" + formulario.getComentario()
-                + "\nRecomendações ULSAV / EAC: \n" + formulario.getRecomendacaoUlsavEac() + "\nPrazos para ajuste: \n"
-                + formulario.getPrazo() + "\nRecomendações UR: \n" + formulario.getRecomendacaoUr()
-                + "\nRecomendações UC: \n" + formulario.getRecomendacaoUC(), f);
-        comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
-        subCatPart.add(comentariosRecomendacoes);
-
-        // ---------------------------------------
-        subCatPart.add(paragraph);// adiciona linha vazia ao paragrafo da secao
+            //Adiciona o nome do municipio auditado
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nComentários: \n" + formulario.getComentario()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+    
+        //Colocar o subtitulo
+        comentarios.add("Recomendações ULSAV / EAC");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNSSCadastroEstabelecimentosController.FormPNSSCadastroEstabelecimento formulario = gson.fromJson(
+                resposta.get("pnss_cadastro_estabelecimentos").getResposta(), FormPNSSCadastroEstabelecimentosController.FormPNSSCadastroEstabelecimento.class);
+            //Adiciona o nome do municipio auditado
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações ULSAV / EAC: \n" + formulario.getRecomendacaoUlsavEac()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subtitulo
+        comentarios.add("Prazos para ajuste");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNSSCadastroEstabelecimentosController.FormPNSSCadastroEstabelecimento formulario = gson.fromJson(
+                resposta.get("pnss_cadastro_estabelecimentos").getResposta(), FormPNSSCadastroEstabelecimentosController.FormPNSSCadastroEstabelecimento.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nPrazos para ajuste: \n" + formulario.getPrazo()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subTitulo
+        comentarios.add("Recomendações UR");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNSSCadastroEstabelecimentosController.FormPNSSCadastroEstabelecimento formulario = gson.fromJson(
+                resposta.get("pnss_cadastro_estabelecimentos").getResposta(), FormPNSSCadastroEstabelecimentosController.FormPNSSCadastroEstabelecimento.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações UR: \n" + formulario.getRecomendacaoUr()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subtitulo
+        comentarios.add("Recomendações UC");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNSSCadastroEstabelecimentosController.FormPNSSCadastroEstabelecimento formulario = gson.fromJson(
+                resposta.get("pnss_cadastro_estabelecimentos").getResposta(), FormPNSSCadastroEstabelecimentosController.FormPNSSCadastroEstabelecimento.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações UC: \n" + formulario.getRecomendacaoUC()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
 //Fim
 //PNSS Vigilância------------------------------------------------------------------------------------------
-        FormPNSSVigilancia formulario2 = gson.fromJson(resposta.get("pnss_vigilancia").getResposta(),
+        comentarios.add("Vigilância Epidemiológica");
+        comentarios.add("Comentarios");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNSSVigilancia formulario2 = gson.fromJson(resposta.get("pnss_vigilancia").getResposta(),
                 FormPNSSVigilancia.class);
-        subPara = new Paragraph("Vigilância Epidemiológica", subFont);
-
-        subCatPart = catPart.addSection(subPara);// adiciona o sub titulo da secao do capitulo
-        subCatPart.add(paragraph);// adiciona linha vazia ao paragrafo da secao
-
-        subCatPart.add(new Paragraph("Registro da vigilância em propriedades e pontos de risco: "
-                + formulario2.getRegistroVigilancia() + "\nMortandade: " + formulario2.getMortandade(), f));
-
-        subCatPart.add(paragraph);// adiciona linha vazia ao paragrafo da secao
-
-        comentariosRecomendacoes = new Paragraph("Comentários: \n" + formulario2.getComentario()
-                + "\nRecomendações ULSAV / EAC: \n" + formulario2.getRecomendacaoUlsavEac() + "\nPrazos para ajuste: \n"
-                + formulario2.getPrazo() + "\nRecomendações UR: \n" + formulario2.getRecomendacaoUr()
-                + "\nRecomendações UC: \n" + formulario2.getRecomendacaoUC(), f);
-        comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
-        subCatPart.add(comentariosRecomendacoes);
-
-        document.add(catPart);
-
+            //Adiciona o nome do municipio auditado
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nComentários: \n" + formulario2.getComentario()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+    
+        //Colocar o subtitulo
+        comentarios.add("Recomendações ULSAV / EAC");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNSSVigilancia formulario2 = gson.fromJson(resposta.get("pnss_vigilancia").getResposta(),
+                FormPNSSVigilancia.class);
+            //Adiciona o nome do municipio auditado
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações ULSAV / EAC: \n" + formulario2.getRecomendacaoUlsavEac()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subtitulo
+        comentarios.add("Prazos para ajuste");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNSSVigilancia formulario2 = gson.fromJson(resposta.get("pnss_vigilancia").getResposta(),
+                FormPNSSVigilancia.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nPrazos para ajuste: \n" + formulario2.getPrazo()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subTitulo
+        comentarios.add("Recomendações UR");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNSSVigilancia formulario2 = gson.fromJson(resposta.get("pnss_vigilancia").getResposta(),
+                FormPNSSVigilancia.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações UR: \n" + formulario2.getRecomendacaoUr()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subtitulo
+        comentarios.add("Recomendações UC");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNSSVigilancia formulario2 = gson.fromJson(resposta.get("pnss_vigilancia").getResposta(),
+                FormPNSSVigilancia.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações UC: \n" + formulario2.getRecomendacaoUC()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
         document.newPage();
     }
 //Fim
-
-    public void PNSA(Document document, HashMap<String, Resposta> resposta) throws DocumentException {
+//PNSA--------------------------------------------------------------------------------------------------------
+    public void PNSA(Document document, List<Supervisao> list, HashMap<String, Resposta> resposta) throws DocumentException {
         Anchor anchor = new Anchor("Programa Nacional de Sanidade Avícola - Maranhão (PNSA/MA)", chaFont);
         anchor.setName("Programa Nacional de Sanidade Avícola - Maranhão (PNSA/MA)");
 
-        Chapter catPart = new Chapter(new Paragraph(anchor), 11);// onde e descrito qual o numero do capitulo
-
+        Chapter catPart = new Chapter(new Paragraph(anchor), 14);// onde e descrito qual o numero do capitulo
+        document.add(catPart);
         Gson gson = new Gson();
 //PNSA Cadastro Estabelecimentos-------------------------------------------------------------------------------
-        FormPNSACadastroEstabelecimentosController.FormPNSACadastroEstabelecimentos formulario = gson.fromJson(
+        Paragraph comentarios = new Paragraph("Cadastro de Estabelecimentos", subFont);
+        comentarios.add("Comentarios");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
+        Paragraph resp = new Paragraph();
+        for (Supervisao supervisao : list){
+            FormPNSACadastroEstabelecimentosController.FormPNSACadastroEstabelecimentos formulario = gson.fromJson(
                 resposta.get("pnsa_cadastro_estabelecimentos").getResposta(), FormPNSACadastroEstabelecimentosController.FormPNSACadastroEstabelecimentos.class);
-        Paragraph subPara = new Paragraph("Cadastro de Estabelecimentos", subFont);
-
-        Section subCatPart = catPart.addSection(subPara);// adiciona o sub titulo da secao do capitulo
-
-        Paragraph paragraph = new Paragraph();
-        addEmptyLine(paragraph, 1);
-        subCatPart.add(paragraph);// adiciona linha vazia ao paragrafo da secao
-
-        Paragraph comentariosRecomendacoes = new Paragraph("Comentários: \n" + formulario.getComentario()
-                + "\nRecomendações ULSAV / EAC: \n" + formulario.getRecomendacaoUlsavEac() + "\nPrazos para ajuste: \n"
-                + formulario.getPrazo() + "\nRecomendações UR: \n" + formulario.getRecomendacaoUr()
-                + "\nRecomendações UC: \n" + formulario.getRecomendacaoUC(), f);
-        comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
-        subCatPart.add(comentariosRecomendacoes);
-
-        // ---------------------------------------
-        subCatPart.add(paragraph);// adiciona linha vazia ao paragrafo da secao
+            //Adiciona o nome do municipio auditado
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nComentários: \n" + formulario.getComentario()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+    
+        //Colocar o subtitulo
+        comentarios.add("Recomendações ULSAV / EAC");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNSACadastroEstabelecimentosController.FormPNSACadastroEstabelecimentos formulario = gson.fromJson(
+                resposta.get("pnsa_cadastro_estabelecimentos").getResposta(), FormPNSACadastroEstabelecimentosController.FormPNSACadastroEstabelecimentos.class);
+            //Adiciona o nome do municipio auditado
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações ULSAV / EAC: \n" + formulario.getRecomendacaoUlsavEac()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subtitulo
+        comentarios.add("Prazos para ajuste");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNSACadastroEstabelecimentosController.FormPNSACadastroEstabelecimentos formulario = gson.fromJson(
+                resposta.get("pnsa_cadastro_estabelecimentos").getResposta(), FormPNSACadastroEstabelecimentosController.FormPNSACadastroEstabelecimentos.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nPrazos para ajuste: \n" + formulario.getPrazo()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subTitulo
+        comentarios.add("Recomendações UR");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNSACadastroEstabelecimentosController.FormPNSACadastroEstabelecimentos formulario = gson.fromJson(
+                resposta.get("pnsa_cadastro_estabelecimentos").getResposta(), FormPNSACadastroEstabelecimentosController.FormPNSACadastroEstabelecimentos.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações UR: \n" + formulario.getRecomendacaoUr()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subtitulo
+        comentarios.add("Recomendações UC");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNSACadastroEstabelecimentosController.FormPNSACadastroEstabelecimentos formulario = gson.fromJson(
+                resposta.get("pnsa_cadastro_estabelecimentos").getResposta(), FormPNSACadastroEstabelecimentosController.FormPNSACadastroEstabelecimentos.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações UC: \n" + formulario.getRecomendacaoUC()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
 //Fim
 //PNSA Vigilância-------------------------------------------------------------------------------------------
-        FormPNSAVigilancia formulario2 = gson.fromJson(resposta.get("pnsa_vigilancia").getResposta(),
+        comentarios.add("Vigilância Epidemiológica");
+        comentarios.add("Comentarios");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNSAVigilancia formulario2 = gson.fromJson(resposta.get("pnsa_vigilancia").getResposta(),
                 FormPNSAVigilancia.class);
-        subPara = new Paragraph("Vigilância Epidemiológica", subFont);
-
-        subCatPart = catPart.addSection(subPara);// adiciona o sub titulo da secao do capitulo
-        subCatPart.add(paragraph);// adiciona linha vazia ao paragrafo da secao
-
-        subCatPart.add(new Paragraph("Mortandade: " + formulario2.getMortandade()
-                + "\nDoenças de notificação obrigatória: " + formulario2.getDoencaNotificacao(), f));
-        comentariosRecomendacoes = new Paragraph("Comentários: \n" + formulario2.getComentario()
-                + "\nRecomendações ULSAV / EAC: \n" + formulario2.getRecomendacaoUlsavEac() + "\nPrazos para ajuste: \n"
-                + formulario2.getPrazo() + "\nRecomendações UR: \n" + formulario2.getRecomendacaoUr()
-                + "\nRecomendações UC: \n" + formulario2.getRecomendacaoUC(), f);
-        comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
-        subCatPart.add(comentariosRecomendacoes);
-
-        document.add(catPart);
-
+            //Adiciona o nome do municipio auditado
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nComentários: \n" + formulario2.getComentario()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+    
+        //Colocar o subtitulo
+        comentarios.add("Recomendações ULSAV / EAC");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNSAVigilancia formulario2 = gson.fromJson(resposta.get("pnsa_vigilancia").getResposta(),
+                FormPNSAVigilancia.class);
+            //Adiciona o nome do municipio auditado
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações ULSAV / EAC: \n" + formulario2.getRecomendacaoUlsavEac()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subtitulo
+        comentarios.add("Prazos para ajuste");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNSAVigilancia formulario2 = gson.fromJson(resposta.get("pnsa_vigilancia").getResposta(),
+                FormPNSAVigilancia.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nPrazos para ajuste: \n" + formulario2.getPrazo()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subTitulo
+        comentarios.add("Recomendações UR");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNSAVigilancia formulario2 = gson.fromJson(resposta.get("pnsa_vigilancia").getResposta(),
+                FormPNSAVigilancia.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações UR: \n" + formulario2.getRecomendacaoUr()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subtitulo
+        comentarios.add("Recomendações UC");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormPNSAVigilancia formulario2 = gson.fromJson(resposta.get("pnsa_vigilancia").getResposta(),
+                FormPNSAVigilancia.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações UC: \n" + formulario2.getRecomendacaoUC()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
         document.newPage();
     }
 //Fim
-
-    public void InteracaoPartes(Document document, HashMap<String, Resposta> resposta) throws DocumentException {
+//Interação Partes--------------------------------------------------------------------------------------------
+    public void InteracaoPartes(Document document, List<Supervisao> list, HashMap<String, Resposta> resposta) throws DocumentException {
         Anchor anchor = new Anchor("Interação com as partes interessadas", chaFont);
         anchor.setName("Interação com as partes interessadas");
 
-        Chapter catPart = new Chapter(new Paragraph(anchor), 12);// onde e descrito qual o numero do capitulo
-
+        Chapter catPart = new Chapter(new Paragraph(anchor), 15);// onde e descrito qual o numero do capitulo
+        document.add(catPart);
         Gson gson = new Gson();
 //IP Comunidade Educação--------------------------------------------------------------------------------------
-        FormICEducacaoSanitaria formulario = gson.fromJson(resposta.get("interacao_comunidade_educacao").getResposta(),
+        Paragraph comentarios = new Paragraph("Educação sanitária e comunicação social (divulgação e publicidade)\n", subFont);
+        comentarios.add("Comentarios");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
+        Paragraph resp = new Paragraph();
+        for (Supervisao supervisao : list){
+            FormICEducacaoSanitaria formulario = gson.fromJson(resposta.get("interacao_comunidade_educacao").getResposta(),
                 FormICEducacaoSanitaria.class);
-        Paragraph subPara = new Paragraph("Educação sanitária e comunicação social (divulgação e publicidade)", subFont);
-
-        Section subCatPart = catPart.addSection(subPara);// adiciona o sub titulo da secao do capitulo
-
-        Paragraph paragraph = new Paragraph();
-        addEmptyLine(paragraph, 1);
-        subCatPart.add(paragraph);// adiciona linha vazia ao paragrafo da secao
-
-        Paragraph comentariosRecomendacoes = new Paragraph("Comentários: \n" + formulario.getComentario()
-                + "\nRecomendações ULSAV / EAC: \n" + formulario.getRecomendacaoUlsavEac() + "\nPrazos para ajuste: \n"
-                + formulario.getPrazo() + "\nRecomendações UR: \n" + formulario.getRecomendacaoUr()
-                + "\nRecomendações UC: \n" + formulario.getRecomendacaoUC(), f);
-        comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
-        subCatPart.add(comentariosRecomendacoes);
-
-        // -----------------------------------------
-        subCatPart.add(paragraph);// adiciona linha vazia ao paragrafo da secao
+            //Adiciona o nome do municipio auditado
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nComentários: \n" + formulario.getComentario()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+    
+        //Colocar o subtitulo
+        comentarios.add("Recomendações ULSAV / EAC");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormICEducacaoSanitaria formulario = gson.fromJson(resposta.get("interacao_comunidade_educacao").getResposta(),
+                FormICEducacaoSanitaria.class);
+            //Adiciona o nome do municipio auditado
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações ULSAV / EAC: \n" + formulario.getRecomendacaoUlsavEac()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subtitulo
+        comentarios.add("Prazos para ajuste");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormICEducacaoSanitaria formulario = gson.fromJson(resposta.get("interacao_comunidade_educacao").getResposta(),
+                FormICEducacaoSanitaria.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nPrazos para ajuste: \n" + formulario.getPrazo()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subTitulo
+        comentarios.add("Recomendações UR");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormICEducacaoSanitaria formulario = gson.fromJson(resposta.get("interacao_comunidade_educacao").getResposta(),
+                FormICEducacaoSanitaria.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações UR: \n" + formulario.getRecomendacaoUr()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subtitulo
+        comentarios.add("Recomendações UC");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormICEducacaoSanitaria formulario = gson.fromJson(resposta.get("interacao_comunidade_educacao").getResposta(),
+                FormICEducacaoSanitaria.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações UC: \n" + formulario.getRecomendacaoUC()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
 //Fim
 //IP Comunidade-----------------------------------------------------------------------------------------------
-        FormICParticipacaoComunidade formulario2 = gson.fromJson(
+        comentarios.add("Participação com a comunidade\n");
+        comentarios.add("Comentarios");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormICParticipacaoComunidade formulario2 = gson.fromJson(
                 resposta.get("interacao_comunidade_comunidade").getResposta(), FormICParticipacaoComunidade.class);
-        subPara = new Paragraph("Participação com a comunidade", subFont);
-
-        subCatPart = catPart.addSection(subPara);// adiciona o sub titulo da secao do capitulo
-        subCatPart.add(paragraph);// adiciona linha vazia ao paragrafo da secao
-
-        comentariosRecomendacoes = new Paragraph("Comentários: \n" + formulario2.getComentario()
-                + "\nRecomendações ULSAV / EAC: \n" + formulario2.getRecomendacaoUlsavEac() + "\nPrazos para ajuste: \n"
-                + formulario2.getPrazo() + "\nRecomendações UR: \n" + formulario2.getRecomendacaoUr()
-                + "\nRecomendações UC: \n" + formulario2.getRecomendacaoUC(), f);
-        comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
-        subCatPart.add(comentariosRecomendacoes);
-
-        // ------------------------------------------------------
-        subCatPart.add(paragraph);// adiciona linha vazia ao paragrafo da secao
+            //Adiciona o nome do municipio auditado
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nComentários: \n" + formulario2.getComentario()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+    
+        //Colocar o subtitulo
+        comentarios.add("Recomendações ULSAV / EAC");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormICParticipacaoComunidade formulario2 = gson.fromJson(
+                resposta.get("interacao_comunidade_comunidade").getResposta(), FormICParticipacaoComunidade.class);
+            //Adiciona o nome do municipio auditado
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações ULSAV / EAC: \n" + formulario2.getRecomendacaoUlsavEac()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subtitulo
+        comentarios.add("Prazos para ajuste");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormICParticipacaoComunidade formulario2 = gson.fromJson(
+                resposta.get("interacao_comunidade_comunidade").getResposta(), FormICParticipacaoComunidade.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nPrazos para ajuste: \n" + formulario2.getPrazo()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subTitulo
+        comentarios.add("Recomendações UR");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormICParticipacaoComunidade formulario2 = gson.fromJson(
+                resposta.get("interacao_comunidade_comunidade").getResposta(), FormICParticipacaoComunidade.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações UR: \n" + formulario2.getRecomendacaoUr()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subtitulo
+        comentarios.add("Recomendações UC");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormICParticipacaoComunidade formulario2 = gson.fromJson(
+                resposta.get("interacao_comunidade_comunidade").getResposta(), FormICParticipacaoComunidade.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações UC: \n" + formulario2.getRecomendacaoUC()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
 //Fim
 //IP Comunidade Instituições----------------------------------------------------------------------------------
-        FormICParticipacaoInstituicoes formulario3 = gson.fromJson(
+        comentarios.add("Participação com instituições e representações\n");
+        comentarios.add("Comentarios");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormICParticipacaoInstituicoes formulario3 = gson.fromJson(
                 resposta.get("interacao_comunidade_instituicoes").getResposta(), FormICParticipacaoInstituicoes.class);
-        subPara = new Paragraph("Participação com instituições e representações", subFont);
-
-        subCatPart = catPart.addSection(subPara);// adiciona o sub titulo da secao do capitulo
-        subCatPart.add(paragraph);// adiciona linha vazia ao paragrafo da secao
-
-        comentariosRecomendacoes = new Paragraph("Comentários: \n" + formulario3.getComentario()
-                + "\nRecomendações ULSAV / EAC: \n" + formulario3.getRecomendacaoUlsavEac() + "\nPrazos para ajuste: \n"
-                + formulario3.getPrazo() + "\nRecomendações UR: \n" + formulario3.getRecomendacaoUr()
-                + "\nRecomendações UC: \n" + formulario3.getRecomendacaoUC(), f);
-        comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
-        subCatPart.add(comentariosRecomendacoes);
-
-        // ------------------------------------------------------
-        subCatPart.add(paragraph);// adiciona linha vazia ao paragrafo da secao
+            //Adiciona o nome do municipio auditado
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nComentários: \n" + formulario3.getComentario()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+    
+        //Colocar o subtitulo
+        comentarios.add("Recomendações ULSAV / EAC");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormICParticipacaoInstituicoes formulario3 = gson.fromJson(
+                resposta.get("interacao_comunidade_instituicoes").getResposta(), FormICParticipacaoInstituicoes.class);
+            //Adiciona o nome do municipio auditado
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações ULSAV / EAC: \n" + formulario3.getRecomendacaoUlsavEac()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subtitulo
+        comentarios.add("Prazos para ajuste");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormICParticipacaoInstituicoes formulario3 = gson.fromJson(
+                resposta.get("interacao_comunidade_instituicoes").getResposta(), FormICParticipacaoInstituicoes.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nPrazos para ajuste: \n" + formulario3.getPrazo()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subTitulo
+        comentarios.add("Recomendações UR");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormICParticipacaoInstituicoes formulario3 = gson.fromJson(
+                resposta.get("interacao_comunidade_instituicoes").getResposta(), FormICParticipacaoInstituicoes.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações UR: \n" + formulario3.getRecomendacaoUr()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subtitulo
+        comentarios.add("Recomendações UC");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormICParticipacaoInstituicoes formulario3 = gson.fromJson(
+                resposta.get("interacao_comunidade_instituicoes").getResposta(), FormICParticipacaoInstituicoes.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações UC: \n" + formulario3.getRecomendacaoUC()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
 //Fim
 //IP Veterinario Habilitação---------------------------------------------------------------------------------
-        FormIMVHabilitacao formulario4 = gson.fromJson(resposta.get("interacao_veterinario_habilitacao").getResposta(),
+        comentarios.add("Veterinario Habilitação\n");
+        comentarios.add("Comentarios");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormIMVHabilitacao formulario4 = gson.fromJson(resposta.get("interacao_veterinario_habilitacao").getResposta(),
                 FormIMVHabilitacao.class);
-        subPara = new Paragraph("Participação com instituições e representações", subFont);
-
-        subCatPart = catPart.addSection(subPara);// adiciona o sub titulo da secao do capitulo
-        subCatPart.add(paragraph);// adiciona linha vazia ao paragrafo da secao
-
-        comentariosRecomendacoes = new Paragraph("Comentários: \n" + formulario4.getComentario()
-                + "\nRecomendações ULSAV / EAC: \n" + formulario4.getRecomendacaoUlsavEac() + "\nPrazos para ajuste: \n"
-                + formulario4.getPrazo() + "\nRecomendações UR: \n" + formulario4.getRecomendacaoUr()
-                + "\nRecomendações UC: \n" + formulario4.getRecomendacaoUC(), f);
-        comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
-        subCatPart.add(comentariosRecomendacoes);
-
-        // ------------------------------------------------------
-        subCatPart.add(paragraph);// adiciona linha vazia ao paragrafo da secao
+            //Adiciona o nome do municipio auditado
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nComentários: \n" + formulario4.getComentario()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+    
+        //Colocar o subtitulo
+        comentarios.add("Recomendações ULSAV / EAC");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormIMVHabilitacao formulario4 = gson.fromJson(resposta.get("interacao_veterinario_habilitacao").getResposta(),
+                FormIMVHabilitacao.class);
+            //Adiciona o nome do municipio auditado
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações ULSAV / EAC: \n" + formulario4.getRecomendacaoUlsavEac()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subtitulo
+        comentarios.add("Prazos para ajuste");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormIMVHabilitacao formulario4 = gson.fromJson(resposta.get("interacao_veterinario_habilitacao").getResposta(),
+                FormIMVHabilitacao.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nPrazos para ajuste: \n" + formulario4.getPrazo()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subTitulo
+        comentarios.add("Recomendações UR");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormIMVHabilitacao formulario4 = gson.fromJson(resposta.get("interacao_veterinario_habilitacao").getResposta(),
+                FormIMVHabilitacao.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações UR: \n" + formulario4.getRecomendacaoUr()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subtitulo
+        comentarios.add("Recomendações UC");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormIMVHabilitacao formulario4 = gson.fromJson(resposta.get("interacao_veterinario_habilitacao").getResposta(),
+                FormIMVHabilitacao.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações UC: \n" + formulario4.getRecomendacaoUC()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
 //Fim
 //IP Instituição Inspeção-----------------------------------------------------------------------------------------
-        FormIISistemaInspecao formulario5 = gson.fromJson(resposta.get("interacao_instituicao_inspecao").getResposta(),
+        comentarios.add("Sistema de inspeção (seguridade alimentar)\n");
+        comentarios.add("Comentarios");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormIISistemaInspecao formulario5 = gson.fromJson(resposta.get("interacao_instituicao_inspecao").getResposta(),
                 FormIISistemaInspecao.class);
-        subPara = new Paragraph("Sistema de inspeção (seguridade alimentar)", subFont);
-
-        subCatPart = catPart.addSection(subPara);// adiciona o sub titulo da secao do capitulo
-        subCatPart.add(paragraph);// adiciona linha vazia ao paragrafo da secao
-
-        comentariosRecomendacoes = new Paragraph("Comentários: \n" + formulario5.getComentario()
-                + "\nRecomendações ULSAV / EAC: \n" + formulario5.getRecomendacaoUlsavEac() + "\nPrazos para ajuste: \n"
-                + formulario5.getPrazo() + "\nRecomendações UR: \n" + formulario5.getRecomendacaoUr()
-                + "\nRecomendações UC: \n" + formulario5.getRecomendacaoUC(), f);
-        comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
-        subCatPart.add(comentariosRecomendacoes);
-
-        // ------------------------------------------------------
-        subCatPart.add(paragraph);// adiciona linha vazia ao paragrafo da secao
+            //Adiciona o nome do municipio auditado
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nComentários: \n" + formulario5.getComentario()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+    
+        //Colocar o subtitulo
+        comentarios.add("Recomendações ULSAV / EAC");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormIISistemaInspecao formulario5 = gson.fromJson(resposta.get("interacao_instituicao_inspecao").getResposta(),
+                FormIISistemaInspecao.class);
+            //Adiciona o nome do municipio auditado
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações ULSAV / EAC: \n" + formulario5.getRecomendacaoUlsavEac()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subtitulo
+        comentarios.add("Prazos para ajuste");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormIISistemaInspecao formulario5 = gson.fromJson(resposta.get("interacao_instituicao_inspecao").getResposta(),
+                FormIISistemaInspecao.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nPrazos para ajuste: \n" + formulario5.getPrazo()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subTitulo
+        comentarios.add("Recomendações UR");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormIISistemaInspecao formulario5 = gson.fromJson(resposta.get("interacao_instituicao_inspecao").getResposta(),
+                FormIISistemaInspecao.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações UR: \n" + formulario5.getRecomendacaoUr()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subtitulo
+        comentarios.add("Recomendações UC");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormIISistemaInspecao formulario5 = gson.fromJson(resposta.get("interacao_instituicao_inspecao").getResposta(),
+                FormIISistemaInspecao.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações UC: \n" + formulario5.getRecomendacaoUC()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
 //Fim
 //IP Instituição SUS----------------------------------------------------------------------------------------------
-        FormIISUS formulario6 = gson.fromJson(resposta.get("interacao_instituicao_sus").getResposta(), FormIISUS.class);
-        subPara = new Paragraph("Sistema Único de Saúde (zoonoses, vigilância sanitária, etc.)", subFont);
-
-        subCatPart = catPart.addSection(subPara);// adiciona o sub titulo da secao do capitulo
-        subCatPart.add(paragraph);// adiciona linha vazia ao paragrafo da secao
-
-        comentariosRecomendacoes = new Paragraph("Comentários: \n" + formulario6.getComentario()
-                + "\nRecomendações ULSAV / EAC: \n" + formulario6.getRecomendacaoUlsavEac() + "\nPrazos para ajuste: \n"
-                + formulario6.getPrazo() + "\nRecomendações UR: \n" + formulario6.getRecomendacaoUr()
-                + "\nRecomendações UC: \n" + formulario6.getRecomendacaoUC(), f);
-        comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
-        subCatPart.add(comentariosRecomendacoes);
-
-        document.add(catPart);
-
+        comentarios.add("Sistema Único de Saúde (zoonoses, vigilância sanitária, etc.)\n");
+        comentarios.add("Comentarios");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormIISUS formulario6 = gson.fromJson(resposta.get("interacao_instituicao_sus").getResposta(), FormIISUS.class);
+            //Adiciona o nome do municipio auditado
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nComentários: \n" + formulario6.getComentario()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+    
+        //Colocar o subtitulo
+        comentarios.add("Recomendações ULSAV / EAC");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormIISUS formulario6 = gson.fromJson(resposta.get("interacao_instituicao_sus").getResposta(), FormIISUS.class);
+            //Adiciona o nome do municipio auditado
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações ULSAV / EAC: \n" + formulario6.getRecomendacaoUlsavEac()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subtitulo
+        comentarios.add("Prazos para ajuste");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormIISUS formulario6 = gson.fromJson(resposta.get("interacao_instituicao_sus").getResposta(), FormIISUS.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nPrazos para ajuste: \n" + formulario6.getPrazo()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subTitulo
+        comentarios.add("Recomendações UR");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormIISUS formulario6 = gson.fromJson(resposta.get("interacao_instituicao_sus").getResposta(), FormIISUS.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações UR: \n" + formulario6.getRecomendacaoUr()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subtitulo
+        comentarios.add("Recomendações UC");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormIISUS formulario6 = gson.fromJson(resposta.get("interacao_instituicao_sus").getResposta(), FormIISUS.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações UC: \n" + formulario6.getRecomendacaoUC()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
         document.newPage();
     }
 //Fim
-
-    public void AcessoMercados(Document document, HashMap<String, Resposta> resposta) throws DocumentException {
+//Acesso Mercados--------------------------------------------------------------------------------------------
+    public void AcessoMercados(Document document, List<Supervisao> list, HashMap<String, Resposta> resposta) throws DocumentException {
         Anchor anchor = new Anchor("Acesso aos mercados", chaFont);
         anchor.setName("Acesso aos mercados");
 
-        Chapter catPart = new Chapter(new Paragraph(anchor), 13);// onde e descrito qual o numero do capitulo
-
+        Chapter catPart = new Chapter(new Paragraph(anchor), 16);// onde e descrito qual o numero do capitulo
+        document.add(catPart);
         Gson gson = new Gson();
 //Acesso aos Mercados----------------------------------------------------------------------------------------
-        FormAMAcesso formulario = gson.fromJson(resposta.get("acesso_mercado").getResposta(), FormAMAcesso.class);
-        Paragraph subPara = new Paragraph("Acesso aos mercados", subFont);
-
-        Section subCatPart = catPart.addSection(subPara);// adiciona o sub titulo da secao do capitulo
-
-        Paragraph paragraph = new Paragraph();
-        addEmptyLine(paragraph, 1);
-        subCatPart.add(paragraph);// adiciona linha vazia ao paragrafo da secao
-
-        Paragraph comentariosRecomendacoes = new Paragraph("Comentários: \n" + formulario.getComentario()
-                + "\nRecomendações ULSAV / EAC: \n" + formulario.getRecomendacaoUlsavEac() + "\nPrazos para ajuste: \n"
-                + formulario.getPrazo() + "\nRecomendações UR: \n" + formulario.getRecomendacaoUr()
-                + "\nRecomendações UC: \n" + formulario.getRecomendacaoUC(), f);
-        comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
-        subCatPart.add(comentariosRecomendacoes);
-
-        document.add(catPart);
-
+        Paragraph comentarios = new Paragraph("Acesso aos mercados\n", subFont);
+        comentarios.add("Comentarios");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
+        Paragraph resp = new Paragraph();
+        for (Supervisao supervisao : list){
+            FormAMAcesso formulario = gson.fromJson(resposta.get("acesso_mercado").getResposta(), FormAMAcesso.class);
+            //Adiciona o nome do municipio auditado
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nComentários: \n" + formulario.getComentario()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+    
+        //Colocar o subtitulo
+        comentarios.add("Recomendações ULSAV / EAC");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormAMAcesso formulario = gson.fromJson(resposta.get("acesso_mercado").getResposta(), FormAMAcesso.class);
+            //Adiciona o nome do municipio auditado
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações ULSAV / EAC: \n" + formulario.getRecomendacaoUlsavEac()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subtitulo
+        comentarios.add("Prazos para ajuste");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormAMAcesso formulario = gson.fromJson(resposta.get("acesso_mercado").getResposta(), FormAMAcesso.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nPrazos para ajuste: \n" + formulario.getPrazo()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subTitulo
+        comentarios.add("Recomendações UR");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormAMAcesso formulario = gson.fromJson(resposta.get("acesso_mercado").getResposta(), FormAMAcesso.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações UR: \n" + formulario.getRecomendacaoUr()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
+        
+        //Colocar o subtitulo
+        comentarios.add("Recomendações UC");
+        document.add(comentarios);
+        comentarios.clear();
+        
+        //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
+        for (Supervisao supervisao : list){
+            FormAMAcesso formulario = gson.fromJson(resposta.get("acesso_mercado").getResposta(), FormAMAcesso.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            //adiciona a resposta dos comentarios do municipio auditado
+            Paragraph comentariosRecomendacoes = new Paragraph(
+                    "\nRecomendações UC: \n" + formulario.getRecomendacaoUC()
+                    + "\n___________________________________________________________________________________\n\n", f);
+            comentariosRecomendacoes.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(comentariosRecomendacoes);
+        }
+        document.add(resp);
+        resp.clear();
         document.newPage();
     }
 //Fim
+//Vulnerabilidades-----------------------------------------------------------------------------------------
+    public void VulnerabilidadesPotencialidades(Document document, List<Supervisao> list, HashMap<String, Resposta> resposta) throws DocumentException {
+        Anchor anchor = new Anchor("Vulnerabilidades e Potencialidades", chaFont);
+        anchor.setName("Vulnerabilidades e Potencialidades");
 
-    public void VulnerabilidadesPotencialidades(Document document, HashMap<String, Resposta> resposta)
-            throws DocumentException {
-        Paragraph identificacaoEscritorio = new Paragraph();
-
-        Anchor titulo = new Anchor("Vulnerabilidades e Potencialidades", chaFont);
-        titulo.setName("Vulnerabilidades e Potencialidades");
-        identificacaoEscritorio.add(titulo);
-
-        addEmptyLine(identificacaoEscritorio, 1);
-
+        Chapter catPart = new Chapter(new Paragraph(anchor), 17);// onde e descrito qual o numero do capitulo
+        document.add(catPart);
         Gson gson = new Gson();
 //VP Vulnerabilidade----------------------------------------------------------------------------------------
-        FormVulnerabilidadesPotencialidadesController.FormVulnerabilidadesPotencialidades formulario = gson.fromJson(
-                resposta.get("vulnerabilidade_potencialidade").getResposta(),
-                FormVulnerabilidadesPotencialidadesController.FormVulnerabilidadesPotencialidades.class);
-
-        Paragraph vulnerabilidades = new Paragraph(
-                "Vulnerabilidades que o escritório apresenta na execução das ações de defesa animal: \n"
-                + formulario.getVulnerabilidades(),
-                f);
-        vulnerabilidades.setAlignment(Element.ALIGN_JUSTIFIED);
-        identificacaoEscritorio.add(vulnerabilidades);
-
-        addEmptyLine(identificacaoEscritorio, 1);
+        Paragraph subtitulo = new Paragraph("Vulnerabilidades", subFont);
+        document.add(subtitulo);
+        
+        Paragraph resp = new Paragraph();
+        for (Supervisao supervisao : list){
+            FormVulnerabilidadesPotencialidadesController.FormVulnerabilidadesPotencialidades formulario = gson.fromJson(
+                    resposta.get("vulnerabilidade_potencialidade").getResposta(),
+                    FormVulnerabilidadesPotencialidadesController.FormVulnerabilidadesPotencialidades.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            Paragraph vulnerabilidades = new Paragraph(
+                    "Vulnerabilidades que o escritório apresenta na execução das ações de defesa animal: \n"
+                    + formulario.getVulnerabilidades(), f);
+            vulnerabilidades.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(vulnerabilidades);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
 //Fim
 //VP Potencialidade-----------------------------------------------------------------------------------------
-        Paragraph potencialidades = new Paragraph(
-                "Potencialidades que o escritório apresenta na execução das ações de defesa animal: \n"
-                + formulario.getPotencialidades(),
-                f);
-        potencialidades.setAlignment(Element.ALIGN_JUSTIFIED);
-        identificacaoEscritorio.add(potencialidades);
-
-        document.add(identificacaoEscritorio);
-
-        document.newPage();*/
+        subtitulo.add("Potencialidades");
+        document.add(subtitulo);
+        
+        for (Supervisao supervisao : list){
+            FormVulnerabilidadesPotencialidadesController.FormVulnerabilidadesPotencialidades formulario = gson.fromJson(
+                    resposta.get("vulnerabilidade_potencialidade").getResposta(),
+                    FormVulnerabilidadesPotencialidadesController.FormVulnerabilidadesPotencialidades.class);
+            String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
+                    : supervisao.getUlsav().getNome());
+            Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
+            resp.add(muniAuditado);
+            Paragraph potencialidades = new Paragraph(
+                    "Potencialidades que o escritório apresenta na execução das ações de defesa animal: \n"
+                    + formulario.getPotencialidades(), f);
+            potencialidades.setAlignment(Element.ALIGN_JUSTIFIED);
+            resp.add(potencialidades);
+        }
+        document.add(resp);
+        resp.clear();
+        document.newPage();
     }
 //Fim
     public void addEmptyLine(Paragraph paragraph, int number) {

@@ -103,25 +103,17 @@ public class RelatoriosController implements Initializable {
     private void handleComentarios(ActionEvent event) {
         AlertMaker.showSimpleAlert("Comentários e Recomendações", "Será gerado o relatório dos comentários e recomendações");
         RelatorioAuditoriaCompilada relatorio = new RelatorioAuditoriaCompilada();
+        
         for (Supervisao supervisao : supervisaoDAO.listarImportadas()) {
             //armazena as respostas da supervisao
-            relatorio.setHashRespostas(respostaDAO.listarRespostasDaSupervisaoImportada(supervisao));
+            supervisao.setHashRespostas(respostaDAO.listarRespostasDaSupervisaoImportada(supervisao));
 
             //adiciona a supervisao e suas respostas no list de supervisoes
             relatorio.getListSupervisao().add(supervisao);
-            //relatorio.setSupervisao(supervisao);
+            
+        }        
 
-            //RespostaDAO respostaDAO = new RespostaDAO();
-            //relatorio.setHashRespostas(respostaDAO.listarRespostasDaSupervisaoImportada(supervisao));
-
-        }
-        //Nome do pdf da supervisao
-        String nome = ("Comentarios e Recomendações");
-        //String data[] = supervisao.getCreated().split(" ");//pega apenas a data
-
-        String file = nome;// +"-"+ data[0];
-
-        relatorio.show(file);
+        relatorio.show("Comentarios e Recomendações");
     }
         
     public void carregarTabelaSupervisoesImportadas() {
