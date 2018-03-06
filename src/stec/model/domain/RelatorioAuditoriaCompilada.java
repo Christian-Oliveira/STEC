@@ -84,20 +84,11 @@ public class RelatorioAuditoriaCompilada {
     private static Font chaFont = new Font(Font.FontFamily.HELVETICA, 13, Font.BOLD);// capitulos do documento
     private static Font smallBold = new Font(Font.FontFamily.HELVETICA, 10, Font.BOLD);// negrito texto normal
     private static Font subFont = new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD);// sub capitulos capitulo
-    //private Supervisao supervisao = new Supervisao();
+    
     private SupervisaoDAO supervisaoDAO = new SupervisaoDAO();
     private HashMap<String, Resposta> hashRespostas = new HashMap<>();
     private List<Supervisao> listSupervisao = new ArrayList<>();
     
-
-/*    public void setSupervisao(Supervisao supervisao) {
-        this.supervisao = supervisao;
-    }
-
-    public Supervisao getSupervisao() {
-        return this.supervisao;
-    }
-*/
     public void setHashRespostas(HashMap<String, Resposta> respostas) {
         this.hashRespostas = respostas;
     }
@@ -119,9 +110,9 @@ public class RelatorioAuditoriaCompilada {
             document.open();
 
             this.Capa(document);
-            //this.IdentificacaoEscritorio(document, listSupervisao, hashRespostas);
+            this.IdentificacaoEscritorio(document, listSupervisao, hashRespostas);
             this.RecursosHumanos(document, listSupervisao, hashRespostas);
-            /*this.RecursosFisicos(document, listSupervisao, hashRespostas);
+            this.RecursosFisicos(document, listSupervisao, hashRespostas);
             this.RecursosFinanceiros(document, listSupervisao, hashRespostas);
             this.EstruturaOrganizacional(document, listSupervisao, hashRespostas);
             this.AutoridadeGestao(document, listSupervisao, hashRespostas);
@@ -170,7 +161,7 @@ public class RelatorioAuditoriaCompilada {
             this.InteracaoPartes(document, listSupervisao, hashRespostas);
             this.AcessoMercados(document, listSupervisao, hashRespostas);
             this.VulnerabilidadesPotencialidades(document, listSupervisao, hashRespostas);
-            */
+            
             document.close();
         } catch (Exception e) {
             // TODO Auto-generated catch block
@@ -181,6 +172,11 @@ public class RelatorioAuditoriaCompilada {
     /*
     * Adiciona a capa com o titulo ao documento OK
      */
+    //função que gera todo o PDF
+    public void gerarPDF(Document document, List<Supervisao> list, HashMap<String, Resposta> resposta) throws DocumentException {
+        
+    }
+    
     public void Capa(Document document) throws DocumentException {
         Paragraph capa = new Paragraph();
 
@@ -194,7 +190,7 @@ public class RelatorioAuditoriaCompilada {
 
         addEmptyLine(capa, 15);
 
-        Paragraph titulo = new Paragraph("Relatório dos Comentarios, Recomendações ULSAV/EAC\n"
+        Paragraph titulo = new Paragraph("Relatório dos Comentarios, Recomendações ULSAV / EAC\n"
                 + "Prazo para Ajuste e Recomendações UR e UC", catFont);
         titulo.setAlignment(Element.ALIGN_CENTER);
         capa.add(titulo);
@@ -1244,7 +1240,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormRFSistemasInformacao formulario4 = gson.fromJson(resposta.get("rf_sistemas").getResposta(),
+            FormRFSistemasInformacao formulario4 = gson.fromJson(supervisao.getHashRespostas().get("rf_sistemas").getResposta(),
                     FormRFSistemasInformacao.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -1269,7 +1265,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormRFSistemasInformacao formulario4 = gson.fromJson(resposta.get("rf_sistemas").getResposta(),
+            FormRFSistemasInformacao formulario4 = gson.fromJson(supervisao.getHashRespostas().get("rf_sistemas").getResposta(),
                     FormRFSistemasInformacao.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -1294,7 +1290,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormRFSistemasInformacao formulario4 = gson.fromJson(resposta.get("rf_sistemas").getResposta(),
+            FormRFSistemasInformacao formulario4 = gson.fromJson(supervisao.getHashRespostas().get("rf_sistemas").getResposta(),
                     FormRFSistemasInformacao.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -1318,7 +1314,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormRFSistemasInformacao formulario4 = gson.fromJson(resposta.get("rf_sistemas").getResposta(),
+            FormRFSistemasInformacao formulario4 = gson.fromJson(supervisao.getHashRespostas().get("rf_sistemas").getResposta(),
                     FormRFSistemasInformacao.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -1342,7 +1338,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormRFSistemasInformacao formulario4 = gson.fromJson(resposta.get("rf_sistemas").getResposta(),
+            FormRFSistemasInformacao formulario4 = gson.fromJson(supervisao.getHashRespostas().get("rf_sistemas").getResposta(),
                     FormRFSistemasInformacao.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -1376,7 +1372,7 @@ public class RelatorioAuditoriaCompilada {
         //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
         Paragraph resp = new Paragraph();
         for (Supervisao supervisao : list){
-            FormRFICusteio formulario = gson.fromJson(resposta.get("rfi_custeio").getResposta(),
+            FormRFICusteio formulario = gson.fromJson(supervisao.getHashRespostas().get("rfi_custeio").getResposta(),
                     FormRFICusteio.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -1401,7 +1397,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormRFICusteio formulario = gson.fromJson(resposta.get("rfi_custeio").getResposta(),
+            FormRFICusteio formulario = gson.fromJson(supervisao.getHashRespostas().get("rfi_custeio").getResposta(),
                     FormRFICusteio.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -1426,7 +1422,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormRFICusteio formulario = gson.fromJson(resposta.get("rfi_custeio").getResposta(),
+            FormRFICusteio formulario = gson.fromJson(supervisao.getHashRespostas().get("rfi_custeio").getResposta(),
                     FormRFICusteio.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -1450,7 +1446,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormRFICusteio formulario = gson.fromJson(resposta.get("rfi_custeio").getResposta(),
+            FormRFICusteio formulario = gson.fromJson(supervisao.getHashRespostas().get("rfi_custeio").getResposta(),
                     FormRFICusteio.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -1474,7 +1470,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormRFICusteio formulario = gson.fromJson(resposta.get("rfi_custeio").getResposta(),
+            FormRFICusteio formulario = gson.fromJson(supervisao.getHashRespostas().get("rfi_custeio").getResposta(),
                     FormRFICusteio.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -1499,7 +1495,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormRFIArrecadacao formulario2 = gson.fromJson(resposta.get("rfi_arrecadacao").getResposta(),
+            FormRFIArrecadacao formulario2 = gson.fromJson(supervisao.getHashRespostas().get("rfi_arrecadacao").getResposta(),
                     FormRFIArrecadacao.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -1524,7 +1520,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormRFIArrecadacao formulario2 = gson.fromJson(resposta.get("rfi_arrecadacao").getResposta(),
+            FormRFIArrecadacao formulario2 = gson.fromJson(supervisao.getHashRespostas().get("rfi_arrecadacao").getResposta(),
                     FormRFIArrecadacao.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -1549,7 +1545,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormRFIArrecadacao formulario2 = gson.fromJson(resposta.get("rfi_arrecadacao").getResposta(),
+            FormRFIArrecadacao formulario2 = gson.fromJson(supervisao.getHashRespostas().get("rfi_arrecadacao").getResposta(),
                     FormRFIArrecadacao.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -1573,7 +1569,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormRFIArrecadacao formulario2 = gson.fromJson(resposta.get("rfi_arrecadacao").getResposta(),
+            FormRFIArrecadacao formulario2 = gson.fromJson(supervisao.getHashRespostas().get("rfi_arrecadacao").getResposta(),
                     FormRFIArrecadacao.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -1597,7 +1593,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormRFIArrecadacao formulario2 = gson.fromJson(resposta.get("rfi_arrecadacao").getResposta(),
+            FormRFIArrecadacao formulario2 = gson.fromJson(supervisao.getHashRespostas().get("rfi_arrecadacao").getResposta(),
                     FormRFIArrecadacao.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -1632,7 +1628,7 @@ public class RelatorioAuditoriaCompilada {
         //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
         Paragraph resp = new Paragraph();
         for (Supervisao supervisao : list){
-            FormEOEstrutura formulario = gson.fromJson(resposta.get("eo_estrutura").getResposta(),
+            FormEOEstrutura formulario = gson.fromJson(supervisao.getHashRespostas().get("eo_estrutura").getResposta(),
                     FormEOEstrutura.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -1657,7 +1653,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormEOEstrutura formulario = gson.fromJson(resposta.get("eo_estrutura").getResposta(),
+            FormEOEstrutura formulario = gson.fromJson(supervisao.getHashRespostas().get("eo_estrutura").getResposta(),
                     FormEOEstrutura.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -1682,7 +1678,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormEOEstrutura formulario = gson.fromJson(resposta.get("eo_estrutura").getResposta(),
+            FormEOEstrutura formulario = gson.fromJson(supervisao.getHashRespostas().get("eo_estrutura").getResposta(),
                     FormEOEstrutura.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -1706,7 +1702,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormEOEstrutura formulario = gson.fromJson(resposta.get("eo_estrutura").getResposta(),
+            FormEOEstrutura formulario = gson.fromJson(supervisao.getHashRespostas().get("eo_estrutura").getResposta(),
                     FormEOEstrutura.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -1730,7 +1726,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormEOEstrutura formulario = gson.fromJson(resposta.get("eo_estrutura").getResposta(),
+            FormEOEstrutura formulario = gson.fromJson(supervisao.getHashRespostas().get("eo_estrutura").getResposta(),
                     FormEOEstrutura.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -1764,7 +1760,7 @@ public class RelatorioAuditoriaCompilada {
         //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
         Paragraph resp = new Paragraph();
         for (Supervisao supervisao : list){
-            FormAGBaseLegal formulario = gson.fromJson(resposta.get("ag_base_legal").getResposta(),
+            FormAGBaseLegal formulario = gson.fromJson(supervisao.getHashRespostas().get("ag_base_legal").getResposta(),
                     FormAGBaseLegal.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -1789,7 +1785,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormAGBaseLegal formulario = gson.fromJson(resposta.get("ag_base_legal").getResposta(),
+            FormAGBaseLegal formulario = gson.fromJson(supervisao.getHashRespostas().get("ag_base_legal").getResposta(),
                     FormAGBaseLegal.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -1814,7 +1810,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormAGBaseLegal formulario = gson.fromJson(resposta.get("ag_base_legal").getResposta(),
+            FormAGBaseLegal formulario = gson.fromJson(supervisao.getHashRespostas().get("ag_base_legal").getResposta(),
                     FormAGBaseLegal.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -1838,7 +1834,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormAGBaseLegal formulario = gson.fromJson(resposta.get("ag_base_legal").getResposta(),
+            FormAGBaseLegal formulario = gson.fromJson(supervisao.getHashRespostas().get("ag_base_legal").getResposta(),
                     FormAGBaseLegal.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -1862,7 +1858,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormAGBaseLegal formulario = gson.fromJson(resposta.get("ag_base_legal").getResposta(),
+            FormAGBaseLegal formulario = gson.fromJson(supervisao.getHashRespostas().get("ag_base_legal").getResposta(),
                     FormAGBaseLegal.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -1887,7 +1883,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormAGOrganizacao formulario2 = gson.fromJson(resposta.get("ag_organizacao").getResposta(),
+            FormAGOrganizacao formulario2 = gson.fromJson(supervisao.getHashRespostas().get("ag_organizacao").getResposta(),
                     FormAGOrganizacao.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -1912,7 +1908,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormAGOrganizacao formulario2 = gson.fromJson(resposta.get("ag_organizacao").getResposta(),
+            FormAGOrganizacao formulario2 = gson.fromJson(supervisao.getHashRespostas().get("ag_organizacao").getResposta(),
                     FormAGOrganizacao.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -1937,7 +1933,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormAGOrganizacao formulario2 = gson.fromJson(resposta.get("ag_organizacao").getResposta(),
+            FormAGOrganizacao formulario2 = gson.fromJson(supervisao.getHashRespostas().get("ag_organizacao").getResposta(),
                     FormAGOrganizacao.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -1961,7 +1957,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormAGOrganizacao formulario2 = gson.fromJson(resposta.get("ag_organizacao").getResposta(),
+            FormAGOrganizacao formulario2 = gson.fromJson(supervisao.getHashRespostas().get("ag_organizacao").getResposta(),
                     FormAGOrganizacao.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -1985,7 +1981,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormAGOrganizacao formulario2 = gson.fromJson(resposta.get("ag_organizacao").getResposta(),
+            FormAGOrganizacao formulario2 = gson.fromJson(supervisao.getHashRespostas().get("ag_organizacao").getResposta(),
                     FormAGOrganizacao.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -2019,7 +2015,7 @@ public class RelatorioAuditoriaCompilada {
         //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
         Paragraph resp = new Paragraph();
         for (Supervisao supervisao : list){
-            FormCTOControleCadastro formulario = gson.fromJson(resposta.get("cto_controle_cadastro").getResposta(),
+            FormCTOControleCadastro formulario = gson.fromJson(supervisao.getHashRespostas().get("cto_controle_cadastro").getResposta(),
                     FormCTOControleCadastro.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -2044,7 +2040,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormCTOControleCadastro formulario = gson.fromJson(resposta.get("cto_controle_cadastro").getResposta(),
+            FormCTOControleCadastro formulario = gson.fromJson(supervisao.getHashRespostas().get("cto_controle_cadastro").getResposta(),
                     FormCTOControleCadastro.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -2069,7 +2065,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormCTOControleCadastro formulario = gson.fromJson(resposta.get("cto_controle_cadastro").getResposta(),
+            FormCTOControleCadastro formulario = gson.fromJson(supervisao.getHashRespostas().get("cto_controle_cadastro").getResposta(),
                     FormCTOControleCadastro.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -2093,7 +2089,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormCTOControleCadastro formulario = gson.fromJson(resposta.get("cto_controle_cadastro").getResposta(),
+            FormCTOControleCadastro formulario = gson.fromJson(supervisao.getHashRespostas().get("cto_controle_cadastro").getResposta(),
                     FormCTOControleCadastro.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -2117,7 +2113,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormCTOControleCadastro formulario = gson.fromJson(resposta.get("cto_controle_cadastro").getResposta(),
+            FormCTOControleCadastro formulario = gson.fromJson(supervisao.getHashRespostas().get("cto_controle_cadastro").getResposta(),
                     FormCTOControleCadastro.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -2142,7 +2138,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormCTOPlanejamento formulario2 = gson.fromJson(resposta.get("cto_planejamento").getResposta(),
+            FormCTOPlanejamento formulario2 = gson.fromJson(supervisao.getHashRespostas().get("cto_planejamento").getResposta(),
                     FormCTOPlanejamento.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -2167,7 +2163,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormCTOPlanejamento formulario2 = gson.fromJson(resposta.get("cto_planejamento").getResposta(),
+            FormCTOPlanejamento formulario2 = gson.fromJson(supervisao.getHashRespostas().get("cto_planejamento").getResposta(),
                     FormCTOPlanejamento.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -2192,7 +2188,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormCTOPlanejamento formulario2 = gson.fromJson(resposta.get("cto_planejamento").getResposta(),
+            FormCTOPlanejamento formulario2 = gson.fromJson(supervisao.getHashRespostas().get("cto_planejamento").getResposta(),
                     FormCTOPlanejamento.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -2216,7 +2212,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormCTOPlanejamento formulario2 = gson.fromJson(resposta.get("cto_planejamento").getResposta(),
+            FormCTOPlanejamento formulario2 = gson.fromJson(supervisao.getHashRespostas().get("cto_planejamento").getResposta(),
                     FormCTOPlanejamento.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -2240,7 +2236,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormCTOPlanejamento formulario2 = gson.fromJson(resposta.get("cto_planejamento").getResposta(),
+            FormCTOPlanejamento formulario2 = gson.fromJson(supervisao.getHashRespostas().get("cto_planejamento").getResposta(),
                     FormCTOPlanejamento.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -2265,7 +2261,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormCTOControle formulario3 = gson.fromJson(resposta.get("cto_controle").getResposta(),
+            FormCTOControle formulario3 = gson.fromJson(supervisao.getHashRespostas().get("cto_controle").getResposta(),
                     FormCTOControle.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -2290,7 +2286,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormCTOControle formulario3 = gson.fromJson(resposta.get("cto_controle").getResposta(),
+            FormCTOControle formulario3 = gson.fromJson(supervisao.getHashRespostas().get("cto_controle").getResposta(),
                     FormCTOControle.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -2315,7 +2311,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormCTOControle formulario3 = gson.fromJson(resposta.get("cto_controle").getResposta(),
+            FormCTOControle formulario3 = gson.fromJson(supervisao.getHashRespostas().get("cto_controle").getResposta(),
                     FormCTOControle.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -2339,7 +2335,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormCTOControle formulario3 = gson.fromJson(resposta.get("cto_controle").getResposta(),
+            FormCTOControle formulario3 = gson.fromJson(supervisao.getHashRespostas().get("cto_controle").getResposta(),
                     FormCTOControle.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -2363,7 +2359,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormCTOControle formulario3 = gson.fromJson(resposta.get("cto_controle").getResposta(),
+            FormCTOControle formulario3 = gson.fromJson(supervisao.getHashRespostas().get("cto_controle").getResposta(),
                     FormCTOControle.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -2388,7 +2384,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormCTOControleTransitoAnimais formulario4 = gson.fromJson(resposta.get("cto_transito_animais").getResposta(),
+            FormCTOControleTransitoAnimais formulario4 = gson.fromJson(supervisao.getHashRespostas().get("cto_transito_animais").getResposta(),
                     FormCTOControleTransitoAnimais.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -2413,7 +2409,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormCTOControleTransitoAnimais formulario4 = gson.fromJson(resposta.get("cto_transito_animais").getResposta(),
+            FormCTOControleTransitoAnimais formulario4 = gson.fromJson(supervisao.getHashRespostas().get("cto_transito_animais").getResposta(),
                     FormCTOControleTransitoAnimais.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -2438,7 +2434,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormCTOControleTransitoAnimais formulario4 = gson.fromJson(resposta.get("cto_transito_animais").getResposta(),
+            FormCTOControleTransitoAnimais formulario4 = gson.fromJson(supervisao.getHashRespostas().get("cto_transito_animais").getResposta(),
                     FormCTOControleTransitoAnimais.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -2462,7 +2458,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormCTOControleTransitoAnimais formulario4 = gson.fromJson(resposta.get("cto_transito_animais").getResposta(),
+            FormCTOControleTransitoAnimais formulario4 = gson.fromJson(supervisao.getHashRespostas().get("cto_transito_animais").getResposta(),
                     FormCTOControleTransitoAnimais.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -2486,7 +2482,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormCTOControleTransitoAnimais formulario4 = gson.fromJson(resposta.get("cto_transito_animais").getResposta(),
+            FormCTOControleTransitoAnimais formulario4 = gson.fromJson(supervisao.getHashRespostas().get("cto_transito_animais").getResposta(),
                     FormCTOControleTransitoAnimais.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -2511,7 +2507,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormCTOControleEventosAglomeracao formulario5 = gson.fromJson(resposta.get("cto_controle_eventos").getResposta(),
+            FormCTOControleEventosAglomeracao formulario5 = gson.fromJson(supervisao.getHashRespostas().get("cto_controle_eventos").getResposta(),
                     FormCTOControleEventosAglomeracao.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -2536,7 +2532,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormCTOControleEventosAglomeracao formulario5 = gson.fromJson(resposta.get("cto_controle_eventos").getResposta(),
+            FormCTOControleEventosAglomeracao formulario5 = gson.fromJson(supervisao.getHashRespostas().get("cto_controle_eventos").getResposta(),
                     FormCTOControleEventosAglomeracao.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -2561,7 +2557,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormCTOControleEventosAglomeracao formulario5 = gson.fromJson(resposta.get("cto_controle_eventos").getResposta(),
+            FormCTOControleEventosAglomeracao formulario5 = gson.fromJson(supervisao.getHashRespostas().get("cto_controle_eventos").getResposta(),
                     FormCTOControleEventosAglomeracao.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -2585,7 +2581,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormCTOControleEventosAglomeracao formulario5 = gson.fromJson(resposta.get("cto_controle_eventos").getResposta(),
+            FormCTOControleEventosAglomeracao formulario5 = gson.fromJson(supervisao.getHashRespostas().get("cto_controle_eventos").getResposta(),
                     FormCTOControleEventosAglomeracao.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -2609,7 +2605,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormCTOControleEventosAglomeracao formulario5 = gson.fromJson(resposta.get("cto_controle_eventos").getResposta(),
+            FormCTOControleEventosAglomeracao formulario5 = gson.fromJson(supervisao.getHashRespostas().get("cto_controle_eventos").getResposta(),
                     FormCTOControleEventosAglomeracao.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -2634,7 +2630,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormCTOFiscalizacao formulario6 = gson.fromJson(resposta.get("cto_fiscalizacao").getResposta(),
+            FormCTOFiscalizacao formulario6 = gson.fromJson(supervisao.getHashRespostas().get("cto_fiscalizacao").getResposta(),
                     FormCTOFiscalizacao.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -2659,7 +2655,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormCTOFiscalizacao formulario6 = gson.fromJson(resposta.get("cto_fiscalizacao").getResposta(),
+            FormCTOFiscalizacao formulario6 = gson.fromJson(supervisao.getHashRespostas().get("cto_fiscalizacao").getResposta(),
                     FormCTOFiscalizacao.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -2684,7 +2680,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormCTOFiscalizacao formulario6 = gson.fromJson(resposta.get("cto_fiscalizacao").getResposta(),
+            FormCTOFiscalizacao formulario6 = gson.fromJson(supervisao.getHashRespostas().get("cto_fiscalizacao").getResposta(),
                     FormCTOFiscalizacao.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -2708,7 +2704,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormCTOFiscalizacao formulario6 = gson.fromJson(resposta.get("cto_fiscalizacao").getResposta(),
+            FormCTOFiscalizacao formulario6 = gson.fromJson(supervisao.getHashRespostas().get("cto_fiscalizacao").getResposta(),
                     FormCTOFiscalizacao.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -2732,7 +2728,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormCTOFiscalizacao formulario6 = gson.fromJson(resposta.get("cto_fiscalizacao").getResposta(),
+            FormCTOFiscalizacao formulario6 = gson.fromJson(supervisao.getHashRespostas().get("cto_fiscalizacao").getResposta(),
                     FormCTOFiscalizacao.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -2757,7 +2753,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormCTOCapacidadeDeteccaoPrecoce formulario7 = gson.fromJson(resposta.get("cto_deteccao_precoce").getResposta(),
+            FormCTOCapacidadeDeteccaoPrecoce formulario7 = gson.fromJson(supervisao.getHashRespostas().get("cto_deteccao_precoce").getResposta(),
                 FormCTOCapacidadeDeteccaoPrecoce.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -2782,7 +2778,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormCTOCapacidadeDeteccaoPrecoce formulario7 = gson.fromJson(resposta.get("cto_deteccao_precoce").getResposta(),
+            FormCTOCapacidadeDeteccaoPrecoce formulario7 = gson.fromJson(supervisao.getHashRespostas().get("cto_deteccao_precoce").getResposta(),
                 FormCTOCapacidadeDeteccaoPrecoce.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -2807,7 +2803,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormCTOCapacidadeDeteccaoPrecoce formulario7 = gson.fromJson(resposta.get("cto_deteccao_precoce").getResposta(),
+            FormCTOCapacidadeDeteccaoPrecoce formulario7 = gson.fromJson(supervisao.getHashRespostas().get("cto_deteccao_precoce").getResposta(),
                 FormCTOCapacidadeDeteccaoPrecoce.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -2831,7 +2827,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormCTOCapacidadeDeteccaoPrecoce formulario7 = gson.fromJson(resposta.get("cto_deteccao_precoce").getResposta(),
+            FormCTOCapacidadeDeteccaoPrecoce formulario7 = gson.fromJson(supervisao.getHashRespostas().get("cto_deteccao_precoce").getResposta(),
                 FormCTOCapacidadeDeteccaoPrecoce.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -2855,7 +2851,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormCTOCapacidadeDeteccaoPrecoce formulario7 = gson.fromJson(resposta.get("cto_deteccao_precoce").getResposta(),
+            FormCTOCapacidadeDeteccaoPrecoce formulario7 = gson.fromJson(supervisao.getHashRespostas().get("cto_deteccao_precoce").getResposta(),
                 FormCTOCapacidadeDeteccaoPrecoce.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -2880,7 +2876,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormCTOAtendimentoSuspeita formulario8 = gson.fromJson(resposta.get("cto_atendimento_suspeita").getResposta(),
+            FormCTOAtendimentoSuspeita formulario8 = gson.fromJson(supervisao.getHashRespostas().get("cto_atendimento_suspeita").getResposta(),
                 FormCTOAtendimentoSuspeita.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -2905,7 +2901,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormCTOAtendimentoSuspeita formulario8 = gson.fromJson(resposta.get("cto_atendimento_suspeita").getResposta(),
+            FormCTOAtendimentoSuspeita formulario8 = gson.fromJson(supervisao.getHashRespostas().get("cto_atendimento_suspeita").getResposta(),
                 FormCTOAtendimentoSuspeita.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -2930,7 +2926,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormCTOAtendimentoSuspeita formulario8 = gson.fromJson(resposta.get("cto_atendimento_suspeita").getResposta(),
+            FormCTOAtendimentoSuspeita formulario8 = gson.fromJson(supervisao.getHashRespostas().get("cto_atendimento_suspeita").getResposta(),
                 FormCTOAtendimentoSuspeita.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -2954,7 +2950,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormCTOAtendimentoSuspeita formulario8 = gson.fromJson(resposta.get("cto_atendimento_suspeita").getResposta(),
+            FormCTOAtendimentoSuspeita formulario8 = gson.fromJson(supervisao.getHashRespostas().get("cto_atendimento_suspeita").getResposta(),
                 FormCTOAtendimentoSuspeita.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -2978,7 +2974,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormCTOAtendimentoSuspeita formulario8 = gson.fromJson(resposta.get("cto_atendimento_suspeita").getResposta(),
+            FormCTOAtendimentoSuspeita formulario8 = gson.fromJson(supervisao.getHashRespostas().get("cto_atendimento_suspeita").getResposta(),
                 FormCTOAtendimentoSuspeita.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -3014,7 +3010,7 @@ public class RelatorioAuditoriaCompilada {
         //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
         Paragraph resp = new Paragraph();
         for (Supervisao supervisao : list){
-            FormPNEFAFiscalizacoes formulario = gson.fromJson(resposta.get("pnefa_fiscalizacoes").getResposta(),
+            FormPNEFAFiscalizacoes formulario = gson.fromJson(supervisao.getHashRespostas().get("pnefa_fiscalizacoes").getResposta(),
                 FormPNEFAFiscalizacoes.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -3039,7 +3035,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNEFAFiscalizacoes formulario = gson.fromJson(resposta.get("pnefa_fiscalizacoes").getResposta(),
+            FormPNEFAFiscalizacoes formulario = gson.fromJson(supervisao.getHashRespostas().get("pnefa_fiscalizacoes").getResposta(),
                 FormPNEFAFiscalizacoes.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -3064,7 +3060,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNEFAFiscalizacoes formulario = gson.fromJson(resposta.get("pnefa_fiscalizacoes").getResposta(),
+            FormPNEFAFiscalizacoes formulario = gson.fromJson(supervisao.getHashRespostas().get("pnefa_fiscalizacoes").getResposta(),
                 FormPNEFAFiscalizacoes.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -3088,7 +3084,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNEFAFiscalizacoes formulario = gson.fromJson(resposta.get("pnefa_fiscalizacoes").getResposta(),
+            FormPNEFAFiscalizacoes formulario = gson.fromJson(supervisao.getHashRespostas().get("pnefa_fiscalizacoes").getResposta(),
                 FormPNEFAFiscalizacoes.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -3112,7 +3108,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNEFAFiscalizacoes formulario = gson.fromJson(resposta.get("pnefa_fiscalizacoes").getResposta(),
+            FormPNEFAFiscalizacoes formulario = gson.fromJson(supervisao.getHashRespostas().get("pnefa_fiscalizacoes").getResposta(),
                 FormPNEFAFiscalizacoes.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -3137,7 +3133,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNEFAVigilanciaController.FormPNEFAVigilancia formulario2 = gson.fromJson(resposta.get("pnefa_vigilancia").getResposta(),
+            FormPNEFAVigilanciaController.FormPNEFAVigilancia formulario2 = gson.fromJson(supervisao.getHashRespostas().get("pnefa_vigilancia").getResposta(),
                 FormPNEFAVigilanciaController.FormPNEFAVigilancia.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -3162,7 +3158,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNEFAVigilanciaController.FormPNEFAVigilancia formulario2 = gson.fromJson(resposta.get("pnefa_vigilancia").getResposta(),
+            FormPNEFAVigilanciaController.FormPNEFAVigilancia formulario2 = gson.fromJson(supervisao.getHashRespostas().get("pnefa_vigilancia").getResposta(),
                 FormPNEFAVigilanciaController.FormPNEFAVigilancia.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -3187,7 +3183,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNEFAVigilanciaController.FormPNEFAVigilancia formulario2 = gson.fromJson(resposta.get("pnefa_vigilancia").getResposta(),
+            FormPNEFAVigilanciaController.FormPNEFAVigilancia formulario2 = gson.fromJson(supervisao.getHashRespostas().get("pnefa_vigilancia").getResposta(),
                 FormPNEFAVigilanciaController.FormPNEFAVigilancia.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -3211,7 +3207,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNEFAVigilanciaController.FormPNEFAVigilancia formulario2 = gson.fromJson(resposta.get("pnefa_vigilancia").getResposta(),
+            FormPNEFAVigilanciaController.FormPNEFAVigilancia formulario2 = gson.fromJson(supervisao.getHashRespostas().get("pnefa_vigilancia").getResposta(),
                 FormPNEFAVigilanciaController.FormPNEFAVigilancia.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -3235,7 +3231,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNEFAVigilanciaController.FormPNEFAVigilancia formulario2 = gson.fromJson(resposta.get("pnefa_vigilancia").getResposta(),
+            FormPNEFAVigilanciaController.FormPNEFAVigilancia formulario2 = gson.fromJson(supervisao.getHashRespostas().get("pnefa_vigilancia").getResposta(),
                 FormPNEFAVigilanciaController.FormPNEFAVigilancia.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -3271,7 +3267,7 @@ public class RelatorioAuditoriaCompilada {
         //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
         Paragraph resp = new Paragraph();
         for (Supervisao supervisao : list){
-            FormPNCEBTFiscalizacoes formulario = gson.fromJson(resposta.get("pncebt_fiscalizacoes").getResposta(),
+            FormPNCEBTFiscalizacoes formulario = gson.fromJson(supervisao.getHashRespostas().get("pncebt_fiscalizacoes").getResposta(),
                 FormPNCEBTFiscalizacoes.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -3296,7 +3292,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNCEBTFiscalizacoes formulario = gson.fromJson(resposta.get("pncebt_fiscalizacoes").getResposta(),
+            FormPNCEBTFiscalizacoes formulario = gson.fromJson(supervisao.getHashRespostas().get("pncebt_fiscalizacoes").getResposta(),
                 FormPNCEBTFiscalizacoes.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -3321,7 +3317,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNCEBTFiscalizacoes formulario = gson.fromJson(resposta.get("pncebt_fiscalizacoes").getResposta(),
+            FormPNCEBTFiscalizacoes formulario = gson.fromJson(supervisao.getHashRespostas().get("pncebt_fiscalizacoes").getResposta(),
                 FormPNCEBTFiscalizacoes.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -3345,7 +3341,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNCEBTFiscalizacoes formulario = gson.fromJson(resposta.get("pncebt_fiscalizacoes").getResposta(),
+            FormPNCEBTFiscalizacoes formulario = gson.fromJson(supervisao.getHashRespostas().get("pncebt_fiscalizacoes").getResposta(),
                 FormPNCEBTFiscalizacoes.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -3369,7 +3365,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNCEBTFiscalizacoes formulario = gson.fromJson(resposta.get("pncebt_fiscalizacoes").getResposta(),
+            FormPNCEBTFiscalizacoes formulario = gson.fromJson(supervisao.getHashRespostas().get("pncebt_fiscalizacoes").getResposta(),
                 FormPNCEBTFiscalizacoes.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -3394,7 +3390,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNCEBTVigilianciaController.FormPNCEBTVigilancia formulario2 = gson.fromJson(resposta.get("pncebt_vigilancia").getResposta(),
+            FormPNCEBTVigilianciaController.FormPNCEBTVigilancia formulario2 = gson.fromJson(supervisao.getHashRespostas().get("pncebt_vigilancia").getResposta(),
                 FormPNCEBTVigilianciaController.FormPNCEBTVigilancia.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -3419,7 +3415,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNCEBTVigilianciaController.FormPNCEBTVigilancia formulario2 = gson.fromJson(resposta.get("pncebt_vigilancia").getResposta(),
+            FormPNCEBTVigilianciaController.FormPNCEBTVigilancia formulario2 = gson.fromJson(supervisao.getHashRespostas().get("pncebt_vigilancia").getResposta(),
                 FormPNCEBTVigilianciaController.FormPNCEBTVigilancia.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -3444,7 +3440,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNCEBTVigilianciaController.FormPNCEBTVigilancia formulario2 = gson.fromJson(resposta.get("pncebt_vigilancia").getResposta(),
+            FormPNCEBTVigilianciaController.FormPNCEBTVigilancia formulario2 = gson.fromJson(supervisao.getHashRespostas().get("pncebt_vigilancia").getResposta(),
                 FormPNCEBTVigilianciaController.FormPNCEBTVigilancia.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -3468,7 +3464,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNCEBTVigilianciaController.FormPNCEBTVigilancia formulario2 = gson.fromJson(resposta.get("pncebt_vigilancia").getResposta(),
+            FormPNCEBTVigilianciaController.FormPNCEBTVigilancia formulario2 = gson.fromJson(supervisao.getHashRespostas().get("pncebt_vigilancia").getResposta(),
                 FormPNCEBTVigilianciaController.FormPNCEBTVigilancia.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -3492,7 +3488,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNCEBTVigilianciaController.FormPNCEBTVigilancia formulario2 = gson.fromJson(resposta.get("pncebt_vigilancia").getResposta(),
+            FormPNCEBTVigilianciaController.FormPNCEBTVigilancia formulario2 = gson.fromJson(supervisao.getHashRespostas().get("pncebt_vigilancia").getResposta(),
                 FormPNCEBTVigilianciaController.FormPNCEBTVigilancia.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -3517,7 +3513,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNCEBTControlesController.FormPNCEBTControles formulario3 = gson.fromJson(resposta.get("pncebt_controles").getResposta(),
+            FormPNCEBTControlesController.FormPNCEBTControles formulario3 = gson.fromJson(supervisao.getHashRespostas().get("pncebt_controles").getResposta(),
                 FormPNCEBTControlesController.FormPNCEBTControles.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -3542,7 +3538,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNCEBTControlesController.FormPNCEBTControles formulario3 = gson.fromJson(resposta.get("pncebt_controles").getResposta(),
+            FormPNCEBTControlesController.FormPNCEBTControles formulario3 = gson.fromJson(supervisao.getHashRespostas().get("pncebt_controles").getResposta(),
                 FormPNCEBTControlesController.FormPNCEBTControles.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -3567,7 +3563,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNCEBTControlesController.FormPNCEBTControles formulario3 = gson.fromJson(resposta.get("pncebt_controles").getResposta(),
+            FormPNCEBTControlesController.FormPNCEBTControles formulario3 = gson.fromJson(supervisao.getHashRespostas().get("pncebt_controles").getResposta(),
                 FormPNCEBTControlesController.FormPNCEBTControles.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -3591,7 +3587,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNCEBTControlesController.FormPNCEBTControles formulario3 = gson.fromJson(resposta.get("pncebt_controles").getResposta(),
+            FormPNCEBTControlesController.FormPNCEBTControles formulario3 = gson.fromJson(supervisao.getHashRespostas().get("pncebt_controles").getResposta(),
                 FormPNCEBTControlesController.FormPNCEBTControles.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -3615,7 +3611,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNCEBTControlesController.FormPNCEBTControles formulario3 = gson.fromJson(resposta.get("pncebt_controles").getResposta(),
+            FormPNCEBTControlesController.FormPNCEBTControles formulario3 = gson.fromJson(supervisao.getHashRespostas().get("pncebt_controles").getResposta(),
                 FormPNCEBTControlesController.FormPNCEBTControles.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -3651,7 +3647,7 @@ public class RelatorioAuditoriaCompilada {
         //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
         Paragraph resp = new Paragraph();
         for (Supervisao supervisao : list){
-            FormPNCRHFiscalizacoes formulario = gson.fromJson(resposta.get("pncrh_fiscalizacoes").getResposta(),
+            FormPNCRHFiscalizacoes formulario = gson.fromJson(supervisao.getHashRespostas().get("pncrh_fiscalizacoes").getResposta(),
                 FormPNCRHFiscalizacoes.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -3676,7 +3672,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNCRHFiscalizacoes formulario = gson.fromJson(resposta.get("pncrh_fiscalizacoes").getResposta(),
+            FormPNCRHFiscalizacoes formulario = gson.fromJson(supervisao.getHashRespostas().get("pncrh_fiscalizacoes").getResposta(),
                 FormPNCRHFiscalizacoes.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -3701,7 +3697,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNCRHFiscalizacoes formulario = gson.fromJson(resposta.get("pncrh_fiscalizacoes").getResposta(),
+            FormPNCRHFiscalizacoes formulario = gson.fromJson(supervisao.getHashRespostas().get("pncrh_fiscalizacoes").getResposta(),
                 FormPNCRHFiscalizacoes.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -3725,7 +3721,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNCRHFiscalizacoes formulario = gson.fromJson(resposta.get("pncrh_fiscalizacoes").getResposta(),
+            FormPNCRHFiscalizacoes formulario = gson.fromJson(supervisao.getHashRespostas().get("pncrh_fiscalizacoes").getResposta(),
                 FormPNCRHFiscalizacoes.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -3749,7 +3745,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNCRHFiscalizacoes formulario = gson.fromJson(resposta.get("pncrh_fiscalizacoes").getResposta(),
+            FormPNCRHFiscalizacoes formulario = gson.fromJson(supervisao.getHashRespostas().get("pncrh_fiscalizacoes").getResposta(),
                 FormPNCRHFiscalizacoes.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -3774,7 +3770,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNCRHVigilanciaController.FormPNCRHVigilancia formulario2 = gson.fromJson(resposta.get("pncrh_vigilancia").getResposta(),
+            FormPNCRHVigilanciaController.FormPNCRHVigilancia formulario2 = gson.fromJson(supervisao.getHashRespostas().get("pncrh_vigilancia").getResposta(),
                 FormPNCRHVigilanciaController.FormPNCRHVigilancia.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -3799,7 +3795,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNCRHVigilanciaController.FormPNCRHVigilancia formulario2 = gson.fromJson(resposta.get("pncrh_vigilancia").getResposta(),
+            FormPNCRHVigilanciaController.FormPNCRHVigilancia formulario2 = gson.fromJson(supervisao.getHashRespostas().get("pncrh_vigilancia").getResposta(),
                 FormPNCRHVigilanciaController.FormPNCRHVigilancia.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -3824,7 +3820,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNCRHVigilanciaController.FormPNCRHVigilancia formulario2 = gson.fromJson(resposta.get("pncrh_vigilancia").getResposta(),
+            FormPNCRHVigilanciaController.FormPNCRHVigilancia formulario2 = gson.fromJson(supervisao.getHashRespostas().get("pncrh_vigilancia").getResposta(),
                 FormPNCRHVigilanciaController.FormPNCRHVigilancia.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -3848,7 +3844,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNCRHVigilanciaController.FormPNCRHVigilancia formulario2 = gson.fromJson(resposta.get("pncrh_vigilancia").getResposta(),
+            FormPNCRHVigilanciaController.FormPNCRHVigilancia formulario2 = gson.fromJson(supervisao.getHashRespostas().get("pncrh_vigilancia").getResposta(),
                 FormPNCRHVigilanciaController.FormPNCRHVigilancia.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -3872,7 +3868,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNCRHVigilanciaController.FormPNCRHVigilancia formulario2 = gson.fromJson(resposta.get("pncrh_vigilancia").getResposta(),
+            FormPNCRHVigilanciaController.FormPNCRHVigilancia formulario2 = gson.fromJson(supervisao.getHashRespostas().get("pncrh_vigilancia").getResposta(),
                 FormPNCRHVigilanciaController.FormPNCRHVigilancia.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -3910,7 +3906,7 @@ public class RelatorioAuditoriaCompilada {
         //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
         Paragraph resp = new Paragraph();
         for (Supervisao supervisao : list){
-            FormPNEEBVigilancia formulario = gson.fromJson(resposta.get("pneeb_vigilancia").getResposta(),
+            FormPNEEBVigilancia formulario = gson.fromJson(supervisao.getHashRespostas().get("pneeb_vigilancia").getResposta(),
                 FormPNEEBVigilancia.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -3935,7 +3931,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNEEBVigilancia formulario = gson.fromJson(resposta.get("pneeb_vigilancia").getResposta(),
+            FormPNEEBVigilancia formulario = gson.fromJson(supervisao.getHashRespostas().get("pneeb_vigilancia").getResposta(),
                 FormPNEEBVigilancia.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -3960,7 +3956,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNEEBVigilancia formulario = gson.fromJson(resposta.get("pneeb_vigilancia").getResposta(),
+            FormPNEEBVigilancia formulario = gson.fromJson(supervisao.getHashRespostas().get("pneeb_vigilancia").getResposta(),
                 FormPNEEBVigilancia.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -3984,7 +3980,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNEEBVigilancia formulario = gson.fromJson(resposta.get("pneeb_vigilancia").getResposta(),
+            FormPNEEBVigilancia formulario = gson.fromJson(supervisao.getHashRespostas().get("pneeb_vigilancia").getResposta(),
                 FormPNEEBVigilancia.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -4008,7 +4004,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNEEBVigilancia formulario = gson.fromJson(resposta.get("pneeb_vigilancia").getResposta(),
+            FormPNEEBVigilancia formulario = gson.fromJson(supervisao.getHashRespostas().get("pneeb_vigilancia").getResposta(),
                 FormPNEEBVigilancia.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -4043,7 +4039,7 @@ public class RelatorioAuditoriaCompilada {
         //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
         Paragraph resp = new Paragraph();
         for (Supervisao supervisao : list){
-            FormPNSECadastroEstabelecimento formulario = gson.fromJson(resposta.get("pnse_cadastro_estabelecimentos").getResposta(), 
+            FormPNSECadastroEstabelecimento formulario = gson.fromJson(supervisao.getHashRespostas().get("pnse_cadastro_estabelecimentos").getResposta(), 
                     FormPNSECadastroEstabelecimento.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -4068,7 +4064,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNSECadastroEstabelecimento formulario = gson.fromJson(resposta.get("pnse_cadastro_estabelecimentos").getResposta(), 
+            FormPNSECadastroEstabelecimento formulario = gson.fromJson(supervisao.getHashRespostas().get("pnse_cadastro_estabelecimentos").getResposta(), 
                     FormPNSECadastroEstabelecimento.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -4093,7 +4089,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNSECadastroEstabelecimento formulario = gson.fromJson(resposta.get("pnse_cadastro_estabelecimentos").getResposta(), 
+            FormPNSECadastroEstabelecimento formulario = gson.fromJson(supervisao.getHashRespostas().get("pnse_cadastro_estabelecimentos").getResposta(), 
                     FormPNSECadastroEstabelecimento.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -4117,7 +4113,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNSECadastroEstabelecimento formulario = gson.fromJson(resposta.get("pnse_cadastro_estabelecimentos").getResposta(), 
+            FormPNSECadastroEstabelecimento formulario = gson.fromJson(supervisao.getHashRespostas().get("pnse_cadastro_estabelecimentos").getResposta(), 
                     FormPNSECadastroEstabelecimento.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -4141,7 +4137,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNSECadastroEstabelecimento formulario = gson.fromJson(resposta.get("pnse_cadastro_estabelecimentos").getResposta(), 
+            FormPNSECadastroEstabelecimento formulario = gson.fromJson(supervisao.getHashRespostas().get("pnse_cadastro_estabelecimentos").getResposta(), 
                     FormPNSECadastroEstabelecimento.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -4166,7 +4162,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNSEVigilanciaController.FormPNSEVigilancia formulario2 = gson.fromJson(resposta.get("pnse_vigilancia").getResposta(),
+            FormPNSEVigilanciaController.FormPNSEVigilancia formulario2 = gson.fromJson(supervisao.getHashRespostas().get("pnse_vigilancia").getResposta(),
                 FormPNSEVigilanciaController.FormPNSEVigilancia.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -4191,7 +4187,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNSEVigilanciaController.FormPNSEVigilancia formulario2 = gson.fromJson(resposta.get("pnse_vigilancia").getResposta(),
+            FormPNSEVigilanciaController.FormPNSEVigilancia formulario2 = gson.fromJson(supervisao.getHashRespostas().get("pnse_vigilancia").getResposta(),
                 FormPNSEVigilanciaController.FormPNSEVigilancia.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -4216,7 +4212,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNSEVigilanciaController.FormPNSEVigilancia formulario2 = gson.fromJson(resposta.get("pnse_vigilancia").getResposta(),
+            FormPNSEVigilanciaController.FormPNSEVigilancia formulario2 = gson.fromJson(supervisao.getHashRespostas().get("pnse_vigilancia").getResposta(),
                 FormPNSEVigilanciaController.FormPNSEVigilancia.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -4240,7 +4236,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNSEVigilanciaController.FormPNSEVigilancia formulario2 = gson.fromJson(resposta.get("pnse_vigilancia").getResposta(),
+            FormPNSEVigilanciaController.FormPNSEVigilancia formulario2 = gson.fromJson(supervisao.getHashRespostas().get("pnse_vigilancia").getResposta(),
                 FormPNSEVigilanciaController.FormPNSEVigilancia.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -4264,7 +4260,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNSEVigilanciaController.FormPNSEVigilancia formulario2 = gson.fromJson(resposta.get("pnse_vigilancia").getResposta(),
+            FormPNSEVigilanciaController.FormPNSEVigilancia formulario2 = gson.fromJson(supervisao.getHashRespostas().get("pnse_vigilancia").getResposta(),
                 FormPNSEVigilanciaController.FormPNSEVigilancia.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -4289,7 +4285,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNSEControlesController.FormPNSEControles formulario3 = gson.fromJson(resposta.get("pnse_controles").getResposta(),
+            FormPNSEControlesController.FormPNSEControles formulario3 = gson.fromJson(supervisao.getHashRespostas().get("pnse_controles").getResposta(),
                 FormPNSEControlesController.FormPNSEControles.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -4314,7 +4310,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNSEControlesController.FormPNSEControles formulario3 = gson.fromJson(resposta.get("pnse_controles").getResposta(),
+            FormPNSEControlesController.FormPNSEControles formulario3 = gson.fromJson(supervisao.getHashRespostas().get("pnse_controles").getResposta(),
                 FormPNSEControlesController.FormPNSEControles.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -4339,7 +4335,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNSEControlesController.FormPNSEControles formulario3 = gson.fromJson(resposta.get("pnse_controles").getResposta(),
+            FormPNSEControlesController.FormPNSEControles formulario3 = gson.fromJson(supervisao.getHashRespostas().get("pnse_controles").getResposta(),
                 FormPNSEControlesController.FormPNSEControles.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -4363,7 +4359,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNSEControlesController.FormPNSEControles formulario3 = gson.fromJson(resposta.get("pnse_controles").getResposta(),
+            FormPNSEControlesController.FormPNSEControles formulario3 = gson.fromJson(supervisao.getHashRespostas().get("pnse_controles").getResposta(),
                 FormPNSEControlesController.FormPNSEControles.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -4387,7 +4383,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNSEControlesController.FormPNSEControles formulario3 = gson.fromJson(resposta.get("pnse_controles").getResposta(),
+            FormPNSEControlesController.FormPNSEControles formulario3 = gson.fromJson(supervisao.getHashRespostas().get("pnse_controles").getResposta(),
                 FormPNSEControlesController.FormPNSEControles.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -4422,7 +4418,7 @@ public class RelatorioAuditoriaCompilada {
         //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
         Paragraph resp = new Paragraph();
         for (Supervisao supervisao : list){
-            FormPNSCOCadastros formulario = gson.fromJson(resposta.get("pnsco_cadastro_estabelecimentos").getResposta(),
+            FormPNSCOCadastros formulario = gson.fromJson(supervisao.getHashRespostas().get("pnsco_cadastro_estabelecimentos").getResposta(),
                 FormPNSCOCadastros.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -4447,7 +4443,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNSCOCadastros formulario = gson.fromJson(resposta.get("pnsco_cadastro_estabelecimentos").getResposta(),
+            FormPNSCOCadastros formulario = gson.fromJson(supervisao.getHashRespostas().get("pnsco_cadastro_estabelecimentos").getResposta(),
                 FormPNSCOCadastros.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -4472,7 +4468,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNSCOCadastros formulario = gson.fromJson(resposta.get("pnsco_cadastro_estabelecimentos").getResposta(),
+            FormPNSCOCadastros formulario = gson.fromJson(supervisao.getHashRespostas().get("pnsco_cadastro_estabelecimentos").getResposta(),
                 FormPNSCOCadastros.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -4496,7 +4492,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNSCOCadastros formulario = gson.fromJson(resposta.get("pnsco_cadastro_estabelecimentos").getResposta(),
+            FormPNSCOCadastros formulario = gson.fromJson(supervisao.getHashRespostas().get("pnsco_cadastro_estabelecimentos").getResposta(),
                 FormPNSCOCadastros.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -4520,7 +4516,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNSCOCadastros formulario = gson.fromJson(resposta.get("pnsco_cadastro_estabelecimentos").getResposta(),
+            FormPNSCOCadastros formulario = gson.fromJson(supervisao.getHashRespostas().get("pnsco_cadastro_estabelecimentos").getResposta(),
                 FormPNSCOCadastros.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -4545,7 +4541,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNSCOVigilanciaController.FormPNSCOVigilancia formulario2 = gson.fromJson(resposta.get("pnsco_vigilancia").getResposta(),
+            FormPNSCOVigilanciaController.FormPNSCOVigilancia formulario2 = gson.fromJson(supervisao.getHashRespostas().get("pnsco_vigilancia").getResposta(),
                 FormPNSCOVigilanciaController.FormPNSCOVigilancia.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -4570,7 +4566,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNSCOVigilanciaController.FormPNSCOVigilancia formulario2 = gson.fromJson(resposta.get("pnsco_vigilancia").getResposta(),
+            FormPNSCOVigilanciaController.FormPNSCOVigilancia formulario2 = gson.fromJson(supervisao.getHashRespostas().get("pnsco_vigilancia").getResposta(),
                 FormPNSCOVigilanciaController.FormPNSCOVigilancia.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -4595,7 +4591,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNSCOVigilanciaController.FormPNSCOVigilancia formulario2 = gson.fromJson(resposta.get("pnsco_vigilancia").getResposta(),
+            FormPNSCOVigilanciaController.FormPNSCOVigilancia formulario2 = gson.fromJson(supervisao.getHashRespostas().get("pnsco_vigilancia").getResposta(),
                 FormPNSCOVigilanciaController.FormPNSCOVigilancia.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -4619,7 +4615,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNSCOVigilanciaController.FormPNSCOVigilancia formulario2 = gson.fromJson(resposta.get("pnsco_vigilancia").getResposta(),
+            FormPNSCOVigilanciaController.FormPNSCOVigilancia formulario2 = gson.fromJson(supervisao.getHashRespostas().get("pnsco_vigilancia").getResposta(),
                 FormPNSCOVigilanciaController.FormPNSCOVigilancia.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -4643,7 +4639,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNSCOVigilanciaController.FormPNSCOVigilancia formulario2 = gson.fromJson(resposta.get("pnsco_vigilancia").getResposta(),
+            FormPNSCOVigilanciaController.FormPNSCOVigilancia formulario2 = gson.fromJson(supervisao.getHashRespostas().get("pnsco_vigilancia").getResposta(),
                 FormPNSCOVigilanciaController.FormPNSCOVigilancia.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -4679,7 +4675,7 @@ public class RelatorioAuditoriaCompilada {
         Paragraph resp = new Paragraph();
         for (Supervisao supervisao : list){
             FormPNSSCadastroEstabelecimentosController.FormPNSSCadastroEstabelecimento formulario = gson.fromJson(
-                resposta.get("pnss_cadastro_estabelecimentos").getResposta(), FormPNSSCadastroEstabelecimentosController.FormPNSSCadastroEstabelecimento.class);
+                supervisao.getHashRespostas().get("pnss_cadastro_estabelecimentos").getResposta(), FormPNSSCadastroEstabelecimentosController.FormPNSSCadastroEstabelecimento.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -4704,7 +4700,7 @@ public class RelatorioAuditoriaCompilada {
         //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
         for (Supervisao supervisao : list){
             FormPNSSCadastroEstabelecimentosController.FormPNSSCadastroEstabelecimento formulario = gson.fromJson(
-                resposta.get("pnss_cadastro_estabelecimentos").getResposta(), FormPNSSCadastroEstabelecimentosController.FormPNSSCadastroEstabelecimento.class);
+                supervisao.getHashRespostas().get("pnss_cadastro_estabelecimentos").getResposta(), FormPNSSCadastroEstabelecimentosController.FormPNSSCadastroEstabelecimento.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -4729,7 +4725,7 @@ public class RelatorioAuditoriaCompilada {
         //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
         for (Supervisao supervisao : list){
             FormPNSSCadastroEstabelecimentosController.FormPNSSCadastroEstabelecimento formulario = gson.fromJson(
-                resposta.get("pnss_cadastro_estabelecimentos").getResposta(), FormPNSSCadastroEstabelecimentosController.FormPNSSCadastroEstabelecimento.class);
+                supervisao.getHashRespostas().get("pnss_cadastro_estabelecimentos").getResposta(), FormPNSSCadastroEstabelecimentosController.FormPNSSCadastroEstabelecimento.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
             Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
@@ -4753,7 +4749,7 @@ public class RelatorioAuditoriaCompilada {
         //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
         for (Supervisao supervisao : list){
             FormPNSSCadastroEstabelecimentosController.FormPNSSCadastroEstabelecimento formulario = gson.fromJson(
-                resposta.get("pnss_cadastro_estabelecimentos").getResposta(), FormPNSSCadastroEstabelecimentosController.FormPNSSCadastroEstabelecimento.class);
+                supervisao.getHashRespostas().get("pnss_cadastro_estabelecimentos").getResposta(), FormPNSSCadastroEstabelecimentosController.FormPNSSCadastroEstabelecimento.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
             Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
@@ -4777,7 +4773,7 @@ public class RelatorioAuditoriaCompilada {
         //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
         for (Supervisao supervisao : list){
             FormPNSSCadastroEstabelecimentosController.FormPNSSCadastroEstabelecimento formulario = gson.fromJson(
-                resposta.get("pnss_cadastro_estabelecimentos").getResposta(), FormPNSSCadastroEstabelecimentosController.FormPNSSCadastroEstabelecimento.class);
+                supervisao.getHashRespostas().get("pnss_cadastro_estabelecimentos").getResposta(), FormPNSSCadastroEstabelecimentosController.FormPNSSCadastroEstabelecimento.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
             Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
@@ -4801,7 +4797,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNSSVigilancia formulario2 = gson.fromJson(resposta.get("pnss_vigilancia").getResposta(),
+            FormPNSSVigilancia formulario2 = gson.fromJson(supervisao.getHashRespostas().get("pnss_vigilancia").getResposta(),
                 FormPNSSVigilancia.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -4826,7 +4822,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNSSVigilancia formulario2 = gson.fromJson(resposta.get("pnss_vigilancia").getResposta(),
+            FormPNSSVigilancia formulario2 = gson.fromJson(supervisao.getHashRespostas().get("pnss_vigilancia").getResposta(),
                 FormPNSSVigilancia.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -4851,7 +4847,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNSSVigilancia formulario2 = gson.fromJson(resposta.get("pnss_vigilancia").getResposta(),
+            FormPNSSVigilancia formulario2 = gson.fromJson(supervisao.getHashRespostas().get("pnss_vigilancia").getResposta(),
                 FormPNSSVigilancia.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -4875,7 +4871,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNSSVigilancia formulario2 = gson.fromJson(resposta.get("pnss_vigilancia").getResposta(),
+            FormPNSSVigilancia formulario2 = gson.fromJson(supervisao.getHashRespostas().get("pnss_vigilancia").getResposta(),
                 FormPNSSVigilancia.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -4899,7 +4895,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNSSVigilancia formulario2 = gson.fromJson(resposta.get("pnss_vigilancia").getResposta(),
+            FormPNSSVigilancia formulario2 = gson.fromJson(supervisao.getHashRespostas().get("pnss_vigilancia").getResposta(),
                 FormPNSSVigilancia.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -4935,7 +4931,7 @@ public class RelatorioAuditoriaCompilada {
         Paragraph resp = new Paragraph();
         for (Supervisao supervisao : list){
             FormPNSACadastroEstabelecimentosController.FormPNSACadastroEstabelecimentos formulario = gson.fromJson(
-                resposta.get("pnsa_cadastro_estabelecimentos").getResposta(), FormPNSACadastroEstabelecimentosController.FormPNSACadastroEstabelecimentos.class);
+                supervisao.getHashRespostas().get("pnsa_cadastro_estabelecimentos").getResposta(), FormPNSACadastroEstabelecimentosController.FormPNSACadastroEstabelecimentos.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -4960,7 +4956,7 @@ public class RelatorioAuditoriaCompilada {
         //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
         for (Supervisao supervisao : list){
             FormPNSACadastroEstabelecimentosController.FormPNSACadastroEstabelecimentos formulario = gson.fromJson(
-                resposta.get("pnsa_cadastro_estabelecimentos").getResposta(), FormPNSACadastroEstabelecimentosController.FormPNSACadastroEstabelecimentos.class);
+                supervisao.getHashRespostas().get("pnsa_cadastro_estabelecimentos").getResposta(), FormPNSACadastroEstabelecimentosController.FormPNSACadastroEstabelecimentos.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -4985,7 +4981,7 @@ public class RelatorioAuditoriaCompilada {
         //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
         for (Supervisao supervisao : list){
             FormPNSACadastroEstabelecimentosController.FormPNSACadastroEstabelecimentos formulario = gson.fromJson(
-                resposta.get("pnsa_cadastro_estabelecimentos").getResposta(), FormPNSACadastroEstabelecimentosController.FormPNSACadastroEstabelecimentos.class);
+                supervisao.getHashRespostas().get("pnsa_cadastro_estabelecimentos").getResposta(), FormPNSACadastroEstabelecimentosController.FormPNSACadastroEstabelecimentos.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
             Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
@@ -5009,7 +5005,7 @@ public class RelatorioAuditoriaCompilada {
         //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
         for (Supervisao supervisao : list){
             FormPNSACadastroEstabelecimentosController.FormPNSACadastroEstabelecimentos formulario = gson.fromJson(
-                resposta.get("pnsa_cadastro_estabelecimentos").getResposta(), FormPNSACadastroEstabelecimentosController.FormPNSACadastroEstabelecimentos.class);
+                supervisao.getHashRespostas().get("pnsa_cadastro_estabelecimentos").getResposta(), FormPNSACadastroEstabelecimentosController.FormPNSACadastroEstabelecimentos.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
             Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
@@ -5033,7 +5029,7 @@ public class RelatorioAuditoriaCompilada {
         //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
         for (Supervisao supervisao : list){
             FormPNSACadastroEstabelecimentosController.FormPNSACadastroEstabelecimentos formulario = gson.fromJson(
-                resposta.get("pnsa_cadastro_estabelecimentos").getResposta(), FormPNSACadastroEstabelecimentosController.FormPNSACadastroEstabelecimentos.class);
+                supervisao.getHashRespostas().get("pnsa_cadastro_estabelecimentos").getResposta(), FormPNSACadastroEstabelecimentosController.FormPNSACadastroEstabelecimentos.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
             Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
@@ -5057,7 +5053,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNSAVigilancia formulario2 = gson.fromJson(resposta.get("pnsa_vigilancia").getResposta(),
+            FormPNSAVigilancia formulario2 = gson.fromJson(supervisao.getHashRespostas().get("pnsa_vigilancia").getResposta(),
                 FormPNSAVigilancia.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -5082,7 +5078,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNSAVigilancia formulario2 = gson.fromJson(resposta.get("pnsa_vigilancia").getResposta(),
+            FormPNSAVigilancia formulario2 = gson.fromJson(supervisao.getHashRespostas().get("pnsa_vigilancia").getResposta(),
                 FormPNSAVigilancia.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -5107,7 +5103,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNSAVigilancia formulario2 = gson.fromJson(resposta.get("pnsa_vigilancia").getResposta(),
+            FormPNSAVigilancia formulario2 = gson.fromJson(supervisao.getHashRespostas().get("pnsa_vigilancia").getResposta(),
                 FormPNSAVigilancia.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -5131,7 +5127,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNSAVigilancia formulario2 = gson.fromJson(resposta.get("pnsa_vigilancia").getResposta(),
+            FormPNSAVigilancia formulario2 = gson.fromJson(supervisao.getHashRespostas().get("pnsa_vigilancia").getResposta(),
                 FormPNSAVigilancia.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -5155,7 +5151,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormPNSAVigilancia formulario2 = gson.fromJson(resposta.get("pnsa_vigilancia").getResposta(),
+            FormPNSAVigilancia formulario2 = gson.fromJson(supervisao.getHashRespostas().get("pnsa_vigilancia").getResposta(),
                 FormPNSAVigilancia.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -5190,7 +5186,7 @@ public class RelatorioAuditoriaCompilada {
         //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
         Paragraph resp = new Paragraph();
         for (Supervisao supervisao : list){
-            FormICEducacaoSanitaria formulario = gson.fromJson(resposta.get("interacao_comunidade_educacao").getResposta(),
+            FormICEducacaoSanitaria formulario = gson.fromJson(supervisao.getHashRespostas().get("interacao_comunidade_educacao").getResposta(),
                 FormICEducacaoSanitaria.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -5215,7 +5211,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormICEducacaoSanitaria formulario = gson.fromJson(resposta.get("interacao_comunidade_educacao").getResposta(),
+            FormICEducacaoSanitaria formulario = gson.fromJson(supervisao.getHashRespostas().get("interacao_comunidade_educacao").getResposta(),
                 FormICEducacaoSanitaria.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -5240,7 +5236,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormICEducacaoSanitaria formulario = gson.fromJson(resposta.get("interacao_comunidade_educacao").getResposta(),
+            FormICEducacaoSanitaria formulario = gson.fromJson(supervisao.getHashRespostas().get("interacao_comunidade_educacao").getResposta(),
                 FormICEducacaoSanitaria.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -5264,7 +5260,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormICEducacaoSanitaria formulario = gson.fromJson(resposta.get("interacao_comunidade_educacao").getResposta(),
+            FormICEducacaoSanitaria formulario = gson.fromJson(supervisao.getHashRespostas().get("interacao_comunidade_educacao").getResposta(),
                 FormICEducacaoSanitaria.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -5288,7 +5284,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormICEducacaoSanitaria formulario = gson.fromJson(resposta.get("interacao_comunidade_educacao").getResposta(),
+            FormICEducacaoSanitaria formulario = gson.fromJson(supervisao.getHashRespostas().get("interacao_comunidade_educacao").getResposta(),
                 FormICEducacaoSanitaria.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -5314,7 +5310,7 @@ public class RelatorioAuditoriaCompilada {
         //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
         for (Supervisao supervisao : list){
             FormICParticipacaoComunidade formulario2 = gson.fromJson(
-                resposta.get("interacao_comunidade_comunidade").getResposta(), FormICParticipacaoComunidade.class);
+                supervisao.getHashRespostas().get("interacao_comunidade_comunidade").getResposta(), FormICParticipacaoComunidade.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -5339,7 +5335,7 @@ public class RelatorioAuditoriaCompilada {
         //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
         for (Supervisao supervisao : list){
             FormICParticipacaoComunidade formulario2 = gson.fromJson(
-                resposta.get("interacao_comunidade_comunidade").getResposta(), FormICParticipacaoComunidade.class);
+                supervisao.getHashRespostas().get("interacao_comunidade_comunidade").getResposta(), FormICParticipacaoComunidade.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -5364,7 +5360,7 @@ public class RelatorioAuditoriaCompilada {
         //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
         for (Supervisao supervisao : list){
             FormICParticipacaoComunidade formulario2 = gson.fromJson(
-                resposta.get("interacao_comunidade_comunidade").getResposta(), FormICParticipacaoComunidade.class);
+                supervisao.getHashRespostas().get("interacao_comunidade_comunidade").getResposta(), FormICParticipacaoComunidade.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
             Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
@@ -5388,7 +5384,7 @@ public class RelatorioAuditoriaCompilada {
         //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
         for (Supervisao supervisao : list){
             FormICParticipacaoComunidade formulario2 = gson.fromJson(
-                resposta.get("interacao_comunidade_comunidade").getResposta(), FormICParticipacaoComunidade.class);
+                supervisao.getHashRespostas().get("interacao_comunidade_comunidade").getResposta(), FormICParticipacaoComunidade.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
             Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
@@ -5412,7 +5408,7 @@ public class RelatorioAuditoriaCompilada {
         //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
         for (Supervisao supervisao : list){
             FormICParticipacaoComunidade formulario2 = gson.fromJson(
-                resposta.get("interacao_comunidade_comunidade").getResposta(), FormICParticipacaoComunidade.class);
+                supervisao.getHashRespostas().get("interacao_comunidade_comunidade").getResposta(), FormICParticipacaoComunidade.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
             Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
@@ -5437,7 +5433,7 @@ public class RelatorioAuditoriaCompilada {
         //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
         for (Supervisao supervisao : list){
             FormICParticipacaoInstituicoes formulario3 = gson.fromJson(
-                resposta.get("interacao_comunidade_instituicoes").getResposta(), FormICParticipacaoInstituicoes.class);
+                supervisao.getHashRespostas().get("interacao_comunidade_instituicoes").getResposta(), FormICParticipacaoInstituicoes.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -5462,7 +5458,7 @@ public class RelatorioAuditoriaCompilada {
         //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
         for (Supervisao supervisao : list){
             FormICParticipacaoInstituicoes formulario3 = gson.fromJson(
-                resposta.get("interacao_comunidade_instituicoes").getResposta(), FormICParticipacaoInstituicoes.class);
+                supervisao.getHashRespostas().get("interacao_comunidade_instituicoes").getResposta(), FormICParticipacaoInstituicoes.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -5487,7 +5483,7 @@ public class RelatorioAuditoriaCompilada {
         //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
         for (Supervisao supervisao : list){
             FormICParticipacaoInstituicoes formulario3 = gson.fromJson(
-                resposta.get("interacao_comunidade_instituicoes").getResposta(), FormICParticipacaoInstituicoes.class);
+                supervisao.getHashRespostas().get("interacao_comunidade_instituicoes").getResposta(), FormICParticipacaoInstituicoes.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
             Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
@@ -5511,7 +5507,7 @@ public class RelatorioAuditoriaCompilada {
         //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
         for (Supervisao supervisao : list){
             FormICParticipacaoInstituicoes formulario3 = gson.fromJson(
-                resposta.get("interacao_comunidade_instituicoes").getResposta(), FormICParticipacaoInstituicoes.class);
+                supervisao.getHashRespostas().get("interacao_comunidade_instituicoes").getResposta(), FormICParticipacaoInstituicoes.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
             Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
@@ -5535,7 +5531,7 @@ public class RelatorioAuditoriaCompilada {
         //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
         for (Supervisao supervisao : list){
             FormICParticipacaoInstituicoes formulario3 = gson.fromJson(
-                resposta.get("interacao_comunidade_instituicoes").getResposta(), FormICParticipacaoInstituicoes.class);
+                supervisao.getHashRespostas().get("interacao_comunidade_instituicoes").getResposta(), FormICParticipacaoInstituicoes.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
             Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
@@ -5559,7 +5555,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormIMVHabilitacao formulario4 = gson.fromJson(resposta.get("interacao_veterinario_habilitacao").getResposta(),
+            FormIMVHabilitacao formulario4 = gson.fromJson(supervisao.getHashRespostas().get("interacao_veterinario_habilitacao").getResposta(),
                 FormIMVHabilitacao.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -5584,7 +5580,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormIMVHabilitacao formulario4 = gson.fromJson(resposta.get("interacao_veterinario_habilitacao").getResposta(),
+            FormIMVHabilitacao formulario4 = gson.fromJson(supervisao.getHashRespostas().get("interacao_veterinario_habilitacao").getResposta(),
                 FormIMVHabilitacao.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -5609,7 +5605,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormIMVHabilitacao formulario4 = gson.fromJson(resposta.get("interacao_veterinario_habilitacao").getResposta(),
+            FormIMVHabilitacao formulario4 = gson.fromJson(supervisao.getHashRespostas().get("interacao_veterinario_habilitacao").getResposta(),
                 FormIMVHabilitacao.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -5633,7 +5629,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormIMVHabilitacao formulario4 = gson.fromJson(resposta.get("interacao_veterinario_habilitacao").getResposta(),
+            FormIMVHabilitacao formulario4 = gson.fromJson(supervisao.getHashRespostas().get("interacao_veterinario_habilitacao").getResposta(),
                 FormIMVHabilitacao.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -5657,7 +5653,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormIMVHabilitacao formulario4 = gson.fromJson(resposta.get("interacao_veterinario_habilitacao").getResposta(),
+            FormIMVHabilitacao formulario4 = gson.fromJson(supervisao.getHashRespostas().get("interacao_veterinario_habilitacao").getResposta(),
                 FormIMVHabilitacao.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -5682,7 +5678,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormIISistemaInspecao formulario5 = gson.fromJson(resposta.get("interacao_instituicao_inspecao").getResposta(),
+            FormIISistemaInspecao formulario5 = gson.fromJson(supervisao.getHashRespostas().get("interacao_instituicao_inspecao").getResposta(),
                 FormIISistemaInspecao.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -5707,7 +5703,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormIISistemaInspecao formulario5 = gson.fromJson(resposta.get("interacao_instituicao_inspecao").getResposta(),
+            FormIISistemaInspecao formulario5 = gson.fromJson(supervisao.getHashRespostas().get("interacao_instituicao_inspecao").getResposta(),
                 FormIISistemaInspecao.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
@@ -5732,7 +5728,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormIISistemaInspecao formulario5 = gson.fromJson(resposta.get("interacao_instituicao_inspecao").getResposta(),
+            FormIISistemaInspecao formulario5 = gson.fromJson(supervisao.getHashRespostas().get("interacao_instituicao_inspecao").getResposta(),
                 FormIISistemaInspecao.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -5756,7 +5752,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormIISistemaInspecao formulario5 = gson.fromJson(resposta.get("interacao_instituicao_inspecao").getResposta(),
+            FormIISistemaInspecao formulario5 = gson.fromJson(supervisao.getHashRespostas().get("interacao_instituicao_inspecao").getResposta(),
                 FormIISistemaInspecao.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -5780,7 +5776,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormIISistemaInspecao formulario5 = gson.fromJson(resposta.get("interacao_instituicao_inspecao").getResposta(),
+            FormIISistemaInspecao formulario5 = gson.fromJson(supervisao.getHashRespostas().get("interacao_instituicao_inspecao").getResposta(),
                 FormIISistemaInspecao.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -5805,7 +5801,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormIISUS formulario6 = gson.fromJson(resposta.get("interacao_instituicao_sus").getResposta(), FormIISUS.class);
+            FormIISUS formulario6 = gson.fromJson(supervisao.getHashRespostas().get("interacao_instituicao_sus").getResposta(), FormIISUS.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -5829,7 +5825,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormIISUS formulario6 = gson.fromJson(resposta.get("interacao_instituicao_sus").getResposta(), FormIISUS.class);
+            FormIISUS formulario6 = gson.fromJson(supervisao.getHashRespostas().get("interacao_instituicao_sus").getResposta(), FormIISUS.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -5853,7 +5849,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormIISUS formulario6 = gson.fromJson(resposta.get("interacao_instituicao_sus").getResposta(), FormIISUS.class);
+            FormIISUS formulario6 = gson.fromJson(supervisao.getHashRespostas().get("interacao_instituicao_sus").getResposta(), FormIISUS.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
             Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
@@ -5876,7 +5872,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormIISUS formulario6 = gson.fromJson(resposta.get("interacao_instituicao_sus").getResposta(), FormIISUS.class);
+            FormIISUS formulario6 = gson.fromJson(supervisao.getHashRespostas().get("interacao_instituicao_sus").getResposta(), FormIISUS.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
             Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
@@ -5899,7 +5895,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormIISUS formulario6 = gson.fromJson(resposta.get("interacao_instituicao_sus").getResposta(), FormIISUS.class);
+            FormIISUS formulario6 = gson.fromJson(supervisao.getHashRespostas().get("interacao_instituicao_sus").getResposta(), FormIISUS.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
             Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
@@ -5933,7 +5929,7 @@ public class RelatorioAuditoriaCompilada {
         //Laço para mostrar os COMENTÁRIOS de todos os municipios auditados
         Paragraph resp = new Paragraph();
         for (Supervisao supervisao : list){
-            FormAMAcesso formulario = gson.fromJson(resposta.get("acesso_mercado").getResposta(), FormAMAcesso.class);
+            FormAMAcesso formulario = gson.fromJson(supervisao.getHashRespostas().get("acesso_mercado").getResposta(), FormAMAcesso.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -5957,7 +5953,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES ULSAV/EAC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormAMAcesso formulario = gson.fromJson(resposta.get("acesso_mercado").getResposta(), FormAMAcesso.class);
+            FormAMAcesso formulario = gson.fromJson(supervisao.getHashRespostas().get("acesso_mercado").getResposta(), FormAMAcesso.class);
             //Adiciona o nome do municipio auditado
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -5981,7 +5977,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar os PRAZOS P/ AJUSTE de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormAMAcesso formulario = gson.fromJson(resposta.get("acesso_mercado").getResposta(), FormAMAcesso.class);
+            FormAMAcesso formulario = gson.fromJson(supervisao.getHashRespostas().get("acesso_mercado").getResposta(), FormAMAcesso.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
             Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
@@ -6004,7 +6000,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UR de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormAMAcesso formulario = gson.fromJson(resposta.get("acesso_mercado").getResposta(), FormAMAcesso.class);
+            FormAMAcesso formulario = gson.fromJson(supervisao.getHashRespostas().get("acesso_mercado").getResposta(), FormAMAcesso.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
             Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
@@ -6027,7 +6023,7 @@ public class RelatorioAuditoriaCompilada {
         
         //Laço para mostrar as RECOMENDAÇÕES UC de todos os municipios auditados
         for (Supervisao supervisao : list){
-            FormAMAcesso formulario = gson.fromJson(resposta.get("acesso_mercado").getResposta(), FormAMAcesso.class);
+            FormAMAcesso formulario = gson.fromJson(supervisao.getHashRespostas().get("acesso_mercado").getResposta(), FormAMAcesso.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
             Paragraph muniAuditado = new Paragraph("Municipio Auditado: " + municipio, smallBold);
@@ -6055,11 +6051,12 @@ public class RelatorioAuditoriaCompilada {
 //VP Vulnerabilidade----------------------------------------------------------------------------------------
         Paragraph subtitulo = new Paragraph("Vulnerabilidades", subFont);
         document.add(subtitulo);
+        subtitulo.clear();
         
         Paragraph resp = new Paragraph();
         for (Supervisao supervisao : list){
             FormVulnerabilidadesPotencialidadesController.FormVulnerabilidadesPotencialidades formulario = gson.fromJson(
-                    resposta.get("vulnerabilidade_potencialidade").getResposta(),
+                    supervisao.getHashRespostas().get("vulnerabilidade_potencialidade").getResposta(),
                     FormVulnerabilidadesPotencialidadesController.FormVulnerabilidadesPotencialidades.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -6067,7 +6064,8 @@ public class RelatorioAuditoriaCompilada {
             resp.add(muniAuditado);
             Paragraph vulnerabilidades = new Paragraph(
                     "Vulnerabilidades que o escritório apresenta na execução das ações de defesa animal: \n"
-                    + formulario.getVulnerabilidades(), f);
+                    + formulario.getVulnerabilidades()
+                    + "\n___________________________________________________________________________________\n\n", f);
             vulnerabilidades.setAlignment(Element.ALIGN_JUSTIFIED);
             resp.add(vulnerabilidades);
         }
@@ -6081,7 +6079,7 @@ public class RelatorioAuditoriaCompilada {
         
         for (Supervisao supervisao : list){
             FormVulnerabilidadesPotencialidadesController.FormVulnerabilidadesPotencialidades formulario = gson.fromJson(
-                    resposta.get("vulnerabilidade_potencialidade").getResposta(),
+                    supervisao.getHashRespostas().get("vulnerabilidade_potencialidade").getResposta(),
                     FormVulnerabilidadesPotencialidadesController.FormVulnerabilidadesPotencialidades.class);
             String municipio = ((supervisao.getTipoEscritorio().equals("EAC")) ? supervisao.getEac().getNome()
                     : supervisao.getUlsav().getNome());
@@ -6089,7 +6087,8 @@ public class RelatorioAuditoriaCompilada {
             resp.add(muniAuditado);
             Paragraph potencialidades = new Paragraph(
                     "Potencialidades que o escritório apresenta na execução das ações de defesa animal: \n"
-                    + formulario.getPotencialidades(), f);
+                    + formulario.getPotencialidades()
+                    + "\n___________________________________________________________________________________\n\n", f);
             potencialidades.setAlignment(Element.ALIGN_JUSTIFIED);
             resp.add(potencialidades);
         }
