@@ -3,133 +3,241 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextArea?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="650.0" stylesheets="@../../resources/css/style.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stec.controller.FormRFInstalacoesController">
+<AnchorPane prefHeight="700.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stec.controller.FormRFInstalacoesController">
    <children>
-      <JFXButton fx:id="btAdicionar" layoutX="438.0" layoutY="441.0" onAction="#handleAdicionar" prefHeight="45.0" prefWidth="80.0" text="Adicionar" />
-      <JFXButton fx:id="btCancelar" layoutX="546.0" layoutY="441.0" onAction="#handleCancelar" prefHeight="45.0" prefWidth="70.0" text="Cancelar" />
-      <JFXComboBox fx:id="cbNaturezaPredio" layoutX="14.0" layoutY="55.0" prefHeight="25.0" prefWidth="126.0" />
-      <Label fx:id="lblNaturezaPredio" layoutX="25.0" layoutY="14.0" text="Natureza do prédio">
-         <tooltip>
-            <Tooltip text="Em caso de prédio cedido, informar no campo &#10;&quot;Comentários&quot;, o horário de funcionamento e &#10;o responsável pela cessão (ex.: prefeitura, etc.)" />
-         </tooltip>
-      </Label>
-      <Label layoutX="214.0" layoutY="14.0" text="Manutenção">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font></Label>
-      <JFXComboBox fx:id="cbLimpeza" labelFloat="true" layoutX="155.0" layoutY="55.0" prefHeight="25.0" prefWidth="50.0" />
-      <Label fx:id="lblLimpeza" layoutX="157.0" layoutY="38.0" prefHeight="17.0" prefWidth="59.0" text="Limpeza">
-         <tooltip>
-            <Tooltip text="No EAC há material de limpeza (vassoura, balde, pano de chão, desinfetante, etc)?&#10;O escritório está limpo?" />
-         </tooltip>
-      </Label>
-      <JFXComboBox fx:id="cbConservacao" labelFloat="true" layoutX="214.0" layoutY="55.0" prefHeight="25.0" prefWidth="126.0" />
-      <Label fx:id="lblConservacao" layoutX="214.0" layoutY="37.0" prefHeight="17.0" prefWidth="126.0" text="Estrutura (Conservação)">
-         <tooltip>
-            <Tooltip text="O prédio está em boas condições de conservação &#10;(pintura, forro, portas, janelas, etc.)?" />
-         </tooltip>
-      </Label>
-      <Label layoutX="464.0" layoutY="14.0" text="Instalações">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font></Label>
-      <JFXComboBox fx:id="cbBanheiro" labelFloat="true" layoutX="363.0" layoutY="55.0" prefHeight="25.0" prefWidth="44.0" />
-      <Label fx:id="lblBanheiro" layoutX="363.0" layoutY="37.0" prefHeight="17.0" prefWidth="59.0" text="Banheiro">
-         <tooltip>
-            <Tooltip text="Existe banheiro no prédio?&#10;Há condições de uso?" />
-         </tooltip></Label>
-      <JFXComboBox fx:id="cbSalaAtendimento" labelFloat="true" layoutX="421.0" layoutY="55.0" prefHeight="25.0" prefWidth="110.0" />
-      <Label fx:id="lblSalaAtendimento" layoutX="421.0" layoutY="38.0" text="Sala de atendimento">
-         <tooltip>
-            <Tooltip text="Existe uma sala reservada para atendimento ao público?&#10;De modo geral a sala é adequada?" />
-         </tooltip></Label>
-      <JFXComboBox fx:id="cbSalaVeterinario" labelFloat="true" layoutX="539.0" layoutY="55.0" prefHeight="25.0" prefWidth="97.0" />
-      <Label fx:id="lblSalaVeterinario" layoutX="539.0" layoutY="38.0" text="Sala p/ veterinário">
-         <tooltip>
-            <Tooltip text="Existe uma sala reservada para o veterinário?&#10;De modo geral a sala é adequada?" />
-         </tooltip></Label>
-      <JFXComboBox fx:id="cbCondicoesAtendimento" labelFloat="true" layoutX="14.0" layoutY="150.0" prefHeight="25.0" prefWidth="140.0" />
-      <Label fx:id="lblCondicoesAtendimento" layoutX="14.0" layoutY="98.0" text="Condições de atendimento &#10;ao público" textAlignment="CENTER">
-         <tooltip>
-            <Tooltip text="O prédio dispõe de condições de atendimento ao público?" />
-         </tooltip></Label>
-      <JFXComboBox fx:id="cbApresentacaoExterna" labelFloat="true" layoutX="168.0" layoutY="150.0" prefHeight="25.0" prefWidth="115.0" />
-      <Label fx:id="lblApresentacaoExterna" layoutX="169.0" layoutY="98.0" text="Apresentação externa">
-         <tooltip>
-            <Tooltip text=" A pintura externa é padronizada?&#10;Permite boa identificação?&#10;Está em bom estado de conservação?" />
-         </tooltip></Label>
-      <JFXComboBox fx:id="cbOrganizacaoInterna" labelFloat="true" layoutX="295.0" layoutY="150.0" prefHeight="25.0" prefWidth="110.0" />
-      <Label fx:id="lblOrganizacaoInterna" layoutX="295.0" layoutY="98.0" text="Organização interna &#10;(impressão visual)" textAlignment="CENTER">
-         <tooltip>
-            <Tooltip text="O ambiente é organizado?&#10;A disposição dos móveis permite a circulação das pessoas livremente?" />
-         </tooltip></Label>
-      <JFXComboBox fx:id="cbAtendeDemanda" labelFloat="true" layoutX="416.0" layoutY="150.0" prefHeight="25.0" prefWidth="104.0" />
-      <Label fx:id="lblAtendeDemanda" layoutX="414.0" layoutY="98.0" text="De modo geral o &#10;mobiliário atende a &#10;demanda?" textAlignment="CENTER">
-         <tooltip>
-            <Tooltip text="O mobiliário é adequado e suficiente?" />
-         </tooltip></Label>
-      <Label fx:id="lblRelacaoMobiliario" layoutX="532.0" layoutY="98.0" text="Há uma relação do &#10;mobiliário existente &#10;por EAC?" textAlignment="CENTER" />
-      <JFXComboBox fx:id="cbRelacaoMobiliario" labelFloat="true" layoutX="532.0" layoutY="150.0" prefHeight="25.0" prefWidth="104.0" />
-      <TabPane layoutX="13.0" layoutY="226.0" prefHeight="200.0" prefWidth="625.0" tabClosingPolicy="UNAVAILABLE">
-         <tabs>
-            <Tab fx:id="comentarios" text="Comentários">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <JFXTextArea fx:id="txtComentarios" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-            <Tab fx:id="recomendacoesULSAVEAC" text="Recomendações ULSAV/EAC">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <JFXTextArea fx:id="txtRULSAVEAC" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-            <Tab fx:id="prazo" text="Prazo para ajuste">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <JFXTextArea fx:id="txtPrazo" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-            <Tab fx:id="recomendacoesUR" text="Recomendações UR">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <JFXTextArea fx:id="txtRUR" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-            <Tab fx:id="recomendacoesUC" text="Recomendações UC">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <JFXTextArea fx:id="txtRUC" labelFloat="true" prefHeight="171.0" prefWidth="568.0" />
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-         </tabs>
-      </TabPane>
-      <JFXComboBox fx:id="cbAvaliacao" layoutX="77.0" layoutY="189.0" prefHeight="25.0" prefWidth="80.0" />
-      <Label fx:id="lblAvaliacao" layoutX="11.0" layoutY="193.0" text="Avaliação">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font></Label>
+      <VBox alignment="CENTER_LEFT" prefHeight="700.0" prefWidth="500.0" styleClass="card" stylesheets="@../../resources/css/style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label text="Manutenção">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="225.0" top="10.0" />
+               </VBox.margin>
+            </Label>
+            <HBox prefHeight="70.0" prefWidth="500.0">
+               <children>
+                  <Label fx:id="lblLimpeza" prefHeight="17.0" prefWidth="59.0" text="Limpeza">
+                     <tooltip>
+                        <Tooltip text="No EAC há material de limpeza (vassoura, balde, pano de chão, desinfetante, etc)?&#10;O escritório está limpo?" />
+                     </tooltip>
+                     <HBox.margin>
+                        <Insets left="70.0" top="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <JFXComboBox fx:id="cbLimpeza" labelFloat="true" prefHeight="25.0" prefWidth="100.0" />
+                  <Label fx:id="lblConservacao" prefHeight="34.0" prefWidth="80.0" text="Estrutura&#10;(Conservação)" textAlignment="CENTER">
+                     <tooltip>
+                        <Tooltip text="O prédio está em boas condições de conservação &#10;(pintura, forro, portas, janelas, etc.)?" />
+                     </tooltip>
+                     <HBox.margin>
+                        <Insets left="25.0" />
+                     </HBox.margin>
+                  </Label>
+                  <JFXComboBox fx:id="cbConservacao" labelFloat="true" prefHeight="25.0" prefWidth="100.0" />
+               </children>
+               <padding>
+                  <Insets top="15.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </HBox>
+            <Separator prefWidth="500.0" />
+            <Label text="Instalações">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="225.0" top="10.0" />
+               </VBox.margin>
+            </Label>
+            <HBox prefHeight="70.0" prefWidth="500.0">
+               <children>
+                  <Label fx:id="lblBanheiro" prefHeight="17.0" prefWidth="59.0" text="Banheiro">
+                     <tooltip>
+                        <Tooltip text="Existe banheiro no prédio?&#10;Há condições de uso?" />
+                     </tooltip>
+                  </Label>
+                  <JFXComboBox fx:id="cbBanheiro" labelFloat="true" prefHeight="25.0" prefWidth="75.0" />
+                  <Label fx:id="lblSalaAtendimento" text="Sala de&#10;atendimento" textAlignment="CENTER">
+                     <tooltip>
+                        <Tooltip text="Existe uma sala reservada para atendimento ao público?&#10;De modo geral a sala é adequada?" />
+                     </tooltip>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <JFXComboBox fx:id="cbSalaAtendimento" labelFloat="true" prefHeight="25.0" prefWidth="75.0" />
+                  <Label fx:id="lblSalaVeterinario" text="Sala p/&#10;veterinário" textAlignment="CENTER">
+                     <tooltip>
+                        <Tooltip text="Existe uma sala reservada para o veterinário?&#10;De modo geral a sala é adequada?" />
+                     </tooltip>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <JFXComboBox fx:id="cbSalaVeterinario" labelFloat="true" prefHeight="25.0" prefWidth="75.0" />
+               </children>
+               <padding>
+                  <Insets left="30.0" top="15.0" />
+               </padding>
+            </HBox>
+            <Separator prefWidth="500.0" />
+            <HBox prefHeight="70.0" prefWidth="500.0">
+               <children>
+                  <Label fx:id="lblNaturezaPredio" text="Natureza do prédio">
+                     <tooltip>
+                        <Tooltip text="Em caso de prédio cedido, informar no campo &#10;&quot;Comentários&quot;, o horário de funcionamento e &#10;o responsável pela cessão (ex.: prefeitura, etc.)" />
+                     </tooltip>
+                  </Label>
+                  <JFXComboBox fx:id="cbNaturezaPredio" prefHeight="25.0" prefWidth="100.0" />
+                  <Label fx:id="lblOrganizacaoInterna" text="Organização interna &#10;(impressão visual)" textAlignment="CENTER">
+                     <tooltip>
+                        <Tooltip text="O ambiente é organizado?&#10;A disposição dos móveis permite a circulação das pessoas livremente?" />
+                     </tooltip>
+                     <HBox.margin>
+                        <Insets left="15.0" />
+                     </HBox.margin>
+                  </Label>
+                  <JFXComboBox fx:id="cbOrganizacaoInterna" labelFloat="true" prefHeight="25.0" prefWidth="100.0" />
+               </children>
+               <padding>
+                  <Insets left="30.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="70.0" prefWidth="500.0">
+               <children>
+                  <Label fx:id="lblCondicoesAtendimento" text="Condições de&#10;atendimento &#10;ao público" textAlignment="CENTER">
+                     <tooltip>
+                        <Tooltip text="O prédio dispõe de condições de atendimento ao público?" />
+                     </tooltip>
+                  </Label>
+                  <JFXComboBox fx:id="cbCondicoesAtendimento" labelFloat="true" prefHeight="25.0" prefWidth="100.0">
+                     <HBox.margin>
+                        <Insets left="15.0" />
+                     </HBox.margin></JFXComboBox>
+                  <Label fx:id="lblAtendeDemanda" text="De modo geral o &#10;mobiliário atende a &#10;demanda?" textAlignment="CENTER">
+                     <tooltip>
+                        <Tooltip text="O mobiliário é adequado e suficiente?" />
+                     </tooltip>
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </Label>
+                  <JFXComboBox fx:id="cbAtendeDemanda" labelFloat="true" prefHeight="25.0" prefWidth="100.0" />
+               </children>
+               <padding>
+                  <Insets left="45.0" />
+               </padding>
+            </HBox>
+            <HBox prefHeight="70.0" prefWidth="200.0">
+               <children>
+                  <Label fx:id="lblApresentacaoExterna" text="Apresentação&#10;externa" textAlignment="CENTER">
+                     <tooltip>
+                        <Tooltip text=" A pintura externa é padronizada?&#10;Permite boa identificação?&#10;Está em bom estado de conservação?" />
+                     </tooltip>
+                  </Label>
+                  <JFXComboBox fx:id="cbApresentacaoExterna" labelFloat="true" prefHeight="25.0" prefWidth="100.0">
+                     <HBox.margin>
+                        <Insets left="15.0" />
+                     </HBox.margin></JFXComboBox>
+                  <Label fx:id="lblRelacaoMobiliario" text="Há uma relação do &#10;mobiliário existente &#10;por EAC?" textAlignment="CENTER">
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin></Label>
+                  <JFXComboBox fx:id="cbRelacaoMobiliario" labelFloat="true" prefHeight="25.0" prefWidth="100.0" />
+               </children>
+               <padding>
+                  <Insets left="45.0" />
+               </padding>
+            </HBox>
+            <Label fx:id="lblAvaliacao" text="Avaliação">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="225.0" />
+               </VBox.margin>
+            </Label>
+            <JFXComboBox fx:id="cbAvaliacao" prefHeight="25.0" prefWidth="80.0">
+               <VBox.margin>
+                  <Insets left="225.0" />
+               </VBox.margin>
+            </JFXComboBox>
+            <TabPane prefHeight="200.0" prefWidth="640.0" tabClosingPolicy="UNAVAILABLE">
+               <tabs>
+                  <Tab fx:id="comentarios" text="Comentários">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <JFXTextArea fx:id="txtComentarios" labelFloat="true" prefHeight="180.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab fx:id="recomendacoesULSAVEAC" text="Recomendações ULSAV/EAC">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="500.0">
+                           <children>
+                              <JFXTextArea fx:id="txtRULSAVEAC" labelFloat="true" prefHeight="180.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab fx:id="prazo" text="Prazo p/ ajuste">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <JFXTextArea fx:id="txtPrazo" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab fx:id="recomendacoesUR" text="Recomendações UR">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <JFXTextArea fx:id="txtRUR" labelFloat="true" prefHeight="171.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab fx:id="recomendacoesUC" text="Recomendações UC">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <JFXTextArea fx:id="txtRUC" labelFloat="true" prefHeight="171.0" prefWidth="568.0" />
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+               </tabs>
+            </TabPane>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="500.0">
+               <children>
+                  <JFXButton fx:id="btAdicionar" onAction="#handleAdicionar" prefHeight="45.0" prefWidth="80.0" styleClass="buttons-all" text="Adicionar">
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin></JFXButton>
+                  <JFXButton fx:id="btCancelar" onAction="#handleCancelar" prefHeight="45.0" prefWidth="70.0" styleClass="buttons-all" text="Cancelar" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

@@ -10,13 +10,14 @@ import stec.model.database.SQLite;
 
 public class STEC extends Application {
     
+    //metodo que inicializa a aplicação
     @Override
-    public void start(Stage stage) throws Exception { //metodo que inicializa a aplicação
-        Parent root = FXMLLoader.load(getClass().getResource("view/Login.fxml"));
+    public void start(Stage stage) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("/stec/view/login/Login.fxml"));
+        stage.initStyle(StageStyle.UTILITY);
         Scene scene = new Scene(root);
-        stage.initStyle(StageStyle.TRANSPARENT);
         stage.setScene(scene);
-        stage.show();        
+        stage.show();    
         
         //Cria uma thread que gera a conexao com o bd, apos isso sera utilizado apenas a mesma instancia
         new Thread(new Runnable() {

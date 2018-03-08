@@ -90,67 +90,63 @@ public class RelatorioSupervisao {
     private Supervisao supervisao = new Supervisao();
     private HashMap<String, Resposta> hashRespostas = new HashMap<>();
 
-    public void setSupervisao(Supervisao supervisao) {
+    public RelatorioSupervisao(Supervisao supervisao, HashMap<String, Resposta> respostas) {
         this.supervisao = supervisao;
-    }
-
-    public Supervisao getSupervisao() {
-        return this.supervisao;
-    }
-
-    public void setHashRespostas(HashMap<String, Resposta> respostas) {
         this.hashRespostas = respostas;
-    }
-
-    public HashMap<String, Resposta> getHashRespostas() {
-        return this.hashRespostas;
     }
 
     public void show(String file) {
         try {
-            RelatorioSupervisao relatorio = new RelatorioSupervisao();
 
             Document document = new Document();
             PdfWriter.getInstance(document, new FileOutputStream(file + ".pdf"));
             document.open();
 
-            relatorio.Capa(document, supervisao);
-            relatorio.IdentificacaoEscritorio(document, supervisao, hashRespostas);
-            relatorio.RecursosHumanos(document, hashRespostas);
-            relatorio.RecursosFisicos(document, supervisao, hashRespostas);
-            relatorio.RecursosFinanceiros(document, hashRespostas);
-            relatorio.EstruturaOrganizacional(document, hashRespostas);
-            relatorio.AutoridadeGestao(document, hashRespostas);
-            relatorio.CapacidadeTecnicaOperacional(document, hashRespostas);
+            this.Capa(document, supervisao);
+            this.IdentificacaoEscritorio(document, supervisao, hashRespostas);
+            this.RecursosHumanos(document, hashRespostas);
+            this.RecursosFisicos(document, supervisao, hashRespostas);
+            this.RecursosFinanceiros(document, hashRespostas);
+            this.EstruturaOrganizacional(document, hashRespostas);
+            this.AutoridadeGestao(document, hashRespostas);
+            this.CapacidadeTecnicaOperacional(document, hashRespostas);
 
-            if (supervisao.getProgramas().toString().contains("PNEFA"))
-                relatorio.PNEFA(document, hashRespostas);
+            if (supervisao.getProgramas().toString().contains("PNEFA")) {
+                this.PNEFA(document, hashRespostas);
+            }
 
-            if (supervisao.getProgramas().toString().contains("PNCEBT"))
-                relatorio.PNCEBT(document, hashRespostas);
+            if (supervisao.getProgramas().toString().contains("PNCEBT")) {
+                this.PNCEBT(document, hashRespostas);
+            }
 
-            if (supervisao.getProgramas().toString().contains("PNCRH"))
-                relatorio.PNCRH(document, hashRespostas);
+            if (supervisao.getProgramas().toString().contains("PNCRH")) {
+                this.PNCRH(document, hashRespostas);
+            }
 
-            if (supervisao.getProgramas().toString().contains("PNEEB"))
-                relatorio.PNEEB(document, hashRespostas);
+            if (supervisao.getProgramas().toString().contains("PNEEB")) {
+                this.PNEEB(document, hashRespostas);
+            }
 
-            if (supervisao.getProgramas().toString().contains("PNSE"))
-                relatorio.PNSE(document, hashRespostas);
+            if (supervisao.getProgramas().toString().contains("PNSE")) {
+                this.PNSE(document, hashRespostas);
+            }
 
-            if (supervisao.getProgramas().toString().contains("PNSCO"))
-                relatorio.PNSCO(document, hashRespostas);
+            if (supervisao.getProgramas().toString().contains("PNSCO")) {
+                this.PNSCO(document, hashRespostas);
+            }
 
-            if (supervisao.getProgramas().toString().contains("PNSS"))
-                relatorio.PNSS(document, hashRespostas);
+            if (supervisao.getProgramas().toString().contains("PNSS")) {
+                this.PNSS(document, hashRespostas);
+            }
 
-            if (supervisao.getProgramas().toString().contains("PNSA"))
-                relatorio.PNSA(document, hashRespostas);
+            if (supervisao.getProgramas().toString().contains("PNSA")) {
+                this.PNSA(document, hashRespostas);
+            }
 
-            relatorio.InteracaoPartes(document, hashRespostas);
-            relatorio.AcessoMercados(document, hashRespostas);
-            relatorio.VulnerabilidadesPotencialidades(document, hashRespostas);
-            relatorio.Assinaturas(document, supervisao, hashRespostas);
+            this.InteracaoPartes(document, hashRespostas);
+            this.AcessoMercados(document, hashRespostas);
+            this.VulnerabilidadesPotencialidades(document, hashRespostas);
+            this.Assinaturas(document, supervisao, hashRespostas);
 
             document.close();
         } catch (Exception e) {
@@ -160,7 +156,7 @@ public class RelatorioSupervisao {
     }
 
     /*
-	 * Adiciona a capa com o titulo ao documento OK
+     * Adiciona a capa com o titulo ao documento
      */
     public void Capa(Document document, Supervisao supervisao) throws DocumentException {
         Paragraph capa = new Paragraph();
@@ -233,7 +229,7 @@ public class RelatorioSupervisao {
     }
 
     /*
-	 * Adiciona formulario de identificacao de escritório ao documento OK
+     * Adiciona formulario de identificacao de escritório ao documento OK
      */
     public void IdentificacaoEscritorio(Document document, Supervisao supervisao, HashMap<String, Resposta> resposta)
             throws DocumentException {

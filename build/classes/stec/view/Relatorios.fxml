@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="RelatoriosPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1100.0" stylesheets="@../resources/css/style.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stec.controller.RelatoriosController">
+<AnchorPane fx:id="RelatoriosPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1100.0" stylesheets="@../resources/css/style.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stec.view.RelatoriosController">
    <children>
       <BorderPane prefHeight="400.0" prefWidth="650.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
@@ -31,6 +31,11 @@
                      </VBox.margin>
                   </JFXButton>
                   <JFXButton fx:id="btAvaliacaoQualidade" layoutX="15.0" layoutY="15.0" onAction="#handleAvaliacaoQualidade" prefHeight="45.0" prefWidth="200.0" styleClass="buttons-all" text="Avaliação da qualidade &#10;de serviços veterinários">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  <JFXButton fx:id="btComentarios" onAction="#handleComentarios" prefHeight="45.0" prefWidth="200.0" styleClass="buttons-all" text="Relatório Comentários&#10;e Recomendações" textAlignment="CENTER">
                      <VBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </VBox.margin>
